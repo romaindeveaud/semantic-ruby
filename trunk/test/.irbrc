@@ -1,5 +1,3 @@
-#
-# All the lines below load the libraries
 linkparserpath = "/home/ubuntu/trashInstall/linkparser/trunk/"
 wordnetpath = "/home/ubuntu/trashInstall/wordnet/wordnet-0.0.5/"
 $LOAD_PATH.unshift( linkparserpath+"lib", linkparserpath+"ext" )
@@ -35,15 +33,6 @@ end
 
 puts "\nCalling Linguistics::EN module..."
 include Linguistics::EN
-#
-# End of loading stuff
 
 puts "\nIs linkparser correctly loaded? => "+Linguistics::EN.has_link_parser?.to_s
 puts "Is wordnet correctly loaded? => "+Linguistics::EN.has_wordnet?.to_s
-
-print "Enter your question : "
-question = gets
-sent = sentence(question)
-puts sent.diagram
-puts sent.linkages.first.constituent_tree_string
-puts sent.linkages.first.links_and_domains
