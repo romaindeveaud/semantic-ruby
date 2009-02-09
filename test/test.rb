@@ -1,10 +1,10 @@
-basedir = File.expand_path("..")
+basedir = File.expand_path(".").split("/").last
 
-unless $LOAD_PATH.include?( "#{basedir}/lib" )
-        $LOAD_PATH.unshift "#{basedir}/lib"
+if basedir == "test" 
+    require '../lib/loading'
+elsif basedir == "semantic-ruby" 
+    require 'lib/loading'
 end
-
-require 'loading'
 
 
 puts "\nIs linkparser correctly loaded? => "+Linguistics::EN.has_link_parser?.to_s
