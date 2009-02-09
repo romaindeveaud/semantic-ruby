@@ -1,0 +1,12 @@
+# A venir : tutorial pour installer Ruby et toutes les librairies utiles pour semantic-ruby
+
+I. Chargement des librairies
+
+En assumant que Ruby-Wordnet, LinkParser et Linguistics soient correctement installés, vous devez modifier le fichier lib/loading.rb.
+Seules les deux premières lignes nous intéressent, il s'agit de préciser le chemin absolu qui mène à vos installations de LinkParser et Ruby-Wordnet (respectivement les variables linkparserpath et wordnetpath).
+Si vous n'avez pas d'erreur lors de l'exécution du programme de test ( $ ruby test/loading.rb ) tout s'est bien passé. Si ce n'est pas le cas, reprenez les étapes d'installation et de configuration afin de voir si vous n'avez pas commis une erreur ; le cas échéant n'hésitez pas à nous envoyer un mail.
+
+
+
+Ludovic Bonnefoy - lulupeon@gmail.com
+Romain Deveaud   - romain.deveaud@gmail.com
