@@ -7,6 +7,5 @@ Seules les deux premières lignes nous intéressent, il s'agit de préciser le c
 Si vous n'avez pas d'erreur lors de l'exécution du programme de test ( $ ruby test/loading.rb ) tout s'est bien passé. Si ce n'est pas le cas, reprenez les étapes d'installation et de configuration afin de voir si vous n'avez pas commis une erreur ; le cas échéant n'hésitez pas à nous envoyer un mail.
 
 
-
 Ludovic Bonnefoy - lulupeon@gmail.com
 Romain Deveaud   - romain.deveaud@gmail.com
