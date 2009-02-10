@@ -8,7 +8,8 @@ require 'lib/request'
 
 while true do
     print "Enter your request : "
-    request = Request.new(str = gets)
+    str = gets.chomp!
+    break if str == "exit" # Condition de sortie
+    request = Request.new(str)
     puts request.extract
-    break if str.chomp! == "exit" # Condition de sortie
 end
