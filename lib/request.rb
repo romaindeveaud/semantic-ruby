@@ -21,6 +21,10 @@ class Request
         np
     end
 
+    def rewrite
+        puts "On réécrit la requête..."
+    end
+
 # Les deux fonctions ci-dessous vont analyser la requête pour choisir
 # le moteur qui convient le mieux, puis elles appeleront les fonctions
 # privées suivant le résultat.
@@ -29,7 +33,8 @@ class Request
 
     def extract
         print "Keywords selected for engine 1 : "
-        extract_e1
+        rewrite if extract_e1_2 == ""
+        extract_e1_2
     end
 
 private
@@ -42,15 +47,34 @@ private
     def extract_e1
         kw_array = get_np
         if !get_np.include?(@sent.object)
-            kw_array.push(@sent.object)
+            kw_array.push(@sent.object) unless @sent.object.nil? 
             @sent.linkages.first.links.each do |l|
                 kw_array.push(l.lword) if (l.rword.split(".").first == @sent.object) && (l.label =~ /A.*/)
             end
         end
         kw_str = "" 
         kw_array.each { |w| kw_str += "#{w.split(".").first} " }
-        kw_str.strip
+        kw_str.strip!
         kw_str
+    end
+
+    def extract_e1_2
+        # Deuxième version à tester, appel de la fonction récursive 
+        # ctree_rec
+        
+        kw_array = ctree_rec(@sent.constituent_tree.first)
+        kw_array.join(" ")
+    end
+
+    def ctree_rec(var)
+        # Parcours récursif de l'arbre, on récupère tous les children du label NP
+        array = []
+
+        var.children.each do |c|
+            array.concat(ctree_rec(c)) if c.children.length > 0
+            array.push(c.label) if (c.children.length == 0) && (var.label == "NP")
+        end
+        array
     end
     
     def extract_e2
