@@ -34,14 +34,35 @@ class Request
     def extract
         print "Keywords selected for engine 1 : "
         rewrite if extract_e1_2 == ""
-        extract_e1_2
+        puts extract_e1_2
+        print "Keywords selected for engine 2 : "
+        puts "[#{categorize_e2}] #{extract_e1}"
     end
 
 private
-    def categorize_e1
+    def categorize_e2
+        cat = ""
+        if @sent.linkages.first.links[1].label =~ /W.*/
+            case @sent.linkages.first.links[1].rword
+                when "who", "whom", "whose" : cat = "pers"
+                when "where", "whence", "wither" :
+# si il n'y a pas d'entité nommée on prend la catégorie 'place', sinon
+# on prend la catégorie de l'entité nommée
+                    np = get_np
+                    if np.empty? 
+                        cat = "place"
+                   # elsif
+# on va chercher la catégorie du nom propre à l'aide du moteur 1
+                    end
+                when "when" :
+                    np = get_np
+# on récupère la catégorie de l'entité nommée, sinon cat = "unk"                    
+                else cat = "unk"
+            end
+        end
     end
     
-    def categorize_e2
+    def categorize_e3
     end
 
     def extract_e1
@@ -59,15 +80,15 @@ private
     end
 
     def extract_e1_2
-        # Deuxième version à tester, appel de la fonction récursive 
-        # ctree_rec
+# Deuxième version à tester, appel de la fonction récursive ctree_rec
         
         kw_array = ctree_rec(@sent.constituent_tree.first)
+        kw_array -= $stoplist
         kw_array.join(" ")
     end
 
     def ctree_rec(var)
-        # Parcours récursif de l'arbre, on récupère tous les children du label NP
+# Parcours récursif de l'arbre, on récupère tous les children du label NP
         array = []
 
         var.children.each do |c|
@@ -75,9 +96,6 @@ private
             array.push(c.label) if (c.children.length == 0) && (var.label == "NP")
         end
         array
-    end
-    
-    def extract_e2
     end
     
     def extract_e3
