@@ -23,5 +23,5 @@ loop do
     str = prompt("Enter your request : ")
     break if str == "exit" # Condition de sortie
     request = Request.new(str)
-    puts request.extract
+    request.extract
 end

@@ -31,6 +31,13 @@ rescue => e
 end
 
 include Linguistics::EN
+
+require 'pathname'
+
+path = (File.basename(Pathname.pwd.to_s) == "lib") ? "" : "lib/" ;
+enfile = File.new(path+"stoplist.en", File::RDONLY, 0644)
+$stoplist = enfile.readlines
+$stoplist.each { |w| w.chomp! }
 #
 # End of loading stuff
 
