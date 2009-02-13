@@ -36,6 +36,8 @@ require 'pathname'
 
 path = (File.basename(Pathname.pwd.to_s) == "lib") ? "" : "lib/" ;
 enfile = File.new(path+"stoplist.en", File::RDONLY, 0644)
+
+require path+'string'
 $stoplist = enfile.readlines
 $stoplist.each { |w| w.chomp! }
 #

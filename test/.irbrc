@@ -10,7 +10,7 @@ rescue => e
 		e.backtrace.join( "\n\t" )
 end
 
-$dict = LinkParser::Dictionary.new
+$dict = LinkParser::Dictionary.new("en")
 $LOAD_PATH.unshift(wordnetpath+"lib")
 
 begin
