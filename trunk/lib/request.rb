@@ -11,14 +11,14 @@ class Request
 
     def get_np
         np = []
-        @sent.linkages.first.links.each { |l| np.push(l.lword, l.rword) if l.label == "G" }
+        @sent.linkages.first.links.each { |l| np.push(l.lword.split(".").first, l.rword.split(".").first) if l.label == "G" }
         np.uniq!
         if np.length > 2
             t = np.shift
             np.insert(1,t)
             np.reverse!
         end
-        np
+        np # => /!\ C'est une Array, pas une String !!
     end
 
     def rewrite
@@ -37,32 +37,66 @@ class Request
         puts extract_e1_2
         print "Keywords selected for engine 2 : "
         puts "[#{categorize_e2}] #{extract_e1}"
+        print "Keywords selected for engine 3 : "
+        puts "[#{categorize_e3}] #{extract_e3}"
     end
 
 private
     def categorize_e2
         cat = ""
+        np = get_np
         if @sent.linkages.first.links[1].label =~ /W.*/
             case @sent.linkages.first.links[1].rword
                 when "who", "whom", "whose" : cat = "pers"
                 when "where", "whence", "wither" :
 # si il n'y a pas d'entité nommée on prend la catégorie 'place', sinon
 # on prend la catégorie de l'entité nommée
-                    np = get_np
-                    if np.empty? 
-                        cat = "place"
-                   # elsif
-# on va chercher la catégorie du nom propre à l'aide du moteur 1
+                    if np.empty? cat = "place"
+                    else cat = np.join(" ").categorize_np
                     end
                 when "when" :
-                    np = get_np
 # on récupère la catégorie de l'entité nommée, sinon cat = "unk"                    
+                    if np.empty? cat = "unk"
+                    else cat = np.join(" ").categorize_np
+                    end
                 else cat = "unk"
             end
         end
     end
     
     def categorize_e3
+        cat = ""
+        if @sent.linkages.first.links[1].label =~ /W.*/
+            case @sent.linkages.first.links[1].rword
+                when "who", "whom", "whose" : cat = "pers"
+                when "where", "whence", "wither" : cat = "place"
+                when "when" : cat = "date"
+                when "how" :
+                    if ["few","great","little","many","much"].include?(@sent.linkages.first.links[2].rword)
+                        cat = "quantity"
+                    elsif ["tall", "wide", "high", "big"].include?(@sent.linkages.first.links[2].rword)
+                        cat = "amount" 
+                    end
+                when "what" : 
+                    np = get_np
+                    if np.empty?
+                        noun = ""
+                        @sent.linkages.first.links.each do |l|
+                            if l.label =~ /O.*/ or l.label =~ /S.*/
+                                lword = l.lword.split(".")
+                                rword = l.rword.split(".")
+                                noun += lword[0] if lword[1] == "n"
+                                noun += rword[0] if rword[1] == "n"
+                            end
+                        end
+                        cat = noun.categorize # définie dans string.rb
+                    else 
+                        cat = np.join(" ").categorize_np
+                    end
+                else cat = "unk"
+            end
+        end
+        cat
     end
 
     def extract_e1
@@ -73,15 +107,14 @@ private
                 kw_array.push(l.lword) if (l.rword.split(".").first == @sent.object) && (l.label =~ /A.*/)
             end
         end
-        kw_str = "" 
-        kw_array.each { |w| kw_str += "#{w.split(".").first} " }
-        kw_str.strip!
-        kw_str
+#        kw_str = "" 
+#        kw_array.each { |w| kw_str += "#{w.split(".").first} " }
+#        kw_str.strip!
+#        kw_str
+        kw_array.join(" ")        
     end
 
     def extract_e1_2
-# Deuxième version à tester, appel de la fonction récursive ctree_rec
-        
         kw_array = ctree_rec(@sent.constituent_tree.first)
         kw_array -= $stoplist
         kw_array.join(" ")
@@ -99,5 +132,18 @@ private
     end
     
     def extract_e3
+        named_ent  = ""
+        keywords   = ""
+        
+        if get_np == ""
+            req = extract_e1_2
+# Executer la requête sur le premier moteur et récupérer le meilleur
+# résultat, qui sera l'entité nommée.
+            named_ent = "[No named_ent in this question]"
+        else
+            named_ent = get_np.join(" ")
+        end
+
+        return "[Named entity : #{named_ent}] [Keywords : #{keywords}]"
     end
 end
