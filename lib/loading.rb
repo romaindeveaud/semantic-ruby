@@ -2,6 +2,7 @@
 # All the lines below load the libraries
 linkparserpath = ENV['LPPATH']
 wordnetpath = ENV['WNPATH']
+
 $LOAD_PATH.unshift( linkparserpath+"lib", linkparserpath+"ext" )
 
 begin
