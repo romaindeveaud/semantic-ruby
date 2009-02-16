@@ -22,7 +22,7 @@ class Request
     end
 
     def rewrite
-        puts "On réécrit la requête..."
+        print "On réécrit la requête..."
     end
 
 # Les deux fonctions ci-dessous vont analyser la requête pour choisir
@@ -51,13 +51,17 @@ private
                 when "where", "whence", "wither" :
 # si il n'y a pas d'entité nommée on prend la catégorie 'place', sinon
 # on prend la catégorie de l'entité nommée
-                    if np.empty? cat = "place"
-                    else cat = np.join(" ").categorize_np
+                    if np.empty? 
+                        cat = "place"
+                    else 
+                        cat = np.join("+").categorize_np
                     end
                 when "when" :
 # on récupère la catégorie de l'entité nommée, sinon cat = "unk"                    
-                    if np.empty? cat = "unk"
-                    else cat = np.join(" ").categorize_np
+                    if np.empty? 
+                        cat = "unk"
+                    else 
+                        cat = np.join("+").categorize_np
                     end
                 else cat = "unk"
             end
@@ -79,19 +83,19 @@ private
                     end
                 when "what" : 
                     np = get_np
-                    if np.empty?
-                        noun = ""
-                        @sent.linkages.first.links.each do |l|
-                            if l.label =~ /O.*/ or l.label =~ /S.*/
-                                lword = l.lword.split(".")
-                                rword = l.rword.split(".")
-                                noun += lword[0] if lword[1] == "n"
-                                noun += rword[0] if rword[1] == "n"
-                            end
-                        end
-                        cat = noun.categorize # définie dans string.rb
+                    if np.include?(@sent.object.split(".").first)
+#                        noun = ""
+#                        @sent.linkages.first.links.each do |l|
+#                            if l.label =~ /O.*/ or l.label =~ /S.*/
+#                                lword = l.lword.split(".")
+#                                rword = l.rword.split(".")
+#                                noun += lword[0] if lword[1] == "n"
+#                                noun += rword[0] if rword[1] == "n"
+#                            end
+#                        end
+                        cat = np.join("+").categorize_np
                     else 
-                        cat = np.join(" ").categorize_np
+                        cat = @sent.object.split(".").first.categorize # définie dans string.rb
                     end
                 else cat = "unk"
             end
@@ -101,10 +105,11 @@ private
 
     def extract_e1
         kw_array = get_np
-        if !get_np.include?(@sent.object)
-            kw_array.push(@sent.object) unless @sent.object.nil? 
+        object = @sent.object.split(".").first if !@sent.object.nil?
+        if !get_np.include?(object)
+            kw_array.push(object) unless object.nil? 
             @sent.linkages.first.links.each do |l|
-                kw_array.push(l.lword) if (l.rword.split(".").first == @sent.object) && (l.label =~ /A.*/)
+                kw_array.push(l.lword.split(".").first) if (l.rword.split(".").first == object) && (l.label =~ /A.*/)
             end
         end
 #        kw_str = "" 
