@@ -1,7 +1,7 @@
 #
 # All the lines below load the libraries
-linkparserpath = "/home/ubuntu/trashInstall/linkparser/trunk/"
-wordnetpath = "/home/ubuntu/trashInstall/wordnet/wordnet-0.0.5/"
+linkparserpath = ENV['LPPATH']
+wordnetpath = ENV['WNPATH']
 $LOAD_PATH.unshift( linkparserpath+"lib", linkparserpath+"ext" )
 
 begin
