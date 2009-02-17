@@ -32,6 +32,7 @@ rescue => e
 end
 
 include Linguistics::EN
+Linguistics::use(:en)
 
 require 'pathname'
 
