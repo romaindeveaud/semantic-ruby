@@ -33,6 +33,13 @@ class String
 
     def categorize(hypernym = nil)
         cat = nil
+
+        if hypernym.nil?
+            cat = Net::HTTP.get(URI.parse("http://www.nlgbase.org/perl/lr_info_extractor.pl?query=#{self}&search=EN")).split(":")[0]
+            cat = nil if cat == ""
+            return cat if !cat.nil?
+        end
+
         hypernym = synset(self) if hypernym.nil?
         hypernym.synonyms.each do |s|
             cat = "loc"     if Loc_Cat.include?(s)
@@ -49,6 +56,7 @@ class String
         end
 
         if cat.nil? && hypernym == synset(self)
+            cat = Net::HTTP.get(URI.parse("http://www.nlgbase.org/perl/lr_info_extractor.pl?query=#{self}&search=EN")).split(":")[1]
             cat = case hypernym.lex_info.split(".").last
                 when "person"   : "pers.hum"
                 when "artifact" : "prod"
@@ -64,7 +72,10 @@ class String
     def categorize_np
 # interraction avec le premier moteur pour récupérer la catégorie
 # d'un nom propre
-        Net::HTTP.get(URI.parse("http://www.nlgbase.org/perl/lr_info_extractor.pl?query=#{self}&search=EN"))
+        arr = Net::HTTP.get(URI.parse("http://www.nlgbase.org/perl/lr_info_extractor.pl?query=#{self}&search=EN")).split(":")
+        cat = arr[0]
+        cat = arr[1] if arr[0] == ""
+        cat
     end
 
 end
