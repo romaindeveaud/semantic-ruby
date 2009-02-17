@@ -36,7 +36,7 @@ class String
 
         if hypernym.nil?
             cat = Net::HTTP.get(URI.parse("http://www.nlgbase.org/perl/lr_info_extractor.pl?query=#{self}&search=EN")).split(":")[0]
-            cat = nil if cat == ""
+            cat = nil if (cat == "" or cat.nil?)
             return cat if !cat.nil?
         end
 
@@ -57,6 +57,8 @@ class String
 
         if cat.nil? && hypernym == synset(self)
             cat = Net::HTTP.get(URI.parse("http://www.nlgbase.org/perl/lr_info_extractor.pl?query=#{self}&search=EN")).split(":")[1]
+            cat = nil if (cat == "" or cat.nil?)
+            return cat if !cat.nil?
             cat = case hypernym.lex_info.split(".").last
                 when "person"   : "pers.hum"
                 when "artifact" : "prod"
