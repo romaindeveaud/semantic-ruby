@@ -20,13 +20,35 @@ require 'net/http'
 #  si on arrive à remonter à 'location'.
 #
 Amount_Cat = []
+Amount_Phy_Temp_Cat = ["temperature", "temperature unit"]
+Amount_Phy_Age_Cat = ["age"]
+Amount_Phy_Spd_Cat = ["megaflop", "MFLOP", "million floating point operations per second", "teraflop", "trillion floating point operations per second", "MIPS", "million instructions per second", "speed", "velocity"]
+Amount_Phy_Wei_Cat = ["mass", "mass unit", "weight", "weight unit"]
+Amount_Phy_Len_Cat = ["length", "linear unit", "linear measure"]
+Amount_Phy_Area_Cat = ["area unit", "square measure"]
+Amount_Phy_Vol_Cat = ["volume unit", "capacity unit", "capacity measure", "cubage unit", "cubic measure", "cubic content unit", "displacement unit", "cubature unit"]
+Amount_Cur_Cat = ["monetary unit"]
 Loc_Cat    = ["topographic point", "place", "spot", "location", "space"]
+Fonc_Cat = ["leader", "representative"]
+Fonc_Rel_Cat = ["spiritual leader", "religious leader", "scoutmaster"]
+Fonc_Ari_Cat = ["ristocrat", "blue blood", "patrician"]
+Fonc_Mil_Cat = ["military leader", "strike leader"]
+Fonc_Pol_Cat = ["nationalist leader", "politician", "politico", "pol", "political leader", "puppet ruler", "puppet leader", "assemblyman", "assemblywoman", "head of state", "chief of state"]
+Fonc_Admi_Cat = ["civic leader", "civil leader", "delegate", "administrator", "executive", "secretary"]
+Prod_Vehicle_Cat = ["conveyance", "transport"]
+Prod_Award_Cat = ["award", "accolade", "honor", "honour", "laurels" , "prize"]
 Pers_Cat   = []
 Prod_Cat   = []
 Date_Cat   = []
 Time_Cat   = []
+Time_Hour_Cat   = ["hours"]
 Org_Cat    = []
-
+Org_Pol_Cat    = ["government officials", "officialdom", "city council", "executive council", "works council", "polity", "union", "labor union", "trade union", "trades union", "brotherhood", "party", "political party", "political machine"]
+Org_Edu_Cat    = ["educational institution", "academy", "honorary society"]
+Org_Com_Cat    = ["management", "financial institution", "financial organization", "financial organisation", "company", "enterprise"]
+Org_Non_Profit_Cat    = ["Curia", "medical institution", "charity", "organized religion", "vicariate", "vicarship", "nongovernmental organization", "NGO"]
+Org_Div_Cat    = ["musical organization", "musical organisation", "musical group", "museum", "company", "troupe", "team", "broadcasting station", "broadcast station"]
+Org_GSP_Cat    = ["aministrative district", "administrative division", "territorial division"]
              
 
 class String
@@ -42,13 +64,36 @@ class String
 
         hypernym = synset(self) if hypernym.nil?
         hypernym.synonyms.each do |s|
+            cat = "amount"  if Amount_Cat.include?(s)
+            cat = "amount.phy.age"  if Amount_Phy_Age_Cat.include?(s)
+            cat = "amount.phy.vol"  if Amount_Phy_Vol_Cat.include?(s)
+            cat = "amount.phy.cur"  if Amount_Phy_Cur_Cat.include?(s)
+            cat = "amount.phy.spd"  if Amount_Phy_Spd_Cat.include?(s)
+            cat = "amount.phy.area"  if Amount_Phy_Area_Cat.include?(s)
+            cat = "amount.phy.temp"  if Amount_Phy_Temp_Cat.include?(s)
+            cat = "amount.phy.wei"  if Amount_Phy_Wei_Cat.include?(s)
+            cat = "amount.phy.len"  if Amount_Phy_Len_Cat.include?(s)
             cat = "loc"     if Loc_Cat.include?(s)
             cat = "pers"    if Pers_Cat.include?(s)
             cat = "prod"    if Prod_Cat.include?(s)
+            cat = "prod.vehicle" if Prod_Vehicle_Cat.include?(s)
+            cat = "prod.award" if Prod_Award_Cat.include?(s)
             cat = "org"     if Org_Cat.include?(s)
+            cat = "org.pol"     if Org_Pol_Cat.include?(s)
+            cat = "org.edu"     if Org_Edu_Cat.include?(s)
+            cat = "org.com"     if Org_Com_Cat.include?(s)
+            cat = "org.non-protif"     if Org_Non_Profit_Cat.include?(s)
+            cat = "org.div"     if Org_Div_Cat.include?(s)
+            cat = "org.gsp"     if Org_GSP_Cat.include?(s)
             cat = "time"    if Time_Cat.include?(s)
+            cat = "time.hour"    if Time_Hour_Cat.include?(s)
             cat = "date"    if Date_Cat.include?(s)
-            cat = "amount"  if Amount_Cat.include?(s)
+            cat = "fonc" if Fonc_Cat.include?(s)
+            cat = "fonc.rel" if Fonc_Rel_Cat.include?(s)
+            cat = "fonc.ari" if Fonc_Ari_Cat.include?(s)
+            cat = "fonc.mil" if Fonc_Mil.include?(s)
+            cat = "fonc.pol" if Fonc_Pol_Cat.include?(s)
+            cat = "fonc.admi" if Fonc_Admi_Cat.include?(s)
         end
 
         if cat.nil?
