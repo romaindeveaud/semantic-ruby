@@ -3,12 +3,12 @@
 linkparserpath = ENV['LPPATH']
 wordnetpath = ENV['WNPATH']
 
-$LOAD_PATH.unshift( linkparserpath+"lib", linkparserpath+"ext" )
+$LOAD_PATH.unshift( linkparserpath+"/lib" , linkparserpath+"/ext" )
 
 begin
 	require 'linkparser'
 rescue => e
-	$stderr.puts "LinkParser module failed to load : #{e.message}\n\t" +
+	puts "LinkParser module failed to load : #{e.message}\n\t" +
 		e.backtrace.join( "\n\t" )
 end
 
