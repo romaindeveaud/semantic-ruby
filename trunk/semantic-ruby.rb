@@ -23,5 +23,9 @@ loop do
     str = prompt("Enter your request : ")
     break if str == "exit" # Condition de sortie
     request = Request.new(str)
-    request.extract
+    begin
+      request.extract
+    rescue NoMethodError
+      $stderr.puts "Your sentence seems to be miswritten, please take the time to check it."
+    end
 end

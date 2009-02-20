@@ -25,7 +25,7 @@ class Request
     end
 
     def rewrite
-        print "On réécrit la requête..."
+        print "Request rewriting..."
     end
 
 # Les deux fonctions ci-dessous vont analyser la requête pour choisir
@@ -35,9 +35,8 @@ class Request
     end
 
     def extract
-        print "Keywords selected for engine 1 : "
         rewrite if extract_e1_2 == ""
-        puts extract_e1_2
+        puts "Keywords selected for engine 1 : "+extract_e1_2
         print "Keywords selected for engine 2 : "
         puts "[#{categorize_e2}] #{extract_e1}"
         print "Keywords selected for engine 3 : "

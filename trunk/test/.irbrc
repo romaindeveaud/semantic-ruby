@@ -1,6 +1,6 @@
 linkparserpath = ENV['LPPATH']
 wordnetpath = ENV['WNPATH']
-$LOAD_PATH.unshift( linkparserpath+"lib", linkparserpath+"ext" )
+$LOAD_PATH.unshift( linkparserpath+"/lib", linkparserpath+"/ext" )
 
 begin
 	puts "Requiring 'linkparser' module..."
