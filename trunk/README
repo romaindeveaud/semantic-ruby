@@ -1,11 +1,12 @@
-# A venir : tutorial pour installer Ruby et toutes les librairies utiles pour semantic-ruby
 
-I. Chargement des librairies
+I. Installation
+semantic-ruby requires a lot of librairies, which require themselves a lot of librairies or packages. It was very painful to install all these things by yourself, so we created a bash script which install everything you need to run our application. You MUST NOT run the install script with sudo.
 
-En assumant que Ruby-Wordnet, LinkParser et Linguistics soient correctement installés, vous devez modifier le fichier lib/loading.rb.
-Seules les deux premières lignes nous intéressent, il s'agit de préciser le chemin absolu qui mène à vos installations de LinkParser et Ruby-Wordnet (respectivement les variables linkparserpath et wordnetpath).
-Si vous n'avez pas d'erreur lors de l'exécution du programme de test ( $ ruby test/loading.rb ) tout s'est bien passé. Si ce n'est pas le cas, reprenez les étapes d'installation et de configuration afin de voir si vous n'avez pas commis une erreur ; le cas échéant n'hésitez pas à nous envoyer un mail.
+  $ sh install.sh
 
+It may be long depending on your internet connection and computer performances. You will be prompted two times, as the red text says, just type 'y' the first time, and 'Enter' without typing anything before the second time.
+
+If you have troubles running the install script, please send us a mail, we will answer as soon as possible.
 
 Ludovic Bonnefoy - lulupeon@gmail.com
 Romain Deveaud   - romain.deveaud@gmail.com
