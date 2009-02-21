@@ -27,7 +27,7 @@ Amount_Phy_Wei_Cat = ["mass", "mass unit", "weight", "weight unit"]
 Amount_Phy_Len_Cat = ["length", "linear unit", "linear measure"]
 Amount_Phy_Area_Cat = ["area unit", "square measure"]
 Amount_Phy_Vol_Cat = ["volume unit", "capacity unit", "capacity measure", "cubage unit", "cubic measure", "cubic content unit", "displacement unit", "cubature unit"]
-Amount_Cur_Cat = ["monetary unit"]
+Amount_Phy_Cur_Cat = ["monetary unit"]
 Loc_Cat    = ["topographic point", "place", "spot", "location", "space"]
 Fonc_Cat = ["leader", "representative"]
 Fonc_Rel_Cat = ["spiritual leader", "religious leader", "scoutmaster"]
@@ -91,7 +91,7 @@ class String
             cat = "fonc"              if Fonc_Cat.include?(s)
             cat = "fonc.rel"          if Fonc_Rel_Cat.include?(s)
             cat = "fonc.ari"          if Fonc_Ari_Cat.include?(s)
-            cat = "fonc.mil"          if Fonc_Mil.include?(s)
+            cat = "fonc.mil"          if Fonc_Mil_Cat.include?(s)
             cat = "fonc.pol"          if Fonc_Pol_Cat.include?(s)
             cat = "fonc.admi"         if Fonc_Admi_Cat.include?(s)
         end
