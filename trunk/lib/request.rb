@@ -190,20 +190,25 @@ private
                     when "a" : :adjective
                     when "n" : :noun
                     when "e" : :adverb
+                    when "v" : :verb
                     else nil
                 end
                 word = l.lword.split(".")[0]
-                syn = synset(ActiveSupport::Inflector.singularize(word), symbol) if synset(word, symbol).nil?
+#syn = synset(ActiveSupport::Inflector.singularize(word), symbol) if synset(word, symbol).nil?
+                syn = synset(word,symbol)
+                syn = syn.nil? ? synset(ActiveSupport::Inflector.singularize(word), symbol) : syn 
                 keywords += syn.words if !syn.nil?
             elsif keywords.include?(l.rword.split(".")[0])
                 symbol = case l.rword.split(".")[1]
                     when "a" : :adjective
                     when "n" : :noun
                     when "e" : :adverb
+                    when "v" : :verb
                     else nil
                 end
-                syn = synset(l.rword.split(".")[0], symbol)
-                syn = synset(ActiveSupport::Inflector.singularize(word), symbol) if synset(word, symbol).nil?
+                word = l.rword.split(".")[0]
+                syn = synset(word,symbol)
+                syn = syn.nil? ? synset(ActiveSupport::Inflector.singularize(word), symbol) : syn 
                 keywords += syn.words if !syn.nil?
             end
         end
