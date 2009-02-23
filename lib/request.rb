@@ -25,7 +25,17 @@ class Request
     end
 
     def rewrite
-        print "Request rewriting..."
+        obj = extract_e1_2.split(" ")
+        index = 1000
+        @sent.words.each { |w| index = @sent.words.index(w) if (obj.include?(w)) && (index > @sent.words.index(w)) }
+        new_sent = @sent.words-["'s","LEFT-WALL","RIGHT-WALL"]-obj
+        obj = obj.join("+")
+        arr = Net::HTTP.get(URI.parse("http://www.nlgbase.org/perl/lr_info_extractor.pl?query=#{obj}&search=EN&type=en")).split(":")
+        obj = arr[0]
+        obj = arr[1] if arr[0] == ""
+
+        new_sent.insert(index-1,obj)
+        @sent = sentence(new_sent.join(" "))
     end
 
 # Les deux fonctions ci-dessous vont analyser la requête pour choisir
@@ -35,7 +45,7 @@ class Request
     end
 
     def extract
-        rewrite if extract_e1_2 == ""
+        rewrite if extract_e1_2 != extract_e1
         puts "Keywords selected for engine 1 : "+extract_e1_2
         print "Keywords selected for engine 2 : "
         puts "[#{categorize_e2}] #{extract_e1}"
@@ -133,6 +143,7 @@ private
                 kw_array.push(l.lword.split(".").first) if (l.rword.split(".").first == object) && (l.label =~ /A[N]/)
             end
         end
+        kw_array -= $stoplist
 #        kw_str = "" 
 #        kw_array.each { |w| kw_str += "#{w.split(".").first} " }
 #        kw_str.strip!
@@ -143,7 +154,7 @@ private
     def extract_e1_2
         kw_array = ctree_rec(@sent.constituent_tree.first)
         kw_array -= $stoplist
-        kw_array = extract_e1 if kw_array.empty?
+#        kw_array = extract_e1 if kw_array.empty?
         kw_array.join(" ")
     end
 
