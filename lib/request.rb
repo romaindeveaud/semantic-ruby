@@ -14,12 +14,17 @@ class Request
 
     def get_np
         np = []
-        @sent.linkages.first.links.each { |l| np.push(l.lword.split(".").first, l.rword.split(".").first) if l.label == "G" }
+        @sent.linkages.first.links.each { |l| np.push(l.lword.split(".").first, l.rword.split(".").first) if l.label =~ /G./ }
         np.uniq!
         if np.length > 2
-            t = np.shift
-            np.insert(1,t)
-            np.reverse!
+          t = np.shift
+          np.insert(1,t)
+          np.reverse!
+        end
+        
+        if np.empty?
+          temp = @sent.words-["?",".","LEFT-WALL","RIGHT-WALL"]
+          temp.each { |w| np.push(w) if w.capitalize == w }
         end
         np # => /!\ C'est une Array, pas une String !!
     end
@@ -29,12 +34,8 @@ class Request
         index = 1000
         @sent.words.each { |w| index = @sent.words.index(w) if (obj.include?(w)) && (index > @sent.words.index(w)) }
         new_sent = @sent.words-["'s","LEFT-WALL","RIGHT-WALL"]-obj
-        obj = obj.join("+")
-        arr = Net::HTTP.get(URI.parse("http://www.nlgbase.org/perl/lr_info_extractor.pl?query=#{obj}&search=EN&type=en")).split(":")
-        obj = arr[0]
-        obj = arr[1] if arr[0] == ""
 
-        new_sent.insert(index-1,obj)
+        new_sent.insert(index-1,new_obj(obj))
         @sent = sentence(new_sent.join(" "))
     end
 
@@ -54,6 +55,14 @@ class Request
     end
 
 private
+    def new_obj(obj)
+        obj = obj.join("+")
+        arr = Net::HTTP.get(URI.parse("http://www.nlgbase.org/perl/lr_info_extractor.pl?query=#{obj}&search=EN&type=en")).split(":")
+        obj = arr[0]
+        obj = arr[1] if arr[0] == ""
+        obj
+    end
+
     def categorize_e2
         cat = ""
         np = get_np
@@ -82,7 +91,12 @@ private
                     else
                         cat = np.join("+").categorize_np
                     end
-                else cat = "unk"
+                else 
+                    if np.empty?
+                        cat = "unk"
+                    else
+                        cat = np.join("+").categorize_np
+                    end
             end
         elsif @sent.linkages.first.links[1].label =~ /W[di]/
         # Si c'est une phrase déclarative ou impérative
@@ -104,10 +118,12 @@ private
                 when "where", "whence", "wither" : cat = "place"
                 when "when" : cat = "date"
                 when "how" :
-                    if ["few","great","little","many","much"].include?(@sent.linkages.first.links[2].rword)
+                    if ["few","great","little","many","much"].include?(@sent.linkages.first.links[2].rword.split(".")[0])
                         cat = "quantity"
-                    elsif ["tall", "wide", "high", "big"].include?(@sent.linkages.first.links[2].rword)
+                    elsif ["tall", "wide", "high", "big", "old"].include?(@sent.linkages.first.links[2].rword.split(".")[0])
                         cat = "amount" 
+                    else
+                        cat = "unk"
                     end
                 when "what" : 
                     if np.include?(@sent.object.split(".").first)
@@ -148,6 +164,7 @@ private
 #        kw_array.each { |w| kw_str += "#{w.split(".").first} " }
 #        kw_str.strip!
 #        kw_str
+        kw_array.sort!        
         kw_array.join(" ")        
     end
 
@@ -155,6 +172,7 @@ private
         kw_array = ctree_rec(@sent.constituent_tree.first)
         kw_array -= $stoplist
 #        kw_array = extract_e1 if kw_array.empty?
+        kw_array.sort!
         kw_array.join(" ")
     end
 
@@ -176,7 +194,7 @@ private
         if get_np.empty?
 # On exécute une requête avec l'objet de la question pour récupérer
 # le nom de la fiche associée, qui fera office d'entité nommée.
-            named_ent = "[No named_ent in this question]"
+            named_ent = new_obj(extract_e1_2.split(" ")) 
         else
 # On exécute une requête pour récupérer le nom exact de l'EN.        
             named_ent = get_np.join(" ")
