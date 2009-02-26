@@ -1,3 +1,4 @@
+rm -rf ~/.semantic-rubyInstall ;
 sudo apt-get update ;
 sudo apt-get install subversion ruby irb rdoc libc6-dev libopenssl-ruby ruby1.8-dev tcl-dev tk-dev libdb4.2 libdb4.2-dev ;
 cd ~ ;
@@ -53,8 +54,8 @@ echo "export LPPATH=/home/$USER/.semantic-rubyInstall/linkparser" >> /home/$USER
 echo "export WNPATH=/home/$USER/.semantic-rubyInstall/wordnet-0.0.5" >> /home/$USER/.bashrc ;
 echo "export LANG=en_US.UTF-8" >> /home/$USER/.bashrc ;
 echo "export LD_LIBRARY_PATH=/usr/local/lib" >> /home/$USER/.bashrc ;
-export LPPATH=/home/$USER/.semantic-rubyInstall/linkparser
-export WNPATH=/home/$USER/.semantic-rubyInstall/wordnet-0.0.5
-export LANG=en_US.UTF-8
+export LPPATH=/home/$USER/.semantic-rubyInstall/linkparser ;
+export WNPATH=/home/$USER/.semantic-rubyInstall/wordnet-0.0.5 ;
+export LANG=en_US.UTF-8 ;
 cd .. ;
 rm -f *.tar.gz *.tgz ;

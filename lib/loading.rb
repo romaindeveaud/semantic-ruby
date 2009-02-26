@@ -37,11 +37,13 @@ Linguistics::use(:en)
 require 'pathname'
 
 path = (File.basename(Pathname.pwd.to_s) == "lib") ? "" : "lib/" ;
-enfile = File.new(path+"stoplist.en", File::RDONLY, 0644)
 
-require path+'string'
-$stoplist = enfile.readlines
-$stoplist.each { |w| w.chomp! }
+unless File.basename(Pathname.pwd.to_s) == "test"
+  require path+'string'
+  enfile = File.new(path+"stoplist.en", File::RDONLY, 0644)
+  $stoplist = enfile.readlines
+  $stoplist.each { |w| w.chomp! }
+end
 #
 # End of loading stuff
 
