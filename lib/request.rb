@@ -37,7 +37,7 @@ private
         
         if np.empty?
           temp = @sent.words-["?",".","LEFT-WALL","RIGHT-WALL"]
-          temp.each { |w| np.push(w) if w.capitalize == w }
+          temp.each { |w| np.push(w) if (w.capitalize == w or w.upcase == w)}
         end
         np # => /!\ C'est une Array, pas une String !!
     end
