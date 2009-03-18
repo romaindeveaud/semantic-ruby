@@ -51,14 +51,14 @@ loop do
       break
     end
     request = Request.new(str)
-#begin
+    begin
       results = request.extract
       puts "Keywords selected for engine 1 : "+results[:kw_e1]
       print "Keywords selected for engine 2 : "
       puts "[#{results[:cat_e2]}] #{results[:kw_e2]}"
       print "Keywords selected for engine 3 : "
       puts "[#{results[:cat_e3]}] [Named entity : #{results[:en_e3]}] [Keywords : #{results[:kw_e3]}]"
-#    rescue NoMethodError
-#      $stderr.puts "Your sentence seems to be miswritten, please take the time to check it."
-#    end
+    rescue NoMethodError
+      $stderr.puts "Your sentence seems to be miswritten, please take the time to check it."
+    end
 end
