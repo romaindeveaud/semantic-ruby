@@ -13,7 +13,15 @@ class Request
     end
 
     def extract
-        rewrite if extract_e1_2 != extract_e1
+        if extract_e1_2 != extract_e1
+          sent = @sent
+          rewrite
+          begin
+            @sent.constituent_tree
+          rescue NoMethodError
+            @sent = sent
+          end
+        end
         results = Hash.new
         results[:kw_e1]  = extract_e1_2
         results[:kw_e2]  = extract_e1
