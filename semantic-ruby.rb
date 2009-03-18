@@ -35,9 +35,14 @@ def evaluate
     request = Request.new(question)
     begin
       result  = request.extract
-    rescue NoMethodError
-      $stderr.puts "Question syntax error [#{question}]"
-      errors += 1
+    rescue NoMethodError => e
+      func = e.message.split("`").last.split("'").first
+      if func == "constituent_tree"
+        $stderr.puts "Question syntax error [#{question}]"
+        errors += 1
+      else
+        puts e.message+" [#{question}]"
+      end
     end
   end
   puts "There was #{errors.to_s} miswritten sentences (#{errors.to_f/questions.length.to_f}%)."
