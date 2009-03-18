@@ -12,6 +12,19 @@ class Request
         @sent.diagram
     end
 
+    def extract
+        rewrite if extract_e1_2 != extract_e1
+        results = Hash.new
+        results[:kw_e1]  = extract_e1_2
+        results[:kw_e2]  = extract_e1
+        results[:kw_e3]  = extract_e3
+        results[:cat_e2] = categorize_e2
+        results[:cat_e3] = categorize_e3
+        results[:en_e3]  = en_e3
+        results
+    end
+
+private
     def get_np
         np = []
         @sent.linkages.first.links.each { |l| np.push(l.lword.split(".").first, l.rword.split(".").first) if l.label =~ /G./ }
@@ -39,22 +52,6 @@ class Request
         @sent = sentence(new_sent.join(" "))
     end
 
-# Les deux fonctions ci-dessous vont analyser la requête pour choisir
-# le moteur qui convient le mieux, puis elles appeleront les fonctions
-# privées suivant le résultat.
-    def categorize
-    end
-
-    def extract
-        rewrite if extract_e1_2 != extract_e1
-        puts "Keywords selected for engine 1 : "+extract_e1_2
-        print "Keywords selected for engine 2 : "
-        puts "[#{categorize_e2}] #{extract_e1}"
-        print "Keywords selected for engine 3 : "
-        puts "[#{categorize_e3}] #{extract_e3}"
-    end
-
-private
     def new_obj(obj)
         obj = obj.join("+")
         arr = Net::HTTP.get(URI.parse("http://www.nlgbase.org/perl/lr_info_extractor.pl?query=#{obj}&search=EN&type=en")).split(":")
@@ -63,9 +60,17 @@ private
         obj
     end
 
+    def find_obj
+      object = nil
+      @sent.linkages.first.links.each { |l| object = l.rword.split(".").first if l.label =~ /I\*./ }
+      object
+    end
+
     def categorize_e2
         cat = ""
         np = get_np
+        object = @sent.object.split(".").first if !@sent.object.nil?
+        object = find_obj if object.nil?
         if @sent.linkages.first.links[1].label =~ /W[jqs]/
         # Si c'est une question...
             case @sent.linkages.first.links[1].rword
@@ -87,7 +92,7 @@ private
                     end
                 when "what" :
                     if np.empty?
-                        cat = ActiveSupport::Inflector.singularize(@sent.object.split(".").first).categorize
+                        cat = ActiveSupport::Inflector.singularize(object).categorize
                     else
                         cat = np.join("+").categorize_np
                     end
@@ -112,6 +117,7 @@ private
         cat = ""
         np = get_np
         object = @sent.object.split(".").first if !@sent.object.nil?
+        object = find_obj if object.nil?
         if @sent.linkages.first.links[1].label =~ /W[jqs]/
             case @sent.linkages.first.links[1].rword
                 when "who", "whom", "whose" : cat = "pers"
@@ -126,7 +132,7 @@ private
                         cat = "unk"
                     end
                 when "what" : 
-                    if np.include?(@sent.object.split(".").first)
+                    if np.include?(object) or object.nil?
 #                        noun = ""
 #                        @sent.linkages.first.links.each do |l|
 #                            if l.label =~ /O.*/ or l.label =~ /S.*/
@@ -186,20 +192,25 @@ private
         end
         array
     end
-    
-    def extract_e3
-        named_ent  = ""
-        keywords   = ""
-        
-        if get_np.empty?
+
+    def en_e3
+      named_ent = ""
+      
+      if get_np.empty?
 # On exécute une requête avec l'objet de la question pour récupérer
 # le nom de la fiche associée, qui fera office d'entité nommée.
-            named_ent = new_obj(extract_e1_2.split(" ")) 
-        else
+          named_ent = new_obj(extract_e1_2.split(" ")) 
+      else
 # On exécute une requête pour récupérer le nom exact de l'EN.        
-            named_ent = get_np.join(" ")
-        end
+          named_ent = get_np.join(" ")
+      end
 
+      named_ent
+    end
+    
+    def extract_e3
+        keywords = []
+        
         verb = []
         @sent.linkages.first.links.each do |l| 
             v = nil
@@ -242,11 +253,17 @@ private
             end
         end
 
+        if keywords.empty?
+          syn = synset(find_obj, :verb)
+          syn = syn.nil? ? synset(ActiveSupport::Inflector.singularize(find_obj), :verb) : syn 
+          keywords += syn.words if !syn.nil?
+        end
+
         keywords.collect! { |w| w.split(" ") }
         keywords.flatten!
         keywords.uniq!
         sec_line = keywords.join(";")
         
-        return "[Named entity : #{named_ent}] [Keywords : #{sec_line}]"
+        return sec_line
     end
 end

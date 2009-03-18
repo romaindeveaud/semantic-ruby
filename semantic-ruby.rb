@@ -19,13 +19,46 @@ def prompt(prompt)
     input
 end
 
+def evaluate
+  errors = 0
+  questions = File.new("test/eval_questions").readlines
+  questions.collect! { |q| q.strip! }
+  questions.each do |q|
+    q = q.split("#")
+    question  = q[0]
+    kw_e1_e2  = q[1]
+    cat_e2    = q[2].split(".")[0]
+    en_e3     = q[3]
+    kw_e3     = q[4]
+    cat_e3    = q[5].split(".")[0]
+
+    request = Request.new(question)
+    begin
+      result  = request.extract
+    rescue NoMethodError
+      $stderr.puts "Question syntax error [#{question}]"
+      errors += 1
+    end
+  end
+  puts "There was #{errors.to_s} miswritten sentences (#{errors.to_f/questions.length.to_f}%)."
+end
+
 loop do
     str = prompt("Enter your request : ")
     break if str == "exit" # Condition de sortie
-    request = Request.new(str)
-    begin
-      request.extract
-    rescue NoMethodError
-      $stderr.puts "Your sentence seems to be miswritten, please take the time to check it."
+    if str == "eval"
+      evaluate
+      break
     end
+    request = Request.new(str)
+#begin
+      results = request.extract
+      puts "Keywords selected for engine 1 : "+results[:kw_e1]
+      print "Keywords selected for engine 2 : "
+      puts "[#{results[:cat_e2]}] #{results[:kw_e2]}"
+      print "Keywords selected for engine 3 : "
+      puts "[#{results[:cat_e3]}] [Named entity : #{results[:en_e3]}] [Keywords : #{results[:kw_e3]}]"
+#    rescue NoMethodError
+#      $stderr.puts "Your sentence seems to be miswritten, please take the time to check it."
+#    end
 end
