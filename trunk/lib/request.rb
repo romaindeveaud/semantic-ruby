@@ -89,9 +89,10 @@ private
                 # si il n'y a pas d'entité nommée on prend la catégorie 'place', sinon
                 # on prend la catégorie de l'entité nommée
                     if np.empty? 
-                        cat = "place"
+                        cat = "loc"
                     else 
                         cat = np.join("+").categorize_np
+                        cat = "loc" if cat.nil?
                     end
                 when "when" :
                 # on récupère la catégorie de l'entité nommée, sinon cat = "unk"                    
@@ -116,10 +117,12 @@ private
         elsif @sent.linkages.first.links[1].label =~ /W[di]/
         # Si c'est une phrase déclarative ou impérative
             if np.empty?
+              cat = "unk"
             else
                 cat = np.join("+").categorize_np
             end
         end
+        cat = "unk" if cat.nil? 
         cat
     end
     
@@ -138,7 +141,7 @@ private
         elsif link.label =~ /W[jqs]/
             case link.rword
                 when "who", "whom", "whose" : cat = "pers"
-                when "where", "whence", "wither" : cat = "place"
+                when "where", "whence", "wither" : cat = "loc"
                 when "when" : cat = "date"
                 when "how" :
                     if ["few","great","little","many","much"].include?(@sent.words[2])
@@ -173,7 +176,7 @@ private
           else
             case @sent.words[1]
                 when "who", "whom", "whose" : cat = "pers"
-                when "where", "whence", "wither" : cat = "place"
+                when "where", "whence", "wither" : cat = "loc"
                 when "when" : cat = "date"
                 when "how" :
                     if ["few","great","little","many","much"].include?(@sent.words[2])
@@ -193,6 +196,7 @@ private
             end
           end
         end
+        cat = "unk" if cat.nil?
         cat
     end
 
@@ -245,6 +249,7 @@ private
           named_ent = get_np.join(" ")
       end
 
+      named_ent = "" if named_ent.nil?
       named_ent
     end
     
