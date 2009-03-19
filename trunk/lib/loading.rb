@@ -12,7 +12,19 @@ rescue => e
 		e.backtrace.join( "\n\t" )
 end
 
-$dict = LinkParser::Dictionary.new
+opts = {
+   :disjunct_cost => 3,
+   :min_null_count => 1,
+   :max_null_count => 250,
+   :max_parse_time => 60,
+   :islands_ok => 1,
+   :short_length => 6,
+   :all_short_connectors => 1,
+   :linkage_limit => 100,
+   :verbosity => 0
+}
+$dict = LinkParser::Dictionary.new(:verbosity => 0)
+$dict_null = LinkParser::Dictionary.new(opts)
 $LOAD_PATH.unshift(wordnetpath+"lib")
 
 begin
@@ -31,10 +43,15 @@ rescue => e
         e.backtrace.join( "\n\t" )
 end
 
+$debug = false
 include Linguistics::EN
 Linguistics::use(:en)
 
 require 'pathname'
+require 'rubygems'
+require 'active_support/inflector'
+
+ActiveSupport::Inflector.inflections.uncountables.push("data","advice","behaviour","consent","dictation","persuasion","scorn","rugby","archery","yoga","copper","iron","oxygen","steel","sodium","clothing","equipment","furniture","luggage","money")
 
 path = (File.basename(Pathname.pwd.to_s) == "lib") ? "" : "lib/" ;
 

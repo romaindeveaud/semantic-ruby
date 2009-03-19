@@ -63,6 +63,8 @@ class String
         end
 
         hypernym = synset(self) if hypernym.nil?
+        return "unk" if hypernym.nil?
+
         hypernym.synonyms.each do |s|
             cat = "amount"            if Amount_Cat.include?(s)
             cat = "amount.phy.age"    if Amount_Phy_Age_Cat.include?(s)
