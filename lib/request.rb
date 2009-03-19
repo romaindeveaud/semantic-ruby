@@ -1,11 +1,10 @@
-require 'rubygems'
-require 'active_support/inflector'
 
 class Request
     attr_reader :sent
 
     def initialize(request)
-        @sent = sentence(request)
+        @sent = $dict.parse(request)
+        @sent = $dict_null.parse(request) if @sent.num_linkages_found == 0 or @sent.linkages.empty?
     end
 
     def diagram
@@ -13,18 +12,12 @@ class Request
     end
 
     def extract
-        if extract_e1_2 != extract_e1
-          sent = @sent
-          rewrite
-          begin
-            @sent.constituent_tree
-          rescue NoMethodError
-            @sent = sent
-          end
-        end
+#        rewrite if extract_e1_2 != extract_e1
         results = Hash.new
-        results[:kw_e1]  = extract_e1_2
-        results[:kw_e2]  = extract_e1
+        ext = extract_e1_2
+        ext = ext == "" ? extract_e1 : ext
+        results[:kw_e1]  = ext
+        results[:kw_e2]  = ext
         results[:kw_e3]  = extract_e3
         results[:cat_e2] = categorize_e2
         results[:cat_e3] = categorize_e3
@@ -35,7 +28,8 @@ class Request
 private
     def get_np
         np = []
-        @sent.linkages.first.links.each { |l| np.push(l.lword.split(".").first, l.rword.split(".").first) if l.label =~ /G./ }
+        @sent.linkages.first.links.each { |l| np.push(l.lword.split(".").first.split("[").first, 
+                l.rword.split(".").first.split("[").first) if l.label =~ /G./ }
         np.uniq!
         if np.length > 2
           t = np.shift
@@ -44,7 +38,7 @@ private
         end
         
         if np.empty?
-          temp = @sent.words-["?",".","LEFT-WALL","RIGHT-WALL"]
+          temp = @sent.words-["?",".","'s","LEFT-WALL","RIGHT-WALL"]
           temp.each { |w| np.push(w) if (w.capitalize == w or w.upcase == w)}
         end
         np # => /!\ C'est une Array, pas une String !!
@@ -57,7 +51,9 @@ private
         new_sent = @sent.words-["'s","LEFT-WALL","RIGHT-WALL"]-obj
 
         new_sent.insert(index-1,new_obj(obj))
-        @sent = sentence(new_sent.join(" "))
+        puts " >> Rewriting... "+new_sent.join(" ") if $debug == true
+        @sent = $dict.parse(new_sent.join(" "))
+        @sent = $dict_null.parse(new_sent.join(" ")) if @sent.num_linkages_found == 0
     end
 
     def new_obj(obj)
@@ -70,16 +66,22 @@ private
 
     def find_obj
       object = nil
-      @sent.linkages.first.links.each { |l| object = l.rword.split(".").first if l.label =~ /I\*./ }
+      @sent.linkages.first.links.each { |l| object = l.rword.split(".").first.split("[").first if l.label =~ /I\*./ }
       object
     end
 
     def categorize_e2
         cat = ""
         np = get_np
-        object = @sent.object.split(".").first if !@sent.object.nil?
+        object = @sent.object if !@sent.object.nil?
         object = find_obj if object.nil?
-        if @sent.linkages.first.links[1].label =~ /W[jqs]/
+        if @sent.words.length <= 5
+          if np.empty?
+              cat = ActiveSupport::Inflector.singularize(object).categorize
+          else
+              cat = np.join("+").categorize_np
+          end
+        elsif @sent.linkages.first.links[1].label =~ /W[jqs]/
         # Si c'est une question...
             case @sent.linkages.first.links[1].rword
                 when "who", "whom", "whose" : cat = "pers"
@@ -124,17 +126,24 @@ private
     def categorize_e3
         cat = ""
         np = get_np
-        object = @sent.object.split(".").first if !@sent.object.nil?
+        object = @sent.object if !@sent.object.nil?
         object = find_obj if object.nil?
-        if @sent.linkages.first.links[1].label =~ /W[jqs]/
-            case @sent.linkages.first.links[1].rword
+        link = @sent.linkages.first.links[1]
+        if @sent.words.length <= 5
+          if np.empty?
+              cat = ActiveSupport::Inflector.singularize(object).categorize
+          else
+              cat = np.join("+").categorize_np
+          end
+        elsif link.label =~ /W[jqs]/
+            case link.rword
                 when "who", "whom", "whose" : cat = "pers"
                 when "where", "whence", "wither" : cat = "place"
                 when "when" : cat = "date"
                 when "how" :
-                    if ["few","great","little","many","much"].include?(@sent.linkages.first.links[2].rword.split(".")[0])
+                    if ["few","great","little","many","much"].include?(@sent.words[2])
                         cat = "quantity"
-                    elsif ["tall", "wide", "high", "big", "old"].include?(@sent.linkages.first.links[2].rword.split(".")[0])
+                    elsif ["tall", "wide", "high", "big", "old"].include?(@sent.words[2])
                         cat = "amount" 
                     else
                         cat = "unk"
@@ -157,20 +166,43 @@ private
                 else cat = "unk"
             end
         elsif @sent.linkages.first.links[1].label =~ /W[di]/
-        # Si c'est une phrase déclarative ou impérative
+        # Si c'est une phrase déclarative ou impérative ou si elle n'a pas été correctement écrite
+          if @sent.null_count == 0
             cat = object.categorize
             cat = ActiveSupport::Inflector.singularize(object).categorize
+          else
+            case @sent.words[1]
+                when "who", "whom", "whose" : cat = "pers"
+                when "where", "whence", "wither" : cat = "place"
+                when "when" : cat = "date"
+                when "how" :
+                    if ["few","great","little","many","much"].include?(@sent.words[2])
+                        cat = "quantity"
+                    elsif ["tall", "wide", "high", "big", "old"].include?(@sent.words[2])
+                        cat = "amount" 
+                    else
+                        cat = "unk"
+                    end
+                when "what" : 
+                    if np.include?(object) or object.nil?
+                        cat = np.join("+").categorize_np
+                    else 
+                        cat = ActiveSupport::Inflector.singularize(object.categorize) # définie dans string.rb
+                    end
+                else cat = "unk"
+            end
+          end
         end
         cat
     end
 
     def extract_e1
         kw_array = get_np
-        object = @sent.object.split(".").first if !@sent.object.nil?
+        object = @sent.object.split(".").first.split("[").first if !@sent.object.nil?
         if !get_np.include?(object)
             kw_array.push(object) unless object.nil? 
             @sent.linkages.first.links.each do |l|
-                kw_array.push(l.lword.split(".").first) if (l.rword.split(".").first == object) && (l.label =~ /A[N]/)
+                kw_array.push(l.lword.split(".").first.split("[").first) if (l.rword.split(".").first.split("[").first == object) && (l.label =~ /A|AN/)
             end
         end
         kw_array -= $stoplist
@@ -223,9 +255,9 @@ private
         @sent.linkages.first.links.each do |l| 
             v = nil
             if l.lword.split(".")[1] == "v"
-                v = l.lword.split(".")[0]
+                v = l.lword.split(".")[0].split("[").first
             elsif l.rword.split(".")[1] == "v"
-                v = l.rword.split(".")[0]
+                v = l.rword.split(".")[0].split("[").first
             end
             verb.push(v) if !v.nil?
         end
@@ -233,7 +265,7 @@ private
         keywords = @sent.words-$stoplist-get_np-verb
 
         @sent.linkages.first.links.each do |l| 
-            if keywords.include?(l.lword.split(".")[0])
+            if keywords.include?(l.lword.split(".")[0].split("[").first)
                 symbol = case l.lword.split(".")[1]
                     when "a" : :adjective
                     when "n" : :noun
@@ -241,12 +273,12 @@ private
                     when "v" : :verb
                     else nil
                 end
-                word = l.lword.split(".")[0]
 #syn = synset(ActiveSupport::Inflector.singularize(word), symbol) if synset(word, symbol).nil?
+                word = l.lword.split(".")[0].split("[").first
                 syn = synset(word,symbol)
                 syn = syn.nil? ? synset(ActiveSupport::Inflector.singularize(word), symbol) : syn 
                 keywords += syn.words if !syn.nil?
-            elsif keywords.include?(l.rword.split(".")[0])
+            elsif keywords.include?(l.rword.split(".")[0].split("[").first)
                 symbol = case l.rword.split(".")[1]
                     when "a" : :adjective
                     when "n" : :noun
@@ -254,7 +286,7 @@ private
                     when "v" : :verb
                     else nil
                 end
-                word = l.rword.split(".")[0]
+                word = l.rword.split(".")[0].split("[").first
                 syn = synset(word,symbol)
                 syn = syn.nil? ? synset(ActiveSupport::Inflector.singularize(word), symbol) : syn 
                 keywords += syn.words if !syn.nil?

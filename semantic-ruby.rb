@@ -35,19 +35,16 @@ def evaluate
     request = Request.new(question)
     begin
       result  = request.extract
-    rescue NoMethodError => e
-      func = e.message.split("`").last.split("'").first
-      if func == "constituent_tree"
-        $stderr.puts "Question syntax error [#{question}]"
+    rescue  => e
         errors += 1
-      else
         puts e.message+" [#{question}]"
-      end
+        puts e.backtrace
     end
   end
-  puts "There was #{errors.to_s} miswritten sentences (#{errors.to_f/questions.length.to_f}%)."
+  puts "There was #{errors.to_s} execution errors (#{errors.to_f*100/questions.length.to_f}%)."
 end
 
+$debug = true if ARGV[0] == "--debug"
 loop do
     str = prompt("Enter your request : ")
     break if str == "exit" # Condition de sortie
@@ -63,7 +60,7 @@ loop do
       puts "[#{results[:cat_e2]}] #{results[:kw_e2]}"
       print "Keywords selected for engine 3 : "
       puts "[#{results[:cat_e3]}] [Named entity : #{results[:en_e3]}] [Keywords : #{results[:kw_e3]}]"
-    rescue NoMethodError
-      $stderr.puts "Your sentence seems to be miswritten, please take the time to check it."
+#    rescue NoMethodError
+#      $stderr.puts "Execution error. Maybe your sentence has not been written properly."
     end
 end

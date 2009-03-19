@@ -10,8 +10,22 @@ rescue => e
 		e.backtrace.join( "\n\t" )
 end
 
-$dict = LinkParser::Dictionary.new("en")
+opts = {
+   :disjunct_cost => 3,
+   :min_null_count => 1,
+   :max_null_count => 250,
+   :max_parse_time => 60,
+   :islands_ok => 1,
+   :short_length => 6,
+   :all_short_connectors => 1,
+   :linkage_limit => 100,
+}
+$dict      = LinkParser::Dictionary.new
+$dict_null = LinkParser::Dictionary.new(opts)
 $LOAD_PATH.unshift(wordnetpath+"lib")
+
+require 'rubygems'
+require 'active_support/inflector'
 
 begin
 	puts "Requiring 'wordnet' module..."
