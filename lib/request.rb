@@ -191,7 +191,7 @@ private
                     if np.include?(object) or object.nil?
                         cat = np.join("+").categorize_np
                     else 
-                        cat = ActiveSupport::Inflector.singularize(object.categorize) # définie dans string.rb
+                        cat = ActiveSupport::Inflector.singularize(object).categorize # définie dans string.rb
                     end
                 else cat = "unk"
             end
