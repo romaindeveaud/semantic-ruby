@@ -162,9 +162,10 @@ private
 #                                noun += rword[0] if rword[1] == "n"
 #                            end
 #                        end
+#
                         cat = np.join("+").categorize_np
                     else 
-                        cat = ActiveSupport::Inflector.singularize(object.categorize) # définie dans string.rb
+                        cat = ActiveSupport::Inflector.singularize(object).categorize # définie dans string.rb
                     end
                 else cat = "unk"
             end

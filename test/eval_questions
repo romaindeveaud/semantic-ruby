@@ -28,10 +28,10 @@ Who composed the music for the fifth element?#music fifth element#pers.hum# fifh
 How did Socrates commit suicide?#Socrates#pers.hum# Socrates# suicide# unk#
 What is an HMM?#HMM#unk# # # #
 why do cats cover their poop?#cats#unk# # # #
-When was Nostradamus born?#Nostradamus#pers.hum# Nostradamus# born# time.date#
+When was Nostradamus born?#Nostradamus#pers.hum# Nostradamus# born# date#
 What is the Digital Millennium Copyright Act?#Digital Millennium copyright Act#unk# # # #
 What is Kennedy's wife name?#Kennedy wife#pers.hum# Kennedy# wife# pers.hum#
-Who is Barbara Jordan?#Barbara Jordan#pes.hum# # # #
+Who is Barbara Jordan?#Barbara Jordan#pers.hum# # # #
 What was the nationallity of Rasputin?#Rasputin#pers.hum# # # #
 How to calculate Pi?#Pi#amount.phy.other# # # #
 Where does Kate Jennings live?#Kate Jennings#pers.hum# Kate Jennings# live# loc#
@@ -56,7 +56,7 @@ what is the Mitchell Plan?#Mitchell Plan#unk# # # #
 Where is Bermondsey?#Bermondsey#loc# # # #
 Jude Law acted in which film?#Jude Law film#prod# Jude Law# film# prod#
 how much does marlon brando weigh?#Marlon Brando#pers.hum# Marlon Brando# weigh# amount.phy.wei#
-What are Shakespeare's Birth and Death dates?#Shakespeare#pers.hum# Shakespeare# birth death# time.date#
+What are Shakespeare's Birth and Death dates?#Shakespeare#pers.hum# Shakespeare# birth death# date#
 Who was the first governor of Alaska?#governor Alaska#pers.hu# Alaska# governor# pers.hum#
 Who is the world champion of badminton?#world champion badminton#pers.hum# # # #
 How is light regarded in religious traditions?#light religious traditions#pers.hum# # # #
@@ -73,15 +73,15 @@ Who is Lena Carlsson?#Lena Carlsson#pers.hum# # # #
 Why does it never rain in the Atacamawueste?#Atacamawueste#loc# # # #
 What did Tanev make?#Tanev#pers.hum# Tanev# make# unk#
 What is Mr Bush's favorite baseball team?#Bush baseball team#org# Bush# baseball team# org#
-when is halloween?#Halloween#unk# Halloween# date# time.date#
+when is halloween?#Halloween#unk# Halloween# date# date#
 Where can I buy anecosphere?#anecosphere#prof# anescosphere# buy# loc#
 what is normative theory?#normative theory#unk# # # #
-What day did Elvis Presley die on?#Elvis Presley#pers.hum# Elvis Presley# die# time.date#
+What day did Elvis Presley die on?#Elvis Presley#pers.hum# Elvis Presley# die# date#
 Who makes Magic Chef refrigerators?#Magic Chef refrigerators#pers.hum# Magic Cher refrigerators# make# pers.hum#
-When did Alexander Hamilton die?#Alexander Hamilton#pers.hum# Alexander Hamilton# die# time.date#
+When did Alexander Hamilton die?#Alexander Hamilton#pers.hum# Alexander Hamilton# die# date#
 What did President Cleveland do to promote peace?#President Cleveland#pers.hum# President Cleveland# promote peace# unk#
 Who received the Will Rogers Award in 1989?#Will Rogers Award 1989#pers.hum# # # #
-When was Marlena Deitrich born?#Marlena Deitrich#pers.hum# Marlena Deitrich# born# time.date#
+When was Marlena Deitrich born?#Marlena Deitrich#pers.hum# Marlena Deitrich# born# date#
 Who is George Letsou?#George Letsou#pers.hum# # # #
 Where is the Smithsonian Institute located?#Smithsonian Institute#org# Smithsonian Institute# located# loc#
 Which African country's major export is coffee?#African country major coffee#loc# # # #
@@ -90,7 +90,7 @@ how big are the gardens at fontainebleau?#Fontainebleau gardens#unk# Fonatainebl
 Who is Bill Loughner?#Bill Loughner#pers.hum# # # #
 What does SGML stand for?#SGML#unk# # # #
 What is the Aurora Borealis?#Aurora Borealis#unk# # # #
-What day of the year did Christopher Coulumbus depart?#Christopher Coulumbus#pers.hum# Christopher Coulumbus# depart# time.date#
+What day of the year did Christopher Coulumbus depart?#Christopher Coulumbus#pers.hum# Christopher Coulumbus# depart# date#
 what does a 3d game engine do?#3d game engine#unk# # # #
 Who invented the Pizza?#Pizza#prod# pizza# invented# pers.hum#
 What does DNS stand for?#DNS#unk# # # #
