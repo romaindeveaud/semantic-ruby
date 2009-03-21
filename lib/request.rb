@@ -144,9 +144,7 @@ private
                 when "where", "whence", "wither" : cat = "loc"
                 when "when" : cat = "date"
                 when "how" :
-                    if ["few","great","little","many","much"].include?(@sent.words[2])
-                        cat = "quantity"
-                    elsif ["tall", "wide", "high", "big", "old"].include?(@sent.words[2])
+                    if ["few","great","little","many","much","tall", "wide", "high", "big", "old"].include?(@sent.words[2])
                         cat = "amount" 
                     else
                         cat = "unk"
@@ -180,9 +178,7 @@ private
                 when "where", "whence", "wither" : cat = "loc"
                 when "when" : cat = "date"
                 when "how" :
-                    if ["few","great","little","many","much"].include?(@sent.words[2])
-                        cat = "quantity"
-                    elsif ["tall", "wide", "high", "big", "old"].include?(@sent.words[2])
+                    if ["few","great","little","many","much","tall", "wide", "high", "big", "old"].include?(@sent.words[2])
                         cat = "amount" 
                     else
                         cat = "unk"
