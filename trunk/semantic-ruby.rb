@@ -76,10 +76,33 @@ def evaluate
     puts i.to_s+". "+question+"\n\tKeywords\t (engine 1 and 2) from corpus : ["+kw_e1_e2+"] <=> extracted : ["+results[:kw_e1]+"]\n \tCategory\t (engine 2) from corpus : ["+cat_e2+"] <=> extracted ["+results[:cat_e2]+"]\n \tCategory\t (engine 3) from corpus : ["+cat_e3+"] <=> extracted : ["+results[:cat_e3]+"]\n \tNamed Entity\t (engine 3) from corpus : ["+en_e3+"] <=> extracted : ["+results[:en_e3]+"]\n \tKeywords\t (engine 3) from corpus : ["+kw_e3+"] <=> extracted : ["+results[:kw_e3]+"]\n\n"
   end
   puts "There was #{errors.to_s} execution errors (#{errors.to_f*100/questions.length.to_f}%)."
+  
+  global_prec = 0
+  global_rec  = 0
+  i = 0
+  j = 0
+  
   puts "Precision : "
-  precision.each_pair { |key, value| puts "\t#{key} : #{value[0].to_f/value[1].to_f}" if value[1] > 0 }
+  precision.each_pair do |key, value| 
+    if value[1] > 0
+      val = value[0].to_f/value[1].to_f
+      puts "\t#{key} : #{val}"
+      global_prec += val
+      i += 1
+    end
+  end
+
   puts "Recall : "
-  recall.each_pair    { |key, value| puts "\t#{key} : #{value[0].to_f/value[1].to_f}" if value[1] > 0 }
+  recall.each_pair    do |key, value| 
+    if value[1] > 0 
+      val = value[0].to_f/value[1].to_f
+      puts "\t#{key} : #{val}" 
+      global_rec += val
+      j += 1
+    end
+  end
+  puts "\nGlobal precision : #{global_prec.to_f/i.to_f}"
+  puts "Global recall    : #{global_rec.to_f/j.to_f}"
 end
 
 loop do
