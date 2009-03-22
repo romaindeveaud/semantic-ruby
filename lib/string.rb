@@ -37,11 +37,11 @@ Fonc_Pol_Cat = ["nationalist leader", "politician", "politico", "pol", "politica
 Fonc_Admi_Cat = ["civic leader", "civil leader", "delegate", "administrator", "executive", "secretary"]
 Prod_Vehicle_Cat = ["conveyance", "transport"]
 Prod_Award_Cat = ["award", "accolade", "honor", "honour", "laurels" , "prize"]
-Pers_Cat   = []
+Pers_Cat   = ["name"]
 Prod_Cat   = []
 Date_Cat   = []
 Time_Cat   = []
-Time_Hour_Cat   = ["hours"]
+Time_Hour_Cat   = []
 Org_Cat    = []
 Org_Pol_Cat    = ["government officials", "officialdom", "city council", "executive council", "works council", "polity", "union", "labor union", "trade union", "trades union", "brotherhood", "party", "political party", "political machine"]
 Org_Edu_Cat    = ["educational institution", "academy", "honorary society"]
@@ -56,11 +56,11 @@ class String
     def categorize(hypernym = nil)
         cat = nil
 
-        if hypernym.nil?
-            cat = Net::HTTP.get(URI.parse("http://www.nlgbase.org/perl/lr_info_extractor.pl?query=#{self}&search=EN")).split(":")[0]
-            cat = nil if (cat == "" or cat.nil?)
-            return cat if !cat.nil?
-        end
+#        if hypernym.nil?
+#            cat = Net::HTTP.get(URI.parse("http://www.nlgbase.org/perl/lr_info_extractor.pl?query=#{self}&search=EN")).split(":")[0]
+#            cat = nil if (cat == "" or cat.nil?)
+#            return cat if !cat.nil?
+#        end
 
         hypernym = synset(self) if hypernym.nil?
         return "unk" if hypernym.nil?
@@ -103,6 +103,9 @@ class String
         end
 
         if cat.nil? && hypernym == synset(self)
+            cat = Net::HTTP.get(URI.parse("http://www.nlgbase.org/perl/lr_info_extractor.pl?query=#{self}&search=EN")).split(":")[0]
+            cat = nil if (cat == "" or cat.nil?)
+            return cat if !cat.nil?
             cat = Net::HTTP.get(URI.parse("http://www.nlgbase.org/perl/lr_info_extractor.pl?query=#{self}&search=EN")).split(":")[1]
             cat = nil if (cat == "" or cat.nil?)
             return cat if !cat.nil?
