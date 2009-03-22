@@ -44,6 +44,73 @@ private
         np # => /!\ C'est une Array, pas une String !!
     end
 
+    def get_cat(word,np,options = {})
+      cat = ""
+      object = @sent.object if !@sent.object.nil?
+      object = find_obj if object.nil?
+      case word
+          when "who", "whom", "whose" : cat = "pers"
+          when "where", "whence", "wither" : 
+            if options[:cat] == 2
+              if !np.empty?
+                cat = np.join("+").categorize_np
+              else
+                cat = "loc"
+              end
+            else
+              cat = "loc"
+            end
+          when "when" : 
+            if options[:cat] == 2
+              if !np.empty?
+                cat = np.join("+").categorize_np
+              elsif !object.nil?
+                cat = ActiveSupport::Inflector.singularize(object).categorize # définie dans string.rb
+              else
+                cat = "unk"
+              end
+            else
+              cat = "date"
+            end
+          when "how" :
+            if options[:cat] == 2
+              if !np.empty?
+                cat = np.join("+").categorize_np
+              elsif !object.nil?
+                cat = ActiveSupport::Inflector.singularize(object).categorize # définie dans string.rb
+              else
+                cat = "unk"
+              end
+            else 
+              if ["few","great","little","many","much","tall", "wide", "high", "big", "old"].include?(@sent.words[2])
+                  cat = "amount" 
+              elsif np.include?(object)
+                cat = np.join("+").categorize_np
+              elsif !object.nil?
+                cat = ActiveSupport::Inflector.singularize(object).categorize # définie dans string.rb
+              else
+                cat = "unk"
+              end
+            end
+          when "what" : 
+            # A compléter ici...
+            if options[:cat] == 2
+              cat = np.join("+").categorize_np if !np.empty?
+              cat = "unk" if np.empty?
+            elsif ["day"].include?(@sent.words[2])
+              cat = "date"
+            elsif np.include?(object)
+              cat = np.join("+").categorize_np
+            elsif !object.nil? 
+              cat = ActiveSupport::Inflector.singularize(object).categorize # définie dans string.rb
+            else 
+              cat = "unk"
+            end
+          else cat = "unk"
+      end
+      cat
+    end
+
     def rewrite
         obj = extract_e1_2.split(" ")
         index = 1000
@@ -75,51 +142,24 @@ private
         np = get_np
         object = @sent.object if !@sent.object.nil?
         object = find_obj if object.nil?
+        link = @sent.linkages.first.links[1]
         if @sent.words.length <= 5
           if np.empty?
               cat = ActiveSupport::Inflector.singularize(object).categorize
           else
               cat = np.join("+").categorize_np
           end
-        elsif @sent.linkages.first.links[1].label =~ /W[jqs]/
+        elsif link.label =~ /W[jqs]/ 
         # Si c'est une question...
-            case @sent.linkages.first.links[1].rword
-                when "who", "whom", "whose" : cat = "pers"
-                when "where", "whence", "wither" :
-                # si il n'y a pas d'entité nommée on prend la catégorie 'place', sinon
-                # on prend la catégorie de l'entité nommée
-                    if np.empty? 
-                        cat = "loc"
-                    else 
-                        cat = np.join("+").categorize_np
-                        cat = "loc" if cat.nil?
-                    end
-                when "when" :
-                # on récupère la catégorie de l'entité nommée, sinon cat = "unk"                    
-                    if np.empty? 
-                        cat = "unk"
-                    else 
-                        cat = np.join("+").categorize_np
-                    end
-                when "what" :
-                    if np.empty?
-                        cat = ActiveSupport::Inflector.singularize(object).categorize
-                    else
-                        cat = np.join("+").categorize_np
-                    end
-                else 
-                    if np.empty?
-                        cat = "unk"
-                    else
-                        cat = np.join("+").categorize_np
-                    end
-            end
-        elsif @sent.linkages.first.links[1].label =~ /W[di]/
+          cat = get_cat(link.rword,np, {:cat => 2})
+        elsif @sent.linkages.first.links[0].label != "Xp" and @sent.linkages.first.links[0].label =~ /W[jqs]/
+          cat = get_cat(@sent.words[1],np, {:cat => 2})
+        elsif link.label =~ /W[di]|Q./ or link.lword != "LEFT-WALL"
         # Si c'est une phrase déclarative ou impérative
             if np.empty?
               cat = "unk"
             else
-                cat = np.join("+").categorize_np
+              cat = np.join("+").categorize_np
             end
         end
         cat = "unk" if cat.nil? 
@@ -138,59 +178,16 @@ private
           else
               cat = np.join("+").categorize_np
           end
-        elsif link.label =~ /W[jqs]/
-            case link.rword
-                when "who", "whom", "whose" : cat = "pers"
-                when "where", "whence", "wither" : cat = "loc"
-                when "when" : cat = "date"
-                when "how" :
-                    if ["few","great","little","many","much","tall", "wide", "high", "big", "old"].include?(@sent.words[2])
-                        cat = "amount" 
-                    else
-                        cat = "unk"
-                    end
-                when "what" : 
-                    if np.include?(object) or object.nil?
-#                        noun = ""
-#                        @sent.linkages.first.links.each do |l|
-#                            if l.label =~ /O.*/ or l.label =~ /S.*/
-#                                lword = l.lword.split(".")
-#                                rword = l.rword.split(".")
-#                                noun += lword[0] if lword[1] == "n"
-#                                noun += rword[0] if rword[1] == "n"
-#                            end
-#                        end
-#
-                        cat = np.join("+").categorize_np
-                    else 
-                        cat = ActiveSupport::Inflector.singularize(object).categorize # définie dans string.rb
-                    end
-                else cat = "unk"
-            end
-        elsif @sent.linkages.first.links[1].label =~ /W[di]/
+        elsif link.label =~ /W[jqs]/ 
+          cat = get_cat(link.rword,np)
+        elsif @sent.linkages.first.links[0].label != "Xp" and @sent.linkages.first.links[0].label =~ /W[jqs]/
+          cat = get_cat(@sent.words[1],np)
+        elsif link.label =~ /W[di]|Q./ or link.lword != "LEFT-WALL"
         # Si c'est une phrase déclarative ou impérative ou si elle n'a pas été correctement écrite
           if @sent.null_count == 0
-            cat = object.categorize
             cat = ActiveSupport::Inflector.singularize(object).categorize
           else
-            case @sent.words[1]
-                when "who", "whom", "whose" : cat = "pers"
-                when "where", "whence", "wither" : cat = "loc"
-                when "when" : cat = "date"
-                when "how" :
-                    if ["few","great","little","many","much","tall", "wide", "high", "big", "old"].include?(@sent.words[2])
-                        cat = "amount" 
-                    else
-                        cat = "unk"
-                    end
-                when "what" : 
-                    if np.include?(object) or object.nil?
-                        cat = np.join("+").categorize_np
-                    else 
-                        cat = ActiveSupport::Inflector.singularize(object).categorize # définie dans string.rb
-                    end
-                else cat = "unk"
-            end
+            cat = get_cat(@sent.words[1],np)
           end
         end
         cat = "unk" if cat.nil?
