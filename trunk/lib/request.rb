@@ -82,7 +82,7 @@ private
                 cat = "unk"
               end
             else 
-              if ["few","great","little","many","much","tall", "wide", "high", "big", "old"].include?(@sent.words[2])
+              if ["far","few","great","little","many","much","tall", "wide", "high", "big", "old"].include?(@sent.words[2])
                   cat = "amount" 
               elsif np.include?(object)
                 cat = np.join("+").categorize_np
@@ -92,7 +92,7 @@ private
                 cat = "unk"
               end
             end
-          when "what" : 
+          when "what", "why" : 
             # A compléter ici...
             if options[:cat] == 2
               cat = np.join("+").categorize_np if !np.empty?
