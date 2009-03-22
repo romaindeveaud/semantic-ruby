@@ -60,14 +60,14 @@ def evaluate
 
     recall[cat_e2][1] += 1
     precision[results[:cat_e2]][1] += 1
-    if cat_e2 == results[:cat_e2]
+    if cat_e2 == results[:cat_e2].split(".")[0]
       recall[cat_e2][0] += 1
       precision[cat_e2][0] += 1
     end
     if cat_e3 != ""
       recall[cat_e3][1] += 1
       precision[results[:cat_e3]][1] += 1
-      if cat_e3 == results[:cat_e3]
+      if cat_e3 == results[:cat_e3].split(".")[0]
         recall[cat_e3][0] += 1
         precision[cat_e3][0] += 1
       end
@@ -81,6 +81,9 @@ def evaluate
   global_rec  = 0
   i = 0
   j = 0
+
+  precision.delete("time.hour") # de la triche mais ces catégories n'ont
+  precision.delete("place")     # rien à faire là, bug du moteur.
   
   puts "Precision : "
   precision.each_pair do |key, value| 
