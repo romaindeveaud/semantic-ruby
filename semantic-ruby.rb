@@ -108,7 +108,7 @@ def evaluate
   precision.each_pair do |key, value| 
     if value[1] > 0 and (["kw_e1_e2","kw_e3","en_e3"].include?(key) == false)
       val = value[0].to_f/value[1].to_f
-      puts "\t#{key} : #{val}"
+      puts "\t#{key} \t: #{val} / #{value[1]} questions"
       global_prec += val
       i += 1
     end
@@ -118,7 +118,7 @@ def evaluate
   recall.each_pair    do |key, value| 
     if value[1] > 0  
       val = value[0].to_f/value[1].to_f
-      puts "\t#{key} \t: #{val}" 
+      puts "\t#{key} \t: #{val} / #{value[1]} questions" 
       global_rec += val
       j += 1
     end
@@ -133,7 +133,7 @@ def evaluate
   precision.each_pair do |key, value| 
     if value[1] > 0 and (["kw_e1_e2","kw_e3","en_e3"].include?(key) == true)
       val = value[0].to_f/value[1].to_f
-      puts "\t#{key} \t: #{val}"
+      puts "\t#{key} \t : #{val}"
       global_prec += val
       i += 1
     end
