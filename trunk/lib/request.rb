@@ -1,4 +1,3 @@
-
 class Request
     attr_reader :sent
 
@@ -28,14 +27,13 @@ class Request
 private
     def get_np
         np = []
-        @sent.linkages.first.links.each { |l| np.push(l.lword.split(".").first.split("[").first, 
-                l.rword.split(".").first.split("[").first) if l.label =~ /G./ }
-        np.uniq!
-        if np.length > 2
-          t = np.shift
-          np.insert(1,t)
-          np.reverse!
+        @sent.linkages.first.links.each do |l| 
+          np.push(l.lword.split(".").first.split("[").first, l.rword.split(".").first.split("[").first) if l.label =~ /G./
+          np.push(l.rword.split(".").first.split("[").first) if l.label =~ /DG./
+          np.push(l.rword.split(".").first.split("[").first) if l.label =~ /JG./
+          np.push(l.rword.split(".").first.split("[").first) if l.label =~ /MG./
         end
+        np.uniq!
         
         if np.empty?
           temp = @sent.words-["?",".","'s","LEFT-WALL","RIGHT-WALL"]
@@ -49,7 +47,16 @@ private
       object = @sent.object if !@sent.object.nil?
       object = find_obj if object.nil?
       case word
-          when "who", "whom", "whose" : cat = "pers"
+          when "who", "whom", "whose" : 
+            if options[:cat] == 2
+              if !np.empty?
+                cat = np.join("+").categorize_np
+              else
+                cat = "pers"
+              end
+            else
+              cat = "pers"
+            end
           when "where", "whence", "wither" : 
             if options[:cat] == 2
               if !np.empty?
@@ -97,7 +104,7 @@ private
             if options[:cat] == 2
               cat = np.join("+").categorize_np if !np.empty?
               cat = "unk" if np.empty?
-            elsif ["day"].include?(@sent.words[2])
+            elsif ["day","month","year","century","time"].include?(@sent.words[2])
               cat = "date"
             elsif np.include?(object)
               cat = np.join("+").categorize_np
@@ -258,7 +265,7 @@ private
             elsif l.rword.split(".")[1] == "v"
                 v = l.rword.split(".")[0].split("[").first
             end
-            verb.push(v) if !v.nil?
+            verb.push(v); break if !v.nil?
         end
 
         keywords = @sent.words-$stoplist-get_np-verb
@@ -276,6 +283,7 @@ private
                 word = l.lword.split(".")[0].split("[").first
                 syn = synset(word,symbol)
                 syn = syn.nil? ? synset(ActiveSupport::Inflector.singularize(word), symbol) : syn 
+                syn = syn.nil? ? synset(Linguistics::EN.infinitive(word), symbol) : syn 
                 keywords += syn.words if !syn.nil?
             elsif keywords.include?(l.rword.split(".")[0].split("[").first)
                 symbol = case l.rword.split(".")[1]
@@ -288,14 +296,25 @@ private
                 word = l.rword.split(".")[0].split("[").first
                 syn = synset(word,symbol)
                 syn = syn.nil? ? synset(ActiveSupport::Inflector.singularize(word), symbol) : syn 
+                syn = syn.nil? ? synset(Linguistics::EN.infinitive(word), symbol) : syn 
                 keywords += syn.words if !syn.nil?
             end
         end
 
         if keywords.empty?
-          syn = synset(find_obj, :verb)
-          syn = syn.nil? ? synset(ActiveSupport::Inflector.singularize(find_obj), :verb) : syn 
+          word = find_obj
+          syn = synset(word, :verb)
+          syn = syn.nil? ? synset(word, :verb) : syn 
           keywords += syn.words if !syn.nil?
+        end
+        
+        if keywords.empty?
+          word = verb.to_s # un seul mot avec un .v est trouvé dans la phrase
+          syn = synset(word, :verb)
+          syn = syn.nil? ? synset(word, :verb) : syn 
+          syn = syn.nil? ? synset(Linguistics::EN.infinitive(word), :verb) : syn 
+          keywords += syn.words if !syn.nil?
+          keywords.push(word)
         end
 
         keywords.collect! { |w| w.split(" ") }
