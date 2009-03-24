@@ -48,19 +48,21 @@ private
       object = find_obj if object.nil?
       case word
           when "who", "whom", "whose" : 
-            if options[:cat] == 2
-              if !np.empty?
-                cat = np.join("+").categorize_np
-              else
-                cat = "pers"
-              end
-            else
+#            if options[:cat] == 2
+#              if !np.empty?
+#                cat = np.join("+").categorize_np
+#              else
+#                cat = "pers"
+#              end
+#            else
               cat = "pers"
-            end
+#            end
           when "where", "whence", "wither" : 
             if options[:cat] == 2
               if !np.empty?
                 cat = np.join("+").categorize_np
+              elsif !object.nil?
+                cat = ActiveSupport::Inflector.singularize(object).categorize # définie dans string.rb
               else
                 cat = "loc"
               end
