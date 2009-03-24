@@ -73,7 +73,11 @@ def evaluate
       precision[cat_e2][0] += 1
     end
 
-    precision["kw_e1_e2"][0] += 1 if kw_e1_e2.split.sort == results[:kw_e1].downcase.split.sort
+    if kw_e1_e2.split.sort == results[:kw_e1].downcase.split.sort
+      precision["kw_e1_e2"][0] += 1 
+    elsif (kw_e1_e2.split-results[:kw_e1].downcase.split).length == 1
+      precision["kw_e1_e2"][0] += 0.5
+    end
     
     if cat_e3 != ""
       recall[cat_e3][1] += 1
@@ -86,9 +90,8 @@ def evaluate
         precision[cat_e3][0] += 1
       end
 
-      precision["kw_e3"][0] += 1 if (kw_e3.split(";") & results[:kw_e3].split) == results[:kw_e3].split
+      precision["kw_e3"][0] += 1 if ((kw_e3.split & results[:kw_e3].split(";")) == kw_e3.split)
       precision["en_e3"][0] += 1 if en_e3.split.sort == results[:en_e3].downcase.split.sort
-
     end
 
     puts i.to_s+". "+question+"\n\tKeywords\t (engine 1 and 2) from corpus : ["+kw_e1_e2+"] <=> extracted : ["+results[:kw_e1]+"]\n \tCategory\t (engine 2) from corpus : ["+cat_e2+"] <=> extracted ["+results[:cat_e2]+"]\n \tCategory\t (engine 3) from corpus : ["+cat_e3+"] <=> extracted : ["+results[:cat_e3]+"]\n \tNamed Entity\t (engine 3) from corpus : ["+en_e3+"] <=> extracted : ["+results[:en_e3]+"]\n \tKeywords\t (engine 3) from corpus : ["+kw_e3+"] <=> extracted : ["+results[:kw_e3]+"]\n\n"
@@ -100,15 +103,15 @@ def evaluate
   i = 0
   j = 0
 
-  # de la triche mais cette catégorie n'a rien à faire là, bug du moteur.
-  precision.delete("place")
-  
+  categorizing_datas = File.new("test/datas_categorizing", File::CREAT | File::TRUNC | File::RDWR, 0644)
+
   puts "Categorizing : "
   puts " -- Precision : "
   precision.each_pair do |key, value| 
     if value[1] > 0 and (["kw_e1_e2","kw_e3","en_e3"].include?(key) == false)
       val = value[0].to_f/value[1].to_f
       puts "\t#{key} \t: #{val} / #{value[1]} questions"
+      categorizing_datas.puts "#{key} #{val} #{recall[key][0].to_f/recall[key][1].to_f}" if recall.has_key?(key) and precision.has_key?(key)
       global_prec += val
       i += 1
     end
@@ -130,10 +133,14 @@ def evaluate
   puts " -- Precision : "
   global_prec = 0
   i = 0
+  
+  extracting_datas = File.new("test/datas_extracting", File::CREAT | File::TRUNC | File::RDWR, 0644)
+  
   precision.each_pair do |key, value| 
     if value[1] > 0 and (["kw_e1_e2","kw_e3","en_e3"].include?(key) == true)
       val = value[0].to_f/value[1].to_f
       puts "\t#{key} \t : #{val}"
+      extracting_datas.puts "#{key} #{val}"
       global_prec += val
       i += 1
     end
