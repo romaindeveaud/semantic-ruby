@@ -23,6 +23,7 @@ end
 def evaluate
   precision = Hash.new
   recall    = Hash.new
+  fmeasure  = Hash.new
 
   precision["kw_e1_e2"] = [0,0]
   precision["kw_e3"]    = [0,0]
@@ -110,6 +111,7 @@ def evaluate
   precision.each_pair do |key, value| 
     if value[1] > 0 and (["kw_e1_e2","kw_e3","en_e3"].include?(key) == false)
       val = value[0].to_f/value[1].to_f
+      fmeasure[key] = [val, 0]
       puts "\t#{key} \t: #{val} / #{value[1]} questions"
       categorizing_datas.puts "#{key} #{val} #{recall[key][0].to_f/recall[key][1].to_f}" if recall.has_key?(key) and precision.has_key?(key)
       global_prec += val
@@ -121,11 +123,16 @@ def evaluate
   recall.each_pair    do |key, value| 
     if value[1] > 0  
       val = value[0].to_f/value[1].to_f
+      fmeasure[key][1] = val if fmeasure.has_key?(key)
       puts "\t#{key} \t: #{val} / #{value[1]} questions" 
       global_rec += val
       j += 1
     end
   end
+
+  puts " -- F-Measure : "
+  fmeasure.each_pair { |key, value| puts "\t#{key} \t: #{2*(value[0]*value[1])/(value[0]+value[1])}" }
+  
   puts "\nOverall precision : #{global_prec.to_f/i.to_f}"
   puts "Overall recall    : #{global_rec.to_f/j.to_f}"
 
