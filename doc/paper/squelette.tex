@@ -1,0 +1,189 @@
+%
+% Fichier exemple pour MajecSTIC 2009
+% -----------------------------------
+% Par le comité de pilotage MajecSTIC
+% majecstic-pilotage@irisa.fr
+% 
+% Vous pouvez éditer ce fichier pour composer votre article. Respectez la 
+% langue française, pour vous aider ce document comporte des consignes 
+% typographiques ainsi que des conseils pour la composition des figures et 
+% des algorithmes.
+%
+%
+%
+%%%%%% NE PAS MODIFIER
+%
+% gillemets a la francaise
+\def\leftnote#1{\leavevmode\vadjust{\setbox1=\vtop{\hsize 20mm
+  \parindent=0pt\small\baselineskip=9pt
+  \rightskip=4mm plus 4mm#1}
+  \hbox{\kern-2cm\smash{\box1}}}}
+% encore quelques petits symboles particuliers
+  \font\myl=manfnt
+  \def\panneau{{\myl\char"7F}}
+  \def\boxone{{\myl\char"1C}}
+  \def\boxtwo{{\myl\char"1D}}
+  \def\ortf{{\myl\char"1E}}
+  \def\fleurone{{\myl\char"26}}
+  \def\fleurtwo{{\myl\char"27}}
+  \def\diams{{\myl\char"23}}
+  \def\cible{{\myl\char"24}}
+  \def\carre{{\myl\char"25}}
+  \def\fleche{{\myl\char"79}}
+  \def\panneaubis{{\myl\char"7E}}
+\def\panneauinverse{{\myl\char"00}}
+
+% Conserver ces commandes (Debut)
+\documentclass[twoside,a4paper,10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage[frenchb]{babel}
+\usepackage{majecstic2009,euler,palatino}
+\usepackage[french,ruled,vlined,linesnumbered]{algorithm2e}
+\dontprintsemicolon
+\Setnlskip{0.5em}
+\incmargin{1.2em}
+\usepackage{epsfig,shadow}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{url}
+\usepackage{cite}
+\usepackage{vmargin}
+\pagestyle{myheadings}
+\setpapersize{A4}
+% Conserver ces commandes (Fin)
+
+%===========================================================
+%                               Title
+%===========================================================
+\newcommand{\filet}{\noindent\rule[0mm]{\textwidth}{0.2mm}}
+
+\toappear{1} % Conserver cette ligne pour la version finale
+
+\begin{document}
+
+\parindent=0pt
+
+% À FAIRE modifier en ajoutant votre titre.
+% Le titre courant peut-être trop long, dans ce cas indiquez un titre 
+% plus court dans la commande shorttitle (sinon, indiquez le même)
+\title{\Large\bf Interrogations de moteurs de recherche par des requêtes formulées en langage naturel}
+
+% À FAIRE modifier en ajoutant dans le premier champ vos noms et dans votre
+% titre. Attention, il faut que ca tienne sur une largeur de page, donc il 
+% peut etre necessaire de donner un titre plus court, ou de ne mettre que les
+% noms de famille des auteurs
+% Exemples:
+% \markboth{Josiane Balasko, Muriel Robin \& Yves Montand}{Nos années palace.}
+% \markboth
+% {Dupont, Dupond, Haddock, Milou, Tintin \& Tournesol}
+% {De l'exploration des profondeurs à la conquète spatiale}
+\markboth
+{Ludovic Bonnefoy, Romain Deveaud \& Eric Charton}
+{Interrogations de moteurs de recherche par des requêtes formulées en langage naturel}
+
+% À FAIRE Indiquez vos noms ici. Nom1, Nom2 et Nom3. Utilisez $^i$ pour 
+% l'adresse i.
+\author{Ludovic Bonnefoy, Romain Deveaud et Eric Charton$^1$}
+
+% À FAIRE Indiquez vos adresses ici. Attention, la première adresse commence
+% juste après le { de la commande.
+\address{1: LIA / Université d'Avignon, 339 chemin des Meinajaries, 84911 Avignon\\
+Contact: \texttt{ludovic.bonnefoy@etd.univ-avignon.fr}, \texttt{romain.deveaud@etd.univ-avignon.fr}, \texttt{eric.charton@univ-avignon.fr}
+}
+
+\maketitle
+
+%===========================================================         %
+%R\'esum\'e
+%===========================================================  
+
+\Resume{L'utilisation de requêtes écrites en langage naturel est un des enjeux important du secteur de la recherche d'information pour les prochaines années. Malgré le fait que ce domaine commence à être couvert par quelques grands noms de l'informatique, les réalisations disponibles à ce jour ne peuvent être considérées que comme des prototypes compte tenu des résultats actuellement visibles. Ceci peut-être expliqué par la grande diversité du langage naturel et par les nombreux sens qui peuvent être donnés à un même mot ou une même expression. Les différents critères sémantiques naturellement présents dans les phrases permettent notamment de combiner la recherche d'information classique - extrayant des documents comparés à des termes, ou mots-clés - avec des \og{}entités\fg{} ou des \og{}concepts\fg{} pouvant être apparentés à des catégories sémantiques (par exemple : \og{}personne\fg{},\og{}organisation\fg{},\og{}date\fg{}...). Nous proposerons dans cet article un système de catégorisation et d'extraction de mots-clés à partir de phrases formulées en langage naturel.}
+% Une catégorisation plus fine peut également être réalisée, permettant ainsi d'obtenir une meilleure granularité des résultats ; une base de données catégorisée doit néanmoins être disponible pour pouvoir appliquer ce type de recherche d'information.}
+
+\Abstract{Nowadays, requesting a search engine with natural language requests is a significant issue in the information retrieval research field, and some of its biggest actors begin to take it seriously. Some prototypes are actually available, but the error rate, inferred by the huge diversity of natural language and the different semantics of words or expressions, is still too large. Sentences naturally contain semantic criteria such as "entities", "concepts" or "categories" which can be combined with standard information retrieval in order to filter the documents with these semantic categories (e.g. "person", "organisation", "date"...). In this article we propose a categorization and keywords extraction system for natural language sentences.}
+
+\MotsCles{Sémantique, catégorisation, langage naturel, recherche d'information.}
+  % 5 mots cl\'es seulement!!!
+\Keywords{Information retrieval, semantic, categorization, natural language.}
+%=========================================================
+\section{Introduction}
+%=========================================================
+
+\par De nos jours, les moteurs de recherche sont un outil pleinement utilisable par les personnes averties et habituées, malgré la volonté d'en améliorer l'accessibilité. En effet, le processus consistant à passer d'une interrogation à un enchainement de mots-clés pertinents retranscrivant correctement la pensée initiale n'est pas un exercice aisé, du moins pour les personnes qui ne sont pas familières avec l'informatique ou internet, parmi lesquelles nous pouvons par exemple compter les enfants ou certaines personnes âgées.
+\par Il serait en effet idéal de pouvoir simplement formuler une question à un moteur de recherche et que celui-ci puisse donner la réponse ou du moins un ensemble de documents dans lesquels une ou des réponses se trouveraient. Des sociétés telles que Google\footnote{http://www.google.com}, Powerset\footnote{http://www.powerset.com} (propriété de Microsoft) ou Hakia\footnote{http://www.hakia.com} sont actuellement fortement investies dans le développement de solution sémantiques à l'interrogation des moteurs de recherche et l'enrichissement communautaire en est un élément central, au moins pour les deux premiers protagonistes. Ils ont en effet recours à de nombreux sites dont les informations sont éditées par des internautes contributeurs, Wikipédia\footnote{http://www.wikipedia.org} étant le plus célèbre d'entre eux.
+\par C'est également notre cas, puisque le système que nous proposons s'interface NLGbAse\footnote{http://www.nlgbase.org}, une base de données classifiées provenant de Wikipédia qui peut être interrogée par le biais de trois moteurs de recherche différents. Le premier d'entre eux met en ½uvre un algorithme calculant la \emph{similarité cosinus} entre l'ensemble des mots-clés entrés et les documents issus de Wikipédia ; le deuxième est semblable au premier en tous points, à l'exception que l'on peut affiner la recherche en précisant une catégorie, ainsi seuls les documents classifiés comme appartenant à la catégorie spécifiée seront relevés. Le troisième applique quant à lui un algorithme de compacité\footnote{Référence nécessaire} permettant de trouver une entité précise étant d'une catégorie donnée, proche d'un ou plusieurs mots donnés, dans le document Wikipédia se rapportant à une entité nommée donnée, ce qui permet notamment de pouvoir proposer une réponse factuelle à une requête.
+\par Ces outils constituent le système de recherche d'information sur lequel nous appliquons les sorties de notre propre système ; ce dernier peut, à partir d'une phrase en langage naturel - de préférence une question, donner les différents mots-clés et catégories attendus par les moteurs de recherche de NLGbAse, et ainsi obtenir une liste de résultats - et éventuellement des réponses factuelles - pertinents suite à une interrogation en langage naturel.
+%Voulez-vous \og{}\emph{vraiment}\fg{} citer~\cite{bogdanoff:these,sonia:point} ?
+
+%=============================================================
+\section{Catégorisation des phrases}
+%=============================================================
+%=============================================================
+\subsection{Utilisation de règles}
+%=============================================================
+
+Notre approche pour catégoriser les questions fonctionne avec un ensemble de règles. Cet ensemble est relativement restreint car nous avons pu remarquer qu?avec une dizaine de règles environ on pouvait couvrir une majorité des cas mais qu'ensuite chaque petit gain se traduisait par la production d'un nombre croissant exponentiellement de nouvelles règles.
+Les règles que nous avons formulées se basent sur les pronoms interrogatifs des questions. En voici la liste : 
+Who, Whom, Whose -> pers
+Where, Whence, Wither -> Si un nom propre ou un objet est trouvé à la question alors la catégorie sera celle du nom propre ou de l'objet (ex: où à étudié Patrick Sébastien, il y a peu de chance de trouver dans la fiche de ce lieu une mention de cette personnalité et il est à priori plus judicieux de proposer sa fiche à l'utilisateur).
+Dans le cas contraire -> loc.
+How -> On à la même chose que pour Where à l'exception près que si aucune des deux premières conditions n'est satisfaite alors on aura unk
+Pour ce pronom là nous avons ajouté quelques précisions : si on a far,few,great,little,many,much,tall,wide,high,big,old on attribut la valeur amount. Très bientôt cela sera affiné afin de correspondre aux conditions d'Ester.
+
+What -> Même principe avec pour valeur par défaut unk
+Là aussi nous avons précisé certains mots pouvant suivre et déterminer la catégorie : day,month,... qui donneront date. 
+%##########UN PROBLEME IL ME SEMBLE LA#######
+
+
+%=============================================================
+\subsection{Utilisation des noms propres}
+%=============================================================
+Comme nous l'avons vu certaines règles ne nous permettent pas de trancher directement (par exemple What).
+Nous devons compléter notre analyse par un autre moyen.
+Le premier que nous avons mis en place concerne les questions qui comportent des noms propres. Tout d'abord la question est passée dans un analyseur syntaxique qui nous permet de trouver les noms propres dans la question (en général les mots commençant par une majuscule).
+En général ce nom propre est l'objet de la question ou alors l'objet est l'une de ses caractéristiques (Par ex  : Quel est la date de naissance de Bruce Dickinson? ou encore : Qui est le coéquipier de Batman?).
+Nous devons donc trouver un moyen d'associer une catégorie à ce nom propre. Pour cela nous adressons une requête à un script issu de NLGbAse. Comme vu plus haut NLGbAse à associé une catégorie à chaque fiche de Wikipédia.
+Nous demandons donc à ce script de nous renvoyer la catégorie de la fiche correspondant à ce nom propre de la manière suivante : Si une fiche porte exactement le même nom alors la catégorie sera celle de cette fiche. Si ce n'est pas le cas mais que des fiches ont un nom similaire alors la catégorie sera celle de la plus pertinente. Enfin si ce n'est pas le cas non plus nous appliquons la méthode suivante.
+Une recherche par tf/idf est faite. La solution la plus évidente aurait été de prendre pour catégorie celle du document ayant le meilleur score.
+Nous avons essayé une autre approche. Nous allons prendre la catégorie qui a le plus fort score. Pour cela chaque catégorie va se voir attribuer comme score la somme des scores des documents ayant cette catégorie. De ce fait la catégorie qui rassemble le plus de pertinence sera sélectionnée.
+
+Cependant nous sommes conscients qu'il arrive parfois que cette stratégie ne soit pas idéale comme par exemple : Quel est le nom de la voiture de Batman? Il y a des chances que cette méthode donne pers comme catégorie attendue alors que la solution idéale aurait probablement été prod. Cependant elle n'est pas totalement mauvaise car nous devrions trouver l'information dans la fiche de Batman donc même avec une étiquette pers (mais l'accès à la réponse est moins direct).
+
+%=============================================================
+\subsection{Utilisation des noms communs}
+%=============================================================
+
+Cependant toutes les questions ne comportent évidemment pas de noms propres mais uniquement des noms communs. C'est pourquoi nous avons du trouver un moyen de traiter ces questions.
+
+Notre approche est assez simple mais efficace.
+Tout d'abord le parser que nous utilisons est capable (du moins en général) de trouver l'objet de la question. C'est celui ci que nous allons étudier. En effet par exemple pour la question "Que sont les généraux?" l'objet de la question est "généraux". L?enjeu est d'arriver à associer "généraux" à l'étiquette fonc.mil (fonction militaire).
+
+Pour arriver à cela nous utilisons WordNet et ses hyperonymes ainsi que sa capacité à fournir déjà une classe pour chaque mot.
+En effet WordNet associe déjà à la totalité des termes une étiquette. Par exemple à "general" WordNet associe noun.person. L'étiquette que fournit WordNet est bien souvent satisfaisante, cependant son jeu d'étiquette ne correspond pas aux exigences d'Ester auquel notre projet doit se plier.
+
+La première étape pour arranger ça fut d'associer "à la main" des étiquettes à des mots qui prendront le dessus sur celles de WordNet.
+En effet par exemple pour "general" nous ne voulons pas pers mais fonc.mil.
+Cependant faire ce travail sur tous les mots demanderait un investissement titanesque.
+Pour palier à ce problème pour chacune des catégories non traitées par WordNet et dont nous avons besoin, nous avons réfléchi aux mots les plus généraux possibles pour chaque catégorie. Ensuite nous vérifions que les hyponymes de ces mots sur WordNet correspondent bien à la même catégorie. Si ce n'est pas le cas alors nous allons sélectionner tout les hyponymes pour lesquels c'est le cas et répétons cette opération.
+
+Ensuite l'algorithme est assez simple. C'est une fonction récursive qui va vérifier si le mot ne fait pas parti des mots étiquetés. Si ce n'est pas le cas cette vérification va être faite pour son hyperonyme. Les conditions d'arrêt sont soit on trouve un mot associé à une étiquette soit on arrive sur l'hyperonyme de plus haut niveau. Dans le premier cas le mot de départ se voit associer cette étiquette et donc la catégorie recherchée aussi.
+Dans le deuxième cas c'est l'étiquette associée au mot de départ qui prévaut et qui est donc la catégorie recherchée.
+
+Au final même si il est évident que nous ne couvrons pas tout les cas en seulement trois heures il est possible de couvrir un très grand nombre de cas puisque pour chaque mot étiqueté tout ses hyponymes reçoivent cette même étiquette.
+
+%=============================================================
+\section{Extraction des mots clés}
+%=============================================================
+
+\bibliographystyle{fplain}
+\bibliography{references}
+
+% À FAIRE: remerciements (ou supprimez les deux lignes suivantes)
+%{\filet \small\\
+%{\em Vous pouvez placer ici des remerciements}\\ \filet } 
+
+
+\end{document}
+% fin
+
