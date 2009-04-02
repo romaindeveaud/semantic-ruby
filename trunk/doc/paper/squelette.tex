@@ -175,7 +175,27 @@ Au final même si il est évident que nous ne couvrons pas tout les cas en seuleme
 %=============================================================
 \section{Extraction des mots clés}
 %=============================================================
+Comme énoncé dans la section précédente nous utilisons un parser pour arriver à repérer les termes importants pour la catégorisation et il en est de même pour l'extraction des mots clés.
 
+Comme nous avons pu l'expliquer les différents moteurs avec lesquels nous fesons le lien n'attendent pas les mêmes entrées.
+ \subsection{Moteurs "classiques"}
+Pour ces moteurs l'opération est assez simple et n'a rien d'originale. Nous passons tout les mots de la phrase dans un filtre qui est constitué d'un anti-dictionnaire. Tout les mots qui y sont ne sont pas retenus. Tout les autres mots formes les mots clés que nous conservons.
+
+\subsection{Moteur extrateur d'entités nommées}
+Pour celui ci la démarche est assez proche mais le besoin de données est différent.
+Dans un premier temps nous devons sélectionner le terme qui permettra de trouver la fiche dans laquelle la recherche sera effectué. Si dans la requête de l'utilisateur se trouve un nom propre alors c'est lui qui sera utilisé pour fiche. Dans le cas contraire nous récupérons l'objet de la question, éxécutons une requête dans l'un des premiers moteurs est récupérons la fiche la plus pertinente dans laquelle la recherche sera faite.
+
+L'autre entrée est une liste de mots près desquels on devrait pouvoir trouver la réponse recherchée.
+ROMAIN PREND LA RELEVE ICI S'IL TE PLAIT JE SUIS PAS SUR EXACTEMENT DE CE QUI SE FAIT ICI
+
+
+%==============================================================
+\section{Résultats}
+%==============================================================
+
+%==============================================================
+\section{Conclusion}
+%==============================================================
 \bibliographystyle{fplain}
 \bibliography{references}
 
