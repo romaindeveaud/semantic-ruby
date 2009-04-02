@@ -116,64 +116,51 @@ Contact: \texttt{ludovic.bonnefoy@etd.univ-avignon.fr}, \texttt{romain.deveaud@e
 \par Ces outils constituent le système de recherche d'information sur lequel nous appliquons les sorties de notre propre système ; ce dernier peut, à partir d'une phrase en langage naturel - de préférence une question, donner les différents mots-clés et catégories attendus par les moteurs de recherche de NLGbAse, et ainsi obtenir une liste de résultats - et éventuellement des réponses factuelles - pertinents suite à une interrogation en langage naturel.
 %Voulez-vous \og{}\emph{vraiment}\fg{} citer~\cite{bogdanoff:these,sonia:point} ?
 
+\section{Analyse morpho-syntaxique et couplage des mots}
+%Ici une explication du travail effectué par le parser et notre méthode pour trouver les noms propres, l'objet etc... dans une phrase.
+%Le premier que nous avons mis en place concerne les questions qui comportent des noms propres. Tout d'abord la question est passée dans un analyseur syntaxique qui nous permet de trouver les noms propres dans la question (en général les mots commençant par une majuscule).
+
 %=============================================================
 \section{Catégorisation des phrases}
 %=============================================================
 %=============================================================
-\subsection{Utilisation de règles}
+\subsection{Catégorisation à base de règles simples}
 %=============================================================
 
-Notre approche pour catégoriser les questions fonctionne avec un ensemble de règles. Cet ensemble est relativement restreint car nous avons pu remarquer qu?avec une dizaine de règles environ on pouvait couvrir une majorité des cas mais qu'ensuite chaque petit gain se traduisait par la production d'un nombre croissant exponentiellement de nouvelles règles.
-Les règles que nous avons formulées se basent sur les pronoms interrogatifs des questions. En voici la liste : 
-Who, Whom, Whose -> pers
-Where, Whence, Wither -> Si un nom propre ou un objet est trouvé à la question alors la catégorie sera celle du nom propre ou de l'objet (ex: où à étudié Patrick Sébastien, il y a peu de chance de trouver dans la fiche de ce lieu une mention de cette personnalité et il est à priori plus judicieux de proposer sa fiche à l'utilisateur).
-Dans le cas contraire -> loc.
-How -> On à la même chose que pour Where à l'exception près que si aucune des deux premières conditions n'est satisfaite alors on aura unk
-Pour ce pronom là nous avons ajouté quelques précisions : si on a far,few,great,little,many,much,tall,wide,high,big,old on attribut la valeur amount. Très bientôt cela sera affiné afin de correspondre aux conditions d'Ester.
-
-What -> Même principe avec pour valeur par défaut unk
-Là aussi nous avons précisé certains mots pouvant suivre et déterminer la catégorie : day,month,... qui donneront date. 
-%##########UN PROBLEME IL ME SEMBLE LA#######
+\par Notre approche pour catégoriser les questions fonctionne avec un ensemble de règles. Cet ensemble est relativement restreint car nous avons pu remarquer qu'une dizaine de règles environ pouvaientt couvrir une majorité des cas, et qu'ensuite chaque petit gain se traduisait par la production d'un nombre croissant exponentiellement de nouvelles règles. Les règles que nous avons formulées se basent principalement sur les pronoms interrogatifs des questions. En voici la liste : 
+\begin{itemize}
+\item Who, Whom, Whose : \emph{pers} (Person).
+\item Where, Whence, Wither : si il s'agit trouver une catégorie pour le deuxième moteur de NLGbAse, et si un nom propre ou un objet est trouvé à la question alors la catégorie sera celle du \emph{nom propre} ou de l'\emph{objet} grammatical de la phrase (par exemple : \og{}Où a étudié Patrick Sébastien?\fg{}, il y a peu de chance de trouver dans la fiche de ce lieu une mention de cette personnalité et il est à priori plus judicieux de proposer la fiche de \emph{Patrick Sébastien}, dans laquelle l'utilisateur sera à même de touver l'information). Dans le cas contraire (ou si nous voulons une catégorie pour le troisième moteur), la catégorie \emph{loc} (Location) est attribuée.
+\item How : nous appliquons la même procédure que précédemment, à l'exception près que si les premières conditions ne sont pas remplies, la catégorie \emph{unk} (Unknown) est attribuée. Pour ce pronom là nous avons ajouté quelques précisions lorsque nous cherchons une catégorie pour le troisème moteur : si le mot suivant directement \emph{how} fait partie de la liste suivante (far, few, great, little, many, much, tall, wide, high, big, old), la catégorie \emph{amount} est attribuée.
+\item What, Why, Which : le principe est toujours le même, avec \emph{unk} (Unknown) pour valeur par défaut. Nous avons également établi, comme précédemment, une liste de mots pouvant être acceptés comme suivant directement le pronom interrogatif (comme par exemple day : \og{}What day is the Independance Day?\fg{}) et qui vont impliquer automatiquement l'attribution d'une catégorie (\emph{date} dans l'exemple précédent).
+\end{itemize}
+Nous allons maintenant détailler les méthodes de catégorisation des noms propres et des noms communs que nous avons mises en place.
 
 
 %=============================================================
-\subsection{Utilisation des noms propres}
+\subsection{Catégorisation par les noms propres utilisant NLGbAse}
 %=============================================================
-Comme nous l'avons vu certaines règles ne nous permettent pas de trancher directement (par exemple What).
-Nous devons compléter notre analyse par un autre moyen.
-Le premier que nous avons mis en place concerne les questions qui comportent des noms propres. Tout d'abord la question est passée dans un analyseur syntaxique qui nous permet de trouver les noms propres dans la question (en général les mots commençant par une majuscule).
-En général ce nom propre est l'objet de la question ou alors l'objet est l'une de ses caractéristiques (Par ex  : Quel est la date de naissance de Bruce Dickinson? ou encore : Qui est le coéquipier de Batman?).
-Nous devons donc trouver un moyen d'associer une catégorie à ce nom propre. Pour cela nous adressons une requête à un script issu de NLGbAse. Comme vu plus haut NLGbAse à associé une catégorie à chaque fiche de Wikipédia.
-Nous demandons donc à ce script de nous renvoyer la catégorie de la fiche correspondant à ce nom propre de la manière suivante : Si une fiche porte exactement le même nom alors la catégorie sera celle de cette fiche. Si ce n'est pas le cas mais que des fiches ont un nom similaire alors la catégorie sera celle de la plus pertinente. Enfin si ce n'est pas le cas non plus nous appliquons la méthode suivante.
-Une recherche par tf/idf est faite. La solution la plus évidente aurait été de prendre pour catégorie celle du document ayant le meilleur score.
-Nous avons essayé une autre approche. Nous allons prendre la catégorie qui a le plus fort score. Pour cela chaque catégorie va se voir attribuer comme score la somme des scores des documents ayant cette catégorie. De ce fait la catégorie qui rassemble le plus de pertinence sera sélectionnée.
-
-Cependant nous sommes conscients qu'il arrive parfois que cette stratégie ne soit pas idéale comme par exemple : Quel est le nom de la voiture de Batman? Il y a des chances que cette méthode donne pers comme catégorie attendue alors que la solution idéale aurait probablement été prod. Cependant elle n'est pas totalement mauvaise car nous devrions trouver l'information dans la fiche de Batman donc même avec une étiquette pers (mais l'accès à la réponse est moins direct).
+\par Comme nous l'avons vu la majorité des règles ne nous permettent pas de trancher directement, nous devons donc compléter notre analyse par un autre moyen et cela passe notamment par la catégorisation des noms propres. Nous avons remarqué que dans la majorité des cas, si un nom propre est présent dans une quest, il en est l'objet ou du moins l'objet est l'une de ses caractéristiques. Prennons par exemple ces deux questions \og{}What is the date of birth of Bruce Dickinson?\fg{}, \og{}Who is Batman's team-mate?\fg{} ; nous voyons bien que les informations désirées sont \emph{forcément} en relation avec nos noms propres.
+\par Nous avons donc prit le parti de prendre comme catégorie la catégorie du nom propre se trouvant dans la question - s'il y en a un. Pour cela nous adressons une requête à un script issu de NLGbAse, qui comme nous l'avons vu associe une catégorie à chaque entité de Wikipédia, qui récupère la catégorie de l'entité correspondant à ce nom propre. Si une entité porte exactement le même nom alors la catégorie sera celle de cette entité ; si ce n'est pas le cas mais que des entités ont un nom similaire, alors la catégorie sera celle de la plus pertinente d'entres elles. Enfin si ce n'est pas le cas nous effectuons une recherche par \emph{TF.Idf}
+%La solution la plus évidente aurait été de prendre pour catégorie celle du document ayant le meilleur score.
+%Nous avons essayé une autre approche. 
+en prenant la catégorie qui a le plus fort score, pour cela chaque catégorie se voit attribué comme score la somme des scores des documents ayant cette catégorie. De ce fait la catégorie qui rassemble le plus de pertinence sera sélectionnée.
+\par Cependant nous sommes conscients qu'il arrive parfois que cette stratégie ne soit pas idéale, comme pour : \og{}What is the name of Batman's car?\fg{}. Il y a des chances que cette méthode donne \emph{pers} (Person) comme catégorie attendue alors que la solution idéale aurait probablement été \emph{prod} (Product). Cependant elle n'est pas totalement inapproprié car nous devrions trouver l'information désirée dans la fiche Wikipédia de Batman, néanmoins l'accès à la réponse est moins direct.
 
 %=============================================================
-\subsection{Utilisation des noms communs}
+\subsection{Catégorisation par les noms communs utilisant WordNet}
 %=============================================================
 
-Cependant toutes les questions ne comportent évidemment pas de noms propres mais uniquement des noms communs. C'est pourquoi nous avons du trouver un moyen de traiter ces questions.
+\par Cependant toutes les questions ne comportent évidemment pas de noms propres mais généralement des noms communs, c'est pourquoi nous avons du trouver un moyen de traiter ces questions par une approche assez simple. La décomposition morpho-syntaxique nous permet généralement de trouver l'objet de la question, étant donné qu'il est généralement fortement porteur de sens dans une phrase, c'est celui-ci que nous allons étudier. En effet, pour la question \og{}What are the generals?\fg{}, l'objet de la question est \og{}generals\fg{} ; l'enjeu est d'arriver à associer \og{}generals\fg{} à l'étiquette \emph{fonc.mil} (fonction militaire).
+\par Pour arriver à cela nous utilisons WordNet et ses hyperonymes ainsi que sa capacité à fournir une classe pour chaque mot : en effet WordNet associe déjà à la totalité des termes une étiquette, par exemple à \og{}general\fg{} WordNet associe \emph{noun.person}. L'étiquette que fournit WordNet est bien souvent satisfaisante, cependant son jeu d'étiquette ne correspond pas aux exigences d'Ester auquel notre projet doit se plier.
+\par La première étape pour arranger ça fut d'associer \og{}à la main\fg{} des étiquettes à des mots qui prendront le dessus sur celles de WordNet ; pour reprendre notre exemple, nous ne voulons pas l'étiquette \emph{pers} (Person) pour \og{}general\fg{} mais bien \emph{fonc.mil}. Cependant faire ce travail sur tous les mots demanderait un investissement titanesque, et nous avons pu palier à ce problème en réfléchissant aux mots les plus généraux possibles pour chaque catégorie dont nous avions besoin. Ensuite nous vérifions que les hyponymes de ces mots sur WordNet correspondent bien à la même catégorie, et si ce n'était pas le cas nous sélectionnions tous les hyponymes pour lesquels c'est le cas et répétions cette opération. Nous sommes donc arrivés à une liste de mots caractérisant parfaitement chaque catégorie - et étant compatibles avec WordNet.
+\par L'algorithme de catégorisation en lui-même consiste en une fonction récursive qui va vérifier si le nom commun ne fait pas partie des mots étiquetés. Si ce n'est pas le cas cette vérification est faite pour son hyperonyme, et ainsi de suite. La récursivité s'arrête si un mot associé à une étiquette est trouvé ou si on arrive sur l'hyperonyme de plus haut niveau. Dans le premier cas le mot de départ se voit associé cette étiquette et donc la catégorie recherchée aussi, dans le deuxième cas c'est l'étiquette associée au mot de départ qui prévaut et qui est donc définie comme la catégorie recherchée.
+\par Cette méthode utilisée seule ne peut bien évidemment pas couvrir tous les cas, néanmoins c'est l'association des différentes - mais surtout complémentaires - méthodes de classification qui permet d'obtenir des résultats satisfaisants.
 
-Notre approche est assez simple mais efficace.
-Tout d'abord le parser que nous utilisons est capable (du moins en général) de trouver l'objet de la question. C'est celui ci que nous allons étudier. En effet par exemple pour la question "Que sont les généraux?" l'objet de la question est "généraux". L?enjeu est d'arriver à associer "généraux" à l'étiquette fonc.mil (fonction militaire).
-
-Pour arriver à cela nous utilisons WordNet et ses hyperonymes ainsi que sa capacité à fournir déjà une classe pour chaque mot.
-En effet WordNet associe déjà à la totalité des termes une étiquette. Par exemple à "general" WordNet associe noun.person. L'étiquette que fournit WordNet est bien souvent satisfaisante, cependant son jeu d'étiquette ne correspond pas aux exigences d'Ester auquel notre projet doit se plier.
-
-La première étape pour arranger ça fut d'associer "à la main" des étiquettes à des mots qui prendront le dessus sur celles de WordNet.
-En effet par exemple pour "general" nous ne voulons pas pers mais fonc.mil.
-Cependant faire ce travail sur tous les mots demanderait un investissement titanesque.
-Pour palier à ce problème pour chacune des catégories non traitées par WordNet et dont nous avons besoin, nous avons réfléchi aux mots les plus généraux possibles pour chaque catégorie. Ensuite nous vérifions que les hyponymes de ces mots sur WordNet correspondent bien à la même catégorie. Si ce n'est pas le cas alors nous allons sélectionner tout les hyponymes pour lesquels c'est le cas et répétons cette opération.
-
-Ensuite l'algorithme est assez simple. C'est une fonction récursive qui va vérifier si le mot ne fait pas parti des mots étiquetés. Si ce n'est pas le cas cette vérification va être faite pour son hyperonyme. Les conditions d'arrêt sont soit on trouve un mot associé à une étiquette soit on arrive sur l'hyperonyme de plus haut niveau. Dans le premier cas le mot de départ se voit associer cette étiquette et donc la catégorie recherchée aussi.
-Dans le deuxième cas c'est l'étiquette associée au mot de départ qui prévaut et qui est donc la catégorie recherchée.
-
-Au final même si il est évident que nous ne couvrons pas tout les cas en seulement trois heures il est possible de couvrir un très grand nombre de cas puisque pour chaque mot étiqueté tout ses hyponymes reçoivent cette même étiquette.
+%Au final même si il est évident que nous ne couvrons pas tout les cas en seulement trois heures il est possible de couvrir un très grand nombre de cas puisque pour chaque mot étiqueté tout ses hyponymes reçoivent cette même étiquette.
 
 %=============================================================
-\section{Extraction des mots clés}
+\section{Extraction des mots-clés}
 %=============================================================
 Comme énoncé dans la section précédente nous utilisons un parser pour arriver à repérer les termes importants pour la catégorisation et il en est de même pour l'extraction des mots clés.
 
