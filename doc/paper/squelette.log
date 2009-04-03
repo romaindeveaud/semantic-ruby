@@ -1,11 +1,11 @@
-This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2008.12.3)  2 APR 2009 23:24
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2008.12.3)  3 APR 2009 14:32
 entering extended mode
  %&-line parsing enabled.
 **squelette.tex
 (./squelette.tex
 LaTeX2e <2005/12/01>
 Babel <v3.8h> and hyphenation patterns for english, usenglishmax, dumylang, noh
-yphenation, loaded.
+yphenation, basque, french, loaded.
 (/usr/share/texmf-texlive/tex/latex/base/article.cls
 Document Class: article 2005/09/16 v1.4f Standard LaTeX document class
 (/usr/share/texmf-texlive/tex/latex/base/size10.clo
@@ -49,12 +49,6 @@ File: babel.def 2005/11/23 v3.8h Babel common definitions
 \babel@savecnt=\count87
 \U@D=\dimen103
 )
-
-Package babel Warning: No hyphenation patterns were loaded for
-(babel)                the language `French'
-(babel)                I will use the patterns loaded for \language=0 instead.
-
-\l@french = a dialect from \language0
 Package babel Info: Making : an active character on input line 219.
 Package babel Info: Making ; an active character on input line 220.
 Package babel Info: Making ! an active character on input line 221.
@@ -62,6 +56,7 @@ Package babel Info: Making ? an active character on input line 222.
 \parindentFFN=\dimen104
 \std@mcc=\count88
 \dec@mcc=\count89
+
 *************************************
 * Local config file frenchb.cfg used
 *
@@ -467,10 +462,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 3786 strings out of 95086
- 45010 string characters out of 1183255
- 126116 words of memory out of 1500000
- 6861 multiletter control sequences out of 10000+50000
+ 3783 strings out of 95063
+ 44976 string characters out of 1182610
+ 126132 words of memory out of 1500000
+ 6868 multiletter control sequences out of 10000+50000
  32915 words of font info for 77 fonts, out of 1200000 for 2000
  28 hyphenation exceptions out of 8191
  32i,10n,24p,1220b,287s stack positions out of 5000i,500n,6000p,200000b,5000s
@@ -480,7 +475,7 @@ courier/ucrr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/palatino/uplb8a.pf
 b></usr/share/texmf-texlive/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/tex
 mf-texlive/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texmf-texlive/fonts/
 type1/urw/palatino/uplri8a.pfb>
-Output written on squelette.pdf (5 pages, 108000 bytes).
+Output written on squelette.pdf (5 pages, 108074 bytes).
 PDF statistics:
  43 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
