@@ -101,6 +101,7 @@ def evaluate
   
   global_prec = 0
   global_rec  = 0
+  global_f    = 0
   i = 0
   j = 0
 
@@ -109,7 +110,7 @@ def evaluate
   puts "Categorizing : "
   puts " -- Precision : "
   precision.each_pair do |key, value| 
-    if value[1] > 0 and (["kw_e1_e2","kw_e3","en_e3"].include?(key) == false)
+    if value[1] > 0 and (["kw_e1_e2","kw_e3","en_e3"].include?(key) == false) and key != "prod"
       val = value[0].to_f/value[1].to_f
       fmeasure[key] = [val, 0]
       puts "\t#{key} \t: #{val} / #{value[1]} questions"
@@ -121,9 +122,9 @@ def evaluate
 
   puts " -- Recall : "
   recall.each_pair    do |key, value| 
-    if value[1] > 0  
+    if value[1] > 0 and fmeasure.has_key?(key)
       val = value[0].to_f/value[1].to_f
-      fmeasure[key][1] = val if fmeasure.has_key?(key)
+      fmeasure[key][1] = val
       puts "\t#{key} \t: #{val} / #{value[1]} questions" 
       global_rec += val
       j += 1
@@ -131,10 +132,15 @@ def evaluate
   end
 
   puts " -- F-Measure : "
-  fmeasure.each_pair { |key, value| puts "\t#{key} \t: #{2*(value[0]*value[1])/(value[0]+value[1])}" }
+  fmeasure.each_pair do |key, value| 
+    val = 2*(value[0]*value[1])/(value[0]+value[1])
+    puts "\t#{key} \t: #{val}"
+    global_f += val
+  end
   
   puts "\nOverall precision : #{global_prec.to_f/i.to_f}"
   puts "Overall recall    : #{global_rec.to_f/j.to_f}"
+  puts "Overall F-measure : #{global_f.to_f/i.to_f}"
 
   puts "\nKeywords extracting : "
   puts " -- Precision : "

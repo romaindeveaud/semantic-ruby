@@ -6,7 +6,7 @@ Where is the Flughayen at Berlin?#Flughayen Berlin#loc.geo# # # #
 What company produces digitizing devices for computers?#digitizing devices computer#org.com# # # #
 What currency does Luxembourg use?#currency Luxembourg#unk# Luxembourg# currency# unk#
 Can you tell me about Whitcomb Judson?#Whitcomb Judson#pers.hum# # # #
-how old do i have to be to apply for a credit card?#credit card#prod# credit card# old# amount.phy.age#
+how old do i have to be to apply for a credit card?#credit card#unk# credit card# old# amount.phy.age#
 what is linux 2.4 tcp auto tuning ?#linux 2.4 tcp#unk# # # #
 How did Kursk disaster happen?#Kursk#unk# # # #
 What does IRS stand for?#IRS#org# # # #
@@ -54,7 +54,7 @@ where does ashley moore live?#ashley moore#pers.hum# ashley moore# live# loc#
 What nationality is Gabriela Sabatini?#Gabriela Sabatini#pers.hum# Gabriela Sabatini# nationality# unk#
 what is the Mitchell Plan?#Mitchell Plan#unk# # # #
 Where is Bermondsey?#Bermondsey#loc# # # #
-Jude Law acted in which film?#Jude Law film#prod# Jude Law# film# prod#
+Jude Law acted in which film?#Jude Law#pers# Jude Law# film# prod#
 how much does marlon brando weigh?#Marlon Brando#pers.hum# Marlon Brando# weigh# amount.phy.wei#
 What are Shakespeare's Birth and Death dates?#Shakespeare#pers.hum# Shakespeare# birth death# date#
 Who was the first governor of Alaska?#governor Alaska#pers.hu# Alaska# governor# pers.hum#
@@ -77,7 +77,7 @@ when is halloween?#Halloween#unk# Halloween# date# date#
 Where can I buy anecosphere?#anecosphere#prof# anescosphere# buy# loc#
 what is normative theory?#normative theory#unk# # # #
 What day did Elvis Presley die on?#Elvis Presley#pers.hum# Elvis Presley# die# date#
-Who makes Magic Chef refrigerators?#Magic Chef refrigerators#pers.hum# Magic Cher refrigerators# make# pers.hum#
+Who makes Magic Chef refrigerators?#Magic Chef refrigerators#pers.hum# Magic Chef# make# pers.hum#
 When did Alexander Hamilton die?#Alexander Hamilton#pers.hum# Alexander Hamilton# die# date#
 What did President Cleveland do to promote peace?#President Cleveland#pers.hum# President Cleveland# peace# unk#
 Who received the Will Rogers Award in 1989?#Will Rogers Award 1989#pers.hum# # # #
@@ -88,7 +88,7 @@ Which African country's major export is coffee?#African country major coffee#loc
 How far is the moon?#Moon#loc.geo# moon# far# amount.phy.len#
 how big are the gardens at fontainebleau?#Fontainebleau gardens#unk# Fonatainebleau gardens# big# amount.phy.area#
 Who is Bill Loughner?#Bill Loughner#pers.hum# # # #
-What does SGML stand for?#SGML#unk# # # #
+What does SGML stand for?#SGML#prod# # # #
 What is the Aurora Borealis?#Aurora Borealis#unk# # # #
 What day of the year did Christopher Coulumbus depart?#Christopher Coulumbus#pers.hum# Christopher Coulumbus# depart# date#
 what does a 3d game engine do?#3d game engine#unk# # # #
