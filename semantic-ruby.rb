@@ -176,7 +176,7 @@ loop do
       puts "[#{results[:cat_e2]}] #{results[:kw_e2]}"
       print "Keywords selected for engine 3 : "
       puts "[#{results[:cat_e3]}] [Named entity : #{results[:en_e3]}] [Keywords : #{results[:kw_e3]}]"
-    rescue NoMethodError
-      $stderr.puts "Execution error. Maybe your sentence has not been written properly."
+#    rescue NoMethodError
+#      $stderr.puts "Execution error. Maybe your sentence has not been written properly."
     end
 end

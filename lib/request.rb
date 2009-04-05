@@ -11,21 +11,21 @@ class Request
     end
 
     def extract
-#        rewrite if extract_e1_2 != extract_e1
         results = Hash.new
-        ext = extract_e1_2
+        ext = extract_e1_2({:label => "NP"})
         ext = ext == "" ? extract_e1 : ext
+#        ext = ext == "" ? extract_e1_2({:label => "ADJP"}) : ext
         results[:kw_e1]  = ext
         results[:kw_e2]  = ext
         results[:kw_e3]  = extract_e3
         results[:cat_e2] = categorize_e2
         results[:cat_e3] = categorize_e3
-        results[:en_e3]  = en_e3
+        results[:en_e3]  = en_e3(ext)
         results
     end
 
 private
-    def get_np
+    def get_np(options = {})
         np = []
         @sent.linkages.first.links.each do |l| 
           np.push(l.lword.split(".").first.split("[").first, l.rword.split(".").first.split("[").first) if l.label =~ /G./
@@ -39,6 +39,14 @@ private
           temp = @sent.words-["?",".","'s","LEFT-WALL","RIGHT-WALL"]
           temp.each { |w| np.push(w) if (w.capitalize == w or w.upcase == w)}
         end
+
+        if options[:from] != "e3"
+          np.push(extract_e1_2({:label => "NP"}).split) if np.empty?
+          np.delete("")
+          np.push(extract_e1_2({:label => "ADJP"}).split) if np.empty?
+          np.delete("")
+        end
+        np.flatten!
         np # => /!\ C'est une Array, pas une String !!
     end
 
@@ -221,32 +229,32 @@ private
         kw_array.join(" ")        
     end
 
-    def extract_e1_2
-        kw_array = ctree_rec(@sent.constituent_tree.first)
+    def extract_e1_2(options)
+        kw_array = ctree_rec(@sent.constituent_tree.first, options[:label])
         kw_array -= $stoplist
 #        kw_array = extract_e1 if kw_array.empty?
         kw_array.sort!
         kw_array.join(" ")
     end
 
-    def ctree_rec(var)
+    def ctree_rec(var,label)
 # Parcours récursif de l'arbre, on récupère tous les children du label NP
         array = []
 
         var.children.each do |c|
-            array.concat(ctree_rec(c)) if c.children.length > 0
-            array.push(c.label) if (c.children.length == 0) && (var.label == "NP")
+            array.concat(ctree_rec(c, label)) if c.children.length > 0
+            array.push(c.label) if (c.children.length == 0) && (var.label == label)
         end
         array
     end
 
-    def en_e3
+    def en_e3(keywords)
       named_ent = ""
       
       if get_np.empty?
 # On exécute une requête avec l'objet de la question pour récupérer
 # le nom de la fiche associée, qui fera office d'entité nommée.
-          named_ent = new_obj(extract_e1_2.split(" ")) 
+          named_ent = new_obj(keywords.split(" ")) 
       else
 # On exécute une requête pour récupérer le nom exact de l'EN.        
           named_ent = get_np.join(" ")
@@ -270,7 +278,7 @@ private
             verb.push(v); break if !v.nil?
         end
 
-        keywords = @sent.words-$stoplist-get_np-verb
+        keywords = @sent.words-$stoplist-get_np({:from => "e3"})-verb
 
         @sent.linkages.first.links.each do |l| 
             if keywords.include?(l.lword.split(".")[0].split("[").first)
