@@ -1,4 +1,4 @@
-This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2008.12.3)  3 APR 2009 14:32
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2008.12.3)  5 APR 2009 14:54
 entering extended mode
  %&-line parsing enabled.
 **squelette.tex
@@ -475,7 +475,7 @@ courier/ucrr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/palatino/uplb8a.pf
 b></usr/share/texmf-texlive/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/tex
 mf-texlive/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texmf-texlive/fonts/
 type1/urw/palatino/uplri8a.pfb>
-Output written on squelette.pdf (5 pages, 108074 bytes).
+Output written on squelette.pdf (5 pages, 108080 bytes).
 PDF statistics:
  43 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
