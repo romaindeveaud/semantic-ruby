@@ -109,13 +109,13 @@ private
                 cat = "unk"
               end
             end
-          when "what", "why" : 
+          when "what", "why", "which" : 
             # A compléter ici...
             if options[:cat] == 2
               cat = np.join("+").categorize_np if !np.empty?
               cat = "unk" if np.empty?
-            elsif ["day","month","year","century","time"].include?(@sent.words[2])
-              cat = "date"
+            elsif !$stoplist.include?(Linguistics::EN.infinitive(@sent.words[2])) or !$stoplist.include?(ActiveSupport::Inflector.singularize(@sent.words[2]))
+              cat = ActiveSupport::Inflector.singularize(@sent.words[2]).categorize
             elsif np.include?(object)
               cat = np.join("+").categorize_np
             elsif !object.nil? 

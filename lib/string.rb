@@ -38,7 +38,7 @@ Fonc_Admi_Cat = ["civic leader", "civil leader", "delegate", "administrator", "e
 Prod_Vehicle_Cat = ["conveyance", "transport"]
 Prod_Award_Cat = ["award", "accolade", "honor", "honour", "laurels" , "prize"]
 Pers_Cat   = ["name"]
-Prod_Cat   = []
+Prod_Cat   = ["product","production","ware"]
 Date_Cat   = ["day","month","year","century","time"]
 Time_Cat   = []
 Time_Hour_Cat   = []
@@ -98,9 +98,7 @@ class String
             cat = "fonc.admi"         if Fonc_Admi_Cat.include?(s)
         end
 
-        if cat.nil?
-            hypernym.hypernyms.each { |h| cat = self.categorize(h) }
-        end
+        hypernym.hypernyms.each { |h| cat = self.categorize(h) } if cat.nil?
 
         if cat.nil? && hypernym == synset(self)
             cat = Net::HTTP.get(URI.parse("http://www.nlgbase.org/perl/lr_info_extractor.pl?query=#{self}&search=EN")).split(":")[0]
