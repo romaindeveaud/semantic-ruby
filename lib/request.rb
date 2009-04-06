@@ -205,6 +205,7 @@ private
             cat = ActiveSupport::Inflector.singularize(object).categorize
           else
             cat = get_cat(@sent.words[1],np)
+#            cat = get_cat(object, np)            
           end
         end
         cat = "unk" if cat.nil?
