@@ -11,6 +11,9 @@
 %
 %
 %
+%% interventions
+%%  -eric 8 Avril 09 // qqes modifs de style pour le moment
+%%
 %%%%%% NE PAS MODIFIER
 %
 % gillemets a la francaise
@@ -84,12 +87,12 @@
 
 % À FAIRE Indiquez vos noms ici. Nom1, Nom2 et Nom3. Utilisez $^i$ pour 
 % l'adresse i.
-\author{Ludovic Bonnefoy, Romain Deveaud et Eric Charton$^1$}
+\author{Ludovic Bonnefoy$^1$, Romain Deveaud$^1$ et Eric Charton$^2$}
 
 % À FAIRE Indiquez vos adresses ici. Attention, la première adresse commence
 % juste après le { de la commande.
-\address{1: LIA / Université d'Avignon, 339 chemin des Meinajaries, 84911 Avignon\\
-Contact: \texttt{ludovic.bonnefoy@etd.univ-avignon.fr}, \texttt{romain.deveaud@etd.univ-avignon.fr}, \texttt{eric.charton@univ-avignon.fr}
+\address{1: Centre d'Enseignement et de Recherche en Informatique / Université d'Avignon et des Pays de Vaucluse \texttt{ludovic.bonnefoy}, \texttt{romain.deveaud} \texttt{\{@etd.univ-avignon.fr\}}\\
+2: LIA / Université d'Avignon et des Pays de Vaucluse, 339 chemin des Meinajaries, 84911 Avignon \texttt{eric.charton@univ-avignon.fr}
 }
 
 \maketitle
@@ -98,7 +101,10 @@ Contact: \texttt{ludovic.bonnefoy@etd.univ-avignon.fr}, \texttt{romain.deveaud@e
 %R\'esum\'e
 %===========================================================  
 
-\Resume{L'utilisation de requêtes écrites en langage naturel est un des enjeux important du secteur de la recherche d'information pour les prochaines années. Malgré le fait que ce domaine commence à être couvert par quelques grands noms de l'informatique, les réalisations disponibles à ce jour ne peuvent être considérées que comme des prototypes compte tenu des résultats actuellement visibles. Ceci peut-être expliqué par la grande diversité du langage naturel et par les nombreux sens qui peuvent être donnés à un même mot ou une même expression. Les différents critères sémantiques naturellement présents dans les phrases permettent notamment de combiner la recherche d'information classique - extrayant des documents comparés à des termes, ou mots-clés - avec des \og{}entités\fg{} ou des \og{}concepts\fg{} pouvant être apparentés à des catégories sémantiques (par exemple : \og{}personne\fg{},\og{}organisation\fg{},\og{}date\fg{}...). Nous proposerons dans cet article un système de catégorisation et d'extraction de mots-clés à partir de phrases formulées en langage naturel.}
+\Resume{La difficulté de la tâche d'interprétation de requêtes en langue naturelle réside dans la transformation d'une phrase grammaticale en une requête pertinente pour interroger un système de RI ou d'extraction d'information. Dans cet article, nous présentons un système d'extraction d'information associé à un analyseur de requêtes, dédié à l'analyse et à l'interprétation de questions factuelles formulées en langue naturelle issues de la campagne TREC. Notre système fournit des réponses en exploitant un système composé d'une ressource ontologique et sémantique issue d'un corpus encyclopédique, dont on aura extrait les réponses candidates à l'aide de méthodes statistiques. Nous obtenons des performances du niveau de l'état de l'art.}
+
+%Hors l'étape d à dessin de reformuler une interrogation qui soit efficace sur un système de RI. 
+%Malgré le fait que ce domaine commence à être couvert par quelques grands noms de l'informatique, les réalisations disponibles à ce jour ne peuvent être considérées que comme des prototypes compte tenu des résultats actuellement visibles. Ceci peut-être expliqué par la grande diversité du langage naturel et par les nombreux sens qui peuvent être donnés à un même mot ou une même expression. Les différents critères sémantiques naturellement présents dans les phrases permettent notamment de combiner la recherche d'information classique - extrayant des documents comparés à des termes, ou mots-clés - avec des \og{}entités\fg{} ou des \og{}concepts\fg{} pouvant être apparentés à des catégories sémantiques (par exemple : \og{}personne\fg{},\og{}organisation\fg{},\og{}date\fg{}...). Nous proposerons dans cet article un système de catégorisation et d'extraction de mots-clés à partir de phrases formulées en langage naturel.}
 % Une catégorisation plus fine peut également être réalisée, permettant ainsi d'obtenir une meilleure granularité des résultats ; une base de données catégorisée doit néanmoins être disponible pour pouvoir appliquer ce type de recherche d'information.}
 
 \Abstract{Nowadays, requesting a search engine with natural language requests is a significant issue in the information retrieval research field, and some of its biggest actors begin to take it seriously. Some prototypes are actually available, but the error rate, inferred by the huge diversity of natural language and the different semantics of words or expressions, is still too large. Sentences naturally contain semantic criteria such as "entities", "concepts" or "categories" which can be combined with standard information retrieval in order to filter the documents with these semantic categories (e.g. "person", "organisation", "date"...). In this article we propose a categorization and keywords extraction system for natural language sentences.}
@@ -109,23 +115,55 @@ Contact: \texttt{ludovic.bonnefoy@etd.univ-avignon.fr}, \texttt{romain.deveaud@e
 %=========================================================
 \section{Introduction}
 %=========================================================
+%%
+%% De manière générale soyez plus directs, évitez les circonvolutions litéraires de type ``De nos Jours'' etc
+%%
 
-\par De nos jours, les moteurs de recherche sont un outil pleinement utilisable par les personnes averties et habituées, malgré la volonté d'en améliorer l'accessibilité. En effet, le processus consistant à passer d'une interrogation à un enchainement de mots-clés pertinents retranscrivant correctement la pensée initiale n'est pas un exercice aisé, du moins pour les personnes qui ne sont pas familières avec l'informatique ou internet, parmi lesquelles nous pouvons par exemple compter les enfants ou certaines personnes âgées.
-\par Il serait en effet idéal de pouvoir simplement formuler une question à un moteur de recherche et que celui-ci puisse donner la réponse ou du moins un ensemble de documents dans lesquels une ou des réponses se trouveraient. Des sociétés telles que Google\footnote{http://www.google.com}, Powerset\footnote{http://www.powerset.com} (propriété de Microsoft) ou Hakia\footnote{http://www.hakia.com} sont actuellement fortement investies dans le développement de solution sémantiques à l'interrogation des moteurs de recherche et l'enrichissement communautaire en est un élément central, au moins pour les deux premiers protagonistes. Ils ont en effet recours à de nombreux sites dont les informations sont éditées par des internautes contributeurs, Wikipédia\footnote{http://www.wikipedia.org} étant le plus célèbre d'entre eux.
+%\par De nos jours, les moteurs de recherche sont un outil pleinement utilisable par les personnes averties et habituées, malgré la volonté d'en améliorer l'accessibilité. En effet, le processus consistant à passer d'une interrogation à un enchainement de mots-clés pertinents retranscrivant correctement la pensée initiale n'est pas un exercice aisé, du moins pour les personnes qui ne sont pas familières avec l'informatique ou internet, parmi lesquelles nous pouvons par exemple compter les enfants ou certaines personnes âgées.
+%\par Il serait en effet idéal de pouvoir simplement formuler une question à un moteur de recherche et que celui-ci puisse donner la réponse ou du moins un ensemble de documents dans lesquels une ou des réponses se trouveraient. 
+\par L'interprétation de requêtes écrites en langage naturel par un système de recherche d'information (RI] ou de dialogue est un enjeu important de l'ingéniérie documentaire. Outre que la requête en language naturelle rend possible la formulation d'une requête de recherche selon une forme bien plus précise que la simple saisie de mots clés. Dans le cadre de la compréhension des languages parlés et des systèmes de dialogue, elle permet de déployer des composants de compréhension (SLU) conviviaux pour les utilisateurs. 
+
+\par Dans le cadre des systèmes de Question et Réponses (SQR), l'analyse d'une requête en language naturelle doit permettre de transformer en processus d'extraction d'information, une question factuelle ou complexe. La difficulté de la tâche d'interprétation de requêtes en langue naturelle réside dans la transformation d'une phrase grammaticale en une requête pertinente pour interroger un système de RI ou d'extraction d'information. 
+
+\par Dans cet article, nous présentons le système \textit{NLGbAse QR}. Ce système est un extracteur d'information contenues dans une ontologie, associé à un analyseur de requêtes formulées en langue naturelle. Ce système est testé à l'analyse et à l'interprétation de questions factuelles formulées en langue naturelle issues de la campagne TREC. Notre système fournit des réponses en exploitant un système composé d'une ressource ontologique et sémantique issue d'un corpus encyclopédique, dont on aura extrait les réponses candidates à l'aide de méthodes statistiques. 
+
+\par La structure de cet article est la suivante: 
+
+\par Nous décrivons dans notre introduction les grands principes de la litérature sur l'analyse de requêtes en langue naturelle, et son déploiement dans le cadre de systèmes de Question Réponses (SQR). Puis nous présentons les principaux systèmes de QR existants, et les méthodes de transformations de requêtes sémantiques et d'interrogation qu'ils mettent en oeuvre. Nous expliquons également dans cette section la relation existant entre ontologies issues de corpus encyclopédiques, et le rôle que ces ontologies peuvent jouer dans des SQR. 
+\par Dans la section suivante, nous présentons l'architecture du SQR \textit{NLGbAse.QR}. Ce dernier est divisé en trois parties: analyse des requêtes en langue naturelle, transformation des requêtes en paramètres d'extraction, extracteur d'informations appliqué sur une ontologie. Puis nous détaillons dans la section \ref{details} ces trois modules et les algorithmes qu'ils sous-tendent. 
+\par Dans la section \ref{expériences}, nous présentons une évaluation de notre système avec le corpus de question de Trec. Nous concluons par une analyse critique des résultats obtenus, qui sont du niveau de l'état de l'art, et introduisons nos perspectives futures de recherche. 
+
+\section{Principe de l'analyse de requêtes en langue naturelle et des SQR}
+%%% cette partie est intéressante pour l'état de l'art
+\par Des sociétés telles
+ que Google\footnote{http://www.google.com}, Powerset\footnote{http://www.powerset.com} (propriété de Microsoft) ou Hakia\footnote{http://www.hakia.com} sont actuellement fortement investies dans le développement de solution sémantiques à l'interrogation des moteurs de recherche et l'enrichissement communautaire en est un élément central, au moins pour les deux premiers protagonistes. Ils ont en effet recours à de nombreux sites dont les informations sont éditées par des internautes contributeurs, Wikipédia\footnote{http://www.wikipedia.org} étant le plus célèbre d'entre eux.
+
 \par C'est également notre cas, puisque le système que nous proposons s'interface NLGbAse\footnote{http://www.nlgbase.org}, une base de données classifiées provenant de Wikipédia qui peut être interrogée par le biais de trois moteurs de recherche différents. Le premier d'entre eux met en ½uvre un algorithme calculant la \emph{similarité cosinus} entre l'ensemble des mots-clés entrés et les documents issus de Wikipédia ; le deuxième est semblable au premier en tous points, à l'exception que l'on peut affiner la recherche en précisant une catégorie, ainsi seuls les documents classifiés comme appartenant à la catégorie spécifiée seront relevés. Le troisième applique quant à lui un algorithme de compacité\footnote{Référence nécessaire} permettant de trouver une entité précise étant d'une catégorie donnée, proche d'un ou plusieurs mots donnés, dans le document Wikipédia se rapportant à une entité nommée donnée, ce qui permet notamment de pouvoir proposer une réponse factuelle à une requête.
+
 \par Ces outils constituent le système de recherche d'information sur lequel nous appliquons les sorties de notre propre système ; ce dernier peut, à partir d'une phrase en langage naturel - de préférence une question, donner les différents mots-clés et catégories attendus par les moteurs de recherche de NLGbAse, et ainsi obtenir une liste de résultats - et éventuellement des réponses factuelles - pertinents suite à une interrogation en langage naturel.
 %Voulez-vous \og{}\emph{vraiment}\fg{} citer~\cite{bogdanoff:these,sonia:point} ?
 
-\section{Analyse morpho-syntaxique et couplage des mots}
+\subsection{Encyclopédies, ontologies et SQR}
+
+%%% description des ontologies et papiers de référence / WWW / dbpedia / Yago
+
+\section{Architecture du système NLGbAse.QR}\label{details}
+
+
+\section{Algorithmes déployés}\label{details}
+
+\subsection{Analyse morpho-syntaxique et couplage des mots}
+
+
 \par Pour travailler sur la sémantique, il est indispensable de posséder des outils permettant à la machine de décomposer et d'analyser la structure des phrases. C'est pourquoi nous avons utilisé un analyseur morpho-syntaxique réalisant des couplages de mots selon leur position grammaticale dans la phrase et les liant selon leurs interdépendances~\cite{linkgrammar:paper}.
 % A faire
 %Ici une explication du travail effectué par le parser et notre méthode pour trouver les noms propres, l'objet etc... dans une phrase.
 
 %=============================================================
-\section{Catégorisation des phrases}
+\subsection{Catégorisation des phrases}
 %=============================================================
 %=============================================================
-\subsection{Catégorisation à base de règles simples}
+\subsubsection{Catégorisation à base de règles simples}
 %=============================================================
 
 \par Notre approche pour catégoriser les questions fonctionne avec un ensemble de règles. Cet ensemble est relativement restreint car nous avons pu remarquer qu'une dizaine de règles environ pouvaientt couvrir une majorité des cas, et qu'ensuite chaque petit gain se traduisait par la production d'un nombre croissant exponentiellement de nouvelles règles. Les règles que nous avons formulées se basent principalement sur les pronoms interrogatifs des questions. En voici la liste : 
@@ -139,7 +177,7 @@ Nous allons maintenant détailler les méthodes de catégorisation des noms propres
 
 
 %=============================================================
-\subsection{Catégorisation par les noms propres utilisant NLGbAse}
+\subsubsection{Catégorisation par les noms propres utilisant NLGbAse}
 %=============================================================
 \par Comme nous l'avons vu la majorité des règles ne nous permettent pas de trancher directement, nous devons donc compléter notre analyse par un autre moyen et cela passe notamment par la catégorisation des noms propres. Nous avons remarqué que dans la majorité des cas, si un nom propre est présent dans une quest, il en est l'objet ou du moins l'objet est l'une de ses caractéristiques. Prennons par exemple ces deux questions \og{}What is the date of birth of Bruce Dickinson?\fg{}, \og{}Who is Batman's team-mate?\fg{} ; nous voyons bien que les informations désirées sont \emph{forcément} en relation avec nos noms propres.
 \par Nous avons donc prit le parti de prendre comme catégorie la catégorie du nom propre se trouvant dans la question - s'il y en a un. Pour cela nous adressons une requête à un script issu de NLGbAse, qui comme nous l'avons vu associe une catégorie à chaque entité de Wikipédia, qui récupère la catégorie de l'entité correspondant à ce nom propre. Si une entité porte exactement le même nom alors la catégorie sera celle de cette entité ; si ce n'est pas le cas mais que des entités ont un nom similaire, alors la catégorie sera celle de la plus pertinente d'entres elles. Enfin si ce n'est pas le cas nous effectuons une recherche par \emph{TF.Idf}
@@ -149,7 +187,7 @@ en prenant la catégorie qui a le plus fort score, pour cela chaque catégorie se 
 \par Cependant nous sommes conscients qu'il arrive parfois que cette stratégie ne soit pas idéale, comme pour : \og{}What is the name of Batman's car?\fg{}. Il y a des chances que cette méthode donne \emph{pers} (Person) comme catégorie attendue alors que la solution idéale aurait probablement été \emph{prod} (Product). Cependant elle n'est pas totalement inapproprié car nous devrions trouver l'information désirée dans la fiche Wikipédia de Batman, néanmoins l'accès à la réponse est moins direct.
 
 %=============================================================
-\subsection{Catégorisation par les noms communs utilisant WordNet}
+\subsubsection{Catégorisation par les noms communs utilisant WordNet}
 %=============================================================
 
 \par Cependant toutes les questions ne comportent évidemment pas de noms propres mais généralement des noms communs, c'est pourquoi nous avons du trouver un moyen de traiter ces questions par une approche assez simple. La décomposition morpho-syntaxique nous permet généralement de trouver l'objet de la question, étant donné qu'il est généralement fortement porteur de sens dans une phrase, c'est celui-ci que nous allons étudier. En effet, pour la question \og{}What are the generals?\fg{}, l'objet de la question est \og{}generals\fg{} ; l'enjeu est d'arriver à associer \og{}generals\fg{} à l'étiquette \emph{fonc.mil} (fonction militaire).
@@ -161,15 +199,15 @@ en prenant la catégorie qui a le plus fort score, pour cela chaque catégorie se 
 %Au final même si il est évident que nous ne couvrons pas tout les cas en seulement trois heures il est possible de couvrir un très grand nombre de cas puisque pour chaque mot étiqueté tout ses hyponymes reçoivent cette même étiquette.
 
 %=============================================================
-\section{Extraction des mots-clés}
+\subsection{Extraction des mots-clés}
 %=============================================================
 %Comme énoncé dans la section précédente nous utilisons un parser pour arriver à repérer les termes importants pour la catégorisation et il en est de même pour l'extraction des mots clés.
 
 \par Comme nous l'avons expliqué, les différents moteurs de recherche de NLGbAse n'attendent pas les mêmes entrées, nous allons donc détailler ici les deux types d'extraction de mots-clés - ou mots pertinents.
- \subsection{Moteurs de recherche d'information par similarité cosinus}
+ \subsubsection{Moteurs de recherche d'information par similarité cosinus}
 \par Dans un premier temps, les mots-outils de la phrase sont automatiquement supprimés à l'aide d'un anti-dictionnaire. Nous utilisons ensuite l'analyse morpho-syntaxique de la phrase, et notamment l'arbre constitutif, pour récupérer les mots - qui ne sont pas des mots-outils - qui font partie des groupes nominaux ; malgrès son aspect simple, voire simpliste, nous avons pu prouver empyriquement son efficacité.
 
-\subsection{Moteur de recherche d'information par algorithme de compacité (question-réponse)}
+\subsubsection{Moteur de recherche d'information par algorithme de compacité (question-réponse)}
 %Pour celui ci la démarche est assez proche mais le besoin de données est différent.
 \par Nous l'avons déjà précisé plus haut, ce troisième moteur accepte plusieurs entrées différentes, et notamment deux champs de mots-clés. Le premier champ est une entité nommée qui va déterminer dans quel document sera appliqué l'algorithme de compacité, tandis que le deuxième champ consiste en une liste de mots qui représentent l'information cherchée ; par exemple pour la question \og{}When was Albert Einstein born?\fg{}, le mot \og{}born\fg{} devrait être sélectionné car l'information recherchée - une date de naissance en l'occurence - se trouvera certainement très proche de ce mot.
 \par Dans un premier temps nous devons donc trouver l'entité nommée ; si un nom propre est présent dans la question, c'est lui qui sera directement utilisé comme entité nommée. Dans le cas contraire, nous éxécutons une requête sur NLGbAse avec l'objet de la question afin de récupérer le nom de l'entité nommée la plus pertinente. 
@@ -179,7 +217,10 @@ en prenant la catégorie qui a le plus fort score, pour cela chaque catégorie se 
 %==============================================================
 \section{Expériences et résultats}
 %==============================================================
-\par Nous avons procédé à un certain nombre de tests et d'expériences afin d'évaluer les performances de la catégorisation comme de l'extraction des mots-clés. Nous n'avons retenu que les catégories \emph{pers}, \emph{org}, \emph{loc}, \emph{date}, \emph{amount} et \emph{unk}, les standards d'Ester 2 n'étant pas encore complètement implémentés sur la version anglaise de NLGbAse. Nous avons récupéré un corpus de questions formulées par des utilisateurs et nous les avons étiquetées en faisant mentalement le même travail que notre système, afin de pouvoir comparer ses résultats aux notres. 
+\par Nous avons procédé à un certain nombre de tests et d'expériences afin d'évaluer les performances de la catégorisation comme de l'extraction des mots-clés. Nous n'avons retenu que les classes racines à savoir \emph{pers}, \emph{org}, \emph{loc}, \emph{date}, \emph{amount} et \emph{unk}, 
+
+%% pas bon ça il faut être affirmatif et plus précis %%%
+%les standards d'Ester 2 n'étant pas encore complètement implémentés sur la version anglaise de NLGbAse. Nous avons récupéré un corpus de questions formulées par des utilisateurs et nous les avons étiquetées en faisant mentalement le même travail que notre système, afin de pouvoir comparer ses résultats aux notres. 
 
 \subsection{Mesures de la catégorisation}
 \par Les résultats de l'attributions de catégories aux 107 phrases du corpus étiqueté sont présentés dans le tableau 1. Nous avons calculé pour chacune d'elles la précision et le rappel, puis le F-Score\footnote{Mesure harmonique combinant la précision et le rappel} en découlant.

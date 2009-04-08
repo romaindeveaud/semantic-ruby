@@ -1,11 +1,11 @@
-This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2008.12.3)  5 APR 2009 14:54
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2009.3.9)  8 APR 2009 15:44
 entering extended mode
  %&-line parsing enabled.
 **squelette.tex
 (./squelette.tex
 LaTeX2e <2005/12/01>
 Babel <v3.8h> and hyphenation patterns for english, usenglishmax, dumylang, noh
-yphenation, basque, french, loaded.
+yphenation, french, basque, french, loaded.
 (/usr/share/texmf-texlive/tex/latex/base/article.cls
 Document Class: article 2005/09/16 v1.4f Standard LaTeX document class
 (/usr/share/texmf-texlive/tex/latex/base/size10.clo
@@ -330,119 +330,122 @@ Package: url 2005/06/27  ver 3.2  Verb mode for urls, etc.
 LaTeX Info: Redefining \cite on input line 149.
 LaTeX Info: Redefining \nocite on input line 214.
 Package: cite 2003/11/04  v 4.01
-)
-(/usr/share/texmf-texlive/tex/latex/vmargin/vmargin.sty
-Package: vmargin 2004/07/15 V2.5 set document margins (VK)
+) (./vmargin.sty
+Package: vmargin 1999/06/01
 
-Package: vmargin 2004/07/15 V2.5 set document margins (VK)
+Package `vmargin', V2.2, <1999/06/01>
 \PaperWidth=\dimen130
 \PaperHeight=\dimen131
-) (./squelette.aux)
+) (./squelette.aux
+
+LaTeX Warning: Label `details' multiply defined.
+
+)
 \openout1 = `squelette.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Try loading font information for T1+ppl on input line 63.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Try loading font information for T1+ppl on input line 66.
  (/usr/share/texmf-texlive/tex/latex/psnfss/t1ppl.fd
 File: t1ppl.fd 2001/06/04 font definitions for T1/ppl.
 )
-LaTeX Info: Redefining \dots on input line 63.
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 63.
+LaTeX Info: Redefining \dots on input line 66.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 66.
 
 
 LaTeX Font Warning: Encoding `OT1' has changed to `T1' for symbol font
-(Font)              `operators' in the math version `normal' on input line 63.
+(Font)              `operators' in the math version `normal' on input line 66.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> T1/ppl/m/n on input line 63.
+(Font)                  OT1/cmr/m/n --> T1/ppl/m/n on input line 66.
 
 LaTeX Font Warning: Encoding `OT1' has changed to `T1' for symbol font
-(Font)              `operators' in the math version `bold' on input line 63.
+(Font)              `operators' in the math version `bold' on input line 66.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> T1/ppl/m/n on input line 63.
+(Font)                  OT1/cmr/bx/n --> T1/ppl/m/n on input line 66.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  T1/ppl/m/n --> T1/ppl/bx/n on input line 63.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 63.
+(Font)                  T1/ppl/m/n --> T1/ppl/bx/n on input line 66.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 66.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> T1/ppl/bx/n on input line 63.
+(Font)                  OT1/cmr/bx/n --> T1/ppl/bx/n on input line 66.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmr/bx/n --> T1/ppl/bx/n on input line 63.
-LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 63.
+(Font)                  OT1/cmr/bx/n --> T1/ppl/bx/n on input line 66.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 66.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> T1/phv/m/n on input line 63.
+(Font)                  OT1/cmss/m/n --> T1/phv/m/n on input line 66.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> T1/phv/m/n on input line 63.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 63.
+(Font)                  OT1/cmss/bx/n --> T1/phv/m/n on input line 66.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 66.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> T1/ppl/m/it on input line 63.
+(Font)                  OT1/cmr/m/it --> T1/ppl/m/it on input line 66.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> T1/ppl/m/it on input line 63.
-LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 63.
+(Font)                  OT1/cmr/bx/it --> T1/ppl/m/it on input line 66.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 66.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> T1/pcr/m/n on input line 63.
+(Font)                  OT1/cmtt/m/n --> T1/pcr/m/n on input line 66.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> T1/pcr/m/n on input line 63.
+(Font)                  OT1/cmtt/m/n --> T1/pcr/m/n on input line 66.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  T1/phv/m/n --> T1/phv/bx/n on input line 63.
+(Font)                  T1/phv/m/n --> T1/phv/bx/n on input line 66.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  T1/ppl/m/it --> T1/ppl/bx/it on input line 63.
+(Font)                  T1/ppl/m/it --> T1/ppl/bx/it on input line 66.
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 95.
-LaTeX Font Info:    Try loading font information for U+eur on input line 95.
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 98.
+LaTeX Font Info:    Try loading font information for U+eur on input line 98.
 (/usr/share/texmf-texlive/tex/latex/amsfonts/ueur.fd
 File: ueur.fd 2002/01/19 v2.2g AMS font definitions
 )
-LaTeX Font Info:    Try loading font information for U+euf on input line 95.
+LaTeX Font Info:    Try loading font information for U+euf on input line 98.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/ueuf.fd
 File: ueuf.fd 2002/01/19 v2.2g AMS font definitions
 )
-LaTeX Font Info:    Try loading font information for U+eus on input line 95.
+LaTeX Font Info:    Try loading font information for U+eus on input line 98.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/ueus.fd
 File: ueus.fd 2002/01/19 v2.2g AMS font definitions
 )
-LaTeX Font Info:    Try loading font information for U+euex on input line 95.
+LaTeX Font Info:    Try loading font information for U+euex on input line 98.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/ueuex.fd
 File: ueuex.fd 2002/01/19 v2.2g AMS font definitions
 )
 LaTeX Font Info:    External font `euex7' loaded for size
-(Font)              <7> on input line 95.
+(Font)              <7> on input line 98.
 LaTeX Font Info:    External font `euex7' loaded for size
-(Font)              <5> on input line 95.
-LaTeX Font Info:    Try loading font information for U+msa on input line 95.
+(Font)              <5> on input line 98.
+LaTeX Font Info:    Try loading font information for U+msa on input line 98.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2002/01/19 v2.2g AMS font definitions
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 95.
+LaTeX Font Info:    Try loading font information for U+msb on input line 98.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2002/01/19 v2.2g AMS font definitions
 )
-LaTeX Font Info:    Try loading font information for T1+pcr on input line 95.
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 98.
 
 (/usr/share/texmf-texlive/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <10> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 101.
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 104.
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <9> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 115.
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 130.
 LaTeX Font Info:    External font `euex7' loaded for size
-(Font)              <6> on input line 115.
+(Font)              <6> on input line 130.
 
 Overfull \vbox (6.69997pt too high) has occurred while \output is active []
 
@@ -451,31 +454,32 @@ Overfull \vbox (6.69997pt too high) has occurred while \output is active []
 
 ]
 
-LaTeX Warning: Citation `linkgrammar:paper' on page 2 undefined on input line 1
-20.
+LaTeX Warning: Reference `exp\'eriences' on page 2 undefined on input line 134.
 
-[2] [3] [4]
-No file squelette.bbl.
-[5] (./squelette.aux)
+
+[2] [3] [4] (./squelette.bbl) [5] (./squelette.aux)
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: There were multiply-defined labels.
+
  ) 
 Here is how much of TeX's memory you used:
- 3783 strings out of 95063
- 44976 string characters out of 1182610
- 126132 words of memory out of 1500000
- 6868 multiletter control sequences out of 10000+50000
+ 3786 strings out of 95059
+ 44899 string characters out of 1182383
+ 124140 words of memory out of 1500000
+ 6870 multiletter control sequences out of 10000+50000
  32915 words of font info for 77 fonts, out of 1200000 for 2000
  28 hyphenation exceptions out of 8191
- 32i,10n,24p,1220b,287s stack positions out of 5000i,500n,6000p,200000b,5000s
+ 32i,11n,24p,1033b,271s stack positions out of 5000i,500n,6000p,200000b,5000s
 {/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-texli
 ve/fonts/type1/bluesky/ams/eurm7.pfb></usr/share/texmf-texlive/fonts/type1/urw/
 courier/ucrr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/palatino/uplb8a.pf
 b></usr/share/texmf-texlive/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/tex
 mf-texlive/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texmf-texlive/fonts/
 type1/urw/palatino/uplri8a.pfb>
-Output written on squelette.pdf (5 pages, 108080 bytes).
+Output written on squelette.pdf (5 pages, 112011 bytes).
 PDF statistics:
  43 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
