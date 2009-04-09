@@ -121,7 +121,7 @@
 
 %\par De nos jours, les moteurs de recherche sont un outil pleinement utilisable par les personnes averties et habituées, malgré la volonté d'en améliorer l'accessibilité. En effet, le processus consistant à passer d'une interrogation à un enchainement de mots-clés pertinents retranscrivant correctement la pensée initiale n'est pas un exercice aisé, du moins pour les personnes qui ne sont pas familières avec l'informatique ou internet, parmi lesquelles nous pouvons par exemple compter les enfants ou certaines personnes âgées.
 %\par Il serait en effet idéal de pouvoir simplement formuler une question à un moteur de recherche et que celui-ci puisse donner la réponse ou du moins un ensemble de documents dans lesquels une ou des réponses se trouveraient. 
-\par L'interprétation de requêtes écrites en langage naturel par un système de recherche d'information (RI] ou de dialogue est un enjeu important de l'ingéniérie documentaire. Outre que la requête en language naturelle rend possible la formulation d'une requête de recherche selon une forme bien plus précise que la simple saisie de mots clés. Dans le cadre de la compréhension des languages parlés et des systèmes de dialogue, elle permet de déployer des composants de compréhension (SLU) conviviaux pour les utilisateurs. 
+\par L'interprétation de requêtes écrites en langage naturel par un système de recherche d'information (RI) ou de dialogue est un enjeu important de l'ingénierie documentaire. Outre que la requête en language naturelle rend possible la formulation d'une requête de recherche selon une forme bien plus précise que la simple saisie de mots clés. Dans le cadre de la compréhension des languages parlés et des systèmes de dialogue, elle permet de déployer des composants de compréhension (SLU) conviviaux pour les utilisateurs. 
 
 \par Dans le cadre des systèmes de Question et Réponses (SQR), l'analyse d'une requête en language naturelle doit permettre de transformer en processus d'extraction d'information, une question factuelle ou complexe. La difficulté de la tâche d'interprétation de requêtes en langue naturelle réside dans la transformation d'une phrase grammaticale en une requête pertinente pour interroger un système de RI ou d'extraction d'information. 
 
@@ -138,7 +138,7 @@
 \par Des sociétés telles
  que Google\footnote{http://www.google.com}, Powerset\footnote{http://www.powerset.com} (propriété de Microsoft) ou Hakia\footnote{http://www.hakia.com} sont actuellement fortement investies dans le développement de solution sémantiques à l'interrogation des moteurs de recherche et l'enrichissement communautaire en est un élément central, au moins pour les deux premiers protagonistes. Ils ont en effet recours à de nombreux sites dont les informations sont éditées par des internautes contributeurs, Wikipédia\footnote{http://www.wikipedia.org} étant le plus célèbre d'entre eux.
 
-\par C'est également notre cas, puisque le système que nous proposons s'interface NLGbAse\footnote{http://www.nlgbase.org}, une base de données classifiées provenant de Wikipédia qui peut être interrogée par le biais de trois moteurs de recherche différents. Le premier d'entre eux met en ½uvre un algorithme calculant la \emph{similarité cosinus} entre l'ensemble des mots-clés entrés et les documents issus de Wikipédia ; le deuxième est semblable au premier en tous points, à l'exception que l'on peut affiner la recherche en précisant une catégorie, ainsi seuls les documents classifiés comme appartenant à la catégorie spécifiée seront relevés. Le troisième applique quant à lui un algorithme de compacité\footnote{Référence nécessaire} permettant de trouver une entité précise étant d'une catégorie donnée, proche d'un ou plusieurs mots donnés, dans le document Wikipédia se rapportant à une entité nommée donnée, ce qui permet notamment de pouvoir proposer une réponse factuelle à une requête.
+\par C'est également notre cas, puisque le système que nous proposons s'interface avec NLGbAse\footnote{http://www.nlgbase.org}, une base de données classifiées provenant de Wikipédia qui peut être interrogée par le biais de trois moteurs de recherche différents. Le premier d'entre eux met en ½uvre un algorithme calculant la \emph{similarité cosinus} entre l'ensemble des mots-clés entrés et les documents issus de Wikipédia ; le deuxième est semblable au premier en tous points, à l'exception que l'on peut affiner la recherche en précisant une catégorie, ainsi seuls les documents classifiés comme appartenant à la catégorie spécifiée seront relevés. Le troisième applique quant à lui un algorithme de compacité\footnote{Référence nécessaire} permettant de trouver une entité précise étant d'une catégorie donnée, proche d'un ou plusieurs mots donnés, dans le document Wikipédia se rapportant à une entité nommée donnée, ce qui permet notamment de pouvoir proposer une réponse factuelle à une requête.
 
 \par Ces outils constituent le système de recherche d'information sur lequel nous appliquons les sorties de notre propre système ; ce dernier peut, à partir d'une phrase en langage naturel - de préférence une question, donner les différents mots-clés et catégories attendus par les moteurs de recherche de NLGbAse, et ainsi obtenir une liste de résultats - et éventuellement des réponses factuelles - pertinents suite à une interrogation en langage naturel.
 %Voulez-vous \og{}\emph{vraiment}\fg{} citer~\cite{bogdanoff:these,sonia:point} ?
@@ -151,10 +151,7 @@
 
 
 \section{Algorithmes déployés}\label{details}
-
 \subsection{Analyse morpho-syntaxique et couplage des mots}
-
-
 \par Pour travailler sur la sémantique, il est indispensable de posséder des outils permettant à la machine de décomposer et d'analyser la structure des phrases. C'est pourquoi nous avons utilisé un analyseur morpho-syntaxique réalisant des couplages de mots selon leur position grammaticale dans la phrase et les liant selon leurs interdépendances~\cite{linkgrammar:paper}.
 % A faire
 %Ici une explication du travail effectué par le parser et notre méthode pour trouver les noms propres, l'objet etc... dans une phrase.
@@ -215,7 +212,7 @@ en prenant la catégorie qui a le plus fort score, pour cela chaque catégorie se 
 
 
 %==============================================================
-\section{Expériences et résultats}
+\section{Expériences et résultats}\label{expériences}
 %==============================================================
 \par Nous avons procédé à un certain nombre de tests et d'expériences afin d'évaluer les performances de la catégorisation comme de l'extraction des mots-clés. Nous n'avons retenu que les classes racines à savoir \emph{pers}, \emph{org}, \emph{loc}, \emph{date}, \emph{amount} et \emph{unk}, 
 
