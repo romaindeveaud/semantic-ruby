@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (WordNet::Synset)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/wordnet/synset.rb, line 304</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>( <span class="ruby-identifier">lexicon</span>, <span class="ruby-identifier">offset</span>, <span class="ruby-identifier">pos</span>, <span class="ruby-identifier">word</span>=<span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">data</span>=<span class="ruby-keyword kw">nil</span> )
+                        <span class="ruby-ivar">@lexicon</span> = <span class="ruby-identifier">lexicon</span> <span class="ruby-keyword kw">or</span>
+                        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-value str">&quot;%p is not a WordNet::Lexicon&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">lexicon</span>
+                        <span class="ruby-ivar">@part_of_speech</span>      = <span class="ruby-constant">SYNTACTIC_SYMBOLS</span>[ <span class="ruby-identifier">pos</span> ] <span class="ruby-keyword kw">or</span>
+                        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-value str">&quot;No such part of speech %p&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">pos</span>
+                        <span class="ruby-ivar">@mutex</span> = <span class="ruby-constant">Sync</span><span class="ruby-operator">::</span><span class="ruby-identifier">new</span>
+                        <span class="ruby-ivar">@pointers</span> = []
+
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">data</span>
+                                <span class="ruby-ivar">@offset</span> = <span class="ruby-identifier">offset</span>.<span class="ruby-identifier">to_i</span>
+                                <span class="ruby-ivar">@filenum</span>, <span class="ruby-ivar">@wordlist</span>, <span class="ruby-ivar">@pointerlist</span>,
+                                <span class="ruby-ivar">@frameslist</span>, <span class="ruby-ivar">@gloss</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">split</span>( <span class="ruby-constant">DELIM_RE</span> )
+                        <span class="ruby-keyword kw">else</span>
+                                <span class="ruby-ivar">@offset</span> = <span class="ruby-value">1</span>
+                                <span class="ruby-ivar">@wordlist</span> = <span class="ruby-identifier">word</span> <span class="ruby-value">? </span><span class="ruby-identifier">word</span> <span class="ruby-operator">:</span> <span class="ruby-value str">''</span>
+                                <span class="ruby-ivar">@filenum</span>, <span class="ruby-ivar">@pointerlist</span>, <span class="ruby-ivar">@frameslist</span>, <span class="ruby-ivar">@gloss</span> = [<span class="ruby-value str">''</span>] <span class="ruby-operator">*</span> <span class="ruby-value">4</span>
+                        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

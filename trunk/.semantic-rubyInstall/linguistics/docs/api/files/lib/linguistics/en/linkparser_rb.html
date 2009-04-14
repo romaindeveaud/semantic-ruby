@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: linkparser.rb</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>linkparser.rb</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>lib/linguistics/en/linkparser.rb
+        &nbsp;(<a href="http://deveiate.org/projects/Linguistics/browser/trunk/lib/linguistics/en/linkparser.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Thu Feb 26 12:34:55 +0000 2009</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+This file contains the extensions to the <a
+href="../../../../classes/Linguistics/EN.html">Linguistics::EN</a> module
+which provide support for the Ruby LinkParser module. LinkParser enables
+grammatic queries of English language sentences.
+</p>
+<h2>Synopsis</h2>
+<pre>
+  # Test to see whether or not the link parser is loaded.
+  Linguistics::EN.has_link_parser?
+  # =&gt; true
+
+  # Diagram the first linkage for a test sentence
+  puts &quot;he is a big dog&quot;.sentence.linkages.first.to_s
+    +---O*---+
+    | +--Ds--+
+   +Ss+ |  +-A-+
+   |  | |  |   |
+  he is a big dog
+
+  # Find the verb in the sentence
+  &quot;he is a big dog&quot;.en.sentence.verb.to_s
+  # =&gt; &quot;is&quot;
+
+  # Combined infinitive + LinkParser: Find the infinitive form of the verb of the
+  given sentence.
+  &quot;he is a big dog&quot;.en.sentence.verb.infinitive
+  # =&gt; &quot;be&quot;
+
+  # Find the direct object of the sentence
+  &quot;he is a big dog&quot;.en.sentence.object.to_s
+  # =&gt; &quot;dog&quot;
+
+  # Combine WordNet + LinkParser to find the definition of the direct object of
+  # the sentence
+  &quot;he is a big dog&quot;.en.sentence.object.gloss
+  # =&gt; &quot;a member of the genus Canis (probably descended from the common wolf) that
+  has been domesticated by man since prehistoric times; occurs in many breeds;
+  \&quot;the dog barked all night\&quot;&quot;
+</pre>
+<h2>Authors</h2>
+<ul>
+<li>Martin Chase &lt;stillflame@FaerieMUD.org&gt;
+
+</li>
+<li>Michael Granger &lt;ged@FaerieMUD.org&gt;
+
+</li>
+</ul>
+<h2>Copyright</h2>
+<p>
+Copyright (c) 2003 The FaerieMUD Consortium. All rights reserved.
+</p>
+<p>
+This module is free software. You may use, modify, and/or redistribute this
+software under the terms of the Perl Artistic License. (See <a
+href="http://language.perl.com/misc/Artistic.html">language.perl.com/misc/Artistic.html</a>)
+</p>
+<pre>
+ # == Version
+
+ $Id: linkparser.rb 99 2008-09-06 05:20:07Z deveiant $
+</pre>
+
+    </div>
+
+    <div id="requires-list">
+      <h3 class="section-bar">Required files</h3>
+
+      <div class="name-list">
+      linguistics/en&nbsp;&nbsp;
+      </div>
+    </div>
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

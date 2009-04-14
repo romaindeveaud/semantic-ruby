@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: infinitive.rb</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>infinitive.rb</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>lib/linguistics/en/infinitive.rb
+        &nbsp;(<a href="http://deveiate.org/projects/Linguistics/browser/trunk/lib/linguistics/en/infinitive.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Thu Feb 26 12:34:55 +0000 2009</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+This file contains functions for deriving the infinitive forms of
+conjugated English words. Requiring this file adds functions and constants
+to the <a
+href="../../../../classes/Linguistics/EN.html">Linguistics::EN</a> module.
+</p>
+<h2>Authors</h2>
+<ul>
+<li>Michael Granger &lt;ged@FaerieMUD.org&gt;
+
+</li>
+</ul>
+<h2>Copyright</h2>
+<p>
+Copyright (c) 2003-2005 The FaerieMUD Consortium. All rights reserved.
+</p>
+<p>
+This module is free software. You may use, modify, and/or redistribute this
+software under the terms of the Perl Artistic License. (See <a
+href="http://language.perl.com/misc/Artistic.html">language.perl.com/misc/Artistic.html</a>)
+</p>
+<p>
+This code was ported from the excellent
+&#8216;Lingua::EN::Infinitive&#8217; Perl module by Ron Savage, which is
+distributed under the following license:
+</p>
+<pre>
+   Australian copyright (c) 1999-2002 Ron Savage.
+
+      All Programs of mine are 'OSI Certified Open Source Software';
+      you can redistribute them and/or modify them under the terms of
+      The Artistic License, a copy of which is available at:
+      http://www.opensource.org/licenses/index.html
+
+ # == Version
+
+ $Id: infinitive.rb 99 2008-09-06 05:20:07Z deveiant $
+</pre>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (WordNet::Lexicon)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/wordnet/lexicon.rb, line 91</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>( <span class="ruby-identifier">dbenv</span>=<span class="ruby-constant">DEFAULT_DB_ENV</span>, <span class="ruby-identifier">mode</span>=<span class="ruby-identifier">:readonly</span> )
+                <span class="ruby-ivar">@mode</span> = <span class="ruby-identifier">normalize_mode</span>( <span class="ruby-identifier">mode</span> )
+                <span class="ruby-identifier">debug_msg</span> <span class="ruby-value str">&quot;Mode is: %04o&quot;</span> <span class="ruby-operator">%</span> [ <span class="ruby-identifier">mode</span> ]
+
+                <span class="ruby-identifier">envflags</span> = <span class="ruby-value">0</span>
+                <span class="ruby-identifier">dbflags</span>  = <span class="ruby-value">0</span>
+
+                <span class="ruby-keyword kw">unless</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">readonly?</span>
+                        <span class="ruby-identifier">debug_msg</span> <span class="ruby-value str">&quot;Using read/write flags&quot;</span>
+                        <span class="ruby-identifier">envflags</span> = <span class="ruby-constant">ENV_FLAGS_RW</span>
+                        <span class="ruby-identifier">dbflags</span> = <span class="ruby-constant">BDB</span><span class="ruby-operator">::</span><span class="ruby-constant">CREATE</span>
+                <span class="ruby-keyword kw">else</span>
+                        <span class="ruby-identifier">debug_msg</span> <span class="ruby-value str">&quot;Using readonly flags&quot;</span>
+                        <span class="ruby-identifier">envflags</span> = <span class="ruby-constant">ENV_FLAGS_RO</span>
+                        <span class="ruby-identifier">dbflags</span> = <span class="ruby-value">0</span>
+                <span class="ruby-keyword kw">end</span>
+
+                <span class="ruby-identifier">debug_msg</span> <span class="ruby-value str">&quot;Env flags are: %0s, dbflags are %0s&quot;</span> <span class="ruby-operator">%</span>
+                        [ <span class="ruby-identifier">envflags</span>.<span class="ruby-identifier">to_s</span>(<span class="ruby-value">2</span>), <span class="ruby-identifier">dbflags</span>.<span class="ruby-identifier">to_s</span>(<span class="ruby-value">2</span>) ]
+
+                <span class="ruby-keyword kw">begin</span>
+                        <span class="ruby-ivar">@env</span> = <span class="ruby-constant">BDB</span><span class="ruby-operator">::</span><span class="ruby-constant">Env</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">dbenv</span>, <span class="ruby-identifier">envflags</span>, <span class="ruby-constant">ENV_OPTIONS</span> )
+                        <span class="ruby-ivar">@index_db</span> = <span class="ruby-ivar">@env</span>.<span class="ruby-identifier">open_db</span>( <span class="ruby-constant">BDB</span><span class="ruby-operator">::</span><span class="ruby-constant">BTREE</span>, <span class="ruby-value str">&quot;index&quot;</span>, <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">dbflags</span>, <span class="ruby-ivar">@mode</span> )
+                        <span class="ruby-ivar">@data_db</span> = <span class="ruby-ivar">@env</span>.<span class="ruby-identifier">open_db</span>( <span class="ruby-constant">BDB</span><span class="ruby-operator">::</span><span class="ruby-constant">BTREE</span>, <span class="ruby-value str">&quot;data&quot;</span>, <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">dbflags</span>, <span class="ruby-ivar">@mode</span> )
+                        <span class="ruby-ivar">@morph_db</span> = <span class="ruby-ivar">@env</span>.<span class="ruby-identifier">open_db</span>( <span class="ruby-constant">BDB</span><span class="ruby-operator">::</span><span class="ruby-constant">BTREE</span>, <span class="ruby-value str">&quot;morph&quot;</span>, <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">dbflags</span>, <span class="ruby-ivar">@mode</span> )
+                <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">StandardError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
+                        <span class="ruby-identifier">msg</span> = <span class="ruby-node">&quot;Error while opening Ruby-WordNet data files: #{dbenv}: %s&quot;</span> <span class="ruby-operator">%</span> 
+                                [ <span class="ruby-identifier">err</span>.<span class="ruby-identifier">message</span> ]
+                        <span class="ruby-identifier">raise</span> <span class="ruby-identifier">err</span>, <span class="ruby-identifier">msg</span>, <span class="ruby-identifier">err</span>.<span class="ruby-identifier">backtrace</span>
+                <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

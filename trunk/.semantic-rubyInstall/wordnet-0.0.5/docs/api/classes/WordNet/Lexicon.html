@@ -1,0 +1,641 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: WordNet::Lexicon</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">WordNet::Lexicon</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/lib/wordnet/lexicon_rb.html">
+                lib/wordnet/lexicon.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Object
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+<a href="../WordNet.html">WordNet</a> lexicon class - abstracts access to
+the <a href="../WordNet.html">WordNet</a> lexical databases, and provides
+factory methods for looking up and creating <a
+href="Lexicon.html#M000001">new</a> <a
+href="Synset.html">WordNet::Synset</a> objects.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000020">archlogs</a>&nbsp;&nbsp;
+      <a href="#M000005">checkpoint</a>&nbsp;&nbsp;
+      <a href="#M000006">clean_logs</a>&nbsp;&nbsp;
+      <a href="#M000004">close</a>&nbsp;&nbsp;
+      <a href="#M000014">create_synset</a>&nbsp;&nbsp;
+      <a href="#M000007">familiarity</a>&nbsp;&nbsp;
+      <a href="#M000013">grep</a>&nbsp;&nbsp;
+      <a href="#M000008">lookup_synsets</a>&nbsp;&nbsp;
+      <a href="#M000010">lookup_synsetsByOffset</a>&nbsp;&nbsp;
+      <a href="#M000009">lookup_synsets_by_key</a>&nbsp;&nbsp;
+      <a href="#M000018">make_pos</a>&nbsp;&nbsp;
+      <a href="#M000019">make_word_key</a>&nbsp;&nbsp;
+      <a href="#M000011">morph</a>&nbsp;&nbsp;
+      <a href="#M000001">new</a>&nbsp;&nbsp;
+      <a href="#M000015">new_synset</a>&nbsp;&nbsp;
+      <a href="#M000002">readonly?</a>&nbsp;&nbsp;
+      <a href="#M000003">readwrite?</a>&nbsp;&nbsp;
+      <a href="#M000017">remove_synset</a>&nbsp;&nbsp;
+      <a href="#M000012">reverse_morph</a>&nbsp;&nbsp;
+      <a href="#M000016">store_synset</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+    <div id="includes">
+      <h3 class="section-bar">Included Modules</h3>
+
+      <div id="includes-list">
+        <span class="include-name"><a href="Constants.html">WordNet::Constants</a></span>
+        <span class="include-name">CrossCase</span>
+      </div>
+    </div>
+
+    <div id="section">
+
+
+    <div id="constants-list">
+      <h3 class="section-bar">Constants</h3>
+
+      <div class="name-list">
+        <table summary="Constants">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">SvnId</td>
+          <td>=</td>
+          <td class="context-item-value">%q$Id: lexicon.rb 93 2008-07-12 00:56:49Z deveiant $</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Subversion Id
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">SvnRev</td>
+          <td>=</td>
+          <td class="context-item-value">%q$Rev: 93 $</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Subversion revision
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">DEFAULT_DB_ENV</td>
+          <td>=</td>
+          <td class="context-item-value">File::join( Config::CONFIG['datadir'], &quot;ruby-wordnet&quot; )</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+The path to the <a href="../WordNet.html">WordNet</a> BerkeleyDB Env. It
+lives in the directory that this module is in.
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">ENV_OPTIONS</td>
+          <td>=</td>
+          <td class="context-item-value">{                 :set_timeout  =&gt; 50,                 :set_lk_detect        =&gt; 1,                 :set_verbose  =&gt; false,                 :set_lk_max     =&gt; 3000,         }</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Options for the creation of the Env object
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">ENV_FLAGS_RW</td>
+          <td>=</td>
+          <td class="context-item-value">BDB::CREATE|BDB::INIT_TRANSACTION|BDB::RECOVER|BDB::INIT_MPOOL</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Flags for the creation of the Env object (read-write and read-only)
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">ENV_FLAGS_RO</td>
+          <td>=</td>
+          <td class="context-item-value">BDB::INIT_MPOOL</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">data_db</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc">
+The handle to the synset data table
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">env</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc">
+The BDB::Env object which contains the wordnet lexicon&#8216;s databases.
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">index_db</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc">
+The handle to the index table
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">morph_db</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc">
+The handle to the <a href="Lexicon.html#M000011">morph</a> table
+
+</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000001" class="method-detail">
+        <a name="M000001"></a>
+
+        <div class="method-heading">
+          <a href="Lexicon.src/M000001.html" target="Code" class="method-signature"
+            onclick="popupCode('Lexicon.src/M000001.html');return false;">
+          <span class="method-name">new</span><span class="method-args">( dbenv=DEFAULT_DB_ENV, mode=:readonly )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Create a <a href="Lexicon.html#M000001">new</a> <a
+href="Lexicon.html">WordNet::Lexicon</a> object that will read its data
+from the given <tt>dbenv</tt> (a BerkeleyDB env directory). The database
+will be opened with the specified <tt>mode</tt>, which can either be a
+numeric octal mode (e.g., 0444) or one of (:readonly, :readwrite).
+</p>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000005" class="method-detail">
+        <a name="M000005"></a>
+
+        <div class="method-heading">
+          <a href="Lexicon.src/M000005.html" target="Code" class="method-signature"
+            onclick="popupCode('Lexicon.src/M000005.html');return false;">
+          <span class="method-name">checkpoint</span><span class="method-args">( bytes=0, minutes=0 )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Checkpoint the database. (BerkeleyDB-specific)
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000006" class="method-detail">
+        <a name="M000006"></a>
+
+        <div class="method-heading">
+          <a href="Lexicon.src/M000006.html" target="Code" class="method-signature"
+            onclick="popupCode('Lexicon.src/M000006.html');return false;">
+          <span class="method-name">clean_logs</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Remove any archival logfiles for the lexicon&#8216;s database environment.
+(BerkeleyDB-specific).
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000004" class="method-detail">
+        <a name="M000004"></a>
+
+        <div class="method-heading">
+          <a href="Lexicon.src/M000004.html" target="Code" class="method-signature"
+            onclick="popupCode('Lexicon.src/M000004.html');return false;">
+          <span class="method-name">close</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Close the lexicon&#8216;s database environment
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000014" class="method-detail">
+        <a name="M000014"></a>
+
+        <div class="method-heading">
+          <a href="Lexicon.src/M000014.html" target="Code" class="method-signature"
+            onclick="popupCode('Lexicon.src/M000014.html');return false;">
+          <span class="method-name">create_synset</span><span class="method-args">( word, part_of_speech )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Factory method: Creates and returns a <a
+href="Lexicon.html#M000001">new</a> <a
+href="Synset.html">WordNet::Synset</a> object in this lexicon for the
+specified <tt>word</tt> and <tt>part_of_speech</tt>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000007" class="method-detail">
+        <a name="M000007"></a>
+
+        <div class="method-heading">
+          <a href="Lexicon.src/M000007.html" target="Code" class="method-signature"
+            onclick="popupCode('Lexicon.src/M000007.html');return false;">
+          <span class="method-name">familiarity</span><span class="method-args">( word, part_of_speech, polyCount=nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns an integer of the familiarity/polysemy count for <tt>word</tt> as a
+<tt>part_of_speech</tt>. Note that polysemy can be identified for a given
+word by counting the synsets returned by <a
+href="Lexicon.html#M000008">lookup_synsets</a>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000013" class="method-detail">
+        <a name="M000013"></a>
+
+        <div class="method-heading">
+          <a href="Lexicon.src/M000013.html" target="Code" class="method-signature"
+            onclick="popupCode('Lexicon.src/M000013.html');return false;">
+          <span class="method-name">grep</span><span class="method-args">( text )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns an array of compound words matching <tt>text</tt>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000008" class="method-detail">
+        <a name="M000008"></a>
+
+        <div class="method-heading">
+          <a href="Lexicon.src/M000008.html" target="Code" class="method-signature"
+            onclick="popupCode('Lexicon.src/M000008.html');return false;">
+          <span class="method-name">lookup_synsets</span><span class="method-args">( word, part_of_speech, sense=nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Look up sysets (Wordnet::Synset objects) matching <tt>text</tt> as a
+<tt>part_of_speech</tt>, where <tt>part_of_speech</tt> is one of
++WordNet::Noun+, +WordNet::Verb+, +WordNet::Adjective+, or
++WordNet::Adverb+. Without <tt>sense</tt>, <a
+href="Lexicon.html#M000008">lookup_synsets</a> will return all matches that
+are a <tt>part_of_speech</tt>. If <tt>sense</tt> is specified, only the
+synset object that matches that particular <tt>part_of_speech</tt> and
+<tt>sense</tt> is returned.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000010" class="method-detail">
+        <a name="M000010"></a>
+
+        <div class="method-heading">
+          <span class="method-name">lookup_synsetsByOffset</span><span class="method-args">( *keys )</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Lexicon.html#M000009">lookup_synsets_by_key</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000009" class="method-detail">
+        <a name="M000009"></a>
+
+        <div class="method-heading">
+          <a href="Lexicon.src/M000009.html" target="Code" class="method-signature"
+            onclick="popupCode('Lexicon.src/M000009.html');return false;">
+          <span class="method-name">lookup_synsets_by_key</span><span class="method-args">( *keys )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the <a href="Synset.html">WordNet::Synset</a> objects corresponding
+to the <tt>keys</tt> specified. The <tt>keys</tt> are made up of the target
+synset&#8216;s &quot;offset&quot; and syntactic category catenated together
+with a &#8217;%&#8217; character.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000011" class="method-detail">
+        <a name="M000011"></a>
+
+        <div class="method-heading">
+          <a href="Lexicon.src/M000011.html" target="Code" class="method-signature"
+            onclick="popupCode('Lexicon.src/M000011.html');return false;">
+          <span class="method-name">morph</span><span class="method-args">( word, part_of_speech )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns a form of <tt>word</tt> as a part of speech
+<tt>part_of_speech</tt>, as found in the <a
+href="../WordNet.html">WordNet</a> <a href="Lexicon.html#M000011">morph</a>
+files. The <a href="Lexicon.html#M000008">lookup_synsets</a> method perfoms
+morphological conversion automatically, so a call to <a
+href="Lexicon.html#M000011">morph</a> is not required.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000015" class="method-detail">
+        <a name="M000015"></a>
+
+        <div class="method-heading">
+          <span class="method-name">new_synset</span><span class="method-args">( word, part_of_speech )</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Lexicon.html#M000014">create_synset</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000002" class="method-detail">
+        <a name="M000002"></a>
+
+        <div class="method-heading">
+          <a href="Lexicon.src/M000002.html" target="Code" class="method-signature"
+            onclick="popupCode('Lexicon.src/M000002.html');return false;">
+          <span class="method-name">readonly?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns <tt>true</tt> if the lexicon was opened in read-only mode.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000003" class="method-detail">
+        <a name="M000003"></a>
+
+        <div class="method-heading">
+          <a href="Lexicon.src/M000003.html" target="Code" class="method-signature"
+            onclick="popupCode('Lexicon.src/M000003.html');return false;">
+          <span class="method-name">readwrite?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns <tt>true</tt> if the lexicon was opened in read-write mode.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000017" class="method-detail">
+        <a name="M000017"></a>
+
+        <div class="method-heading">
+          <a href="Lexicon.src/M000017.html" target="Code" class="method-signature"
+            onclick="popupCode('Lexicon.src/M000017.html');return false;">
+          <span class="method-name">remove_synset</span><span class="method-args">( synset )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Remove the specified <tt>synset</tt> (a <a
+href="Synset.html">WordNet::Synset</a> object) in the lexicon. Returns the
+offset of the stored synset.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000012" class="method-detail">
+        <a name="M000012"></a>
+
+        <div class="method-heading">
+          <a href="Lexicon.src/M000012.html" target="Code" class="method-signature"
+            onclick="popupCode('Lexicon.src/M000012.html');return false;">
+          <span class="method-name">reverse_morph</span><span class="method-args">( word )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the result of looking up <tt>word</tt> in the inverse of the <a
+href="../WordNet.html">WordNet</a> <a href="Lexicon.html#M000011">morph</a>
+files. _(This is undocumented in Lingua::Wordnet)_
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000016" class="method-detail">
+        <a name="M000016"></a>
+
+        <div class="method-heading">
+          <a href="Lexicon.src/M000016.html" target="Code" class="method-signature"
+            onclick="popupCode('Lexicon.src/M000016.html');return false;">
+          <span class="method-name">store_synset</span><span class="method-args">( synset )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Store the specified <tt>synset</tt> (a <a
+href="Synset.html">WordNet::Synset</a> object) in the lexicon. Returns the
+key of the stored synset.
+</p>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Protected Instance methods</h3>
+
+      <div id="method-M000020" class="method-detail">
+        <a name="M000020"></a>
+
+        <div class="method-heading">
+          <a href="Lexicon.src/M000020.html" target="Code" class="method-signature"
+            onclick="popupCode('Lexicon.src/M000020.html');return false;">
+          <span class="method-name">archlogs</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return a list of archival logfiles that can be removed safely.
+(BerkeleyDB-specific).
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000018" class="method-detail">
+        <a name="M000018"></a>
+
+        <div class="method-heading">
+          <a href="Lexicon.src/M000018.html" target="Code" class="method-signature"
+            onclick="popupCode('Lexicon.src/M000018.html');return false;">
+          <span class="method-name">make_pos</span><span class="method-args">( original )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Normalize various ways of specifying a part of speech into the <a
+href="../WordNet.html">WordNet</a> part of speech indicator from the
+<tt>original</tt> representation, which may be the name (e.g.,
+&quot;noun&quot;); <tt>nil</tt>, in which case it defaults to the indicator
+for a noun; or the indicator character itself, in which case it is returned
+unmodified.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000019" class="method-detail">
+        <a name="M000019"></a>
+
+        <div class="method-heading">
+          <a href="Lexicon.src/M000019.html" target="Code" class="method-signature"
+            onclick="popupCode('Lexicon.src/M000019.html');return false;">
+          <span class="method-name">make_word_key</span><span class="method-args">( word, pos )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Make a lexicon key out of the given <tt>word</tt> and part of speech
+(<tt>pos</tt>).
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

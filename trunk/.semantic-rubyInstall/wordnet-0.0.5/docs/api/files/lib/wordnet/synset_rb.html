@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: synset.rb</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>synset.rb</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>lib/wordnet/synset.rb
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Wed Jul 09 23:04:26 +0000 2008</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+<a href="../../../classes/WordNet.html">WordNet</a> synonym-set object
+class
+</p>
+<h2>Synopsis</h2>
+<pre>
+  ss = lexicon.lookupSynset( &quot;word&quot;, WordNet::Noun, 1 )
+      puts &quot;Definition: %s&quot; % ss.gloss
+  coords = ss.coordinates
+</pre>
+<h2>Description</h2>
+<p>
+Instances of this class encapsulate the data for a synonym set
+(&#8216;synset&#8217;) in a Wordnet lexical database. A synonym set is a
+set of words that are interchangeable in some context.
+</p>
+<h2>Author</h2>
+<p>
+Michael Granger &lt;ged@FaerieMUD.org&gt;
+</p>
+<p>
+Copyright (c) 2002-2008 The FaerieMUD Consortium. All rights reserved.
+</p>
+<p>
+This module is free software. You may use, modify, and/or redistribute this
+software under the terms of the Perl Artistic License. (See <a
+href="http://language.perl.com/misc/Artistic.html">language.perl.com/misc/Artistic.html</a>)
+</p>
+<p>
+Much of this code was inspired by/ported from the Lingua::Wordnet Perl
+module by Dan Brian.
+</p>
+<h2>Version</h2>
+<pre>
+ $Id: synset.rb 90 2008-07-09 23:02:53Z deveiant $
+</pre>
+
+    </div>
+
+    <div id="requires-list">
+      <h3 class="section-bar">Required files</h3>
+
+      <div class="name-list">
+      sync&nbsp;&nbsp;
+      wordnet/constants&nbsp;&nbsp;
+      </div>
+    </div>
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

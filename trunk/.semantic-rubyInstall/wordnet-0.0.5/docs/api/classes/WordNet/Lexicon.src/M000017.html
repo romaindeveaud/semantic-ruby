@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>remove_synset (WordNet::Lexicon)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/wordnet/lexicon.rb, line 327</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">remove_synset</span>( <span class="ruby-identifier">synset</span> )
+                <span class="ruby-comment cmt"># If it's not in the database (ie., doesn't have a real offset),</span>
+                <span class="ruby-comment cmt"># just return.</span>
+                <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">synset</span>.<span class="ruby-identifier">offset</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+
+                <span class="ruby-comment cmt"># Start a transaction on the data table</span>
+                <span class="ruby-ivar">@env</span>.<span class="ruby-identifier">begin</span>( <span class="ruby-constant">BDB</span><span class="ruby-operator">::</span><span class="ruby-constant">TXN_COMMIT</span>, <span class="ruby-ivar">@data_db</span> ) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">txn</span>,<span class="ruby-identifier">datadb</span><span class="ruby-operator">|</span>
+
+                        <span class="ruby-comment cmt"># First remove the index entries for this synset by iterating</span>
+                        <span class="ruby-comment cmt"># over each of its words</span>
+                        <span class="ruby-identifier">txn</span>.<span class="ruby-identifier">begin</span>( <span class="ruby-constant">BDB</span><span class="ruby-operator">::</span><span class="ruby-constant">TXN_COMMIT</span>, <span class="ruby-ivar">@index_db</span> ) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">txn</span>,<span class="ruby-identifier">indexdb</span><span class="ruby-operator">|</span>
+                                <span class="ruby-identifier">synset</span>.<span class="ruby-identifier">words</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">word</span><span class="ruby-operator">|</span> <span class="ruby-identifier">word</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;%&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">pos</span> }.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">word</span><span class="ruby-operator">|</span>
+
+                                        <span class="ruby-comment cmt"># If the index contains an entry for this word, either</span>
+                                        <span class="ruby-comment cmt"># splice out the offset for the synset being deleted if</span>
+                                        <span class="ruby-comment cmt"># there are more than one, or just delete the whole</span>
+                                        <span class="ruby-comment cmt"># entry if it's the only one.</span>
+                                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">indexdb</span>.<span class="ruby-identifier">key?</span>( <span class="ruby-identifier">word</span> )
+                                                <span class="ruby-identifier">offsets</span> = <span class="ruby-identifier">indexdb</span>[ <span class="ruby-identifier">word</span> ].
+                                                        <span class="ruby-identifier">split</span>( <span class="ruby-constant">SUB_DELIM_RE</span> ).
+                                                        <span class="ruby-identifier">reject</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">offset</span><span class="ruby-operator">|</span> <span class="ruby-identifier">offset</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">synset</span>.<span class="ruby-identifier">offset</span>}
+
+                                                <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">offsets</span>.<span class="ruby-identifier">empty?</span>
+                                                        <span class="ruby-identifier">index_db</span>[ <span class="ruby-identifier">word</span> ] = <span class="ruby-identifier">newoffsets</span>.<span class="ruby-identifier">join</span>( <span class="ruby-constant">SUB_DELIM</span> )
+                                                <span class="ruby-keyword kw">else</span>
+                                                        <span class="ruby-identifier">index_db</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-identifier">word</span> )
+                                                <span class="ruby-keyword kw">end</span>
+                                        <span class="ruby-keyword kw">end</span>
+                                }
+                        <span class="ruby-keyword kw">end</span>
+
+                        <span class="ruby-comment cmt"># :TODO: Delete synset from pointers of related synsets</span>
+
+                        <span class="ruby-comment cmt"># Delete the synset from the main db</span>
+                        <span class="ruby-identifier">datadb</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-identifier">synset</span>.<span class="ruby-identifier">offset</span> )
+                <span class="ruby-keyword kw">end</span>
+
+                <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

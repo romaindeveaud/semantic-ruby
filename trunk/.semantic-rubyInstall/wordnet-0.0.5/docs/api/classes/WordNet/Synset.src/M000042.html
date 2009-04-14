@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>traverse (WordNet::Synset)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/wordnet/synset.rb, line 732</span>
+                                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">traverse</span>( <span class="ruby-identifier">type</span>, <span class="ruby-identifier">includeOrigin</span>=<span class="ruby-keyword kw">true</span> )
+                                        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-value str">&quot;Illegal parameter 1: Must be either a String or a Symbol&quot;</span> <span class="ruby-keyword kw">unless</span>
+                                        <span class="ruby-identifier">type</span>.<span class="ruby-identifier">kind_of?</span>( <span class="ruby-constant">String</span> ) <span class="ruby-operator">||</span> <span class="ruby-identifier">type</span>.<span class="ruby-identifier">kind_of?</span>( <span class="ruby-constant">Symbol</span> )
+
+                                        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;Synset doesn't support the #{type.to_s} pointer type.&quot;</span> <span class="ruby-keyword kw">unless</span>
+                                        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">respond_to?</span>( <span class="ruby-identifier">type</span> )
+
+                                        <span class="ruby-identifier">foundSyns</span> = []
+                                        <span class="ruby-identifier">depth</span> = <span class="ruby-value">0</span>
+                                        <span class="ruby-identifier">traversalFunc</span> = <span class="ruby-keyword kw">nil</span>
+
+                                        <span class="ruby-comment cmt"># Build a traversal function which we can call recursively. It'll return</span>
+                                        <span class="ruby-comment cmt"># the synsets it traverses.</span>
+                                        <span class="ruby-identifier">traversalFunc</span> = <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">syn</span>,<span class="ruby-identifier">newDepth</span><span class="ruby-operator">|</span>
+
+                                                <span class="ruby-comment cmt"># Flag to continue traversal</span>
+                                                <span class="ruby-identifier">haltFlag</span> = <span class="ruby-keyword kw">false</span>
+
+                                                <span class="ruby-comment cmt"># Call the block if it exists and we're either past the origin or</span>
+                                                <span class="ruby-comment cmt"># including it</span>
+                                                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">newDepth</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">includeOrigin</span>)
+                                                        <span class="ruby-identifier">res</span> = <span class="ruby-keyword kw">yield</span>( <span class="ruby-identifier">syn</span>, <span class="ruby-identifier">newDepth</span> )
+                                                        <span class="ruby-identifier">haltFlag</span> = <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">res</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">TrueClass</span>
+                                                <span class="ruby-keyword kw">end</span>
+
+                                                <span class="ruby-comment cmt"># Make an array for holding sub-synsets we see</span>
+                                                <span class="ruby-identifier">subSyns</span> = []
+                                                <span class="ruby-identifier">subSyns</span>.<span class="ruby-identifier">push</span>( <span class="ruby-identifier">syn</span> ) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">newDepth</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">includeOrigin</span>
+
+                                                <span class="ruby-comment cmt"># Iterate over each synset returned by calling the pointer on the</span>
+                                                <span class="ruby-comment cmt"># current syn. For each one, we call ourselves recursively, and</span>
+                                                <span class="ruby-comment cmt"># break out of the iterator with a false value if the block has</span>
+                                                <span class="ruby-comment cmt"># indicated we should abort by returning a false value.</span>
+                                                <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">haltFlag</span>
+                                                        <span class="ruby-identifier">syn</span>.<span class="ruby-identifier">send</span>( <span class="ruby-identifier">type</span> ).<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">subSyn</span><span class="ruby-operator">|</span>
+                                                                <span class="ruby-identifier">subSubSyns</span>, <span class="ruby-identifier">haltFlag</span> = <span class="ruby-identifier">traversalFunc</span>.<span class="ruby-identifier">call</span>( <span class="ruby-identifier">subSyn</span>, <span class="ruby-identifier">newDepth</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span> )
+                                                                <span class="ruby-identifier">subSyns</span>.<span class="ruby-identifier">push</span>( <span class="ruby-operator">*</span><span class="ruby-identifier">subSubSyns</span> ) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">subSubSyns</span>.<span class="ruby-identifier">empty?</span>
+                                                                <span class="ruby-keyword kw">break</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">haltFlag</span>
+                                                        }
+                                                <span class="ruby-keyword kw">end</span>
+
+                                                <span class="ruby-comment cmt"># return</span>
+                                                [ <span class="ruby-identifier">subSyns</span>, <span class="ruby-identifier">haltFlag</span> ]
+                                        }
+
+                                        <span class="ruby-comment cmt"># Call the iterator</span>
+                                        <span class="ruby-identifier">traversedSets</span>, <span class="ruby-identifier">haltFlag</span> =  <span class="ruby-identifier">traversalFunc</span>.<span class="ruby-identifier">call</span>( <span class="ruby-keyword kw">self</span>, <span class="ruby-identifier">depth</span> )
+
+                                        <span class="ruby-comment cmt"># If a block was given, just return whether or not the block was halted.</span>
+                                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>
+                                                <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">haltFlag</span>
+
+                                                <span class="ruby-comment cmt"># If no block was given, return the traversed synsets</span>
+                                        <span class="ruby-keyword kw">else</span>
+                                                <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">traversedSets</span>
+                                        <span class="ruby-keyword kw">end</span>
+                                <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

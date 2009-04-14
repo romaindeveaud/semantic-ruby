@@ -1,0 +1,845 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: WordNet::Synset</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">WordNet::Synset</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/lib/wordnet/synset_rb.html">
+                lib/wordnet/synset.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Object
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+&quot;Synonym set&quot; class - encapsulates the data for a set of <a
+href="Synset.html#M000027">words</a> in the lexical database that are
+interchangeable in some context, and provides methods for accessing its
+relationships.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000026">==</a>&nbsp;&nbsp;
+      <a href="#M000030">add_words</a>&nbsp;&nbsp;
+      <a href="#M000038">coordinates</a>&nbsp;&nbsp;
+      <a href="#M000031">delete_words</a>&nbsp;&nbsp;
+      <a href="#M000043">distance</a>&nbsp;&nbsp;
+      <a href="#M000049">fetch_synset_pointers</a>&nbsp;&nbsp;
+      <a href="#M000041">frames</a>&nbsp;&nbsp;
+      <a href="#M000025">glosses</a>&nbsp;&nbsp;
+      <a href="#M000022">inspect</a>&nbsp;&nbsp;
+      <a href="#M000023">key</a>&nbsp;&nbsp;
+      <a href="#M000040">lexInfo=</a>&nbsp;&nbsp;
+      <a href="#M000039">lex_info</a>&nbsp;&nbsp;
+      <a href="#M000021">new</a>&nbsp;&nbsp;
+      <a href="#M000033">overview</a>&nbsp;&nbsp;
+      <a href="#M000048">pointer_map</a>&nbsp;&nbsp;
+      <a href="#M000046">pointers</a>&nbsp;&nbsp;
+      <a href="#M000047">pointers=</a>&nbsp;&nbsp;
+      <a href="#M000024">pos</a>&nbsp;&nbsp;
+      <a href="#M000036">remove</a>&nbsp;&nbsp;
+      <a href="#M000044">search</a>&nbsp;&nbsp;
+      <a href="#M000037">serialize</a>&nbsp;&nbsp;
+      <a href="#M000050">set_synset_pointers</a>&nbsp;&nbsp;
+      <a href="#M000034">store</a>&nbsp;&nbsp;
+      <a href="#M000028">synonyms</a>&nbsp;&nbsp;
+      <a href="#M000032">to_s</a>&nbsp;&nbsp;
+      <a href="#M000042">traverse</a>&nbsp;&nbsp;
+      <a href="#M000027">words</a>&nbsp;&nbsp;
+      <a href="#M000029">words=</a>&nbsp;&nbsp;
+      <a href="#M000035">write</a>&nbsp;&nbsp;
+      <a href="#M000045">|</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+    <div id="includes">
+      <h3 class="section-bar">Included Modules</h3>
+
+      <div id="includes-list">
+        <span class="include-name"><a href="Constants.html">WordNet::Constants</a></span>
+        <span class="include-name">CrossCase</span>
+      </div>
+    </div>
+
+    <div id="section">
+
+    <div id="class-list">
+      <h3 class="section-bar">Classes and Modules</h3>
+
+      Class <a href="Synset/Pointer.html" class="link">WordNet::Synset::Pointer</a><br />
+
+    </div>
+
+    <div id="constants-list">
+      <h3 class="section-bar">Constants</h3>
+
+      <div class="name-list">
+        <table summary="Constants">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">SVNId</td>
+          <td>=</td>
+          <td class="context-item-value">%q$Id: synset.rb 90 2008-07-09 23:02:53Z deveiant $</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Subversion ID
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">SVNRev</td>
+          <td>=</td>
+          <td class="context-item-value">%q$Rev: 90 $</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Subversion Rev
+
+</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">filenum</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+The number corresponding to the lexicographer file name containing the
+synset. Calling lexInfo will return the actual filename. See the
+&quot;System Description&quot; of wngloss(7WN) for more info about this.
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">frameslist</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+The list of raw verb sentence <a href="Synset.html#M000041">frames</a> for
+this synset.
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">gloss</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+Definition and/or example sentences for the <a
+href="Synset.html">Synset</a>.
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">lexicon</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc">
+The <a href="Lexicon.html">WordNet::Lexicon</a> that was used to look up
+this synset
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">offset</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+The original byte offset of the synset in the data file; acts as the unique
+identifier (when combined with part_of_speech) of this <a
+href="Synset.html">Synset</a> in the database.
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">part_of_speech</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+The syntactic category of this <a href="Synset.html">Synset</a>. Will be
+one of &quot;n&quot; (noun), &quot;v&quot; (verb), &quot;a&quot;
+(adjective), &quot;r&quot; (adverb), or &quot;s&quot; (other).
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">pointerlist</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+The list of raw <a href="Synset.html#M000046">pointers</a> to related
+synsets. E.g., the pointerlist for &quot;mourning dove&quot; is:
+
+<pre>
+  &quot;@ 01731700%n 0000|#m 01733452%n 0000&quot;
+</pre>
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">wordlist</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+The raw list of word/lex_id pairs associated with this synset. Each word
+and lex_id is separated by a &#8217;%&#8217; character, and each pair is
+delimited with a &#8217;|&#8217;. E.g., the wordlist for &quot;animal&quot;
+is:
+
+<pre>
+  &quot;animal%0|animate_being%0|beast%0|brute%1|creature%0|fauna%1&quot;
+</pre>
+</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000021" class="method-detail">
+        <a name="M000021"></a>
+
+        <div class="method-heading">
+          <a href="Synset.src/M000021.html" target="Code" class="method-signature"
+            onclick="popupCode('Synset.src/M000021.html');return false;">
+          <span class="method-name">new</span><span class="method-args">( lexicon, offset, pos, word=nil, data=nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Create a <a href="Synset.html#M000021">new</a> <a
+href="Synset.html">Synset</a> object in the specified <tt>lexicon</tt> for
+the specified <tt>word</tt> and <tt>part_of_speech</tt>. If <tt>data</tt>
+is specified, initialize the synset&#8216;s other object data from it. This
+method shouldn&#8216;t be called directly: you should use one of the <a
+href="Lexicon.html">Lexicon</a> class&#8216;s factory methods:
+create_synset, lookup_synsets, or lookup_synsetsByOffset.
+</p>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000026" class="method-detail">
+        <a name="M000026"></a>
+
+        <div class="method-heading">
+          <a href="Synset.src/M000026.html" target="Code" class="method-signature"
+            onclick="popupCode('Synset.src/M000026.html');return false;">
+          <span class="method-name">==</span><span class="method-args">( otherSyn )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns true if the receiver and otherSyn are identical according to their
+offsets.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000030" class="method-detail">
+        <a name="M000030"></a>
+
+        <div class="method-heading">
+          <a href="Synset.src/M000030.html" target="Code" class="method-signature"
+            onclick="popupCode('Synset.src/M000030.html');return false;">
+          <span class="method-name">add_words</span><span class="method-args">( *newWords )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Add the specified <tt>newWords</tt> to this synset&#8216;s wordlist. Alias:
+<tt><a href="Synset.html#M000030">add_words</a></tt>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000038" class="method-detail">
+        <a name="M000038"></a>
+
+        <div class="method-heading">
+          <a href="Synset.src/M000038.html" target="Code" class="method-signature"
+            onclick="popupCode('Synset.src/M000038.html');return false;">
+          <span class="method-name">coordinates</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns an Array of the coordinate sisters of the receiver.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000031" class="method-detail">
+        <a name="M000031"></a>
+
+        <div class="method-heading">
+          <a href="Synset.src/M000031.html" target="Code" class="method-signature"
+            onclick="popupCode('Synset.src/M000031.html');return false;">
+          <span class="method-name">delete_words</span><span class="method-args">( *oldWords )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Delete the specified <tt>oldWords</tt> from this synset&#8216;s wordlist.
+Alias: <tt><a href="Synset.html#M000031">delete_words</a></tt>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000043" class="method-detail">
+        <a name="M000043"></a>
+
+        <div class="method-heading">
+          <a href="Synset.src/M000043.html" target="Code" class="method-signature"
+            onclick="popupCode('Synset.src/M000043.html');return false;">
+          <span class="method-name">distance</span><span class="method-args">( type, otherSynset )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the <a href="Synset.html#M000043">distance</a> in <a
+href="Synset.html#M000046">pointers</a> between the receiver and
+<tt>otherSynset</tt> using <tt>type</tt> as the <a
+href="Synset.html#M000044">search</a> path.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000041" class="method-detail">
+        <a name="M000041"></a>
+
+        <div class="method-heading">
+          <a href="Synset.src/M000041.html" target="Code" class="method-signature"
+            onclick="popupCode('Synset.src/M000041.html');return false;">
+          <span class="method-name">frames</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns an <tt>Array</tt> of verb frame +String+s for the synset.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000025" class="method-detail">
+        <a name="M000025"></a>
+
+        <div class="method-heading">
+          <a href="Synset.src/M000025.html" target="Code" class="method-signature"
+            onclick="popupCode('Synset.src/M000025.html');return false;">
+          <span class="method-name">glosses</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return each of the sentences of the gloss for this synset as an array. The
+gloss is a definition of the synset, and optionally one or more example
+sentences.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000022" class="method-detail">
+        <a name="M000022"></a>
+
+        <div class="method-heading">
+          <a href="Synset.src/M000022.html" target="Code" class="method-signature"
+            onclick="popupCode('Synset.src/M000022.html');return false;">
+          <span class="method-name">inspect</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return a human-readable representation of the <a
+href="Synset.html">Synset</a> suitable for debugging.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000023" class="method-detail">
+        <a name="M000023"></a>
+
+        <div class="method-heading">
+          <a href="Synset.src/M000023.html" target="Code" class="method-signature"
+            onclick="popupCode('Synset.src/M000023.html');return false;">
+          <span class="method-name">key</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the <a href="Synset.html">Synset</a>&#8216;s unique identifier,
+made up of its offset and syntactic category catenated together with a
+&#8217;%&#8217; symbol.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000040" class="method-detail">
+        <a name="M000040"></a>
+
+        <div class="method-heading">
+          <a href="Synset.src/M000040.html" target="Code" class="method-signature"
+            onclick="popupCode('Synset.src/M000040.html');return false;">
+          <span class="method-name">lexInfo=</span><span class="method-args">( id )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the &quot;lexicographer&#8216;s file&quot; association for this synset
+to <tt>id</tt>. The value in <tt>id</tt> should correspond to one of the
+values in <a href="../WordNet.html">WordNet</a>::LEXFILES
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000039" class="method-detail">
+        <a name="M000039"></a>
+
+        <div class="method-heading">
+          <a href="Synset.src/M000039.html" target="Code" class="method-signature"
+            onclick="popupCode('Synset.src/M000039.html');return false;">
+          <span class="method-name">lex_info</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return the name of the &quot;lexicographer&#8216;s file&quot; associated
+with this synset.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000033" class="method-detail">
+        <a name="M000033"></a>
+
+        <div class="method-heading">
+          <span class="method-name">overview</span><span class="method-args">()</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Synset.html#M000032">to_s</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000048" class="method-detail">
+        <a name="M000048"></a>
+
+        <div class="method-heading">
+          <a href="Synset.src/M000048.html" target="Code" class="method-signature"
+            onclick="popupCode('Synset.src/M000048.html');return false;">
+          <span class="method-name">pointer_map</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the synset&#8216;s <a href="Synset.html#M000046">pointers</a> in a
+Hash keyed by their type.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000046" class="method-detail">
+        <a name="M000046"></a>
+
+        <div class="method-heading">
+          <a href="Synset.src/M000046.html" target="Code" class="method-signature"
+            onclick="popupCode('Synset.src/M000046.html');return false;">
+          <span class="method-name">pointers</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the <a href="Synset.html#M000046">pointers</a> in this
+synset&#8216;s pointerlist as an <tt>Array</tt>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000047" class="method-detail">
+        <a name="M000047"></a>
+
+        <div class="method-heading">
+          <a href="Synset.src/M000047.html" target="Code" class="method-signature"
+            onclick="popupCode('Synset.src/M000047.html');return false;">
+          <span class="method-name">pointers=</span><span class="method-args">( *newPointers )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Set the <a href="Synset.html#M000046">pointers</a> in this synset&#8216;s
+pointerlist to <tt>newPointers</tt>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000024" class="method-detail">
+        <a name="M000024"></a>
+
+        <div class="method-heading">
+          <a href="Synset.src/M000024.html" target="Code" class="method-signature"
+            onclick="popupCode('Synset.src/M000024.html');return false;">
+          <span class="method-name">pos</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The symbol which represents this synset&#8216;s syntactic category. Will be
+one of :noun, :verb, :adjective, :adverb, or :other.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000036" class="method-detail">
+        <a name="M000036"></a>
+
+        <div class="method-heading">
+          <a href="Synset.src/M000036.html" target="Code" class="method-signature"
+            onclick="popupCode('Synset.src/M000036.html');return false;">
+          <span class="method-name">remove</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Removes this synset from the database.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000044" class="method-detail">
+        <a name="M000044"></a>
+
+        <div class="method-heading">
+          <a href="Synset.src/M000044.html" target="Code" class="method-signature"
+            onclick="popupCode('Synset.src/M000044.html');return false;">
+          <span class="method-name">search</span><span class="method-args">( type, otherSynset )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Recursively searches all of the receiver&#8216;s <a
+href="Synset.html#M000046">pointers</a> of the specified <tt>type</tt> for
+<tt>otherSynset</tt>, returning <tt>true</tt> if it is found.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000037" class="method-detail">
+        <a name="M000037"></a>
+
+        <div class="method-heading">
+          <a href="Synset.src/M000037.html" target="Code" class="method-signature"
+            onclick="popupCode('Synset.src/M000037.html');return false;">
+          <span class="method-name">serialize</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the synset&#8216;s data in a form suitable for storage in the
+lexicon&#8216;s database.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000034" class="method-detail">
+        <a name="M000034"></a>
+
+        <div class="method-heading">
+          <a href="Synset.src/M000034.html" target="Code" class="method-signature"
+            onclick="popupCode('Synset.src/M000034.html');return false;">
+          <span class="method-name">store</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Writes any changes made to the object to the database and updates all
+affected synset data and indexes. If the object passes out of scope before
+<a href="Synset.html#M000035">write</a> is called, the changes are lost.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000028" class="method-detail">
+        <a name="M000028"></a>
+
+        <div class="method-heading">
+          <span class="method-name">synonyms</span><span class="method-args">()</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Synset.html#M000027">words</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000032" class="method-detail">
+        <a name="M000032"></a>
+
+        <div class="method-heading">
+          <a href="Synset.src/M000032.html" target="Code" class="method-signature"
+            onclick="popupCode('Synset.src/M000032.html');return false;">
+          <span class="method-name">to_s</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return the synset as a string. Alias: <tt><a
+href="Synset.html#M000033">overview</a></tt>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000042" class="method-detail">
+        <a name="M000042"></a>
+
+        <div class="method-heading">
+          <a href="Synset.src/M000042.html" target="Code" class="method-signature"
+            onclick="popupCode('Synset.src/M000042.html');return false;">
+          <span class="method-name">traverse</span><span class="method-args">( type, includeOrigin=true ) {|syn, newDepth| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Traversal iterator: Iterates depth-first over a particular <tt>type</tt> of
+the receiver, and all of the pointed-to synset&#8216;s <a
+href="Synset.html#M000046">pointers</a>. If called with a block, the block
+is called once for each synset with the <tt>foundSyn</tt> and its
+<tt>depth</tt> in relation to the originating synset as arguments. The
+first call will be the originating synset with a depth of +0+ unless
+<tt>includeOrigin</tt> is <tt>false</tt>. If the <tt>callback</tt> returns
+<tt>true</tt>, the traversal is halted, and the method returns immediately.
+This method returns an Array of the synsets which were traversed if no
+block is given, or a flag which indicates whether or not the traversal was
+interrupted if a block is given.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000027" class="method-detail">
+        <a name="M000027"></a>
+
+        <div class="method-heading">
+          <a href="Synset.src/M000027.html" target="Code" class="method-signature"
+            onclick="popupCode('Synset.src/M000027.html');return false;">
+          <span class="method-name">words</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns an Array of <a href="Synset.html#M000027">words</a> and/or
+collocations associated with this synset.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000029" class="method-detail">
+        <a name="M000029"></a>
+
+        <div class="method-heading">
+          <a href="Synset.src/M000029.html" target="Code" class="method-signature"
+            onclick="popupCode('Synset.src/M000029.html');return false;">
+          <span class="method-name">words=</span><span class="method-args">( *newWords )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Set the <a href="Synset.html#M000027">words</a> in this synset&#8216;s
+wordlist to <tt>newWords</tt>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000035" class="method-detail">
+        <a name="M000035"></a>
+
+        <div class="method-heading">
+          <span class="method-name">write</span><span class="method-args">()</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Synset.html#M000034">store</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000045" class="method-detail">
+        <a name="M000045"></a>
+
+        <div class="method-heading">
+          <a href="Synset.src/M000045.html" target="Code" class="method-signature"
+            onclick="popupCode('Synset.src/M000045.html');return false;">
+          <span class="method-name">|</span><span class="method-args">( otherSyn )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Union: Return the least general synset that the receiver and
+<tt>otherSynset</tt> have in common as a hypernym, or nil if it
+doesn&#8216;t share any.
+</p>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Protected Instance methods</h3>
+
+      <div id="method-M000049" class="method-detail">
+        <a name="M000049"></a>
+
+        <div class="method-heading">
+          <a href="Synset.src/M000049.html" target="Code" class="method-signature"
+            onclick="popupCode('Synset.src/M000049.html');return false;">
+          <span class="method-name">fetch_synset_pointers</span><span class="method-args">( type, subtype=nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns an Array of synset objects for the receiver&#8216;s <a
+href="Synset.html#M000046">pointers</a> of the specified <tt>type</tt>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000050" class="method-detail">
+        <a name="M000050"></a>
+
+        <div class="method-heading">
+          <a href="Synset.src/M000050.html" target="Code" class="method-signature"
+            onclick="popupCode('Synset.src/M000050.html');return false;">
+          <span class="method-name">set_synset_pointers</span><span class="method-args">( type, synsets, subtype=nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the receiver&#8216;s synset <a href="Synset.html#M000046">pointers</a>
+for the specified <tt>type</tt> to the specified <tt>synsets</tt>.
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

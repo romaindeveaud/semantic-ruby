@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>lookup_synsets (WordNet::Lexicon)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/wordnet/lexicon.rb, line 193</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">lookup_synsets</span>( <span class="ruby-identifier">word</span>, <span class="ruby-identifier">part_of_speech</span>, <span class="ruby-identifier">sense</span>=<span class="ruby-keyword kw">nil</span> )
+                <span class="ruby-identifier">wordkey</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">make_word_key</span>( <span class="ruby-identifier">word</span>, <span class="ruby-identifier">part_of_speech</span> )
+                <span class="ruby-identifier">pos</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">make_pos</span>( <span class="ruby-identifier">part_of_speech</span> )
+                <span class="ruby-identifier">synsets</span> = []
+
+                <span class="ruby-comment cmt"># Look up the index entry, trying first the word as given, and if</span>
+                <span class="ruby-comment cmt"># that fails, trying morphological conversion.</span>
+                <span class="ruby-identifier">entry</span> = <span class="ruby-ivar">@index_db</span>[ <span class="ruby-identifier">wordkey</span> ]
+
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">word</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">morph</span>( <span class="ruby-identifier">word</span>, <span class="ruby-identifier">part_of_speech</span> ))
+                        <span class="ruby-identifier">wordkey</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">make_word_key</span>( <span class="ruby-identifier">word</span>, <span class="ruby-identifier">part_of_speech</span> )
+                        <span class="ruby-identifier">entry</span> = <span class="ruby-ivar">@index_db</span>[ <span class="ruby-identifier">wordkey</span> ]
+                <span class="ruby-keyword kw">end</span>
+
+                <span class="ruby-comment cmt"># If the lookup failed both ways, just abort</span>
+                <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">entry</span>
+
+                <span class="ruby-comment cmt"># Make synset keys from the entry, narrowing it to just the sense</span>
+                <span class="ruby-comment cmt"># requested if one was specified.</span>
+                <span class="ruby-identifier">synkeys</span> = <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">split</span>( <span class="ruby-constant">SUB_DELIM_RE</span> ).<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">off</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;#{off}%#{pos}&quot;</span> }
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">sense</span>
+                        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">lookup_synsets_by_key</span>( <span class="ruby-identifier">synkeys</span>[<span class="ruby-identifier">sense</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>] )
+                <span class="ruby-keyword kw">else</span>
+                        <span class="ruby-keyword kw">return</span> [ <span class="ruby-identifier">lookup_synsets_by_key</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">synkeys</span>) ].<span class="ruby-identifier">flatten</span>
+                <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>
