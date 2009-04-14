@@ -1,0 +1,282 @@
+
+-- 0.1.1 first alpha release
+
+-- 0.1.2
+
+* error are now BDB::Fatal, BDB::Lock (rather than BDBFatal, ...) 
+* remove BDBKeyExist : it return Qfalse if it fail, or the value inserted
+* #put return the value
+* change rb_eFatal in bdb_eFatal
+* option for array_base (0 or 1)
+* corrected flags27
+* support for bt_compare, bt_prefix, dup_compare, h_hash (see func.rb)
+* can store nil (like 1.6,  a["aa"] = nil don't delete the key)
+* add #dup_count (count), #get_dup (dup) for BDB::Common
+* add #partial_clear (same than #clear_partial)
+* corrected #put for set_partial
+* remove bdb_recno_length (don't do what I want)
+* corrected #close (thread_local_aset)
+* corrected BDB::Unknown (it created object of class BDB::Unknown)
+* remove shift for Common (only for Recno and Queue)
+* corrected #length for bdb < 3 with BDB::TXN
+* add test for RUNIT (only Btree, Hash, Recno)
+* tested with 3.1.17
+* add methods fetch, store, reject!, reject, member?, index, indexes (like 1.5)
+* add initialize
+
+-- 0.1.3
+
+* Queue pad automatically the value (for put && get)
+* partial_get (set) is strange ???
+* add Queue#pad
+* re_pad return a character (not an int)
+* corrected nil for Queue
+* add test for Queue
+* corrected 2 bugs (thanks Takaaki Tateishi <ttate@jaist.ac.jp>)
+   - struct timeval
+   - rb_struct_define
+
+-- 0.1.4
+
+* corrected rb_iterate()
+
+-- 0.1.5
+
+* corrected (thanks Phillipe Lucas <philippe.lucas@technologies-gid.com>)
+  - db_get_both()
+  - flag --disable-thread to compile on some "stupid" system
+
+* add #invert, #clear, #update, #replace
+
+-- 0.1.6
+
+* support for 3.2.9 : Thanks Rick Ohnemus <rjohnemus@systemware-inc.com>
+* corrected flags for DUP_SORT
+* add BDB::Env.set_flags for 3.2.9
+* 3.2.9 : bt_compare, bt_prefix, dup_compare, h_hash take now 3 args
+
+-- 0.1.7
+
+* BDB::Env#remove is now a class method
+* corrected Lock for DB < 3
+* added Log
+* tests for Log
+* error BDB::LockError, BDB::LockHeld, BDB::LockGranted, BDB::LockDead
+
+
+-- 0.1.8
+
+* protected env against GC for Log, Lock
+* added BDB::Recnum
+
+-- 0.1.9
+
+* corrected DB_SET_BOTH (Thanks "Peter J. Kernan" <pete@narya.PHYS.cwru.edu>)
+* added warning for BDB::Unknown and Recnum, Recno
+* corrected re-definition of RECNUM
+
+-- 0.2.0
+
+* better interface with Marshal (experimental)
+
+-- 0.2.1
+
+* new syntax "marshal" => Marshal (or any module with #load, #dump)
+* tested with 3.3.11
+* txn_prepare take now an extra argument with 3.3.11
+* secondary index for 3.3.11 (see #associate)
+* partial implementation of #pget
+
+-- 0.2.2
+
+* corrected set_rpc_server for 3.3.11
+* added support for bulk retrieval (#each, #each_value, #each_key) 3.3.11
+
+-- 0.2.3
+
+* search libdb3 before libdb (src/extconf.rb) 
+         (Thanks "Akinori MUSHA" <knu@iDaemons.org>)
+* BDB::Common::remove for >= 3
+* BDB::Common::truncate alias of BDB::Common::clear
+* BDB::Env#recover && BDB::Txn#discard for >= 3.3.11
+* BDB::Common#each_dup, BDB::Common#each_dup_value, BDB::Common#duplicates
+* BDB::Common#each_primary, BDB::Common#reverse_each_primary 3.3.11
+
+-- 0.2.4
+
+* delegator also for #each, #each_dup, #duplicates, etc
+* #get_dup (without delegator)
+
+-- 0.2.5
+
+* corrected lg_max, lg_bsize (Thanks Joseph McDonald <joe@vpop.net>)
+* added Cursor#pget
+* added some tests for secondary indexes
+* corrected constants
+
+-- 0.2.6
+
+* corrected lock_get (Thanks Darrin Thompson <dthompson@characterlink.net>)
+* lock_vec now return always an array with (lockid for GET, nil for PUT)
+
+-- 0.2.7
+
+* corrected an error for Recnum#indexes 
+* corrected Recnum#unshift (length)
+* corrected Recnum#delete_at
+* set_q_extendsize (Queue), set_tx_timestamp
+* support for 4.0
+* replication (not tested)
+* set_{txn,lock,}timeout
+* options for Env::begin
+* corrected a stupid bug introduced in 0.2.6
+
+-- 0.2.8
+
+* corrected stat for winxx
+* accept 'extend Marshal'
+* corrected bug with gc (test_dump)
+* protected against old class
+
+-- 0.2.9
+
+* stupid bug with free()
+* added -R for Solaris 2 (Thanks Amos Gouaux <amos+ruby@utdallas.edu>)
+
+-- 0.3.0
+
+* added --with-uniquename to extconf.rb 
+       (Thanks Matt Armstrong <matt@lickey.com>)
+* rep_process_message return [code, cdata, envid]
+* added Common#filename, Common#database (Common#subname), Env#home
+* example for replication
+* txn_begin (argv++)
+* add flags to Common#stat
+* add Common#verify (>= 3.3.11)
+* corrected no_thread for Common::open
+
+-- 0.3.1
+
+* added --with-db-version to extconf.rb 
+       (Thanks "Akinori MUSHA" <knu@iDaemons.org>)
+* patch from "akira yamada" <akira@debian.org> (Thanks)
+   - examples/cursor.rb
+   - BDB::Queue#stat (-1)
+   - test suite : specification of assert was changed
+* tests for RUNIT/Test::Unit
+* filter function like P language (bdb_{store,fetch}_{key,value})
+
+-- 0.3.2
+
+* stupid bug with GC
+* Common#select (1.7.2)
+* switch on model allocate/initialize (IDLI)
+* ::open == ::new + block
+* 1.7.2 Recnum#map, #insert
+* first modifications for xdb
+* patch for tests (Thanks "WATANABE Hirofumi" <eban@os.rim.or.jp>)
+* flatten! ===> txn.begin(a, b, c) {|t, a1, b1, c1| }
+
+-- 0.3.3
+
+* typo in bdb_select (Thanks "Fritz Heinrichmeyer "
+                             <fritz.heinrichmeyer@fernuni-hagen.de>)
+* support for db-4.1.16
+   - set_append_recno
+   - cache_priority, cache_priority=
+   - set_encrypt
+   - dbremove, dbrename
+* new BDB::Txn::open_db
+* BDB::ENV, BDB::Common : "set_feedback", feedback= for db >= 3.
+* documentation : make rd2; make rdoc
+* experimental bdbxml for DbXml (not yet released)
+
+--- 0.3.4
+
+* set_rep_limit, set_app_dispatch for db 4.1.16
+* BDB::Common::[]
+* better (???) interface to transaction for 4.1.16
+* Lsn#env
+* corrected set_fetch_value
+* complete support for AUTO_COMMIT
+* added "flags" for #each, #cursor. new #write_cursor 
+        (Thanks Darrin Thompson <darrint@progeny.com>)
+
+--- 0.3.5
+
+* INT2NUM(DB_RMW) rather than INT2FIX()
+       (Thanks Darrin Thompson <darrint@progeny.com>)
+
+* adapted for 4.1.24 (DB_CURLSN is removed)
+
+--- 0.3.8
+
+* adapted for 1.8.0
+
+--- 0.3.9
+
+* better interface at exit
+* dbconfig for <= 2
+
+--- 0.4.0
+
+* adapted for debian (extconf.rb)
+
+--- 0.4.8
+
+* corrected various bug with 1.8.0
+* corrected lock_id_free, marshal with recnum
+   (Thanks YAEGASHI Takeshi <t@keshi.org>)
+   - added method Lockid#close
+
+--- 0.4.9
+
+* adapted (???) for win32
+* corrected app_dispatch, env_stat
+* corrected #fetch
+* corrected Log
+* protected internal cursors
+* change return value for Queue#push (return indices)
+* adapted for 4.2.50
+* added Common#conf, Env#conf (4.2.50)
+* corrected Common#select
+* corrected Log#log_get
+
+--- 0.5.2
+
+* corrected #duplicates and added Btree#{reverse_}each_by_prefix
+  (Thanks Satoru Takabayashi <satoru@namazu.org>)
+
+* corrected #begin (flatten!) for 1.9
+
+--- 0.5.3
+
+* compile for 4.3
+* BDB::Sequence (not tested)
+
+--- 0.5.5
+
+* store_nil_as_null (see README.en)
+* patch bdb_TXN (Thanks akira yamada <akira@debian.org>)
+
+
+--- 0.5.8
+
+* patch #associate (Thanks Dan Janowsky <danj@3skel.com>
+* adapted to db 4.4
+
+--- 0.5.9
+
+* rb_frame_last_func(), GetWriteFile() (Thanks akira yamada <akira@debian.org>)
+
+--- 0.6.2
+
+* patch from Akinori MUSHA 
+
+--- 0.6.3
+
+* updated for dbxml-2.4
+
+--- 0.6.4
+
+* update for db 4.7

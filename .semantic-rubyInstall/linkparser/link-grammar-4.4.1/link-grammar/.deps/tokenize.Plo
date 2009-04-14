@@ -1,0 +1,212 @@
+tokenize.lo: tokenize.c /usr/include/langinfo.h /usr/include/nl_types.h \
+  /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+  /usr/include/gnu/stubs-32.h /usr/include/bits/locale.h \
+  /usr/lib/gcc/i486-linux-gnu/4.3.2/include-fixed/limits.h \
+  /usr/lib/gcc/i486-linux-gnu/4.3.2/include-fixed/syslimits.h \
+  /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+  /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+  /usr/include/bits/posix2_lim.h ../link-grammar/api.h \
+  /usr/include/stdio.h /usr/lib/gcc/i486-linux-gnu/4.3.2/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+  /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+  /usr/lib/gcc/i486-linux-gnu/4.3.2/include/stdarg.h \
+  /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+  /usr/include/bits/stdio.h /usr/include/bits/stdio2.h \
+  /usr/include/stdlib.h /usr/include/sys/types.h /usr/include/time.h \
+  /usr/include/endian.h /usr/include/bits/endian.h \
+  /usr/include/sys/select.h /usr/include/bits/select.h \
+  /usr/include/bits/sigset.h /usr/include/bits/time.h \
+  /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+  /usr/include/alloca.h /usr/include/bits/stdlib.h /usr/include/string.h \
+  /usr/include/bits/string.h /usr/include/bits/string2.h \
+  /usr/include/bits/string3.h /usr/include/ctype.h \
+  ../link-grammar/structures.h ../link-grammar/api-types.h \
+  ../link-grammar/utilities.h /usr/include/bits/wchar.h \
+  /usr/include/bits/wchar2.h /usr/include/wctype.h \
+  ../link-grammar/error.h ../link-grammar/link-includes.h \
+  ../link-grammar/link-features.h ../link-grammar/link-includes.h \
+  ../link-grammar/api-structures.h ../link-grammar/externs.h \
+  ../link-grammar/analyze-linkage.h ../link-grammar/and.h \
+  ../link-grammar/build-disjuncts.h ../link-grammar/constituents.h \
+  ../link-grammar/count.h ../link-grammar/error.h \
+  ../link-grammar/extract-links.h ../link-grammar/fast-match.h \
+  ../link-grammar/idiom.h ../link-grammar/massage.h \
+  ../link-grammar/post-process.h ../link-grammar/pp_knowledge.h \
+  ../link-grammar/pp_lexer.h ../link-grammar/pp_linkset.h \
+  ../link-grammar/preparation.h ../link-grammar/print.h \
+  ../link-grammar/print-util.h ../link-grammar/prune.h \
+  ../link-grammar/read-dict.h ../link-grammar/resources.h \
+  ../link-grammar/string-set.h ../link-grammar/tokenize.h \
+  ../link-grammar/utilities.h ../link-grammar/word-file.h \
+  ../link-grammar/word-utils.h error.h utilities.h
+
+/usr/include/langinfo.h:
+
+/usr/include/nl_types.h:
+
+/usr/include/features.h:
+
+/usr/include/sys/cdefs.h:
+
+/usr/include/bits/wordsize.h:
+
+/usr/include/gnu/stubs.h:
+
+/usr/include/gnu/stubs-32.h:
+
+/usr/include/bits/locale.h:
+
+/usr/lib/gcc/i486-linux-gnu/4.3.2/include-fixed/limits.h:
+
+/usr/lib/gcc/i486-linux-gnu/4.3.2/include-fixed/syslimits.h:
+
+/usr/include/limits.h:
+
+/usr/include/bits/posix1_lim.h:
+
+/usr/include/bits/local_lim.h:
+
+/usr/include/linux/limits.h:
+
+/usr/include/bits/posix2_lim.h:
+
+../link-grammar/api.h:
+
+/usr/include/stdio.h:
+
+/usr/lib/gcc/i486-linux-gnu/4.3.2/include/stddef.h:
+
+/usr/include/bits/types.h:
+
+/usr/include/bits/typesizes.h:
+
+/usr/include/libio.h:
+
+/usr/include/_G_config.h:
+
+/usr/include/wchar.h:
+
+/usr/lib/gcc/i486-linux-gnu/4.3.2/include/stdarg.h:
+
+/usr/include/bits/stdio_lim.h:
+
+/usr/include/bits/sys_errlist.h:
+
+/usr/include/bits/stdio.h:
+
+/usr/include/bits/stdio2.h:
+
+/usr/include/stdlib.h:
+
+/usr/include/sys/types.h:
+
+/usr/include/time.h:
+
+/usr/include/endian.h:
+
+/usr/include/bits/endian.h:
+
+/usr/include/sys/select.h:
+
+/usr/include/bits/select.h:
+
+/usr/include/bits/sigset.h:
+
+/usr/include/bits/time.h:
+
+/usr/include/sys/sysmacros.h:
+
+/usr/include/bits/pthreadtypes.h:
+
+/usr/include/alloca.h:
+
+/usr/include/bits/stdlib.h:
+
+/usr/include/string.h:
+
+/usr/include/bits/string.h:
+
+/usr/include/bits/string2.h:
+
+/usr/include/bits/string3.h:
+
+/usr/include/ctype.h:
+
+../link-grammar/structures.h:
+
+../link-grammar/api-types.h:
+
+../link-grammar/utilities.h:
+
+/usr/include/bits/wchar.h:
+
+/usr/include/bits/wchar2.h:
+
+/usr/include/wctype.h:
+
+../link-grammar/error.h:
+
+../link-grammar/link-includes.h:
+
+../link-grammar/link-features.h:
+
+../link-grammar/link-includes.h:
+
+../link-grammar/api-structures.h:
+
+../link-grammar/externs.h:
+
+../link-grammar/analyze-linkage.h:
+
+../link-grammar/and.h:
+
+../link-grammar/build-disjuncts.h:
+
+../link-grammar/constituents.h:
+
+../link-grammar/count.h:
+
+../link-grammar/error.h:
+
+../link-grammar/extract-links.h:
+
+../link-grammar/fast-match.h:
+
+../link-grammar/idiom.h:
+
+../link-grammar/massage.h:
+
+../link-grammar/post-process.h:
+
+../link-grammar/pp_knowledge.h:
+
+../link-grammar/pp_lexer.h:
+
+../link-grammar/pp_linkset.h:
+
+../link-grammar/preparation.h:
+
+../link-grammar/print.h:
+
+../link-grammar/print-util.h:
+
+../link-grammar/prune.h:
+
+../link-grammar/read-dict.h:
+
+../link-grammar/resources.h:
+
+../link-grammar/string-set.h:
+
+../link-grammar/tokenize.h:
+
+../link-grammar/utilities.h:
+
+../link-grammar/word-file.h:
+
+../link-grammar/word-utils.h:
+
+error.h:
+
+utilities.h:

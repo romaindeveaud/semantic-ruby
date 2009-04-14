@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: en.rb</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>en.rb</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>lib/linguistics/en.rb
+        &nbsp;(<a href="http://deveiate.org/projects/Linguistics/browser/trunk/lib/linguistics/en.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Thu Feb 26 12:34:56 +0000 2009</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1><a href="../../../classes/Linguistics/EN.html">Linguistics::EN</a></h1>
+<p>
+This module contains English-language linguistic functions for the <a
+href="../../../classes/Linguistics.html">Linguistics</a> module. It can be
+either loaded directly, or by passing some variant of &#8216;en&#8217; or
+&#8216;eng&#8217; to the Linguistics::use method.
+</p>
+<p>
+The functions contained by the module provide:
+</p>
+<h2>Plural Inflections</h2>
+<p>
+Plural forms of all nouns, most verbs, and some adjectives are provided.
+Where appropriate, &quot;classical&quot; variants (for example:
+&quot;brother&quot; -&gt; &quot;brethren&quot;, &quot;dogma&quot; -&gt;
+&quot;dogmata&quot;, etc.) are also provided.
+</p>
+<p>
+These can be accessed via the #plural, #plural_noun, #plural_verb, and
+#plural_adjective methods.
+</p>
+<h2>Indefinite Articles</h2>
+<p>
+Pronunciation-based &quot;a&quot;/&quot;an&quot; selection is provided for
+all English words, and most initialisms.
+</p>
+<p>
+See: #a, #an, and #no.
+</p>
+<h2>Numbers to Words</h2>
+<p>
+Conversion from Numeric values to words are supported using the American
+&quot;thousands&quot; system. E.g., 2561 =&gt; &quot;two thousand, five
+hundred and sixty-one&quot;.
+</p>
+<p>
+See the #numwords method.
+</p>
+<h2>Ordinals</h2>
+<p>
+It is also possible to inflect numerals (1,2,3) and number words
+(&quot;one&quot;, &quot;two&quot;, &quot;three&quot;) to ordinals (1st,
+2nd, 3rd) and ordinates (&quot;first&quot;, &quot;second&quot;,
+&quot;third&quot;).
+</p>
+<h2>Conjunctions</h2>
+<p>
+This module also supports the creation of English conjunctions from Arrays
+of Strings or objects which respond to the #to_s message. Eg.,
+</p>
+<pre>
+  %w{cow pig chicken cow dog cow duck duck moose}.en.conjunction
+    ==&gt; &quot;three cows, two ducks, a pig, a chicken, a dog, and a moose&quot;
+</pre>
+<h2>Infinitives</h2>
+<p>
+Returns the infinitive form of English verbs:
+</p>
+<pre>
+ &quot;dodging&quot;.en.infinitive
+   ==&gt; &quot;dodge&quot;
+</pre>
+<h2>Authors</h2>
+<ul>
+<li>Michael Granger &lt;ged@FaerieMUD.org&gt;
+
+</li>
+</ul>
+<h2>Copyright</h2>
+<p>
+This module is copyright (c) 2003-2005 The FaerieMUD Consortium. All rights
+reserved.
+</p>
+<p>
+This module is free software. You may use, modify, and/or redistribute this
+software under the terms of the Perl Artistic License. (See <a
+href="http://language.perl.com/misc/Artistic.html">language.perl.com/misc/Artistic.html</a>)
+</p>
+<p>
+The inflection functions of this module were adapted from Damien
+Conway&#8216;s Lingua::EN::Inflect Perl module:
+</p>
+<pre>
+  Copyright (c) 1997-2000, Damian Conway. All Rights Reserved.
+  This module is free software. It may be used, redistributed
+    and/or modified under the same terms as Perl itself.
+</pre>
+<p>
+The conjunctions code was adapted from the Lingua::Conjunction Perl module
+written by Robert Rothenberg and Damian Conway, which has no copyright
+statement included.
+</p>
+<h2>Version</h2>
+<pre>
+ $Id: en.rb 99 2008-09-06 05:20:07Z deveiant $
+</pre>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

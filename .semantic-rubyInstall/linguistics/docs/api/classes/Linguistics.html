@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: Linguistics</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">Linguistics</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/lib/linguistics_rb.html">
+                lib/linguistics.rb
+                </a>
+        &nbsp;(<a href="http://deveiate.org/projects/Linguistics/browser/trunk/lib/linguistics.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/linguistics/iso639_rb.html">
+                lib/linguistics/iso639.rb
+                </a>
+        &nbsp;(<a href="http://deveiate.org/projects/Linguistics/browser/trunk/lib/linguistics/iso639.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+A language-independent framework for adding linguistics functions to Ruby
+classes.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000013">NUM</a>&nbsp;&nbsp;
+      <a href="#M000011">NUM=</a>&nbsp;&nbsp;
+      <a href="#M000014">classical=</a>&nbsp;&nbsp;
+      <a href="#M000015">classical?</a>&nbsp;&nbsp;
+      <a href="#M000008">const_missing</a>&nbsp;&nbsp;
+      <a href="#M000003">extend_object</a>&nbsp;&nbsp;
+      <a href="#M000004">included</a>&nbsp;&nbsp;
+      <a href="#M000007">install_delegator_proxy</a>&nbsp;&nbsp;
+      <a href="#M000006">install_language_proxy</a>&nbsp;&nbsp;
+      <a href="#M000005">make_language_proxy</a>&nbsp;&nbsp;
+      <a href="#M000012">num</a>&nbsp;&nbsp;
+      <a href="#M000010">num=</a>&nbsp;&nbsp;
+      <a href="#M000009">use</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+    <div id="class-list">
+      <h3 class="section-bar">Classes and Modules</h3>
+
+      Module <a href="Linguistics/EN.html" class="link">Linguistics::EN</a><br />
+Class <a href="Linguistics/LanguageProxyClass.html" class="link">Linguistics::LanguageProxyClass</a><br />
+
+    </div>
+
+    <div id="constants-list">
+      <h3 class="section-bar">Constants</h3>
+
+      <div class="name-list">
+        <table summary="Constants">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">SVNRev</td>
+          <td>=</td>
+          <td class="context-item-value">%q$Rev: 99 $</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Subversion revision
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">SVNid</td>
+          <td>=</td>
+          <td class="context-item-value">%q$Id: linguistics.rb 99 2008-09-06 05:20:07Z deveiant $</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Subversion ID
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">VERSION</td>
+          <td>=</td>
+          <td class="context-item-value">'1.0.6'</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Release version
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">DefaultLanguages</td>
+          <td>=</td>
+          <td class="context-item-value">[]</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Language module implementors should do something like:
+
+<pre>
+  Linguistics::DefaultLanguages.push( :ja ) # or whatever
+</pre>
+<p>
+so that direct requiring of a language module sets the default.
+</p>
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">DefaultExtClasses</td>
+          <td>=</td>
+          <td class="context-item-value">[String, Numeric, Array]</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+The list of Classes to add linguistic behaviours to.
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">LanguageCodes</td>
+          <td>=</td>
+          <td class="context-item-value">{}</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Hash of ISO639 2- and 3-letter language codes
+
+</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000008" class="method-detail">
+        <a name="M000008"></a>
+
+        <div class="method-heading">
+          <a href="#M000008" class="method-signature">
+          <span class="method-name">const_missing</span><span class="method-args">( sym )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Handle auto-magic usage
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000008-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000008-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/linguistics.rb, line 248</span>
+248:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span><span class="ruby-operator">::</span><span class="ruby-identifier">const_missing</span>( <span class="ruby-identifier">sym</span> )
+249:         <span class="ruby-identifier">load_language</span>( <span class="ruby-identifier">sym</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">downcase</span> )
+250:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000003" class="method-detail">
+        <a name="M000003"></a>
+
+        <div class="method-heading">
+          <a href="#M000003" class="method-signature">
+          <span class="method-name">extend_object</span><span class="method-args">( obj )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Extend the specified target object with one or more language proxy methods,
+each of which provides access to one or more linguistic methods for that
+language.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000003-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000003-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/linguistics.rb, line 121</span>
+121:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span><span class="ruby-operator">::</span><span class="ruby-identifier">extend_object</span>( <span class="ruby-identifier">obj</span> )
+122:         <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">obj</span>
+123:         <span class="ruby-keyword kw">when</span> <span class="ruby-constant">Class</span>
+124:             <span class="ruby-comment cmt"># $stderr.puts &quot;Extending %p&quot; % obj if $DEBUG</span>
+125:             <span class="ruby-keyword kw">self</span><span class="ruby-operator">::</span><span class="ruby-identifier">install_language_proxy</span>( <span class="ruby-identifier">obj</span> )
+126:         <span class="ruby-keyword kw">else</span>
+127:             <span class="ruby-identifier">sclass</span> = (<span class="ruby-keyword kw">class</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">obj</span>; <span class="ruby-keyword kw">self</span>; <span class="ruby-keyword kw">end</span>)
+128:             <span class="ruby-comment cmt"># $stderr.puts &quot;Extending a object's metaclass: %p&quot; % obj if $DEBUG</span>
+129:             <span class="ruby-keyword kw">self</span><span class="ruby-operator">::</span><span class="ruby-identifier">install_language_proxy</span>( <span class="ruby-identifier">sclass</span> )
+130:         <span class="ruby-keyword kw">end</span>
+131: 
+132:         <span class="ruby-keyword kw">super</span>
+133:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000004" class="method-detail">
+        <a name="M000004"></a>
+
+        <div class="method-heading">
+          <a href="#M000004" class="method-signature">
+          <span class="method-name">included</span><span class="method-args">( mod )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Extend the including class with linguistics proxy methods.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000004-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000004-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/linguistics.rb, line 137</span>
+137:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span><span class="ruby-operator">::</span><span class="ruby-identifier">included</span>( <span class="ruby-identifier">mod</span> )
+138:         <span class="ruby-comment cmt"># $stderr.puts &quot;Including Linguistics in %p&quot; % mod if $DEBUG</span>
+139:         <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">extend</span>( <span class="ruby-keyword kw">self</span> ) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">mod</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Linguistics</span>
+140:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000007" class="method-detail">
+        <a name="M000007"></a>
+
+        <div class="method-heading">
+          <a href="#M000007" class="method-signature">
+          <span class="method-name">install_delegator_proxy</span><span class="method-args">( klass, langcode )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Install a regular proxy method in the given klass that will delegate calls
+to missing method to the languageProxy for the given <tt>language</tt>.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000007-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000007-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/linguistics.rb, line 199</span>
+199:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span><span class="ruby-operator">::</span><span class="ruby-identifier">install_delegator_proxy</span>( <span class="ruby-identifier">klass</span>, <span class="ruby-identifier">langcode</span> )
+200:         <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-value str">&quot;Missing langcode&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">langcode</span>.<span class="ruby-identifier">nil?</span>
+201: 
+202:         <span class="ruby-comment cmt"># Alias any currently-extant</span>
+203:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">instance_methods</span>( <span class="ruby-keyword kw">false</span> ).<span class="ruby-identifier">include?</span>( <span class="ruby-value str">&quot;method_missing&quot;</span> )
+204:             <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">module_eval</span> <span class="ruby-value str">%{
+205:                 alias_method :__orig_method_missing, :method_missing
+206:             }</span>
+207:         <span class="ruby-keyword kw">end</span>
+208: 
+209:         <span class="ruby-comment cmt"># Add the #method_missing method that auto-installs delegator methods</span>
+210:         <span class="ruby-comment cmt"># for methods supported by the linguistic proxy objects.</span>
+211:         <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">module_eval</span> <span class="ruby-node">%{
+212:             def method_missing( sym, *args, &amp;block )
+213: 
+214:                 # If the linguistic delegator answers the message, install a
+215:                 # delegator method and call it.
+216:                 if self.send( :#{langcode} ).respond_to?( sym )
+217: 
+218:                     # $stderr.puts &quot;Installing linguistic delegator method \#{sym} &quot; \
+219:                     #  &quot;for the '#{langcode}' proxy&quot;
+220:                     self.class.module_eval %{
+221:                         def \#{sym}( *args, &amp;block )
+222:                             self.#{langcode}.\#{sym}( *args, &amp;block )
+223:                         end
+224:                     }
+225:                     self.method( sym ).call( *args, &amp;block )
+226: 
+227:                 # Otherwise either call the overridden proxy method if there is
+228:                 # one, or just let our parent deal with it.
+229:                 else
+230:                     if self.respond_to?( :__orig_method_missing )
+231:                         return self.__orig_method_missing( sym, *args, &amp;block )
+232:                     else
+233:                         super( sym, *args, &amp;block )
+234:                     end
+235:                 end
+236:             end
+237:         }</span>
+238:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000006" class="method-detail">
+        <a name="M000006"></a>
+
+        <div class="method-heading">
+          <a href="#M000006" class="method-signature">
+          <span class="method-name">install_language_proxy</span><span class="method-args">( klass, languages=DefaultLanguages )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Install the language proxy
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000006-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000006-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/linguistics.rb, line 154</span>
+154:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span><span class="ruby-operator">::</span><span class="ruby-identifier">install_language_proxy</span>( <span class="ruby-identifier">klass</span>, <span class="ruby-identifier">languages</span>=<span class="ruby-constant">DefaultLanguages</span> )
+155:         <span class="ruby-identifier">languages</span>.<span class="ruby-identifier">replace</span>( <span class="ruby-constant">DefaultLanguages</span> ) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">languages</span>.<span class="ruby-identifier">empty?</span>
+156: 
+157:         <span class="ruby-comment cmt"># Create an languageProxy class for each language specified</span>
+158:         <span class="ruby-identifier">languages</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">lang</span><span class="ruby-operator">|</span>
+159:             <span class="ruby-comment cmt"># $stderr.puts &quot;Extending the %p class with %p&quot; %</span>
+160:             <span class="ruby-comment cmt">#    [ klass, lang ] if $DEBUG</span>
+161: 
+162:             <span class="ruby-comment cmt"># Load the language module (skipping to the next if it's already</span>
+163:             <span class="ruby-comment cmt"># loaded), make a languageProxy class that delegates to it, and</span>
+164:             <span class="ruby-comment cmt"># figure out what the languageProxy method will be called.</span>
+165:             <span class="ruby-identifier">mod</span> = <span class="ruby-identifier">load_language</span>( <span class="ruby-identifier">lang</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">downcase</span> )
+166:             <span class="ruby-identifier">ifaceMeth</span> = <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">sub</span>( <span class="ruby-regexp re">/.*:/</span>, <span class="ruby-value str">''</span> )
+167:             <span class="ruby-identifier">languageProxyClass</span> = <span class="ruby-identifier">make_language_proxy</span>( <span class="ruby-identifier">mod</span> )
+168: 
+169:             <span class="ruby-comment cmt"># Install a hash for languageProxy classes and an accessor for the</span>
+170:             <span class="ruby-comment cmt"># hash if it's not already present.</span>
+171:             <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">klass</span>.<span class="ruby-identifier">class_variables</span>.<span class="ruby-identifier">include?</span>( <span class="ruby-value str">&quot;@@__languageProxy_class&quot;</span> )
+172:                 <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">module_eval</span> <span class="ruby-value str">%{
+173:                     @@__languageProxy_class = {}
+174:                     def self::__languageProxy_class; @@__languageProxy_class; end
+175:                 }</span>, <span class="ruby-keyword kw">__FILE__</span>, <span class="ruby-keyword kw">__LINE__</span>
+176:             <span class="ruby-keyword kw">end</span>
+177: 
+178:             <span class="ruby-comment cmt"># Merge the current languageProxy into the hash</span>
+179:             <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">__languageProxy_class</span>.<span class="ruby-identifier">merge!</span>( <span class="ruby-identifier">ifaceMeth</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">languageProxyClass</span> )
+180: 
+181:             <span class="ruby-comment cmt"># Set the language-code proxy method for the class unless it has one</span>
+182:             <span class="ruby-comment cmt"># already</span>
+183:             <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">instance_methods</span>(<span class="ruby-keyword kw">true</span>).<span class="ruby-identifier">include?</span>( <span class="ruby-identifier">ifaceMeth</span> )
+184:                 <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">module_eval</span> <span class="ruby-node">%{
+185:                     def #{ifaceMeth}
+186:                         @__#{ifaceMeth}_languageProxy ||=
+187:                             self.class.__languageProxy_class[&quot;#{ifaceMeth}&quot;].
+188:                             new( self )
+189:                     end
+190:                 }</span>, <span class="ruby-keyword kw">__FILE__</span>, <span class="ruby-keyword kw">__LINE__</span>
+191:             <span class="ruby-keyword kw">end</span>
+192:         <span class="ruby-keyword kw">end</span>
+193:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000005" class="method-detail">
+        <a name="M000005"></a>
+
+        <div class="method-heading">
+          <a href="#M000005" class="method-signature">
+          <span class="method-name">make_language_proxy</span><span class="method-args">( mod )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Make an languageProxy class that encapsulates all of the inflect operations
+using the given language module.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000005-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000005-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/linguistics.rb, line 145</span>
+145:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span><span class="ruby-operator">::</span><span class="ruby-identifier">make_language_proxy</span>( <span class="ruby-identifier">mod</span> )
+146:         <span class="ruby-comment cmt"># $stderr.puts &quot;Making language proxy for mod %p&quot; % [mod]</span>
+147:         <span class="ruby-constant">Class</span><span class="ruby-operator">::</span><span class="ruby-identifier">new</span>( <span class="ruby-constant">LanguageProxyClass</span> ) {
+148:             <span class="ruby-ivar">@langmod</span> = <span class="ruby-identifier">mod</span>
+149:         }
+150:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000013" class="method-detail">
+        <a name="M000013"></a>
+
+        <div class="method-heading">
+          <span class="method-name">NUM</span><span class="method-args">()</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Linguistics.html#M000012">#num</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000011" class="method-detail">
+        <a name="M000011"></a>
+
+        <div class="method-heading">
+          <span class="method-name">NUM=</span><span class="method-args">( val )</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Linguistics.html#M000012">#num</a>=
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000014" class="method-detail">
+        <a name="M000014"></a>
+
+        <div class="method-heading">
+          <a href="#M000014" class="method-signature">
+          <span class="method-name">classical=</span><span class="method-args">( val )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Set the &#8216;classical pluralizations&#8217; flag to <tt>val</tt>.
+Setting is local to calling thread.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000014-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000014-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/linguistics.rb, line 331</span>
+331:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">classical=</span>( <span class="ruby-identifier">val</span> )
+332:         <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">current</span>[<span class="ruby-identifier">:classical_plurals</span>] = <span class="ruby-identifier">val</span>
+333:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000015" class="method-detail">
+        <a name="M000015"></a>
+
+        <div class="method-heading">
+          <a href="#M000015" class="method-signature">
+          <span class="method-name">classical?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return the value of the &#8216;classical pluralizations&#8217; flag.
+Setting is local to calling thread.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000015-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000015-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/linguistics.rb, line 337</span>
+337:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">classical?</span>
+338:         <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">current</span>[<span class="ruby-identifier">:classical_plurals</span>] <span class="ruby-operator">?</span> <span class="ruby-keyword kw">true</span> <span class="ruby-operator">:</span> <span class="ruby-keyword kw">false</span>
+339:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000012" class="method-detail">
+        <a name="M000012"></a>
+
+        <div class="method-heading">
+          <a href="#M000012" class="method-signature">
+          <span class="method-name">num</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Get the default count for all unspecified plurals. Setting is local to
+calling thread.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000012-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000012-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/linguistics.rb, line 323</span>
+323:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">num</span>
+324:         <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">current</span>[<span class="ruby-identifier">:persistent_count</span>]
+325:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000010" class="method-detail">
+        <a name="M000010"></a>
+
+        <div class="method-heading">
+          <a href="#M000010" class="method-signature">
+          <span class="method-name">num=</span><span class="method-args">( val )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Set the default count for all unspecified plurals to <tt>val</tt>. Setting
+is local to calling thread.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000010-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000010-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/linguistics.rb, line 316</span>
+316:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">num=</span>( <span class="ruby-identifier">val</span> )
+317:         <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">current</span>[<span class="ruby-identifier">:persistent_count</span>] = <span class="ruby-identifier">val</span>
+318:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000009" class="method-detail">
+        <a name="M000009"></a>
+
+        <div class="method-heading">
+          <a href="#M000009" class="method-signature">
+          <span class="method-name">use</span><span class="method-args">( *languages )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Add linguistics functions for the specified languages to Ruby&#8216;s core
+classes. The interface to all linguistic functions for a given language is
+through a method which is the same the language&#8216;s international 2- or
+3-letter code (ISO 639). You can also specify a Hash of configuration
+options which control which classes are extended:
+</p>
+<dl>
+<dt><b>:classes</b></dt><dd>Specify the classes which are to be extended. If this is not specified, the
+Class objects in Linguistics::DefaultExtClasses (an <a
+href="Array.html">Array</a>) are extended.
+
+</dd>
+<dt><b>:installProxy</b></dt><dd>Install a proxy method in each of the classes which are to be extended
+which will search for missing methods in the languageProxy for the language
+code specified as the value. This allows linguistics methods to be called
+directly on extended objects directly (e.g., 12.en.ordinal becomes
+12.ordinal). Obviously, methods which would collide with the object&#8216;s
+builtin methods will need to be invoked through the languageProxy. Any
+existing proxy methods in the extended classes will be preserved.
+
+</dd>
+</dl>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000009-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000009-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/linguistics.rb, line 276</span>
+276:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">use</span>( <span class="ruby-operator">*</span><span class="ruby-identifier">languages</span> )
+277:         <span class="ruby-identifier">config</span> = {}
+278:         <span class="ruby-identifier">config</span> = <span class="ruby-identifier">languages</span>.<span class="ruby-identifier">pop</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">languages</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">is_a?</span>( <span class="ruby-constant">Hash</span> )
+279: 
+280:         <span class="ruby-identifier">classes</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">key?</span>( <span class="ruby-identifier">:classes</span> ) <span class="ruby-operator">?</span> <span class="ruby-identifier">config</span>[<span class="ruby-identifier">:classes</span>] <span class="ruby-operator">:</span> <span class="ruby-constant">DefaultExtClasses</span>
+281:         <span class="ruby-identifier">classes</span> = [ <span class="ruby-identifier">classes</span> ] <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">classes</span>.<span class="ruby-identifier">is_a?</span>( <span class="ruby-constant">Array</span> )
+282: 
+283:         <span class="ruby-comment cmt"># Install the languageProxy in each class.</span>
+284:         <span class="ruby-identifier">classes</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">klass</span><span class="ruby-operator">|</span>
+285: 
+286:             <span class="ruby-comment cmt"># Create an languageProxy class for each installed language</span>
+287:             <span class="ruby-identifier">install_language_proxy</span>( <span class="ruby-identifier">klass</span>, <span class="ruby-identifier">languages</span> )
+288: 
+289:             <span class="ruby-comment cmt"># Install the delegator proxy if configured</span>
+290:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">config</span>[<span class="ruby-identifier">:installProxy</span>]
+291:                 <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">config</span>[<span class="ruby-identifier">:installProxy</span>]
+292:                 <span class="ruby-keyword kw">when</span> <span class="ruby-constant">Symbol</span>
+293:                     <span class="ruby-identifier">langcode</span> = <span class="ruby-identifier">config</span>[<span class="ruby-identifier">:installProxy</span>]
+294:                 <span class="ruby-keyword kw">when</span> <span class="ruby-constant">String</span>
+295:                     <span class="ruby-identifier">langcode</span> = <span class="ruby-identifier">config</span>[<span class="ruby-identifier">:installProxy</span>].<span class="ruby-identifier">intern</span>
+296:                 <span class="ruby-keyword kw">when</span> <span class="ruby-constant">TrueClass</span>
+297:                     <span class="ruby-identifier">langcode</span> = <span class="ruby-identifier">languages</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">DefaultLanguages</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">:en</span>
+298:                 <span class="ruby-keyword kw">else</span>
+299:                     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>,
+300:                         <span class="ruby-value str">&quot;Unexpected value %p for :installProxy&quot;</span> <span class="ruby-operator">%</span>
+301:                         <span class="ruby-identifier">config</span>[<span class="ruby-identifier">:installProxy</span>]
+302:                 <span class="ruby-keyword kw">end</span>
+303: 
+304:                 <span class="ruby-identifier">install_delegator_proxy</span>( <span class="ruby-identifier">klass</span>, <span class="ruby-identifier">langcode</span> )
+305:             <span class="ruby-keyword kw">end</span>
+306:         }
+307:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

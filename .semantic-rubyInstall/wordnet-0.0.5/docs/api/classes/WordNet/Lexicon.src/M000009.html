@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>lookup_synsets_by_key (WordNet::Lexicon)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/wordnet/lexicon.rb, line 224</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">lookup_synsets_by_key</span>( <span class="ruby-operator">*</span><span class="ruby-identifier">keys</span> )
+                <span class="ruby-identifier">synsets</span> = []
+
+                <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
+                        <span class="ruby-identifier">raise</span> <span class="ruby-constant">WordNet</span><span class="ruby-operator">::</span><span class="ruby-constant">LookupError</span>, <span class="ruby-node">&quot;Failed lookup of synset '#{key}':&quot;</span>\
+                                <span class="ruby-value str">&quot;No such synset&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@data_db</span>.<span class="ruby-identifier">key?</span>( <span class="ruby-identifier">key</span> )
+
+                        <span class="ruby-identifier">data</span> = <span class="ruby-ivar">@data_db</span>[ <span class="ruby-identifier">key</span> ]
+                        <span class="ruby-identifier">offset</span>, <span class="ruby-identifier">part_of_speech</span> = <span class="ruby-identifier">key</span>.<span class="ruby-identifier">split</span>( <span class="ruby-regexp re">/%/</span>, <span class="ruby-value">2</span> )
+                        <span class="ruby-identifier">synsets</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">WordNet</span><span class="ruby-operator">::</span><span class="ruby-constant">Synset</span><span class="ruby-operator">::</span><span class="ruby-identifier">new</span>( <span class="ruby-keyword kw">self</span>, <span class="ruby-identifier">offset</span>, <span class="ruby-identifier">part_of_speech</span>, <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">data</span> )
+                }
+
+                <span class="ruby-keyword kw">return</span> <span class="ruby-operator">*</span><span class="ruby-identifier">synsets</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

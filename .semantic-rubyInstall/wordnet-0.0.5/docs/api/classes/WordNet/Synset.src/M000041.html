@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>frames (WordNet::Synset)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/wordnet/synset.rb, line 701</span>
+                                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">frames</span>
+                                        <span class="ruby-identifier">frarray</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">frameslist</span>.<span class="ruby-identifier">split</span>( <span class="ruby-constant">WordNet</span><span class="ruby-operator">::</span><span class="ruby-constant">SUB_DELIM_RE</span> )
+                                        <span class="ruby-identifier">verbFrames</span> = []
+
+                                        <span class="ruby-ivar">@mutex</span>.<span class="ruby-identifier">synchronize</span>( <span class="ruby-constant">Sync</span><span class="ruby-operator">::</span><span class="ruby-constant">SH</span> ) {
+                                                <span class="ruby-identifier">frarray</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">fr</span><span class="ruby-operator">|</span>
+                                                        <span class="ruby-identifier">fnum</span>, <span class="ruby-identifier">wnum</span> = <span class="ruby-identifier">fr</span>.<span class="ruby-identifier">split</span>
+                                                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">wnum</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+                                                                <span class="ruby-identifier">wordtext</span> = <span class="ruby-value str">&quot; (&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">words</span>[<span class="ruby-identifier">wnum</span>] <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;)&quot;</span>
+                                                                <span class="ruby-identifier">verbFrames</span>.<span class="ruby-identifier">push</span> <span class="ruby-constant">VERB_SENTS</span>[ <span class="ruby-identifier">fnum</span> ] <span class="ruby-operator">+</span> <span class="ruby-identifier">wordtext</span>
+                                                        <span class="ruby-keyword kw">else</span>
+                                                                <span class="ruby-identifier">verbFrames</span>.<span class="ruby-identifier">push</span> <span class="ruby-constant">VERB_SENTS</span>[ <span class="ruby-identifier">fnum</span> ]
+                                                        <span class="ruby-keyword kw">end</span>
+                                                }
+                                        }
+
+                                        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">verbFrames</span>
+                                <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

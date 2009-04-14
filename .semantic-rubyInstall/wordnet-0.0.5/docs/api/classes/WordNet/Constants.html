@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: WordNet::Constants</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">WordNet::Constants</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/lib/wordnet/constants_rb.html">
+                lib/wordnet/constants.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+Constant-container module
+</p>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+    <div id="constants-list">
+      <h3 class="section-bar">Constants</h3>
+
+      <div class="name-list">
+        <table summary="Constants">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">SYNTACTIC_CATEGORIES</td>
+          <td>=</td>
+          <td class="context-item-value">{                         :noun                =&gt; &quot;n&quot;,                         :verb                =&gt; &quot;v&quot;,                         :adjective   =&gt; &quot;a&quot;,                         :adverb              =&gt; &quot;r&quot;,                         :other               =&gt; &quot;s&quot;,                 }</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+<a href="Synset.html">Synset</a> syntactic-category names -&gt; indicators
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">SYNTACTIC_SYMBOLS</td>
+          <td>=</td>
+          <td class="context-item-value">SYNTACTIC_CATEGORIES.invert</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Syntactic-category indicators -&gt; names
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">POINTER_TYPES</td>
+          <td>=</td>
+          <td class="context-item-value">{                         :antonym             =&gt; '!',                         :hypernym            =&gt; '@',                         :entailment          =&gt; '*',                         :hyponym             =&gt; '~',                         :meronym             =&gt; '%',                         :holonym             =&gt; '#',                         :cause                       =&gt; '&gt;',                         :verb_group          =&gt; %{$},                         :similar_to          =&gt; '&amp;',                         :participle          =&gt; '&lt;',                         :pertainym           =&gt; '\\',                         :attribute           =&gt; '=',                         :derived_from        =&gt; '\\',                         :see_also            =&gt; '^',                         :derivation          =&gt; '+',                         :domain                      =&gt; ';',                         :member                      =&gt; '-',                 }</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+<a href="Synset.html">Synset</a> pointer typenames -&gt; indicators
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">POINTER_SYMBOLS</td>
+          <td>=</td>
+          <td class="context-item-value">POINTER_TYPES.invert</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+<a href="Synset.html">Synset</a> pointer indicator -&gt; typename
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">HYPERNYM_TYPES</td>
+          <td>=</td>
+          <td class="context-item-value">{                         nil             =&gt; '@', # Install non-subtype methods, too                         :instance       =&gt; '@i',                 }</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Hypernym synset pointer types
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">HYPERNYM_SYMBOLS</td>
+          <td>=</td>
+          <td class="context-item-value">HYPERNYM_TYPES.invert</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Hypernym indicator -&gt; type map
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">HYPONYM_TYPES</td>
+          <td>=</td>
+          <td class="context-item-value">{                         nil             =&gt; '~', # Install non-subtype methods, too                         :instance       =&gt; '~i',                 }</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Hyponym synset pointer types
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">HYPONYM_SYMBOLS</td>
+          <td>=</td>
+          <td class="context-item-value">HYPONYM_TYPES.invert</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Hyponym indicator -&gt; type map
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">MERONYM_TYPES</td>
+          <td>=</td>
+          <td class="context-item-value">{                         :member                      =&gt; '%m',                         :stuff                       =&gt; '%s',                         :portion             =&gt; '%o',                         :component           =&gt; '%p',                         :feature             =&gt; '%f',                         :phase                       =&gt; '%a',                         :place                       =&gt; '%l',                 }</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Meronym synset pointer types
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">MERONYM_SYMBOLS</td>
+          <td>=</td>
+          <td class="context-item-value">MERONYM_TYPES.invert</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Meronym indicator -&gt; type map
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">HOLONYM_TYPES</td>
+          <td>=</td>
+          <td class="context-item-value">{                         :member                      =&gt; '#m',                         :stuff                       =&gt; '#s',                         :portion             =&gt; '#o',                         :component           =&gt; '#p',                         :feature             =&gt; '#f',                         :phase                       =&gt; '#a',                         :place                       =&gt; '#l',                 }</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Holonym synset pointer types
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">HOLONYM_SYMBOLS</td>
+          <td>=</td>
+          <td class="context-item-value">HOLONYM_TYPES.invert</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Holonym indicator -&gt; type map
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">DOMAIN_TYPES</td>
+          <td>=</td>
+          <td class="context-item-value">{                         :category            =&gt; ';c',                         :region                      =&gt; ';r',                         :usage                       =&gt; ';u',                 }</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Domain synset pointer types
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">DomainSymbols</td>
+          <td>=</td>
+          <td class="context-item-value">DOMAIN_TYPES.invert</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Domain indicator -&gt; type map
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">MEMBER_TYPES</td>
+          <td>=</td>
+          <td class="context-item-value">{                         :category            =&gt; '-c',                         :region                      =&gt; '-r',                         :usage                       =&gt; '-u',                 }</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Member synset pointer types
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">MEMBER_SYMBOLS</td>
+          <td>=</td>
+          <td class="context-item-value">MEMBER_TYPES.invert</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Member indicator -&gt; type map
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">POINTER_SUBTYPES</td>
+          <td>=</td>
+          <td class="context-item-value">{                         :hyponym    =&gt; HYPONYM_TYPES,                         :hypernym   =&gt; HYPERNYM_TYPES,                         :meronym     =&gt; MERONYM_TYPES,                         :holonym     =&gt; HOLONYM_TYPES,                         :member              =&gt; MEMBER_TYPES,                         :domain              =&gt; DOMAIN_TYPES,                 }</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Map of primary types to maps of their subtypes
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">DELIM</td>
+          <td>=</td>
+          <td class="context-item-value">'||'</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Record-part delimiter
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">DELIM_RE</td>
+          <td>=</td>
+          <td class="context-item-value">Regexp::new( Regexp::quote(DELIM) )</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">SUB_DELIM</td>
+          <td>=</td>
+          <td class="context-item-value">'|'</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Record-subpart delimiter
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">SUB_DELIM_RE</td>
+          <td>=</td>
+          <td class="context-item-value">Regexp::new( Regexp::quote(SUB_DELIM) )</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">LEXFILES</td>
+          <td>=</td>
+          <td class="context-item-value">[                         &quot;adj.all&quot;,                         &quot;adj.pert&quot;,                                  &quot;adv.all&quot;,                                   &quot;noun.Tops&quot;,                                 &quot;noun.act&quot;,                                  &quot;noun.animal&quot;,                               &quot;noun.artifact&quot;,                                 &quot;noun.attribute&quot;,                                &quot;noun.body&quot;,                                 &quot;noun.cognition&quot;,                                &quot;noun.communication&quot;,                            &quot;noun.event&quot;,                                &quot;noun.feeling&quot;,                              &quot;noun.food&quot;,                                 &quot;noun.group&quot;,                                &quot;noun.location&quot;,                                 &quot;noun.motive&quot;,                               &quot;noun.object&quot;,                               &quot;noun.person&quot;,                               &quot;noun.phenomenon&quot;,                               &quot;noun.plant&quot;,                                &quot;noun.possession&quot;,                               &quot;noun.process&quot;,                              &quot;noun.quantity&quot;,                                 &quot;noun.relation&quot;,                                 &quot;noun.shape&quot;,                                &quot;noun.state&quot;,                                &quot;noun.substance&quot;,                                &quot;noun.time&quot;,                                 &quot;verb.body&quot;,                                 &quot;verb.change&quot;,                               &quot;verb.cognition&quot;,                                &quot;verb.communication&quot;,                            &quot;verb.competition&quot;,                              &quot;verb.consumption&quot;,                              &quot;verb.contact&quot;,                              &quot;verb.creation&quot;,                                 &quot;verb.emotion&quot;,                              &quot;verb.motion&quot;,                               &quot;verb.perception&quot;,                         &quot;verb.possession&quot;,                               &quot;verb.social&quot;,                               &quot;verb.stative&quot;,                              &quot;verb.weather&quot;,                              &quot;adj.ppl&quot;</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Lexicographer file index &#8212; from lexnames(5WN)
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">VERB_SENTS</td>
+          <td>=</td>
+          <td class="context-item-value">[                         &quot;&quot;,                         &quot;Something ----s&quot;,                         &quot;Somebody ----s&quot;,                         &quot;It is ----ing&quot;,                         &quot;Something is ----ing PP&quot;,                         &quot;Something ----s something Adjective/Noun&quot;,                         &quot;Something ----s Adjective/Noun&quot;,                         &quot;Somebody ----s Adjective&quot;,                         &quot;Somebody ----s something&quot;,                         &quot;Somebody ----s somebody&quot;,                         &quot;Something ----s somebody&quot;,                         &quot;Something ----s something&quot;,                         &quot;Something ----s to somebody&quot;,                         &quot;Somebody ----s on something&quot;,                         &quot;Somebody ----s somebody something&quot;,                         &quot;Somebody ----s something to somebody&quot;,                         &quot;Somebody ----s something from somebody&quot;,                         &quot;Somebody ----s somebody with something&quot;,                         &quot;Somebody ----s somebody of something&quot;,                         &quot;Somebody ----s something on somebody&quot;,                         &quot;Somebody ----s somebody PP&quot;,                         &quot;Somebody ----s something PP&quot;,                         &quot;Somebody ----s PP&quot;,                         &quot;Somebody's (body part) ----s&quot;,                         &quot;Somebody ----s somebody to INFINITIVE&quot;,                         &quot;Somebody ----s somebody INFINITIVE&quot;,                         &quot;Somebody ----s that CLAUSE&quot;,                         &quot;Somebody ----s to somebody&quot;,                         &quot;Somebody ----s to INFINITIVE&quot;,                         &quot;Somebody ----s whether INFINITIVE&quot;,                         &quot;Somebody ----s somebody into V-ing something&quot;,                         &quot;Somebody ----s something with something&quot;,                         &quot;Somebody ----s INFINITIVE&quot;,                         &quot;Somebody ----s VERB-ing&quot;,                         &quot;It ----s that CLAUSE&quot;,                         &quot;Something ----s INFINITIVE&quot;</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Verb sentences (?) &#8212; used in building verb frames.
+
+</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

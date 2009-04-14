@@ -4,22 +4,25 @@ I. Installation
 Before doing anything, you have to active Universe and Multiverse repositories. If you don't, the installation script won't work.
 Here is a tutorial : http://www.psychocats.net/ubuntu/sources.php.
 
-semantic-ruby requires a lot of librairies, which require themselves a lot of librairies or packages. It was very painful to install all these things by yourself, so we created a bash script which install everything you need to run our application. You MUST NOT run the install script with sudo.
+Here are the commands you have to run in order to install semantic-ruby (take care of being in the root directory : semantic-ruby/) :
 
-  $ sh install.sh
-  $ source ~/.bashrc
-
-It may be long depending on your internet connection and computer performances. You will be prompted two times, as the red text says, just type 'y' the first time, and 'Enter' without typing anything before the second time.
-
-If you have troubles running the install script, please send us a mail, we will reply as soon as possible.
-
-I. Installation
-
-  $ sudo ln -s $PWD/.semantic-rubyInstall/linkparser/link-grammar-4.4.1/link-grammar/.libs/liblink-grammar.so.4 /usr/lib/liblink-grammar.so.4
   $ sudo apt-get install ruby-full build-essential
-  $ sudo gem1.8 install rake
-  $ cd .semantic-rubyInstall/bdb-0.6.5/
+  $ sudo apt-get install libdb4.2-dev rubygems
+  $ sudo ln -s $PWD/.semantic-rubyInstall/linkparser/link-grammar-4.4.1/link-grammar/.libs/liblink-grammar.so.4 /usr/lib/liblink-grammar.so.4
+  $ sudo ln -s $PWD/.semantic-rubyInstall/wordnet-0.0.5/ruby-wordnet/ /usr/share/ruby-wordnet
+  $ sudo gem install activesupport
+  $ cd .semantic-rubyInstall/linkparser/link-grammar-4.4.1/
+  $ ./configure
+  $ make
   $ sudo make install
+  $ cd ../../bdb-0.6.5
+  $ sudo make install
+
+And that's it, you can run semantic-ruby simply by typing :
+  
+  $ ruby semantic-ruby.rb
+
+If you have troubles installing semantic-ruby, please send us a mail, we will reply as soon as possible.
 
 Ludovic Bonnefoy - lulupeon@gmail.com
 Romain Deveaud   - romain.deveaud@gmail.com

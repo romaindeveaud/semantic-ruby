@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: README</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>README</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>README
+        &nbsp;(<a href="http://deveiate.org/projects/Linguistics/browser/trunk/README"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Thu Feb 26 12:34:56 +0000 2009</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1><a href="../classes/Linguistics.html">Linguistics</a></h1>
+<h2>Authors</h2>
+<ul>
+<li>Michael Granger &lt;ged@FaerieMUD.org&gt;
+
+</li>
+<li>Martin Chase &lt;stillflame@FaerieMUD.org&gt;
+
+</li>
+</ul>
+<h2>Requirements</h2>
+<ul>
+<li>Ruby &gt;= 1.8.6
+
+</li>
+</ul>
+<h2>Optional</h2>
+<ul>
+<li>Ruby-WordNet (&gt;= 0.0.5) - adds integration for the Ruby binding for the
+WordNet® lexical refrence system.
+
+<p>
+URL: <a
+href="http://deveiate.org/projects/Ruby-WordNet">deveiate.org/projects/Ruby-WordNet</a>
+</p>
+</li>
+<li>LinkParser (&gt;= 1.0.2) - adds integration for the Ruby Link Grammar
+Parser by Martin Chase.
+
+<p>
+URL: <a
+href="http://dev.faeriemud.org/~stillflame/linkparse.html">dev.faeriemud.org/~stillflame/linkparse.html</a>
+Download: <a
+href="http://www.faeriemud.org/code/Ruby-LinkParser-0.0.4.tgz">www.faeriemud.org/code/Ruby-LinkParser-0.0.4.tgz</a>
+</p>
+</li>
+</ul>
+<h2>General Information</h2>
+<p>
+<a href="../classes/Linguistics.html">Linguistics</a> is a framework for
+building linguistic utilities for Ruby objects in any language. It includes
+a generic language-independant front end, a module for mapping language
+codes into language names, and a module which contains various
+English-language utilities.
+</p>
+<h3>Method Interface</h3>
+<p>
+The <a href="../classes/Linguistics.html">Linguistics</a> module comes with
+a language-independant mechanism for extending core Ruby classes with
+linguistic methods.
+</p>
+<p>
+It consists of three parts: a core linguistics module which contains the
+class-extension framework for languages, a generic inflector class that
+serves as a delegator for linguistic methods on Ruby objects, and one or
+more language-specific modules which contain the actual linguistic
+functions.
+</p>
+<p>
+The module works by adding a single instance method for each language named
+after the language&#8216;s two-letter code (or three-letter code, if no
+two-letter code is defined by ISO639) to various Ruby classes. This allows
+many language-specific methods to be added to objects without cluttering up
+the interface or risking collision between them, albeit at the cost of
+three or four more characters per method invocation.
+</p>
+<p>
+If you don&#8216;t like extending core Ruby classes, the language modules
+should also allow you to use them as a function library as well.
+</p>
+<p>
+For example, the English-language module contains a #plural function which
+can be accessed via a method on a core class:
+</p>
+<pre>
+  Linguistics::use( :en )
+  &quot;goose&quot;.en.plural
+  # =&gt; &quot;geese&quot;
+</pre>
+<p>
+or via the Linguistics::EN::plural function directly:
+</p>
+<pre>
+  include Linguistics::EN
+  plural( &quot;goose&quot; )
+  # =&gt; &quot;geese&quot;
+</pre>
+<p>
+The class-extension mechanism actually uses the functional interface behind
+the scenes.
+</p>
+<p>
+A new feature with the 0.02 release: You can now omit the language-code
+method for unambiguous methods by calling Linguistics::use with the
++:installProxy+ configuration key, with the language code of the language
+module whose methods you wish to be available. For example, instead of
+having to call:
+</p>
+<pre>
+  &quot;goose&quot;.en.plural
+</pre>
+<p>
+from the example above, you can now do this:
+</p>
+<pre>
+  Lingusitics::use( :en, :installProxy =&gt; :en )
+  &quot;goose&quot;.plural
+  # =&gt; &quot;geese&quot;
+</pre>
+<p>
+More about how this works in the documentation for Linguistics::use.
+</p>
+<h4>Adding Language Modules</h4>
+<p>
+To add a new language to the framework, create a file named the same as the
+ISO639 2- or 3-letter language code for the language you&#8216;re adding.
+It must be placed under lib/linguistics/ to be recognized by the
+linguistics module, but you can also just require it yourself prior to
+calling Linguistics::use(). This file should define a module under <a
+href="../classes/Linguistics.html">Linguistics</a> that is an all-caps
+version of the code used in the filename. Any methods you wish to be
+exposed to users should be declared as module functions (ie., using
+Module#module_function).
+</p>
+<p>
+You may also wish to add your module to the list of default languages by
+adding the appropriate symbol to the Linguistics::DefaultLanguages array.
+</p>
+<p>
+For example, to create a Portuguese-language module, create a file called
+&#8216;lib/linguistics/pt.rb&#8217; which contains the following:
+</p>
+<pre>
+  module Linguistics
+    module PT
+      Linguistics::DefaultLanguages &lt;&lt; :pt
+
+      module_function
+          &lt;language methods here&gt;
+    end
+  end
+</pre>
+<p>
+See the English language module (lib/linguistics/en.rb) for an example.
+</p>
+<h3>English Language Module</h3>
+<p>
+See the README.english file for a synopsis.
+</p>
+<p>
+The English-language module currently contains linguistic functions ported
+from a few excellent Perl modules:
+</p>
+<pre>
+  Lingua::EN::Inflect
+  Lingua::Conjunction
+  Lingua::EN::Infinitive
+</pre>
+<p>
+See the lib/linguistics/en.rb file for specific attributions.
+</p>
+<p>
+New with version 0.02: integration with the Ruby WordNet® and LinkParser
+modules (which must be installed separately).
+</p>
+<h2>To Do</h2>
+<ul>
+<li>I am planning on improving the results from the infinitive functions, which
+currently return useful results only part of the time. Investigations into
+additional stemming functions and some other strategies are ongoing.
+
+</li>
+<li>Martin Chase &lt;stillflame at FaerieMUD dot org&gt; is working on an
+integration module for his excellent work on a Ruby interface to the CMU
+Link Grammar (an english-sentence parser). This will make writing fairly
+accurate natural language parsers in Ruby much easier.
+
+</li>
+<li>Suggestions (and patches) for any of these items or additional features are
+welcomed.
+
+</li>
+</ul>
+<h2>Legal</h2>
+<p>
+This module is Open Source Software which is Copyright (c) 2003 by The
+FaerieMUD Consortium. All rights reserved.
+</p>
+<p>
+You may use, modify, and/or redistribute this software under the terms of
+the Perl Artistic License, a copy of which should have been included in
+this distribution (See the file Artistic). If it was not, a copy of it may
+be obtained from <a
+href="http://language.perl.com/misc/Artistic.html">language.perl.com/misc/Artistic.html</a>
+or <a
+href="http://www.faeriemud.org/artistic.html">www.faeriemud.org/artistic.html</a>).
+</p>
+<p>
+THIS PACKAGE IS PROVIDED &quot;AS IS&quot; AND WITHOUT ANY EXPRESS OR
+IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES
+OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+</p>
+<pre>
+ $Id: README 99 2008-09-06 05:20:07Z deveiant $
+</pre>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

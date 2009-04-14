@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>store_synset (WordNet::Lexicon)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/wordnet/lexicon.rb, line 287</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">store_synset</span>( <span class="ruby-identifier">synset</span> )
+                <span class="ruby-identifier">strippedOffset</span> = <span class="ruby-keyword kw">nil</span>
+                <span class="ruby-identifier">pos</span> = <span class="ruby-keyword kw">nil</span>
+
+                <span class="ruby-comment cmt"># Start a transaction</span>
+                <span class="ruby-ivar">@env</span>.<span class="ruby-identifier">begin</span>( <span class="ruby-constant">BDB</span><span class="ruby-operator">::</span><span class="ruby-constant">TXN_COMMIT</span>, <span class="ruby-ivar">@data_db</span> ) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">txn</span>,<span class="ruby-identifier">datadb</span><span class="ruby-operator">|</span>
+
+                        <span class="ruby-comment cmt"># If this is a new synset, generate an offset for it</span>
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">synset</span>.<span class="ruby-identifier">offset</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+                                <span class="ruby-identifier">synset</span>.<span class="ruby-identifier">offset</span> =
+                                        (<span class="ruby-identifier">datadb</span>[<span class="ruby-value str">'offsetcount'</span>] = <span class="ruby-identifier">datadb</span>[<span class="ruby-value str">'offsetcount'</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)
+                        <span class="ruby-keyword kw">end</span>
+                        
+                        <span class="ruby-comment cmt"># Write the data entry</span>
+                        <span class="ruby-identifier">datadb</span>[ <span class="ruby-identifier">synset</span>.<span class="ruby-identifier">key</span> ] = <span class="ruby-identifier">synset</span>.<span class="ruby-identifier">serialize</span>
+                                
+                        <span class="ruby-comment cmt"># Write the index entries</span>
+                        <span class="ruby-identifier">txn</span>.<span class="ruby-identifier">begin</span>( <span class="ruby-constant">BDB</span><span class="ruby-operator">::</span><span class="ruby-constant">TXN_COMMIT</span>, <span class="ruby-ivar">@index_db</span> ) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">txn</span>,<span class="ruby-identifier">indexdb</span><span class="ruby-operator">|</span>
+
+                                <span class="ruby-comment cmt"># Make word/part-of-speech pairs from the words in the synset</span>
+                                <span class="ruby-identifier">synset</span>.<span class="ruby-identifier">words</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">word</span><span class="ruby-operator">|</span> <span class="ruby-identifier">word</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;%&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">pos</span> }.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">word</span><span class="ruby-operator">|</span>
+
+                                        <span class="ruby-comment cmt"># If the index already has this word, but not this</span>
+                                        <span class="ruby-comment cmt"># synset, add it</span>
+                                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">indexdb</span>.<span class="ruby-identifier">key?</span>( <span class="ruby-identifier">word</span> )
+                                                <span class="ruby-identifier">indexdb</span>[ <span class="ruby-identifier">word</span> ] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">SUB_DELIM</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">synset</span>.<span class="ruby-identifier">offset</span> <span class="ruby-keyword kw">unless</span>
+                                                        <span class="ruby-identifier">indexdb</span>[ <span class="ruby-identifier">word</span> ].<span class="ruby-identifier">include?</span>( <span class="ruby-identifier">synset</span>.<span class="ruby-identifier">offset</span> )
+                                        <span class="ruby-keyword kw">else</span>
+                                                <span class="ruby-identifier">indexdb</span>[ <span class="ruby-identifier">word</span> ] = <span class="ruby-identifier">synset</span>.<span class="ruby-identifier">offset</span>
+                                        <span class="ruby-keyword kw">end</span>
+                                }
+                        <span class="ruby-keyword kw">end</span> <span class="ruby-comment cmt"># transaction on @index_db</span>
+                <span class="ruby-keyword kw">end</span> <span class="ruby-comment cmt"># transaction on @dataDB</span>
+
+                <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">synset</span>.<span class="ruby-identifier">offset</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

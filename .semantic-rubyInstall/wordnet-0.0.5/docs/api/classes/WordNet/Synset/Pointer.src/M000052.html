@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (WordNet::Synset::Pointer)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/wordnet/synset.rb, line 94</span>
+                        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>( <span class="ruby-identifier">type</span>, <span class="ruby-identifier">offset</span>, <span class="ruby-identifier">pos</span>=<span class="ruby-constant">Noun</span>, <span class="ruby-identifier">source_wn</span>=<span class="ruby-value">0</span>, <span class="ruby-identifier">target_wn</span>=<span class="ruby-value">0</span> )
+
+                                <span class="ruby-comment cmt"># Allow type = '!', 'antonym', or :antonym. Also handle</span>
+                                <span class="ruby-comment cmt"># splitting of compound pointers (e.g., :memberMeronym / '%m')</span>
+                                <span class="ruby-comment cmt"># into their correct type/subtype parts.</span>
+                                <span class="ruby-ivar">@type</span> = <span class="ruby-ivar">@subtype</span> = <span class="ruby-keyword kw">nil</span>
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">type</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+                                        <span class="ruby-ivar">@type</span> = <span class="ruby-constant">POINTER_SYMBOLS</span>[ <span class="ruby-identifier">type</span>[<span class="ruby-value">0</span>,<span class="ruby-value">1</span>] ]
+
+                                <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">type</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">2</span>
+                                        <span class="ruby-ivar">@type</span> = <span class="ruby-constant">POINTER_SYMBOLS</span>[ <span class="ruby-identifier">type</span>[<span class="ruby-value">0</span>,<span class="ruby-value">1</span>] ]
+                                        <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;No known subtypes for '%s'&quot;</span> <span class="ruby-operator">%</span> [<span class="ruby-ivar">@type</span>] <span class="ruby-keyword kw">unless</span>
+                                        <span class="ruby-constant">POINTER_SUBTYPES</span>.<span class="ruby-identifier">key?</span>( <span class="ruby-ivar">@type</span> )
+                                        <span class="ruby-ivar">@subtype</span> = <span class="ruby-constant">POINTER_SUBTYPES</span>[ <span class="ruby-ivar">@type</span> ].<span class="ruby-identifier">index</span>( <span class="ruby-identifier">type</span> ) <span class="ruby-keyword kw">or</span>
+                                        <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;Unknown subtype '%s' for '%s'&quot;</span> <span class="ruby-operator">%</span>
+                                        [ <span class="ruby-identifier">type</span>, <span class="ruby-ivar">@type</span> ]
+
+                                <span class="ruby-keyword kw">else</span>
+                                        <span class="ruby-keyword kw">if</span> <span class="ruby-constant">POINTER_TYPES</span>.<span class="ruby-identifier">key?</span>( <span class="ruby-identifier">type</span>.<span class="ruby-identifier">to_sym</span> )
+                                                <span class="ruby-ivar">@type</span> = <span class="ruby-identifier">type</span>.<span class="ruby-identifier">to_sym</span>
+                                        <span class="ruby-keyword kw">elsif</span> <span class="ruby-regexp re">/([a-z]+)([A-Z][a-z]+)/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">type</span>.<span class="ruby-identifier">to_s</span>
+                                                <span class="ruby-identifier">subtype</span>, <span class="ruby-identifier">maintype</span> = <span class="ruby-identifier">$1</span>, <span class="ruby-identifier">$2</span>.<span class="ruby-identifier">downcase</span>
+                                                <span class="ruby-ivar">@type</span> = <span class="ruby-identifier">maintype</span>.<span class="ruby-identifier">to_sym</span> <span class="ruby-keyword kw">if</span>
+                                                <span class="ruby-constant">POINTER_TYPES</span>.<span class="ruby-identifier">key?</span>( <span class="ruby-identifier">maintype</span>.<span class="ruby-identifier">to_sym</span> )
+                                                <span class="ruby-ivar">@subtype</span> = <span class="ruby-identifier">subtype</span>.<span class="ruby-identifier">to_sym</span>
+                                        <span class="ruby-keyword kw">end</span>
+                                <span class="ruby-keyword kw">end</span>
+
+                                <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-value str">&quot;No such pointer type %p&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">type</span> <span class="ruby-keyword kw">if</span>
+                                <span class="ruby-ivar">@type</span>.<span class="ruby-identifier">nil?</span>
+
+                                <span class="ruby-comment cmt"># Allow pos = 'n', 'noun', or :noun</span>
+                                <span class="ruby-ivar">@part_of_speech</span> = <span class="ruby-keyword kw">nil</span>
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">pos</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+                                        <span class="ruby-ivar">@part_of_speech</span> = <span class="ruby-constant">SYNTACTIC_SYMBOLS</span>[ <span class="ruby-identifier">pos</span> ]
+                                <span class="ruby-keyword kw">else</span>
+                                        <span class="ruby-ivar">@part_of_speech</span> = <span class="ruby-identifier">pos</span>.<span class="ruby-identifier">to_sym</span> <span class="ruby-keyword kw">if</span>
+                                        <span class="ruby-constant">SYNTACTIC_CATEGORIES</span>.<span class="ruby-identifier">key?</span>( <span class="ruby-identifier">pos</span>.<span class="ruby-identifier">to_sym</span> )
+                                <span class="ruby-keyword kw">end</span>
+                                <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-value str">&quot;No such part of speech %p&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">pos</span> <span class="ruby-keyword kw">if</span>
+                                <span class="ruby-ivar">@part_of_speech</span>.<span class="ruby-identifier">nil?</span>
+
+                                <span class="ruby-comment cmt"># Other attributes</span>
+                                <span class="ruby-ivar">@offset</span>             = <span class="ruby-identifier">offset</span>
+                                <span class="ruby-ivar">@source_wn</span>  = <span class="ruby-identifier">source_wn</span>
+                                <span class="ruby-ivar">@target_wn</span>  = <span class="ruby-identifier">target_wn</span>
+                        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

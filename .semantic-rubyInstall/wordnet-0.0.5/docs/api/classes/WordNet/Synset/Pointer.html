@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: WordNet::Synset::Pointer</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">WordNet::Synset::Pointer</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/lib/wordnet/synset_rb.html">
+                lib/wordnet/synset.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Object
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+The &quot;pointer&quot; type that encapsulates relationships between one <a
+href="Pointer.html#M000054">synset</a> and another.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000057">==</a>&nbsp;&nbsp;
+      <a href="#M000053">inspect</a>&nbsp;&nbsp;
+      <a href="#M000052">new</a>&nbsp;&nbsp;
+      <a href="#M000051">parse</a>&nbsp;&nbsp;
+      <a href="#M000055">pos</a>&nbsp;&nbsp;
+      <a href="#M000054">synset</a>&nbsp;&nbsp;
+      <a href="#M000058">to_s</a>&nbsp;&nbsp;
+      <a href="#M000056">type_symbol</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+    <div id="includes">
+      <h3 class="section-bar">Included Modules</h3>
+
+      <div id="includes-list">
+        <span class="include-name"><a href="../Constants.html">WordNet::Constants</a></span>
+        <span class="include-name">CrossCase</span>
+      </div>
+    </div>
+
+    <div id="section">
+
+
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">offset</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+The offset of the target <a href="Pointer.html#M000054">synset</a>
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">part_of_speech</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+The part-of-speech of the target <a href="Pointer.html#M000054">synset</a>.
+Will be one of the keys of WordNet::SYNTACTIC_CATEGORIES.
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">source_wn</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+The word number in the source <a href="Pointer.html#M000054">synset</a>
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">subtype</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+The subtype of the pointer, if any. Will be one of the keys of one of the
+hashes in POINTER_SUBTYPES (e.g., :portion).
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">target_wn</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+The word number in the target <a href="Pointer.html#M000054">synset</a>
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">type</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+The type of the pointer. Will be one of the keys of WordNet::POINTER_TYPES
+(e.g., :meronym).
+
+</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000052" class="method-detail">
+        <a name="M000052"></a>
+
+        <div class="method-heading">
+          <a href="Pointer.src/M000052.html" target="Code" class="method-signature"
+            onclick="popupCode('Pointer.src/M000052.html');return false;">
+          <span class="method-name">new</span><span class="method-args">( type, offset, pos=Noun, source_wn=0, target_wn=0 )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Create a <a href="Pointer.html#M000052">new</a> <a
+href="Pointer.html#M000054">synset</a> pointer with the given arguments.
+The <tt>ptrType</tt> is the type of the link between synsets, and must be
+either a key or a value of WordNet::Constants::POINTER_TYPES. The
+<tt>offset</tt> is the unique identifier of the target <a
+href="Pointer.html#M000054">synset</a>, and <tt><a
+href="Pointer.html#M000055">pos</a></tt> is its part-of-speech, which must
+be either a key or value of WordNet::Constants::SYNTACTIC_CATEGORIES. The
+<tt>source_wn</tt> and <tt>target_wn</tt> are numerical values which
+distinguish lexical and semantic pointers. <tt>source_wn</tt> indicates the
+word number in the current (source) <a
+href="Pointer.html#M000054">synset</a>, and <tt>target_wn</tt> indicates
+the word number in the target <a href="Pointer.html#M000054">synset</a>. If
+both are 0 (the default) it means that the pointer type of the pointer
+represents a semantic relation between the current (source) <a
+href="Pointer.html#M000054">synset</a> and the target <a
+href="Pointer.html#M000054">synset</a> indicated by <tt>offset</tt>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000051" class="method-detail">
+        <a name="M000051"></a>
+
+        <div class="method-heading">
+          <a href="Pointer.src/M000051.html" target="Code" class="method-signature"
+            onclick="popupCode('Pointer.src/M000051.html');return false;">
+          <span class="method-name">parse</span><span class="method-args">( pointerString )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Make an Array of <a href="Pointer.html">WordNet::Synset::Pointer</a>
+objects out of the given <tt>pointerList</tt>. The pointerlist is a string
+of pointers delimited by Constants::SUB_DELIM. Pointers are in the form:
+</p>
+<pre>
+  &quot;&lt;pointer_symbol&gt; &lt;synset_offset&gt;%&lt;pos&gt; &lt;source/target&gt;&quot;
+</pre>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000057" class="method-detail">
+        <a name="M000057"></a>
+
+        <div class="method-heading">
+          <a href="Pointer.src/M000057.html" target="Code" class="method-signature"
+            onclick="popupCode('Pointer.src/M000057.html');return false;">
+          <span class="method-name">==</span><span class="method-args">( other )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Comparison operator. <a href="Pointer.html">Pointer</a> are equivalent if
+they point at the same <a href="Pointer.html#M000054">synset</a> and are of
+the same type.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000053" class="method-detail">
+        <a name="M000053"></a>
+
+        <div class="method-heading">
+          <a href="Pointer.src/M000053.html" target="Code" class="method-signature"
+            onclick="popupCode('Pointer.src/M000053.html');return false;">
+          <span class="method-name">inspect</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return the <a href="Pointer.html">Pointer</a> as a human-readable String
+suitable for debugging.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000055" class="method-detail">
+        <a name="M000055"></a>
+
+        <div class="method-heading">
+          <a href="Pointer.src/M000055.html" target="Code" class="method-signature"
+            onclick="popupCode('Pointer.src/M000055.html');return false;">
+          <span class="method-name">pos</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return the syntactic category symbol for this pointer
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000054" class="method-detail">
+        <a name="M000054"></a>
+
+        <div class="method-heading">
+          <a href="Pointer.src/M000054.html" target="Code" class="method-signature"
+            onclick="popupCode('Pointer.src/M000054.html');return false;">
+          <span class="method-name">synset</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return the <a href="Pointer.html#M000054">synset</a> key of the target <a
+href="Pointer.html#M000054">synset</a> (i.e., &lt;offset&gt;%&lt;<a
+href="Pointer.html#M000055">pos</a> symbol&gt;).
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000058" class="method-detail">
+        <a name="M000058"></a>
+
+        <div class="method-heading">
+          <a href="Pointer.src/M000058.html" target="Code" class="method-signature"
+            onclick="popupCode('Pointer.src/M000058.html');return false;">
+          <span class="method-name">to_s</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return the pointer in its stringified form.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000056" class="method-detail">
+        <a name="M000056"></a>
+
+        <div class="method-heading">
+          <a href="Pointer.src/M000056.html" target="Code" class="method-signature"
+            onclick="popupCode('Pointer.src/M000056.html');return false;">
+          <span class="method-name">type_symbol</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return the pointer type symbol for this pointer
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>
