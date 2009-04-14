@@ -3,9 +3,9 @@
 linkparserpath = ENV['PWD']+"/.semantic-rubyInstall/linkparser"
 wordnetpath = ENV['PWD']+"/.semantic-rubyInstall/wordnet-0.0.5"
 linguisticspath = ENV['PWD']+"/.semantic-rubyInstall/linguistics"
+$LOAD_PATH.unshift( linkparserpath+"/lib" , linkparserpath+"/ext" )
 $LOAD_PATH.unshift(wordnetpath+"/lib")
 $LOAD_PATH.unshift(linguisticspath+"/lib")
-$LOAD_PATH.unshift( linkparserpath+"/lib" , linkparserpath+"/ext" )
 
 
 begin
