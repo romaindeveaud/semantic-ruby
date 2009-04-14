@@ -1,9 +1,10 @@
 #
 # All the lines below load the libraries
-linkparserpath = ENV['LPPATH']
-wordnetpath = ENV['WNPATH']
-
+linkparserpath = ENV['PWD']+"/.semantic-rubyInstall/linkparser"
+wordnetpath = ENV['PWD']+"/.semantic-rubyInstall/wordnet-0.0.5"
+$LOAD_PATH.unshift(wordnetpath+"/lib")
 $LOAD_PATH.unshift( linkparserpath+"/lib" , linkparserpath+"/ext" )
+
 
 begin
 	require 'linkparser'
@@ -25,7 +26,6 @@ opts = {
 }
 $dict = LinkParser::Dictionary.new(:verbosity => 0)
 $dict_null = LinkParser::Dictionary.new(opts)
-$LOAD_PATH.unshift(wordnetpath+"lib")
 
 begin
 	require 'wordnet'
@@ -47,8 +47,8 @@ $debug = false
 include Linguistics::EN
 Linguistics::use(:en)
 
-require 'pathname'
 require 'rubygems'
+require 'pathname'
 require 'active_support/inflector'
 
 ActiveSupport::Inflector.inflections.uncountables.push("data","advice","behaviour","consent","dictation","persuasion","scorn","rugby","archery","yoga","copper","iron","oxygen","steel","sodium","clothing","equipment","furniture","luggage","money")
