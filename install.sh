@@ -29,7 +29,7 @@ apt-get install libdb4.2-dev
 echo "done"
 
 echo -n "installing activesupport... "
-gem install activesupport
+gem install activesupport rake
 echo "done"
 
 echo -n "installing link-grammar... "
@@ -43,3 +43,8 @@ echo -n "installing bdb-0.6.5... "
 cd ../../bdb-0.6.5 ;
 make install ;
 echo "done"
+
+echo -n "installing linkparser... "
+cd ../linkparser ;
+rake ;
+echo "done" 
