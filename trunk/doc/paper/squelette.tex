@@ -112,7 +112,6 @@
 \Abstract{Nowadays, requesting a search engine with natural language requests is a significant issue in the information retrieval research field, and some of its biggest actors begin to take it seriously. Some prototypes are actually available, but the error rate, inferred by the huge diversity of natural language and the different semantics of words or expressions, is still too large. Sentences naturally contain semantic criteria such as "entities", "concepts" or "categories" which can be combined with standard information retrieval in order to filter the documents with these semantic categories (e.g. "person", "organisation", "date"...). In this article we propose a categorization and keywords extraction system for natural language sentences.}
 
 \MotsCles{Sémantique, catégorisation, langage naturel, recherche d'information.}
-  % 5 mots cl\'es seulement!!!
 \Keywords{Information retrieval, semantic, categorization, natural language.}
 %=========================================================
 \section{Introduction}
@@ -219,6 +218,9 @@ en prenant la catégorie qui a le plus fort score, pour cela chaque catégorie se 
 \section{Expériences et résultats}\label{expériences}
 %==============================================================
 \par Nous avons procédé à un certain nombre de tests et d'expériences afin d'évaluer les performances de la catégorisation comme de l'extraction des mots-clés. Nous n'avons retenu que les classes racines à savoir \emph{pers}, \emph{org}, \emph{loc}, \emph{date}, \emph{amount} et \emph{unk}. 
+\par Nous nous sommes appuyés sur un corpus de 
+%% il faudra mettre le nombre de questions (107 pour le moment)
+questions issues de TREC 8 que nous avons étiquettées \og{}à la main\fg{} comme si c'était des sorties de notre système. Pour chaque question, nous avons déterminé la catégorie sémantique de l'information attendue et les différents mots-clés nécessaires pour une recherche correcte de cette information - comme nous l'avons déjà expliqué dans cet article. Les sorties réelles de notre système ont donc été comparées avec notre corpus, et nous avons ainsi pu calculer les diverses mesures présentées ci-dessous.
 
 %% pas bon ça il faut être affirmatif et plus précis %%%
 %les standards d'Ester 2 n'étant pas encore complètement implémentés sur la version anglaise de NLGbAse. Nous avons récupéré un corpus de questions formulées par des utilisateurs et nous les avons étiquetées en faisant mentalement le même travail que notre système, afin de pouvoir comparer ses résultats aux notres. 
@@ -254,7 +256,25 @@ en prenant la catégorie qui a le plus fort score, pour cela chaque catégorie se 
 \end{table}
 
 \subsection{Mesures de l'extraction de mots-clés}
-% A faire
+\par Nous avons également mesuré la pertinence des mots-clés extraits par notre système. Comme précédemment nous avons tout d'abord effectué \og{}à la main\fg{} le travail d'extraction, puis nous avons comparé ceci avec les résultats du système afin d'obtenir un pourcentage de satisfaction calculé comme ceci : $$S(C) = \frac{\sum_{i = 1}^{N} P(Q_i)}{N}$$
+\par Ils sont présentés dans les tableaux ci-dessous.
+
+\begin{table}[htbp]
+    \begin{center}
+        \begin{tabular}{|p{12cm}|l|}
+            \hline
+            Type de mots-clés & (S(C)) \\
+            \hline
+            Mots-clés extraits pour une recherche par similarité cosinus & \textbf{70.37\%} \\
+            \hline
+            Entités nommées extraites pour une recherche de type question-réponse (compacité) & \textbf{56.86\%} \\
+            \hline
+            Mots-clés extraits pour une recherche de type question-réponse (compacité) & \textbf{76.47\%} \\
+            \hline
+        \end{tabular}
+        \caption{\label{tab:results}Satisfaction (S(C)) obtenue sur le corpus de test}
+    \end{center}
+\end{table}
 
 %==============================================================
 \section{Conclusion}
