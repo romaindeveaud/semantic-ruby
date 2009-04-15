@@ -9,7 +9,8 @@ In the semantic-ruby main directory, you just have to type this command :
 
     $ sudo sh install.sh
 
-It may be long depending on your internet connection and computer performances. If you experience troubles installing semantic-ruby, please send us a mail, we will reply as soon as possible.
+You will be prompted for approval several times, just type 'Y' every time.
+It may be long depending on your internet connection and computer performances. If you experience troubles installing semantic-ruby, please send us a mail with your error log, we will reply as soon as possible.
 
 Ludovic Bonnefoy - lulupeon@gmail.com
 Romain Deveaud   - romain.deveaud@gmail.com
