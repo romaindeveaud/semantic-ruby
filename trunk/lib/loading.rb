@@ -27,8 +27,8 @@ opts = {
    :linkage_limit => 100,
    :verbosity => 0
 }
-$dict = LinkParser::Dictionary.new(:verbosity => 0)
-$dict_null = LinkParser::Dictionary.new(opts)
+$dict = LinkParser::Dictionary.new("en", :verbosity => 0)
+$dict_null = LinkParser::Dictionary.new("en", opts)
 
 begin
 	require 'wordnet'

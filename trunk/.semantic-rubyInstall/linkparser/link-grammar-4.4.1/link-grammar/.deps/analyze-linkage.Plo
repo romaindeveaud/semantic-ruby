@@ -7,20 +7,18 @@ analyze-linkage.lo: analyze-linkage.c \
   /usr/include/bits/types.h /usr/include/bits/typesizes.h \
   /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
   /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
-  /usr/include/bits/stdio.h /usr/include/bits/stdio2.h \
-  /usr/include/stdlib.h /usr/include/sys/types.h /usr/include/time.h \
-  /usr/include/endian.h /usr/include/bits/endian.h \
-  /usr/include/sys/select.h /usr/include/bits/select.h \
-  /usr/include/bits/sigset.h /usr/include/bits/time.h \
-  /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
-  /usr/include/alloca.h /usr/include/bits/stdlib.h /usr/include/string.h \
-  /usr/include/bits/string.h /usr/include/bits/string2.h \
-  /usr/include/bits/string3.h /usr/include/ctype.h \
+  /usr/include/bits/stdio.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+  /usr/include/string.h /usr/include/bits/string.h \
+  /usr/include/bits/string2.h /usr/include/ctype.h \
   ../link-grammar/structures.h ../link-grammar/api-types.h \
   ../link-grammar/utilities.h /usr/include/langinfo.h \
   /usr/include/nl_types.h /usr/include/bits/locale.h \
-  /usr/include/bits/wchar.h /usr/include/bits/wchar2.h \
-  /usr/include/wctype.h ../link-grammar/error.h \
+  /usr/include/bits/wchar.h /usr/include/wctype.h ../link-grammar/error.h \
   ../link-grammar/link-includes.h ../link-grammar/link-features.h \
   ../link-grammar/link-includes.h ../link-grammar/api-structures.h \
   ../link-grammar/externs.h ../link-grammar/analyze-linkage.h \
@@ -71,8 +69,6 @@ analyze-linkage.lo: analyze-linkage.c \
 
 /usr/include/bits/stdio.h:
 
-/usr/include/bits/stdio2.h:
-
 /usr/include/stdlib.h:
 
 /usr/include/sys/types.h:
@@ -97,15 +93,11 @@ analyze-linkage.lo: analyze-linkage.c \
 
 /usr/include/alloca.h:
 
-/usr/include/bits/stdlib.h:
-
 /usr/include/string.h:
 
 /usr/include/bits/string.h:
 
 /usr/include/bits/string2.h:
-
-/usr/include/bits/string3.h:
 
 /usr/include/ctype.h:
 
@@ -122,8 +114,6 @@ analyze-linkage.lo: analyze-linkage.c \
 /usr/include/bits/locale.h:
 
 /usr/include/bits/wchar.h:
-
-/usr/include/bits/wchar2.h:
 
 /usr/include/wctype.h:
 
