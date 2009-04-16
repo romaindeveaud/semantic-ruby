@@ -7,6 +7,7 @@ linguisticspath = ENV['PWD']+"/.semantic-rubyInstall/linguistics"
 $LOAD_PATH.unshift( linkparserpath+"/lib" , linkparserpath+"/ext" )
 $LOAD_PATH.unshift(wordnetpath+"/lib")
 $LOAD_PATH.unshift(linguisticspath+"/lib")
+$LOAD_PATH.unshift(ENV['PWD']+"/lib")
 
 
 begin
@@ -58,8 +59,8 @@ ActiveSupport::Inflector.inflections.uncountables.push("data","advice","behaviou
 path = (File.basename(Pathname.pwd.to_s) == "lib") ? "" : "lib/" ;
 
 unless File.basename(Pathname.pwd.to_s) == "test"
-  require path+'string'
-  enfile = File.new(path+"stoplist.en", File::RDONLY, 0644)
+  require 'string'
+  enfile = File.new(ENV['PWD']+"/"+path+"stoplist.en", File::RDONLY, 0644)
   $stoplist = enfile.readlines
   $stoplist.each { |w| w.chomp! }
 end
