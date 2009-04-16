@@ -225,8 +225,7 @@ en prenant la catégorie qui a le plus fort score, pour cela chaque catégorie se 
 \subsection{Corpus de référence et standard de mesure}
 
 \par Nous avons utilisé pour ces mesures des corpus de questions reliées à une réponse factuelles ou de type liste. Des corpus de références ont été mis au points dans le cadre de campagnes d'évaluation telles que Trec 8 %%% citer %%% 
-
-Le corpus \textit{Question Answering Collections} de Trec est composé de XXX questions factuelles et des réponses standard qui doivent être retournées\footnote{En téléchargement sur http:\/\/trec\.nist\.gov\/data\/qa\/t2004\_qadata.html}. Ces paires de questions et réponses sont organisées comme suit. Un fichier XML décrit les question factuelles: 
+\par Le corpus \textit{Question Answering Collections} de Trec est composé de XXX questions factuelles et des réponses standard qui doivent être retournées\footnote{En téléchargement sur http:\/\/trec\.nist\.gov\/data\/qa\/t2004\_qadata.html}. Ces paires de questions et réponses sont organisées comme suit. Un fichier XML décrit les question factuelles: 
 
 \begin{verbatim}
 <target id="2" text="Fred Durst">
@@ -241,18 +240,16 @@ What record company is he with?
 [...]
 \end{verbatim}
 
-Des réponses ``standard'' sont livrées sous forme de liste: 
+Des réponses \og{}standard\fg{} sont livrées sous forme de liste : 
 
 \begin{verbatim}
 2.5 1	vital	tattoo artist
 2.5 2	vital	operated skate park
 \end{verbatim}
 
-Ce corpus n'étant pas initiallement prévu pour vérifier l'expérience d'étiquetage de questions tel que prévu dans le cadre de notre algorithme, nous avons procédé à son enrichissement.
-
-\par Cet enrichissement consiste a attribuer à chaque question la catégorie sémantique de la réponse attendue (Nous n'avons retenu que les classes racines à savoir \emph{pers}, \emph{org}, \emph{loc}, \emph{date}, \emph{amount} et \emph{unk}). ainsi que les différents mots-clés qui peuvent permettre d'obtenir une réponse. Nous disposons ainsi d'un corpus de questions et de réponses de références complétées par des informations sémantiques compatibles avec notre système\footnote{Ce corpus complété est disponible sur www.nlgbase.org}. 
-
-Ainsi, dans l'exemple précitée, nous complétons la description de la question par plusieurs étiquettes de classes, à savoir que l'entité source est une personne, et que la réponse cible  est un nom d'organisation (celui du groupe musical), et d'éditeur de disque: 
+\par Ce corpus n'étant pas initiallement prévu pour vérifier l'expérience d'étiquetage de questions tel que prévu dans le cadre de notre algorithme, nous avons procédé à son enrichissement.
+\par Cet enrichissement consiste a attribuer à chaque question la catégorie sémantique de la réponse attendue (nous n'avons retenu que les classes racines à savoir \emph{pers}, \emph{org}, \emph{loc}, \emph{date}, \emph{amount} et \emph{unk}), ainsi que les différents mots-clés qui peuvent permettre d'obtenir une réponse. Nous disposons ainsi d'un corpus de questions et de réponses de références complétées par des informations sémantiques compatibles avec notre système\footnote{Ce corpus complété est disponible sur www.nlgbase.org}. 
+\par Ainsi, dans l'exemple précité, nous complétons la description de la question par plusieurs étiquettes de classes, à savoir que l'entité source est une personne, et que la réponse cible est un nom d'organisation (celui du groupe musical), et d'éditeur de disque: 
 
 \begin{verbatim}
 <target id="2" text="Fred Durst">
