@@ -204,7 +204,8 @@ en prenant la catégorie qui a le plus fort score, pour cela chaque catégorie se 
 %Comme énoncé dans la section précédente nous utilisons un parser pour arriver à repérer les termes importants pour la catégorisation et il en est de même pour l'extraction des mots clés.
 
 \par Comme nous l'avons expliqué, les différents moteurs de recherche de NLGbAse n'attendent pas les mêmes entrées, nous allons donc détailler ici les deux types d'extraction de mots-clés - ou mots pertinents.
- \subsubsection{Extraction destinées aux moteurs de recherche d'information par similarité cosinus}
+
+\subsubsection{Extraction destinées aux moteurs de recherche d'information par similarité cosinus}
 \par Dans un premier temps, les mots-outils de la phrase sont automatiquement supprimés à l'aide d'un anti-dictionnaire. Nous utilisons ensuite l'analyse morpho-syntaxique de la phrase, et notamment l'arbre constitutif, pour récupérer les mots - qui ne sont pas des mots-outils - qui constituent groupes nominaux ; malgrès son aspect simple, voire simpliste, nous avons pu prouver empyriquement son efficacité.
 
 \subsubsection{Extraction destinées au moteur de recherche d'information par algorithme de compacité (question-réponse)}
@@ -217,16 +218,78 @@ en prenant la catégorie qui a le plus fort score, pour cela chaque catégorie se 
 %==============================================================
 \section{Expériences et résultats}\label{expériences}
 %==============================================================
-\par Nous avons procédé à un certain nombre de tests et d'expériences afin d'évaluer les performances de la catégorisation comme de l'extraction des mots-clés. Nous n'avons retenu que les classes racines à savoir \emph{pers}, \emph{org}, \emph{loc}, \emph{date}, \emph{amount} et \emph{unk}. 
-\par Nous nous sommes appuyés sur un corpus de 
+
+%%% modif eric
+\par La vocation de notre algorithme est de transformer une question en langue naturelle en une requête compatible avec un système de RI.  Pour mesurer les performances de notre système, nous évaluons dans un premier temps sa capacité à étiqueter une question en vue de l'extraction des informations requise pour construire une requête. Dans un second temps nous construisons une requête d'après les informations extraites et mesurons la pertinence des résultats retournés par l'un des trois moteurs de NLGbAse.
+
+\subsection{Corpus de référence et standard de mesure}
+
+\par Nous avons utilisé pour ces mesures des corpus de questions reliées à une réponse factuelles ou de type liste. Des corpus de références ont été mis au points dans le cadre de campagnes d'évaluation telles que Trec 8 %%% citer %%% 
+
+Le corpus \textit{Question Answering Collections} de Trec est composé de XXX questions factuelles et des réponses standard qui doivent être retournées\footnote{En téléchargement sur http:\/\/trec\.nist\.gov\/data\/qa\/t2004\_qadata.html}. Ces paires de questions et réponses sont organisées comme suit. Un fichier XML décrit les question factuelles: 
+
+\begin{verbatim}
+<target id="2" text="Fred Durst">
+<qa><q id="2.1" type="FACTOID">
+What is the name of Durst's group?
+</q></qa>
+<qa>
+<q id="2.2" type="FACTOID">
+What record company is he with?
+</q>
+</qa>
+[...]
+\end{verbatim}
+
+Des réponses ``standard'' sont livrées sous forme de liste: 
+
+\begin{verbatim}
+2.5 1	vital	tattoo artist
+2.5 2	vital	operated skate park
+\end{verbatim}
+
+Ce corpus n'étant pas initiallement prévu pour vérifier l'expérience d'étiquetage de questions tel que prévu dans le cadre de notre algorithme, nous avons procédé à son enrichissement.
+
+\par Cet enrichissement consiste a attribuer à chaque question la catégorie sémantique de la réponse attendue (Nous n'avons retenu que les classes racines à savoir \emph{pers}, \emph{org}, \emph{loc}, \emph{date}, \emph{amount} et \emph{unk}). ainsi que les différents mots-clés qui peuvent permettre d'obtenir une réponse. Nous disposons ainsi d'un corpus de questions et de réponses de références complétées par des informations sémantiques compatibles avec notre système\footnote{Ce corpus complété est disponible sur www.nlgbase.org}. 
+
+Ainsi, dans l'exemple précitée, nous complétons la description de la question par plusieurs étiquettes de classes, à savoir que l'entité source est une personne, et que la réponse cible  est un nom d'organisation (celui du groupe musical), et d'éditeur de disque: 
+
+\begin{verbatim}
+<target id="2" text="Fred Durst">
+<k>PERS</k>
+<qa><q id="2.1" type="FACTOID">
+What is the name of Durst's group?
+</q><kt>ORG</kt>
+</qa>
+<qa>
+<q id="2.2" type="FACTOID">
+What record company is he with?
+</q><kt>ORG</kt>
+</qa>
+[...]
+\end{verbatim}
+
+%%% Si il y a le second corpus, il faut le décrire à son tour ici avec sa source - le site web -
+
+\par Nous avons lancé notre système et mesuré pour chaque question la validité de son étiquetage sémantique et de l'identification des mots clés pertinents pour une extraction de réponse, puis la pertinence des réponses retournées par le moteur de recherche par rapport à la réponse de référence. Ces mesures sont réalisées par un calcul de score de précision et le rappel, complété par le F-Score\footnote{Mesure harmonique combinant la précision et le rappel}.
+
+
+%% retrait eric
+%Les sorties réelles de notre système ont donc été comparées avec notre corpus, et nous avons ainsi pu calculer les diverses mesures présentées ci-dessous.
+
+%\par Nous avons procédé à un certain nombre de tests et d'expériences afin d'évaluer les performances de la catégorisation comme de l'extraction des mots-clés. Nous n'avons retenu que les classes racines à savoir \emph{pers}, \emph{org}, \emph{loc}, \emph{date}, \emph{amount} et \emph{unk}. 
+
+%\par Nous nous sommes appuyés sur un corpus de 
 %% il faudra mettre le nombre de questions (107 pour le moment)
-questions issues de TREC 8 que nous avons étiquettées \og{}à la main\fg{} comme si c'était des sorties de notre système. Pour chaque question, nous avons déterminé la catégorie sémantique de l'information attendue et les différents mots-clés nécessaires pour une recherche correcte de cette information - comme nous l'avons déjà expliqué dans cet article. Les sorties réelles de notre système ont donc été comparées avec notre corpus, et nous avons ainsi pu calculer les diverses mesures présentées ci-dessous.
+%questions issues de TREC 8 que nous avons étiquettées \og{}à la main\fg{} comme si c'était des sorties de notre système. Pour chaque question, nous avons déterminé la catégorie sémantique de l'information attendue et les différents mots-clés nécessaires pour une recherche correcte de cette information - comme nous l'avons déjà expliqué dans cet article. Les sorties réelles de notre système ont donc été comparées avec notre corpus, et nous avons ainsi pu calculer les diverses mesures présentées ci-dessous.
 
 %% pas bon ça il faut être affirmatif et plus précis %%%
 %les standards d'Ester 2 n'étant pas encore complètement implémentés sur la version anglaise de NLGbAse. Nous avons récupéré un corpus de questions formulées par des utilisateurs et nous les avons étiquetées en faisant mentalement le même travail que notre système, afin de pouvoir comparer ses résultats aux notres. 
 
-\subsection{Mesures de la catégorisation}
-\par Les résultats de l'attributions de catégories aux 107 phrases du corpus étiqueté sont présentés dans le tableau 1. Nous avons calculé pour chacune d'elles la précision et le rappel, puis le F-Score\footnote{Mesure harmonique combinant la précision et le rappel} en découlant.
+\subsection{Mesures de la catégorisation sémantique}
+
+\par Les résultats de l'attributions de catégories aux 107 phrases du corpus étiqueté sont présentés dans le tableau 1. 
+%Nous avons calculé pour chacune d'elles la précision et le rappel, puis le F-Score\footnote{Mesure harmonique combinant la précision et le rappel} en découlant.
 \par Ces résultats mettent en perspective le fait que des règles simples couplées à une catégorisation par recherche dans une base de données sémantique peuvent être viables. Les résultats de la catégorie \emph{org} peuvent être expliqués par le fait que nous n'avons pas pu définir de règle spécifique à cette catégorie sans impacter les résultats des autres catégories, notamment \emph{pers} et \emph{loc}.
 
 \begin{table}[h]
@@ -256,6 +319,7 @@ questions issues de TREC 8 que nous avons étiquettées \og{}à la main\fg{} comme 
 \end{table}
 
 \subsection{Mesures de l'extraction de mots-clés}
+
 \par Nous avons également mesuré la pertinence des mots-clés extraits par notre système. Comme précédemment nous avons tout d'abord effectué \og{}à la main\fg{} le travail d'extraction, puis nous avons comparé ceci avec les résultats du système afin d'obtenir un pourcentage de satisfaction calculé comme ceci : $$S(C) = \frac{\sum_{i = 1}^{N} P(Q_i)}{N}$$
 \par Ils sont présentés dans les tableaux ci-dessous.
 
