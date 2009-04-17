@@ -12,7 +12,7 @@ cgi.out() do
     cgi.body() do
       if cgi.params.has_key?("request")
         sock.print cgi.params["request"]
-        results = sock.recvfrom(500)[0].split("#")
+        results = sock.recvfrom(500)[0]+"<br /><a href='http://sit.vickev.fr/semantic-ruby/www/'>Back home</a>"
         results
       else
         CGI::escapeHTML("Failure !")
