@@ -31,7 +31,7 @@ Amount_Phy_Cur_Cat = ["monetary unit"]
 Loc_Cat    = ["topographic point", "place", "spot", "location", "space"]
 Fonc_Cat = ["leader", "representative"]
 Fonc_Rel_Cat = ["spiritual leader", "religious leader", "scoutmaster"]
-Fonc_Ari_Cat = ["ristocrat", "blue blood", "patrician"]
+Fonc_Ari_Cat = ["aristocrat", "blue blood", "patrician"]
 Fonc_Mil_Cat = ["military leader", "strike leader"]
 Fonc_Pol_Cat = ["nationalist leader", "politician", "politico", "pol", "political leader", "puppet ruler", "puppet leader", "assemblyman", "assemblywoman", "head of state", "chief of state"]
 Fonc_Admi_Cat = ["civic leader", "civil leader", "delegate", "administrator", "executive", "secretary"]
@@ -49,6 +49,7 @@ Org_Com_Cat    = ["management", "financial institution", "financial organization
 Org_Non_Profit_Cat    = ["Curia", "medical institution", "charity", "organized religion", "vicariate", "vicarship", "nongovernmental organization", "NGO"]
 Org_Div_Cat    = ["musical organization", "musical organisation", "musical group", "museum", "company", "troupe", "team", "broadcasting station", "broadcast station"]
 Org_GSP_Cat    = ["aministrative district", "administrative division", "territorial division"]
+Unk = ["animal"]
              
 
 class String
