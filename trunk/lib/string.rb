@@ -121,29 +121,42 @@ class String
     end
 
     def categorize_np
-# interraction avec le premier moteur pour récupérer la catégorie
+# interaction avec le premier moteur pour récupérer la catégorie
 # d'un nom propre
         arr = Net::HTTP.get(URI.parse("http://www.nlgbase.org/perl/lr_info_extractor.pl?query=#{self}&search=EN")).split(":")
         cat = arr[0]
         cat = arr[1] if arr[0] == ""
 
-        if cat.nil?
-            arr2 = Net::HTTP.get(URI.parse("http://www.google.com/search?hl=en&q=#{self}&btnG=Search")).split("Did you mean:")
-            if(!arr2[1].nil?)
-                arr2 = arr2[1].split("</a>")
-                arr2 = arr2[0].split("class=p>")
-                arr2 = arr2[1].split(/\<\/?[a-z0-9]\>+/)
-
-                temp = arr2[0].to_s.chomp(" ")+"+"+arr2[2].to_s
-
-                arr = Net::HTTP.get(URI.parse("http://www.nlgbase.org/perl/lr_info_extractor.pl?query="+temp.to_s+"&search=EN")).split(":")
-                cat = arr[0]
-                cat = arr[1] if arr[0] == ""
-            end
-
+        if(cat.nil?)
+            temp = self.check_np
+            puts temp
+            arr = Net::HTTP.get(URI.parse("http://www.nlgbase.org/perl/lr_info_extractor.pl?query="+temp.to_s+"&search=EN")).split(":")
+            cat = arr[0]
+            cat = arr[1] if arr[0] == ""
         end
 
         cat
-    end
 
+   end
+
+   def check_np
+        arr2 = Net::HTTP.get(URI.parse("http://www.google.com/search?hl=en&q=#{self}&btnG=Search")).split("Did you mean:")
+        if(!arr2[1].nil?)
+            arr2 = arr2[1].split("</a>")
+            arr2 = arr2[0].split("class=p>")
+            arr2 = arr2[1].split(/\<\/?[a-z0-9]\>+/)
+
+            temp = ""
+
+            arr2.each do |value|
+                if value.to_s.chomp(" ")!="" && temp!=""
+                    temp += "+"
+                end
+                temp += value.to_s.chomp(" ")
+            end
+
+            temp
+        end
+    end
+ 
 end
