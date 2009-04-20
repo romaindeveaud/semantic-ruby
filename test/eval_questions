@@ -4,10 +4,10 @@ How much live animal on the head of humans?#animal head humans#unk# amount.phy.d
 Who shot JR?#shot JR#pers.hum# JR# shot# pers.hum#
 Where is the Flughafen at Berlin?#Flughafen Berlin#loc# # # #
 What company produces digitizing devices for computers?#digitizing devices computer#org.com# # # #
-What currency does Luxembourg use?#currency Luxembourg#unk# Luxembourg# currency# unk#
+What currency does Luxembourg use?#currency Luxembourg#unk# # # #
 Can you tell me about Whitcomb Judson?#Whitcomb Judson#pers.hum# # # #
-how old do i have to be to apply for a credit card?#credit card#unk# credit card# old# amount.phy.age#
-what is linux 2.4 tcp auto tuning ?#linux 2.4 tcp#unk# # # #
+How old do i have to be to apply for a credit card?#credit card#unk# credit card# old# amount.phy.age#
+What is Linux 2.4 tcp auto tuning ?#linux 2.4 tcp#unk# # # #
 How did Kursk disaster happen?#Kursk#unk# # # #
 What does IRS stand for?#IRS#org# # # #
 Who followed Gagarin into space?#Gagarin#pers.hum# Gagarin# followed# pers.hum#
@@ -23,7 +23,7 @@ How far is Yaroslavl from Moscow?#Yaroslavl#loc.geo# Yaroslavl# Moscow# amount.p
 What are M&M chocolate candies?#M&M#prod# # # #
 Who is William Lyon MacKenzie?#William Lyon MacKenzie#pers.hum# # # #
 What is Judaism's most sacred shrine?#Judaism sacred shrine#unk# Judaism# sacred shrine# unk#
-where can I find a robot?#robot#unk# robot# find# loc#
+Where can I find a robot?#robot#unk# robot# find# loc#
 Who composed the music for the fifth element?#music fifth element#pers.hum# fifth element# music# pers.hum#
 How did Socrate commit suicide?#Socrate#pers.hum# Socrate# suicide# unk#
 What is an HMM?#HMM#unk# # # #
@@ -37,14 +37,14 @@ How to calculate Pi?#Pi#unk# # # #
 Where does Kate Jennings live?#Kate Jennings#pers.hum# Kate Jennings# live# loc#
 What are Monterssori materials?#Monterssori materials#org# # # #
 What is a Yenta?#Yenta#unk# # # #
-who wrote "stairway to heaven"?#stairway to heaven#unk# stairway to heaven# wrote# pers.hum#
+Who wrote "stairway to heaven"?#stairway to heaven#unk# stairway to heaven# wrote# pers.hum#
 What does E.M.T. stand for?#E.M.T.#org# # # #
 what kind of poison is good for a cat?#poison cat#unk# # # #
 what is pallavi?#pallavi#unk# # # #
 Which song did Darius sing Popstars auditions?#Darius#pers.hum# Darius# sing# unk#
 Who is the president of Cymer?#president Cymer#pers.hum# Cymer# president# pers.hum#
 Where can I get some information on Michael Jordan?#Michael Jordan#pers.hum# # # #
-who is aarline?#aarline#org# # # #
+Who is aarline?#aarline#org# # # #
 Who wrote The Who worthe The Collector?#The Who The collector#pers.hum# # # #
 Who is John McEnroe married to?#John McEnroe#pers.hum# John McEnroe# married# pers.hum#
 What brought America into World War 1?#World War 1#unk# # # #
@@ -90,7 +90,7 @@ how big are the gardens at Fontainebleau?#Fontainebleau gardens#unk# Fonatainebl
 Who is Bill Loughner?#Bill Loughner#pers.hum# # # #
 What does SGML stand for?#SGML#prod# # # #
 What is the Aurora Borealis?#Aurora Borealis#unk# # # #
-What day of the year did Christopher Columbus depart?#Christopher Columbus#pers.hum# Christopher Columbus# depart# date#
+What day of the year did Christopher Coulumbus depart?#Christopher Columbus#pers.hum# Christopher Columbus# depart# date#
 what does a 3d game engine do?#3d game engine#unk# # # #
 Who invented the Pizza?#Pizza#unk# pizza# invented# pers.hum#
 What does DNS stand for?#DNS#unk# # # #

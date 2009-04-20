@@ -36,7 +36,7 @@ private
         np.uniq!
         
         if np.empty?
-          temp = @sent.words-["?",".","'s","LEFT-WALL","RIGHT-WALL"]
+          temp = @sent.words-["?",".","'s","LEFT-WALL","RIGHT-WALL","I"]
           temp.each { |w| np.push(w) if (w.capitalize == w or w.upcase == w)}
         end
 

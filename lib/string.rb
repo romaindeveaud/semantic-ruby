@@ -84,9 +84,9 @@ class String
             cat = "org"               if Org_Cat.include?(s)
             cat = "org.pol"           if Org_Pol_Cat.include?(s)
             cat = "org.edu"           if Org_Edu_Cat.include?(s)
+            cat = "org.div"           if Org_Div_Cat.include?(s)
             cat = "org.com"           if Org_Com_Cat.include?(s)
             cat = "org.non-protif"    if Org_Non_Profit_Cat.include?(s)
-            cat = "org.div"           if Org_Div_Cat.include?(s)
             cat = "org.gsp"           if Org_GSP_Cat.include?(s)
             cat = "time"              if Time_Cat.include?(s)
             cat = "time.hour"         if Time_Hour_Cat.include?(s)
@@ -126,6 +126,23 @@ class String
         arr = Net::HTTP.get(URI.parse("http://www.nlgbase.org/perl/lr_info_extractor.pl?query=#{self}&search=EN")).split(":")
         cat = arr[0]
         cat = arr[1] if arr[0] == ""
+
+        if cat.nil?
+            arr2 = Net::HTTP.get(URI.parse("http://www.google.com/search?hl=en&q=#{self}&btnG=Search")).split("Did you mean:")
+            if(!arr2[1].nil?)
+                arr2 = arr2[1].split("</a>")
+                arr2 = arr2[0].split("class=p>")
+                arr2 = arr2[1].split(/\<\/?[a-z0-9]\>+/)
+
+                temp = arr2[0].to_s.chomp(" ")+"+"+arr2[2].to_s
+
+                arr = Net::HTTP.get(URI.parse("http://www.nlgbase.org/perl/lr_info_extractor.pl?query="+temp.to_s+"&search=EN")).split(":")
+                cat = arr[0]
+                cat = arr[1] if arr[0] == ""
+            end
+
+        end
+
         cat
     end
 
