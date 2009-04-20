@@ -28,13 +28,13 @@ private
     def get_np(options = {})
         np = []
         @sent.linkages.first.links.each do |l| 
-          np.push(l.lword.split(".").first.split("[").first, l.rword.split(".").first.split("[").first) if l.label =~ /G./
-          np.push(l.rword.split(".").first.split("[").first) if l.label =~ /DG./
-          np.push(l.rword.split(".").first.split("[").first) if l.label =~ /JG./
-          np.push(l.rword.split(".").first.split("[").first) if l.label =~ /MG./
+          np.push(l.lword.split(".").first.split("[").first, l.rword.split(".").first.split("[").first) if l.label =~ /G.*/
+          np.push(l.rword.split(".").first.split("[").first) if l.label =~ /DG.*/
+          np.push(l.rword.split(".").first.split("[").first) if l.label =~ /JG.*/
+          np.push(l.rword.split(".").first.split("[").first) if l.label =~ /MG.*/
         end
         np.uniq!
-        
+
         if np.empty?
           temp = @sent.words-["?",".","'s","LEFT-WALL","RIGHT-WALL","I"]
           temp.each { |w| np.push(w) if (w.capitalize == w or w.upcase == w)}

@@ -141,22 +141,22 @@ class String
 
    def check_np
         arr2 = Net::HTTP.get(URI.parse("http://www.google.com/search?hl=en&q=#{self}&btnG=Search")).split("Did you mean:")
+        temp = ""
         if(!arr2[1].nil?)
             arr2 = arr2[1].split("</a>")
             arr2 = arr2[0].split("class=p>")
             arr2 = arr2[1].split(/\<\/?[a-z0-9]\>+/)
 
-            temp = ""
 
-            arr2.each do |value|
-                if value.to_s.chomp(" ")!="" && temp!=""
-                    temp += "+"
-                end
-                temp += value.to_s.chomp(" ")
-            end
-
-            temp
+#            arr2.each do |value|
+#                if value.to_s.chomp(" ")!="" && temp!=""
+#                    temp += "+"
+#                end
+#                temp += value.to_s.chomp(" ")
+#            end
+            temp = arr2.join(" ").split.join("+")
         end
+        temp
     end
  
 end

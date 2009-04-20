@@ -26,10 +26,11 @@ loop do
       result += "[#{results[:cat_e2]}] #{results[:kw_e2]}<br />"
       result += "Keywords selected for engine 3 : "
       result += "[#{results[:cat_e3]}] [Named entity : #{results[:en_e3]}] [Keywords : #{results[:kw_e3]}]<br />"
+      res = Net::HTTP.get(URI.parse("http://www.nlgbase.org/perl/info_extractor.pl?query=#{results[:kw_e1].split.join("+")}&search=EN"))
     rescue NoMethodError,URI::InvalidURIError 
       result+= "Execution error. Maybe your sentence has not been written properly."
     end
-    sock.print result
+    sock.print res#ult
   rescue Errno::EAGAIN, Errno::ECONNABORTED, Errno::EPROTO, Errno::EINTR
     IO.select([serv])
     retry
