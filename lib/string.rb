@@ -129,10 +129,11 @@ class String
 
         if(cat.nil?)
             temp = self.check_np
-            puts temp
-            arr = Net::HTTP.get(URI.parse("http://www.nlgbase.org/perl/lr_info_extractor.pl?query="+temp.to_s+"&search=EN")).split(":")
-            cat = arr[0]
-            cat = arr[1] if arr[0] == ""
+            if(temp != "")
+                arr = Net::HTTP.get(URI.parse("http://www.nlgbase.org/perl/lr_info_extractor.pl?query="+temp.to_s+"&search=EN")).split(":")
+                cat = arr[0]
+                cat = arr[1] if arr[0] == ""
+            end
         end
 
         cat
@@ -147,16 +148,19 @@ class String
             arr2 = arr2[0].split("class=p>")
             arr2 = arr2[1].split(/\<\/?[a-z0-9]\>+/)
 
-
-#            arr2.each do |value|
-#                if value.to_s.chomp(" ")!="" && temp!=""
-#                    temp += "+"
-#                end
-#                temp += value.to_s.chomp(" ")
-#            end
             temp = arr2.join(" ").split.join("+")
         end
         temp
+    end
+
+    def categorize_ccg
+        res = Net::HTTP.post_form(URI.parse('http://l2r.cs.uiuc.edu/cgi-bin/LbjNer-front.pl'),                                    {'dest'=>'NETagger', 'sentence'=>self, '.cgifields'=>'dest'})
+        res = res.body.split("[")
+        res = res[1].split(" ")
+        puts res[0]
+
+
+
     end
  
 end
