@@ -157,9 +157,16 @@ class String
         res = Net::HTTP.post_form(URI.parse('http://l2r.cs.uiuc.edu/cgi-bin/LbjNer-front.pl'),                                    {'dest'=>'NETagger', 'sentence'=>self, '.cgifields'=>'dest'})
         res = res.body.split("[")
         res = res[1].split(" ")
-        puts res[0]
 
+        cat = case res[0]
+            when "PER" : "pers"
+            when "LOC" : "loc"
+            when "ORG" : "org"
+            #when "MISC" : "pouet"
+            else "unk"
+        end
 
+        cat
 
     end
  

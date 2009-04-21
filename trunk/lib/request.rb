@@ -170,7 +170,7 @@ private
         # Si c'est une question...
           cat = get_cat(link.rword,np, {:cat => 2})
           if (cat.nil?)
-              (@sent.words-["LEFT-WALL","RIGHT-WALL"]).join(" ").categorize_ccg
+              cat = (@sent.words-["LEFT-WALL","RIGHT-WALL"]).join(" ").categorize_ccg
           end
         elsif @sent.linkages.first.links[0].label != "Xp" and @sent.linkages.first.links[0].label =~ /W[jqs]/
           cat = get_cat(@sent.words[1],np, {:cat => 2})
