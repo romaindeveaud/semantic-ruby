@@ -1,3 +1,14 @@
+# # # # # # # # # #
+# Classe Request  #
+# # # # # # # # # #
+#
+# Synopsis : analyse morpho-syntaxique, catégorisation, extraction de mots-clés.
+# Authors : Romain Deveaud, Ludovic Bonnefoy
+#
+# NLGbAse.QR, May 2009
+#
+# # # # #
+
 class Request
     attr_reader :sent
 
@@ -56,15 +67,7 @@ private
       object = find_obj if object.nil?
       case word
           when "who", "whom", "whose" : 
-#            if options[:cat] == 2
-#              if !np.empty?
-#                cat = np.join("+").categorize_np
-#              else
-#                cat = "pers"
-#              end
-#            else
-              cat = "pers"
-#            end
+            cat = "pers"
           when "where", "whence", "wither" : 
             if options[:cat] == 2
               if !np.empty?
@@ -169,9 +172,9 @@ private
         elsif link.label =~ /W[jqs]/ 
         # Si c'est une question...
           cat = get_cat(link.rword,np, {:cat => 2})
-          if (cat.nil?)
-              cat = (@sent.words-["LEFT-WALL","RIGHT-WALL"]).join(" ").categorize_ccg
-          end
+#          if (cat.nil?)
+#              cat = (@sent.words-["LEFT-WALL","RIGHT-WALL"]).join(" ").categorize_ccg
+#          end
         elsif @sent.linkages.first.links[0].label != "Xp" and @sent.linkages.first.links[0].label =~ /W[jqs]/
           cat = get_cat(@sent.words[1],np, {:cat => 2})
         elsif link.label =~ /W[di]|Q./ or link.lword != "LEFT-WALL"
@@ -182,6 +185,7 @@ private
               cat = np.join("+").categorize_np
             end
         end
+#        cat = (@sent.words-["LEFT-WALL","RIGHT-WALL"]).join(" ").categorize_ccg if cat.nil?
         cat = "unk" if cat.nil? 
         cat
     end
