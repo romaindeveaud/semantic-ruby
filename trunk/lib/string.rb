@@ -1,3 +1,18 @@
+# # # # # # # # #
+# Classe String #
+# # # # # # # # #
+#
+# Functions : categorize, categorize_np, check_np, categorize_ccg
+#
+# Synopsis : les fonctions définies ici sont liés à la catégorisation
+# sémantique d'un mot.
+#
+# Authors : Romain Deveaud, Ludovic Bonnefoy
+#
+# NLGbAse.QR, May 2009
+#
+# # # # #
+
 require 'net/http'
 
 # Ruby propose des classes ouvertes. Ici j'ai besoin de rajouter une méthode
@@ -55,6 +70,11 @@ Unk = ["animal"]
 class String
 
     def categorize(hypernym = nil)
+
+# Cette fonction utilise les synsets de WordNet afin de pouvoir remonter
+# la hiérarchie hyperonimique d'un mot et ainsi pouvoir le catégoriser
+# à partir des mots "généraux" présents dans les tableaux ci-dessus.
+
         cat = nil
 
 #        if hypernym.nil?
@@ -99,7 +119,14 @@ class String
             cat = "fonc.admi"         if Fonc_Admi_Cat.include?(s)
         end
 
+# La récursivité se lance ici.        
+
         hypernym.hypernyms.each { |h| cat = self.categorize(h) } if cat.nil?
+
+
+# Si aucune catégorie n'a été détectée par WordNet, nous allons chercher
+# directement dans NLGbAse la classe du document correspondant au mot
+# recherché.
 
         if cat.nil? && hypernym == synset(self)
             cat = Net::HTTP.get(URI.parse("http://www.nlgbase.org/perl/lr_info_extractor.pl?query=#{self}&search=EN")).split(":")[0]
@@ -108,6 +135,10 @@ class String
             cat = Net::HTTP.get(URI.parse("http://www.nlgbase.org/perl/lr_info_extractor.pl?query=#{self}&search=EN")).split(":")[1]
             cat = nil if (cat == "" or cat.nil?)
             return cat if !cat.nil?
+
+# L'information lexicale fournie par WordNet est peu fiable, c'est pourquoi
+# elle est utilisée en dernier recours si rien n'a été trouvé précédemment.
+
             cat = case hypernym.lex_info.split(".").last
                 when "person"   : "pers.hum"
                 when "artifact" : "prod"
@@ -120,27 +151,38 @@ class String
         cat
     end
 
-    def categorize_np
-# interaction avec le premier moteur pour récupérer la catégorie
-# d'un nom propre
-        arr = Net::HTTP.get(URI.parse("http://www.nlgbase.org/perl/lr_info_extractor.pl?query=#{self}&search=EN")).split(":")
-        cat = arr[0]
-        cat = arr[1] if arr[0] == ""
+    def cat_from_nlgbase
 
-        if(cat.nil?)
+# Interraction avec NLGbAse pour récupérer la catégorie d'un nom propre.
+
+      arr = Net::HTTP.get(URI.parse("http://www.nlgbase.org/perl/lr_info_extractor.pl?query=#{self}&search=EN")).split(":")
+      cat = arr[0]
+      cat = arr[1] if arr[0] == ""
+
+      cat
+    end
+
+    def categorize_np
+
+        cat = self.cat_from_nlgbase
+
+# Si rien n'a été trouvé, il est fort probable que le nom propre ait été
+# mal orthographié, une vérification auprès de Google (check_np) est 
+# effectuée, et une requête est de nouveau effectuée.
+
+        if cat.nil? 
             temp = self.check_np
-            if(temp != "")
-                arr = Net::HTTP.get(URI.parse("http://www.nlgbase.org/perl/lr_info_extractor.pl?query="+temp.to_s+"&search=EN")).split(":")
-                cat = arr[0]
-                cat = arr[1] if arr[0] == ""
-            end
+            cat = temp.cat_from_nlgbase if temp != ""
         end
 
         cat
-
    end
 
    def check_np
+
+# Recherche auprès de GoogleSuggest pour corriger l'orthographe d'un
+# nom propre.
+
         arr2 = Net::HTTP.get(URI.parse("http://www.google.com/search?hl=en&q=#{self}&btnG=Search")).split("Did you mean:")
         temp = ""
         if(!arr2[1].nil?)
@@ -154,9 +196,10 @@ class String
     end
 
     def categorize_ccg
-        res = Net::HTTP.post_form(URI.parse('http://l2r.cs.uiuc.edu/cgi-bin/LbjNer-front.pl'),                                    {'dest'=>'NETagger', 'sentence'=>self, '.cgifields'=>'dest'})
+        res = Net::HTTP.post_form(URI.parse('http://l2r.cs.uiuc.edu/cgi-bin/LbjNer-front.pl'),{'dest'=>'NETagger', 'sentence'=>self, '.cgifields'=>'dest'})
+# Ce code est super foireux, et il ne marche pas.
         res = res.body.split("[")
-        res = res[1].split(" ")
+        res = res[1].split
 
         cat = case res[0]
             when "PER" : "pers"
