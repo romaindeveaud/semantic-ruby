@@ -13,6 +13,7 @@ class Request
     attr_reader :sent
 
     def initialize(request)
+# La phrase tapée est parsée par l'analyseur morpho-syntaxique (LinkParser).
         @sent = $dict.parse(request)
         @sent = $dict_null.parse(request) if @sent.num_linkages_found == 0 or @sent.linkages.empty?
     end
@@ -22,10 +23,12 @@ class Request
     end
 
     def extract
+# Cette fonction va appeler successivement toutes les méthodes
+# nécessaires afin d'extraire les différents mots-clés et les 
+# catégories qui seront utilisés dans le système de RI.
         results = Hash.new
         ext = extract_e1_2({:label => "NP"})
         ext = ext == "" ? extract_e1 : ext
-#        ext = ext == "" ? extract_e1_2({:label => "ADJP"}) : ext
         results[:kw_e1]  = ext
         results[:kw_e2]  = ext
         results[:kw_e3]  = extract_e3
