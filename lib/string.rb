@@ -197,9 +197,8 @@ class String
 
     def categorize_ccg
         res = Net::HTTP.post_form(URI.parse('http://l2r.cs.uiuc.edu/cgi-bin/LbjNer-front.pl'),{'dest'=>'NETagger', 'sentence'=>self, '.cgifields'=>'dest'})
-# Ce code est super foireux, et il ne marche pas.
         res = res.body.split("[")
-        res = res[1].split
+        res = res[1].split if !res[1].nil?
 
         cat = case res[0]
             when "PER" : "pers"
