@@ -62,7 +62,7 @@ Org_Pol_Cat    = ["government officials", "officialdom", "city council", "execut
 Org_Edu_Cat    = ["educational institution", "academy", "honorary society"]
 Org_Com_Cat    = ["management", "financial institution", "financial organization", "financial organisation", "company", "enterprise"]
 Org_Non_Profit_Cat    = ["Curia", "medical institution", "charity", "organized religion", "vicariate", "vicarship", "nongovernmental organization", "NGO"]
-Org_Div_Cat    = ["musical organization", "musical organisation", "musical group", "museum", "company", "troupe", "team", "broadcasting station", "broadcast station","band"]
+Org_Div_Cat    = ["musical organization", "musical organisation", "musical group", "museum", "company", "troupe", "team", "broadcasting station", "broadcast station","band","rock band","musical band","group"]
 Org_GSP_Cat    = ["aministrative district", "administrative division", "territorial division"]
 Unk = ["animal"]
              
