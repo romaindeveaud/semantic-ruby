@@ -65,7 +65,7 @@ private
         np # => /!\ C'est une Array, pas une String !!
     end
 
-    def get_cat(word,np,options = {})
+    def get_cat(word,np,options = {},offset = 1)
       cat = ""
       object = @sent.object if !@sent.object.nil?
       object = find_obj if object.nil?
@@ -109,7 +109,7 @@ private
                 cat = "unk"
               end
             else 
-              if ["long","hot","late","fast","large","far","few","great","little","many","much","tall", "wide", "high", "big", "old"].include?(@sent.words[2])
+              if ["close","long","hot","late","fast","large","far","few","great","little","many","much","tall", "wide", "high", "big", "old"].include?(@sent.words[offset+1])
                   cat = "amount" 
               elsif np.include?(object)
                 cat = np.join("+").categorize_np
@@ -125,9 +125,9 @@ private
             cat = np.join("+").categorize_np if !np.empty? and options[:cat] == 2
             cat = extract_e1_2({:label => "NP"}).split.join("+").categorize_np if cat == "unk"    
 #              cat = "unk" if np.empty?
-            if np.empty? or cat.nil? or cat == ""           
-              if !$stoplist.include?(Linguistics::EN.infinitive(@sent.words[2])) and !$stoplist.include?(ActiveSupport::Inflector.singularize(@sent.words[2]))
-                cat = ActiveSupport::Inflector.singularize(@sent.words[2]).categorize
+            if np.empty? or cat.nil? or cat == "" 
+              if !$stoplist.include?(Linguistics::EN.infinitive(@sent.words[offset+1])) and !$stoplist.include?(ActiveSupport::Inflector.singularize(@sent.words[offset+1]))
+                cat = ActiveSupport::Inflector.singularize(@sent.words[offset+1]).categorize
               elsif np.include?(object)
                 cat = np.join("+").categorize_np
               elsif !object.nil? 
@@ -181,7 +181,10 @@ private
           end
         elsif link.label =~ /W[jqs]/ 
         # Si c'est une question...
-          cat = get_cat(link.rword,np, {:cat => 2})
+          word = link.rword
+          word = @sent.words[@sent.words.index(word.capitalize)+1] if word.capitalize == "In"
+          offset = @sent.words.index(word).nil? ? @sent.words.index(word.capitalize) : @sent.words.index(word)
+          cat = get_cat(word,np, {:cat => 2}, offset)
 #          if (cat.nil?)
 #              cat = (@sent.words-["LEFT-WALL","RIGHT-WALL"]).join(" ").categorize_ccg
 #          end
@@ -195,7 +198,7 @@ private
               cat = np.join("+").categorize_np
             end
         end
-#        cat = (@sent.words-["LEFT-WALL","RIGHT-WALL"]).join(" ").categorize_ccg if cat.nil?
+        cat = (@sent.words-["LEFT-WALL","RIGHT-WALL"]).join(" ").categorize_ccg if cat.nil?
         cat = "unk" if cat.nil? 
         cat
     end
@@ -213,7 +216,10 @@ private
               cat = np.join("+").categorize_np
           end
         elsif link.label =~ /W[jqs]/ 
-          cat = get_cat(link.rword,np)
+          word = link.rword
+          word = @sent.words[@sent.words.index(word.capitalize)+1] if word.capitalize == "In"
+          offset = @sent.words.index(word).nil? ? @sent.words.index(word.capitalize) : @sent.words.index(word)
+          cat = get_cat(word,np, {}, offset)
         elsif @sent.linkages.first.links[0].label != "Xp" and @sent.linkages.first.links[0].label =~ /W[jqs]/
           cat = get_cat(@sent.words[1],np)
         elsif link.label =~ /W[di]|Q./ or link.lword != "LEFT-WALL"
