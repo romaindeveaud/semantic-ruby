@@ -193,3 +193,35 @@ How large in square miles is North Carolina?#Notrh Carolina#loc.admi#Notrth Caro
 How big is the sun?#sun#unk#sun#big#amount.phy.area#
 How many moons does Venus have?#Venus#unk#Venus#moons#amount.phy.other#
 How far is the moon from Earth in miles?#Earth#loc.geo#Earth#moon miles far#amount.phy.len#
+How long is the Great Barrier Reef?#Great Barrier Reef#loc.geo#Great Barrier Reef#long#amount.phy.len#
+What movie won the Academy Award for best picture in 1989?#Academy Award 1989#prod.award#Academy Award#1986 won movie best picture#prod.art#
+When Lyndon B. Johnson was president?#Lyndon B. Johnson#pers.hum#Lyndon B. Johnson#president#date#
+What is the Cav's arena name?#Cav arena#loc.fac# # # #
+What city is Ole Mississippi University in?#Ole Mississippi University#org.edu#Ole Mississippi University#city#loc.admi#
+What is ETA in Spain?#ETA#org.pol# # # #
+List the names of casinos owned by Native Americans.#Native Americans#org.com#Native Americans#casinos#loc.fac#
+When was chewing tobacco banned in baseball?#chewing tobacco#prod#chewing tobacco#baseball banned#date#
+What comic book friend of Archie wears a crown-shaped hat?#Archie#pers.hum# # # #
+How did Minnesota get its name?#Minnesota#loc.admi# # # #
+How hot is the sun?#sun#unk#sun#hot#amount.phy.temp#
+How many official languages does Switzerland have?#Switzerland languages#loc.geo#Switzerland#languages official#amount.phy.other#
+What was the Beatles' first number one hit?#Beatles#org.div#Beatles#first number one hit#prod#
+What department is responsible for regulating casino gambling in Mississippi?#Mississippi regulating casino#org#Mississippi#department regulation casino gambling#org.gsp#
+What city is Duke University in?#Duke University#org.edu#Duke University#city#loc.admi#
+What American revolutionary general turned over West Point to the British?#West Point#loc#West Point#Amercian revolutionary general#pers.hum#
+How old was Babe Ruth when he died?#Babe Ruth#pers.hum#Babe Ruth#died#amount.phy.age#
+What is the state with the smallest population?#state smallest population#loc.admi# # # #
+How many Earth days does it take for Mars to orbit the sun?#Mars#unk#Mars#sun orbit Earth days#amount.phy.dur#
+What rock band sang "A Whole Lotta Love"?#A Whole Lotta Love#prod#A Whole Lotta Love#rock band sang#org.div#
+Name singers performing the role of Donna Elvira in performances of Mozart's "Don Giovanni".#Donna Elvira#pers.hum#Donna Elvira#singers performing role#pers.hum#
+How far is the distance for a free throw?#free throw#unk#free throw#distance far#amount.phy.len#
+What is the fastest roller coaster?#roller coaster fastest#loc.fac#roller coaster#fastest#loc.fac#
+Who is Aga Khan?#Aga Khan#pers.hum# # # #
+How many years are there in a French president's term?#French president#pers#French president#years term#amount.phy.dur#
+What is the vagus nerve?#vagus nerve#unk# # # #
+What animal has human-like fingerprints?#animal fingerprints#unk# # # #
+What island was Napoleon exiled to after his defeat at Waterloo?#Napolean i#pers.hum#Napoleon#island defeat exiled Waterloo#loc.geo#
+When was Leonardo da Vinci born?#Leonardo da Vinci#pers.hum#Leonardo da Vinci#born#date#
+How did Marty Robbins die?#Marty Robbins#pers.hum# # # #
+How many stripes are on the American flag?#American flag#loc#American flag#stripes#amount.phy.other#
+List brands of pianos.#brands pianos#org.div# # # #

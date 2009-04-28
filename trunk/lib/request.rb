@@ -43,16 +43,16 @@ private
         np = []
         @sent.linkages.first.links.each do |l| 
           np.push(l.lword.split(".").first.split("[").first, l.rword.split(".").first.split("[").first) if l.label =~ /G.*/
-          np.push(l.rword.split(".").first.split("[").first) if l.label =~ /DG.*/
-          np.push(l.rword.split(".").first.split("[").first) if l.label =~ /JG.*/
-          np.push(l.rword.split(".").first.split("[").first) if l.label =~ /MG.*/
+          np.push(l.rword.split(".").first.split("[").first, l.rword.split(".").first.split("[").first) if l.label =~ /DG.*/
+          np.push(l.rword.split(".").first.split("[").first, l.rword.split(".").first.split("[").first) if l.label =~ /JG.*/
+          np.push(l.rword.split(".").first.split("[").first, l.rword.split(".").first.split("[").first) if l.label =~ /MG.*/
         end
-        np.uniq!
 
         if np.empty?
           temp = @sent.words-["?",".","'s","LEFT-WALL","RIGHT-WALL","I"]
           temp.each { |w| np.push(w) if (w.capitalize == w or w.upcase == w)}
         end
+        np.uniq!
 
         if options[:from] != "e3"
           np.push(extract_e1_2({:label => "NP"}).split) if np.empty?
@@ -89,7 +89,7 @@ private
             if options[:cat] == 2
               if !np.empty?
                 cat = np.join("+").categorize_np
-                cat = extract_e1_2({:label => "NP"}).split.join("+").categorize_np if cat == "unk"    
+                cat = extract_e1_2({:label => "NP"}).split.join("+").categorize_np if cat == "unk" 
               elsif !object.nil?
                 cat = ActiveSupport::Inflector.singularize(object).categorize # définie dans string.rb
               else
@@ -109,7 +109,7 @@ private
                 cat = "unk"
               end
             else 
-              if ["late","fast","large","far","few","great","little","many","much","tall", "wide", "high", "big", "old"].include?(@sent.words[2])
+              if ["long","hot","late","fast","large","far","few","great","little","many","much","tall", "wide", "high", "big", "old"].include?(@sent.words[2])
                   cat = "amount" 
               elsif np.include?(object)
                 cat = np.join("+").categorize_np
