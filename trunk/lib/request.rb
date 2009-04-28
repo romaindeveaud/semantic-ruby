@@ -61,6 +61,7 @@ private
           np.delete("")
         end
         np.flatten!
+        np -= $stoplist
         np # => /!\ C'est une Array, pas une String !!
     end
 
@@ -75,6 +76,7 @@ private
             if options[:cat] == 2
               if !np.empty?
                 cat = np.join("+").categorize_np
+                cat = extract_e1_2({:label => "NP"}).split.join("+").categorize_np if cat == "unk"    
               elsif !object.nil?
                 cat = ActiveSupport::Inflector.singularize(object).categorize # définie dans string.rb
               else
@@ -87,10 +89,11 @@ private
             if options[:cat] == 2
               if !np.empty?
                 cat = np.join("+").categorize_np
+                cat = extract_e1_2({:label => "NP"}).split.join("+").categorize_np if cat == "unk"    
               elsif !object.nil?
                 cat = ActiveSupport::Inflector.singularize(object).categorize # définie dans string.rb
               else
-                cat = "unk"
+                cat = "date"
               end
             else
               cat = "date"
@@ -99,16 +102,18 @@ private
             if options[:cat] == 2
               if !np.empty?
                 cat = np.join("+").categorize_np
+                cat = extract_e1_2({:label => "NP"}).split.join("+").categorize_np if cat == "unk"    
               elsif !object.nil?
                 cat = ActiveSupport::Inflector.singularize(object).categorize # définie dans string.rb
               else
                 cat = "unk"
               end
             else 
-              if ["far","few","great","little","many","much","tall", "wide", "high", "big", "old"].include?(@sent.words[2])
+              if ["late","fast","large","far","few","great","little","many","much","tall", "wide", "high", "big", "old"].include?(@sent.words[2])
                   cat = "amount" 
               elsif np.include?(object)
                 cat = np.join("+").categorize_np
+                cat = extract_e1_2({:label => "NP"}).split.join("+").categorize_np if cat == "unk"    
               elsif !object.nil?
                 cat = ActiveSupport::Inflector.singularize(object).categorize # définie dans string.rb
               else
@@ -116,18 +121,20 @@ private
               end
             end
           when "what", "why", "which" : 
-            # A compléter ici...
-            if options[:cat] == 2
-              cat = np.join("+").categorize_np if !np.empty?
-              cat = "unk" if np.empty?
-            elsif !$stoplist.include?(Linguistics::EN.infinitive(@sent.words[2])) or !$stoplist.include?(ActiveSupport::Inflector.singularize(@sent.words[2]))
-              cat = ActiveSupport::Inflector.singularize(@sent.words[2]).categorize
-            elsif np.include?(object)
-              cat = np.join("+").categorize_np
-            elsif !object.nil? 
-              cat = ActiveSupport::Inflector.singularize(object).categorize # définie dans string.rb
-            else 
-              cat = "unk"
+#            if options[:cat] == 2
+            cat = np.join("+").categorize_np if !np.empty? and options[:cat] == 2
+            cat = extract_e1_2({:label => "NP"}).split.join("+").categorize_np if cat == "unk"    
+#              cat = "unk" if np.empty?
+            if np.empty? or cat.nil? or cat == ""           
+              if !$stoplist.include?(Linguistics::EN.infinitive(@sent.words[2])) and !$stoplist.include?(ActiveSupport::Inflector.singularize(@sent.words[2]))
+                cat = ActiveSupport::Inflector.singularize(@sent.words[2]).categorize
+              elsif np.include?(object)
+                cat = np.join("+").categorize_np
+              elsif !object.nil? 
+                cat = ActiveSupport::Inflector.singularize(object).categorize # définie dans string.rb
+              else 
+                cat = "unk"
+              end
             end
           else cat = "unk"
       end
@@ -292,6 +299,7 @@ private
         keywords = @sent.words-$stoplist-get_np({:from => "e3"})-verb
 
         @sent.linkages.first.links.each do |l| 
+            next if l.lword.nil? or l.rword.nil? or l.lword == "." or l.rword == "."
             if keywords.include?(l.lword.split(".")[0].split("[").first)
                 symbol = case l.lword.split(".")[1]
                     when "a" : :adjective

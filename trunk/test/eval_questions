@@ -106,3 +106,90 @@ What is the GDP of the U.S.?#GDP U.S.#unk# Economy of the United States# GDP# am
 what is the IQ of Georges Bush ?#Georges Bush#pers# Georges Bush# IQ# amount#
 who is the owner of microsoft?#owner microsoft#pers# microsoft# owner# pers#
 Who did Google acquire?#Google#org# Google# acquired# org#
+How far is it from Earth to Mars?#Earth Mars#unk#Mars#Earth#amount.phy.len#
+How late is Disneyland open?#Disneyland#loc.fac#Disneyland#open#date#
+What was the Hunchback of Notre Dame's real name?#Hunchback Notre Dame#pers.hum#Hunchback Notre Dame#real name#unk#
+What is the name of the airport in Dallas Ft. Worth?#airport Dallas Ft. Worth#loc.fac#airport Dallas Ft. Worth#name#unk#
+What city is Disneyland in?#Disneyland#loc.admi#Disneyland#city#loc.admi#
+What book did Rachel Carson write in 1962?#Rachel Carson#pers#Rachel Carson#book 1962#prod.art#
+What country is Aswan High Dam located in?#Aswan High Dam#loc.admi#Aswan High Dam#located country#loc.admi#
+Who is Aaron Copland?#Aaron Copland#pers.hum# # # #
+Which past and present NFL players have the last name of Johnson?#NFL Johnson#pers#NFL Johnson#name#pers.hum#
+How many time zones are there in the world?#time zones#unk#times zones#world#amount.phy.other#
+How high is the pitcher's mound?#pitcher mound#loc#pitcher mound#high#amount.phy.len#
+What is a golden parachute?#golden parachute#unk# # # #
+How did the disciple Peter die?#disciple Peter#pers.hum#disciple Peter#die#unk#
+Who is Alberto Tomba?#Alberto Tomba#pers.hum# # # #
+What is the population of Iceland?#Iceland#loc#Iceland#population#amount.phy.other#
+What business was the source of John D. Rockefeller's fortune?#John D. Rockfeller#pers.hum#John D. Rockfeller#source business#unk#
+What are pennies made of?#pennies#unk#pennies#made of#unk#
+What is the name of the chart that tells you the symbol for all chemical elements?#chart chemical elements#unk# # # #
+In which city is the River Seine?#River Seine#loc.geo#River Seine#city#loc.admi#
+What breeds of dog have won the "Best in Show" award at the Westminster Dog Show?#Westminster Dog Show#unk#Westminster Dog Show#Best in Show won#unk#
+What city is the home to the Rock and Roll Hall of Fame?#Rock Roll Hall Fame#loc.fac#Rock Roll Hall Fame#city home#loc.admi#
+List the names of chewing gums.#chewing gums#prod#chewing gums#names#prod#
+What city did Duke Ellington live in?#Duck Ellington#pers.hum#Duck Ellington#city live in#loc.admi#
+What is Bausch & Lomb?#Bausch Lomb#org.com# # # #
+How did Jimi Hendrix die?#Jimi Hendrix#pers.hum# # # #
+How big is Mars?#Mars#unk#Mars#big#amount.phy.area#
+When was "Cold Mountain" written?#Cold Mountain#prod.art#Cold Mountain#written#date#
+How did Virginia Woolf die?#Virginia Woolf#pers.hum# # # #
+How fast is an eye blink?#eye blink#unk#eye blink#fast#amount.phy.spd#
+What governments still officially recognize and support International Labor Day?#International Labor Day#unk#International Labor Day#governments recognize support#loc.admi#
+When was the first hair dryer made?#hair dryer#prod#hair dryer#first made#date#
+What did Ozzy Osbourne bite the head off of?#Ozzy Osbourne#pers.hum# # # #
+When was the U.S. capitol built?#U.S. capitol#loc.fac#U.S. capitol#built#date#
+How did George Washington die?#George Washington#pers.hum# # # #
+how did Patsy Cline die#Patsy Cline#pers.hum# # # #
+What band did the music for the 1970's film "Saturday Night Fever"?#Saturday Night Fever#prod.art#Saturday Night Fever#band music#org.div#
+What band was Jerry Garcia with?#Jerry Garcia#pers.hum#Jerry Garcia#band with#org.div#
+When was Prince Charles born?#Prince Charles#pers.hum#Prince Charles#born#date#
+When did International Volunteers Day begin?#International Volunteers Day#org#International Volunteers Day#begin#date#
+Who is Vlad the Impaler?#Vlad Impaler#pers.hum# # # #
+What is the play "West Side Story" based on?#West Side Story#prod.art# # # #
+What color is the top stripe on the U.S. flag?#U.S. flag#unk#U.S. flag#top stripe color#unk#
+How many stories are in the Sears Tower?#Sears Tower#loc.fac#Sears Tower#stories#amount.phy.other#
+How fast can a nuclear submarine travel?#nuclear submarine#unk#nuclear submarine#travel fast#amount.phy.spd#
+How many floors are in the Empire State Building?#Empire State Building#loc.fac#Empire State Building#floors#amount.phy.other#
+How did Albert Einstein die?#Albert Einstein#pers.hum# # # #
+What grapes are used in making wine?#wine#unk#wine#grapes#unk#
+What membrane controls the amount of light entering the eye?#membrane eye#unk# # # #
+How many Olympic Games were canceled because of World War I?#Olympic Games World War I#unk#Olympic Games#World War I canceled#amount.phy.other#
+What is the name of Ling Ling's mate?#Ling Ling#pers.anim#Ling Ling#mate#pers.anim#
+What did George Washington call his house?#George Washington#pers.hum#George Washington#house#loc.fac#
+When was Adolf Hitler born?#Adolf Hitler#pers.hum#Adolf Hitler#born#date#
+What day and month did Nixon resign?#Nixon#pers.hum#Nixon#reign#date#
+What country did Catherine the Great rule?#Catherine Great#pers.hum#Catherine Great#country rule#loc.admi#
+What is the word which means one hiring his relatives?#word hiring relatives#unk# # # #
+What is the nickname of the British flag?#British flag#unk#British flag#nickname#unk#
+Who created the literary character Phineas Fogg?#Phineas Fogg#pers.hum#Phineas Fogg#created#pers.hum#
+What beach was "I Dream of Jeannie" filmed on?#I Dream of Jeannie#prod.art#I Dream of Jeannie#beach#loc.geo#
+How late will airlines let you fly in pregnancy?#airlines#org.com#airlines#pregnancy#amount.phy#
+How many NFL teams are there?#NLF teams#org.div# # # #
+What country made the Statue of Liberty?#Statue of Liberty#loc.fac#Statue of Liberty#made country#loc.admi#
+Who is Akbar the Great?#Akbar the Great#pers.hum# # # #
+What country is the largest in square miles?#largest country#loc.admi# # # #
+What are fractals?#fractals#unk# # # #
+How fast can a king cobra kill you?#king cobra#unk#king cobra#kill#amount.phy.dur#
+What does cc mean in letter writing?#cc#unk# # # #
+How many gas stations are there in the United States?#gas station United States#unk#United State#gas stations#amount.phy.other#
+What position did Satchel Paige play in professional baseball?#Satchel Paige#pers.hum#Satchel Paige#position baseball#unk#
+What country is know as the "Land of the Rising Sun"?#Land of the Rising Sun#loc.admi#Land of the Rising Sun#country#loc.admi#
+Who are professional female boxers?#female boxers#pers.hum# # # #
+Who is Allen Iverson?#Allen Iverson#pers.hum# # # #
+What company manufactures Sinemet?#Sinemet#prod#Sinemet#manufactures company#org.com#
+What capital city do you see from the top of Bunker Hill?#Bunker Hill#loc.fac#Bunker Hill#capital city#loc.admi#
+What party led Australia from 1983 to 1996?#party Australia#org.pol#Australia#party led 1983 1996#org.pol#
+What fruit's stone does Laetrile come from?#Laetrile#unk#Laetrile#come fruit stone#unk#
+What does ACLU stand for?#ACLU#unk# # # #
+What is the national airline of Spain?#national airline Spain#org.com#Spain#national airline#org.com#
+What city is the Liberty Bell currently located in?#Liberty Bell#loc.fac#Liberty Bell#located city#loc.admi#
+Who was Abraham in the Old Testament?#Abrahman Old Testament#pers.hum# # # #
+What player on a basketball team usually plays the post or pivot position?#basketball post pivot#pers.hum# # # #
+What is Richie's surname on "Happy Days"?#Richie Happy Days#pers.hum#Happy Days#Richie#pers.hum#
+How did Cleopatra die?#Cleopatra#pers.hum# # # #
+What is the motto for the Boy Scouts?#Boy Scouts#org.edu# # # #
+How large in square miles is North Carolina?#Notrh Carolina#loc.admi#Notrth Carolina#square miles#amount.phy.area#
+How big is the sun?#sun#unk#sun#big#amount.phy.area#
+How many moons does Venus have?#Venus#unk#Venus#moons#amount.phy.other#
+How far is the moon from Earth in miles?#Earth#loc.geo#Earth#moon miles far#amount.phy.len#

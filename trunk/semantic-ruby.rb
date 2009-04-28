@@ -40,9 +40,9 @@ def evaluate
     question  = q[0]
     kw_e1_e2  = q[1].downcase
     cat_e2    = q[2].split(".")[0]
-    en_e3     = q[3].strip!.downcase
-    kw_e3     = q[4].strip!.downcase
-    cat_e3    = q[5].split(".")[0].strip!
+    en_e3     = q[3].strip.downcase
+    kw_e3     = q[4].strip.downcase
+    cat_e3    = q[5].split(".")[0].strip
     
    
     request = Request.new(question)
