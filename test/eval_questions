@@ -268,7 +268,7 @@ What is the motto of the "New York Times"?#New York Times#prod# # # #
 How did Chicago get its name?#Chicago#loc.admi# # # #
 Who is Albert Ghiorso?#Albert Ghiorso#pers.hum# # # #
 What court case overturned Plessy v. Furgeson?#Plessy Furgeson#unk#Plessy#court case Furgeson#unk#
-How many legs does a beetle have?#beetle#pers.anim#beetle#legs#amount.phy.other#
+How many legs does a beetle have?#beetle#unk#beetle#legs#amount.phy.other#
 What Shakespeare character said, "...the law is an ass."?#Shakespeare character#pers.hum#Shakespeare#law ass character#pers.hum#
 What country is Mt. Everest in?#Mt. Everest#loc.geo#Mt. Everest#country#loc.admi#
 What is a female moose called?#female moose#unk#moose#female#unk#
@@ -284,8 +284,7 @@ How tall is the tallest pyramid?#tallest pyramid#loc.fac#pyramid#tallest#amount.
 What city in Louisiana was Britney Spears born in?#Britney Spears#pers.hum#Britney Spears#city Lousiana born#loc.admi#
 What company owns the soft drink brand "Gatorade"?#Gatorade#prod#Gatarade#company owns#org.com#
 How big does a pig get?#pig#unk#pig#big#amount.phy.wei#
-What is Corian made of?#Corian#unk#Corian#made of#unk#
-How do you say "who" in Spanish?#pouet#pouet#pouet#pouet#pouet#
+What is Corian made of?#Corian#prod#Corian#made of#unk#
 What peace treaty ended WWI?#WWI#unk#WWI#peace treaty#unk#
 Which is the longest track event in the Olympic Games?#Olympic Games#unk#Olympic Games#longest track event#unk#
 Who is Anthony Blunt?#Anthony Blunt#pers.hum# # # #
@@ -310,9 +309,9 @@ What did Caesar say before he died?#Caesar#pers.hum# # # #
 What country was Catherine the Great from?#Catherine the Great#pers.hum#Catherine the Great#country from#loc.admi#
 What American landmark stands on Liberty Island?#Liberty Island#loc.admi#Liberty Island#landmark stands#unk#
 What confederate general was responsible for the defeat at Gettysburg?#Gettysburg#pers.hum#Gettysburg#general defeat#pers.hum#
-When was the submarine invented?#submarine#unk#submarine#invented#date#
-What country produces the most silk?#silk#unk#silk#produces most#loc.admi#
-What is Barbie's full name?#Barbie#pers.hum# # # #
+When was the submarine invented?#submarine#prod#submarine#invented#date#
+What country produces the most silk?#silk#loc#silk#produces most#loc.admi#
+What is Barbie's full name?#Barbie#prod# # # #
 What is the currency of Denmark?#Denmark currency#unk#Denmark#currency#unk#
 What companies manufacture golf clubs?#golf clubs#unk#golf clubs#manufacture#org.com#
 When was the U.N. created?#U.N.#org.pol#U.N.#created#date#
