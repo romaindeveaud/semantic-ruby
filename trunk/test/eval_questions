@@ -315,3 +315,72 @@ What is Barbie's full name?#Barbie#prod# # # #
 What is the currency of Denmark?#Denmark currency#unk#Denmark#currency#unk#
 What companies manufacture golf clubs?#golf clubs#unk#golf clubs#manufacture#org.com#
 When was the U.N. created?#U.N.#org.pol#U.N.#created#date#
+what is Speedy Claxton's real name?#Speedy Claxton#pers.hum# # # #
+How many times have the Yankees won the World Series?#Yankees#org.div#Yankees#won World Series#amount.phy.other#
+Who is Antonia Coello Novello?#Antonia Coello Novello#pers.hum# # # #
+Which U.S. presidents have died while in office?#U.S. presidents#pers.hum#U.S. presidents#died while office#pers.hum#
+List art museums that have returned looted Nazi art to their owners or descendants.#museum Nazi#org.div# # # #
+In what Canadian province are most people of French descent?#Canadian province#loc.admi#Canadian#french descent province#loc.admi#
+How cold is Lake George?#Lake George#loc.geo#Lake George#cold#amount.phy.temp#
+What college did Marcus Camby play for?#Marcus Camby#pers.hum#Marcus Camby#college play#org.edu#
+How many brothers and sisters does Fidel Castro have?#Fidel Castro#pers.hum#Fidel Castro#brothers sisters#amount.phy.other#
+When is Jennifer Lopez's birthday?#Jennifer Lopez#pers.hum#Jennifer Lopez#birthday#date#
+What does "CBS" (television network) stand for?#CBS#org.com# # # #
+What artist recorded the song "At Last" in the 40's or 50's?#At Last#pers.hum#At Last#recorded artist song#pers.hum#
+What is the inner peel of an orange called?#inner peel orange#unk# # # #
+When was John Lennon born?#John Lennon#pers.hum#John Lennon#born#date#
+What organization did Paul Konerko first play major league baseball with?#Paul Konerko#pers.hum#Paul Konerko#major baseball#org.com#
+Who is Charles Lindberg?#Charles Lindberg#pers.hum# # # #
+What altitude is Orange City, Florida?#Orange City, Florida#loc.admi#Orange City, Florida#altitude#amount.phy.len#
+What country did Panama gain its independence from?#Panama#loc.admi#Panama#country independence#loc.admi#
+What flavor filling did the original Twinkies have?#Twinkies#prod#Twinkies#flavor#unk#
+How many home runs did Henry "Hank" Aaron hit in his major league career?#Henry Hank Aaron#pers.hum#Henry Hank Aaron#runs#amount.phy.other#
+Who is Ben Hur?#Ben Hur#pers.hum# # # #
+Who is the mayor of San Francisco?#San Francisco#loc.admi#San Francisco#mayor#pers.hum#
+What are names of dirigibles (rigid airships)?#dirigibles#unk# # # #
+When was Abraham Lincoln born?#Abraham Lincoln#pers.hum#Abraham Lincoln#born#date#
+What is Motley Crue's Nikki Sixx's real name?#Nikki Sixx#pers.hum# # # #
+How accurate are HIV tests?#HIV tests#unk#HIV tests#accurate#amount.phy.other#
+How many moons does Neptune have?#Neptune moons#loc.geo#Neptune#moons#amount.phy.other#
+Which college athletic teams are nicknamed the Cougars?#Cougars#org.div#college athletic teams#Cougars#org.edu#
+Name U.S. entertainers that later became politicians.#U.S. entertainers#pers.hum# # # #
+What gas is 78 percent of the earth's atmosphere?#gas atmosphere#unk#earth atmosphere#gas 78 percent#unk#
+What day did Martin Luther King, Jr. get assassinated?#Martin Luther King Jr.#pers.hum#Martin Luther King Jr.#assassinated day#date#
+How many justices does the United States Supreme Court have?#United States Supreme Court#org.gsp#United States Supreme Court#justices#amount.phy.other#
+When was Listerine first put on the market?#Listerine#prod#Listerine#put market#date#
+How did John Dillinger die?#John Dillinger#pers.hum# # # #
+What Bob Dylan song is in a Disney movie?#Bob Dylan Disney#prod#Bob Dylan#Disney movie song#prod#
+What does a theodolite measure?#theodoloite measure#unk# # # #
+Who is Bill Bradley?#Bill Bradley#pers.hum# # # #
+Which U.S. states have a county named Jackson?#U.S. states Jackson#loc.admi#U.S. states#Jackson county#loc.admi#
+What is Ph in biology?#Ph#unk# # # #
+How many Olympic gold medals did Carl Lewis win?#Carl Lewis#pers.hum#Carl Lewis#Olympinc gold medals win#amount.phy.other#
+What is El Shaddai?#El Shaddai#unk# # # #
+What cathedral is in Claude Monet's paintings?#Claude Monet#loc.fac#Claude Monet#cathedral#loc.fac#
+When was the Great Wall of China built?#Great Wall China#loc.fac#Great Wall China#built#date#
+What date did the Lusitania sink?#Lusitania#loc.admi#Lusitania#sink#date#
+What is egg white called?#egg white#unk# # # #
+What country is home to Sabena Airlines?#Sabena Airlines#org.com#Sabena Airlines#country home#loc.admi#
+How fast does Randy Johnson throw?#Randy Johnson#pers.hum#Randy Johnson#throw#amount.phy.spd#
+What state had the most signers of the Declaration of Independence?#Declaration Independence#unk#Declaration Independence#most#loc.admi#
+what is the Hague?#Hague#loc.admi# # # #
+What country singer's first album was titled "Storms of Life"?#Storms of Life#pers.hum#Storms of Life#singer#pers.hum#
+What is the body temperature of a dog?#dog#unk#dog#body temperature#amount.phy.temp#
+What is the nickname for the national New Zealand basketball team?#New Zealand basketball#org.div#New Zealand#basketball team#org.div#
+How high is the net on a regulation ping pong table?#ping pong#unk#ping pong#net#amount.phy.len#
+What cruise ships have sunk, caught fire, or have been beached?#cruise ships#unk# # # #
+How did Julius Irving's son die?#Julius Irving#pers.hum#Julius Irving#son die#n#
+What date was the Declaration of Independence signed on?#Declaration Independence#unk#Declaration Independence#date signed#date#
+How did George Wallace's father die?#George Wallace#pers.hum# # # #
+How often is someone murdered in the U.S.?#U.S. murdered#unk#U.S. murdered#murdered#amount.phy.dur#
+What country produces the most emeralds?#emeralds#loc.admi#emeralds#country produces#loc.admi#
+What day did Pearl Harbor occur?#Pearl Harbor#unk#Pearl Harbor#day occur#date.rel#
+How often does the men's soccer World Cup take place?#soccer World Cup#unk#soccer World Cup#take place#amount.phy.dur#
+How big do iguanas get?#iguanas#unk#iguanas#big#amount.phy.wei#
+Who were the great opera tenors of the twentieth century?#great opera tenors#pers.hum#opera tenors#great twentieth#pers.hum#
+What is the "Playboy" logo?#Playboy#prod#Playboy#logo#unk#
+Who was Alexander Hamilton?#Alexander Hamilton#pers.hum# # # #
+What country did Iraq invade in 1990?#Iraq#loc.admi#Iraq#invade 1990#loc.admi#
+when was Dante's "Inferno" written?#Dante Inferno#pers.hum#Dante Inferno#written#date#
+Who is Angela Davis?#Angela Davis#pers.hum# # # #
+How high is Mt. Hood?#Mt. Hood#loc.geo#Mt. Hood#high#amount.phy.len#
