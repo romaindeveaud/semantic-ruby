@@ -37,7 +37,7 @@ How to calculate Pi?#Pi#unk# # # #
 Where does Kate Jennings live?#Kate Jennings#pers.hum# Kate Jennings# live# loc#
 What are Monterssori materials?#Monterssori materials#org# # # #
 What is a Yenta?#Yenta#unk# # # #
-Who wrote "stairway to heaven"?#stairway to heaven#unk# stairway to heaven# wrote# pers.hum#
+Who wrote stairway to heaven?#stairway to heaven#unk# stairway to heaven# wrote# pers.hum#
 What does E.M.T. stand for?#E.M.T.#org# # # #
 what kind of poison is good for a cat?#poison cat#unk# # # #
 what is pallavi?#pallavi#unk# # # #
@@ -65,7 +65,7 @@ what is the largest city on the mississippi river?#city mississippi river#loc.ad
 how old is George Bush ?#George Bush#pers.hum# George Bush# old# amount.phy.age#
 Where is Rider College located?#Rider College#org.edu# Rider College# located# loc#
 Who is Norm Quimby?#Norm Quimby#pers.hum# # # #
-How is "Pacific Bell" abbribiated?#Pacific Bell#unk# # # #
+How is Pacific Bell abbribiated?#Pacific Bell#unk# # # #
 What is the population of the Chicago metro area?#Chicago metro area#loc.admi# Chicago metro area# population# amount.phy.other#
 Who was Rigoberta Menchu?#Rigoberta Menchu#pers.hum# # # #
 What are the uses of the buckeye?#buckeye#unk# buckeye# uses# unk#
@@ -125,14 +125,14 @@ What business was the source of John D. Rockefeller's fortune?#John D. Rockfelle
 What are pennies made of?#pennies#unk#pennies#made of#unk#
 What is the name of the chart that tells you the symbol for all chemical elements?#chart chemical elements#unk# # # #
 In which city is the River Seine?#River Seine#loc.geo#River Seine#city#loc.admi#
-What breeds of dog have won the "Best in Show" award at the Westminster Dog Show?#Westminster Dog Show#unk#Westminster Dog Show#Best in Show won#unk#
+What breeds of dog have won the Best in Show award at the Westminster Dog Show?#Westminster Dog Show#unk#Westminster Dog Show#Best in Show won#unk#
 What city is the home to the Rock and Roll Hall of Fame?#Rock Roll Hall Fame#loc.fac#Rock Roll Hall Fame#city home#loc.admi#
 List the names of chewing gums.#chewing gums#prod#chewing gums#names#prod#
 What city did Duke Ellington live in?#Duck Ellington#pers.hum#Duck Ellington#city live in#loc.admi#
 What is Bausch & Lomb?#Bausch Lomb#org.com# # # #
 How did Jimi Hendrix die?#Jimi Hendrix#pers.hum# # # #
 How big is Mars?#Mars#unk#Mars#big#amount.phy.area#
-When was "Cold Mountain" written?#Cold Mountain#prod.art#Cold Mountain#written#date#
+When was Cold Mountain written?#Cold Mountain#prod.art#Cold Mountain#written#date#
 How did Virginia Woolf die?#Virginia Woolf#pers.hum# # # #
 How fast is an eye blink?#eye blink#unk#eye blink#fast#amount.phy.spd#
 What governments still officially recognize and support International Labor Day?#International Labor Day#unk#International Labor Day#governments recognize support#loc.admi#
@@ -141,12 +141,12 @@ What did Ozzy Osbourne bite the head off of?#Ozzy Osbourne#pers.hum# # # #
 When was the U.S. capitol built?#U.S. capitol#loc.fac#U.S. capitol#built#date#
 How did George Washington die?#George Washington#pers.hum# # # #
 how did Patsy Cline die#Patsy Cline#pers.hum# # # #
-What band did the music for the 1970's film "Saturday Night Fever"?#Saturday Night Fever#prod.art#Saturday Night Fever#band music#org.div#
+What band did the music for the 1970's film Saturday Night Fever?#Saturday Night Fever#prod.art#Saturday Night Fever#band music#org.div#
 What band was Jerry Garcia with?#Jerry Garcia#pers.hum#Jerry Garcia#band with#org.div#
 When was Prince Charles born?#Prince Charles#pers.hum#Prince Charles#born#date#
 When did International Volunteers Day begin?#International Volunteers Day#org#International Volunteers Day#begin#date#
 Who is Vlad the Impaler?#Vlad Impaler#pers.hum# # # #
-What is the play "West Side Story" based on?#West Side Story#prod.art# # # #
+What is the play West Side Story based on?#West Side Story#prod.art# # # #
 What color is the top stripe on the U.S. flag?#U.S. flag#unk#U.S. flag#top stripe color#unk#
 How many stories are in the Sears Tower?#Sears Tower#loc.fac#Sears Tower#stories#amount.phy.other#
 How fast can a nuclear submarine travel?#nuclear submarine#unk#nuclear submarine#travel fast#amount.phy.spd#
@@ -163,7 +163,7 @@ What country did Catherine the Great rule?#Catherine Great#pers.hum#Catherine Gr
 What is the word which means one hiring his relatives?#word hiring relatives#unk# # # #
 What is the nickname of the British flag?#British flag#unk#British flag#nickname#unk#
 Who created the literary character Phineas Fogg?#Phineas Fogg#pers.hum#Phineas Fogg#created#pers.hum#
-What beach was "I Dream of Jeannie" filmed on?#I Dream of Jeannie#prod.art#I Dream of Jeannie#beach#loc.geo#
+What beach was I Dream of Jeannie filmed on?#I Dream of Jeannie#prod.art#I Dream of Jeannie#beach#loc.geo#
 How late will airlines let you fly in pregnancy?#airlines#org.com#airlines#pregnancy#amount.phy#
 How many NFL teams are there?#NLF teams#org.div# # # #
 What country made the Statue of Liberty?#Statue of Liberty#loc.fac#Statue of Liberty#made country#loc.admi#
@@ -174,7 +174,7 @@ How fast can a king cobra kill you?#king cobra#unk#king cobra#kill#amount.phy.du
 What does cc mean in letter writing?#cc#unk# # # #
 How many gas stations are there in the United States?#gas station United States#unk#United State#gas stations#amount.phy.other#
 What position did Satchel Paige play in professional baseball?#Satchel Paige#pers.hum#Satchel Paige#position baseball#unk#
-What country is know as the "Land of the Rising Sun"?#Land of the Rising Sun#loc.admi#Land of the Rising Sun#country#loc.admi#
+What country is know as the Land of the Rising Sun?#Land of the Rising Sun#loc.admi#Land of the Rising Sun#country#loc.admi#
 Who are professional female boxers?#female boxers#pers.hum# # # #
 Who is Allen Iverson?#Allen Iverson#pers.hum# # # #
 What company manufactures Sinemet?#Sinemet#prod#Sinemet#manufactures company#org.com#
@@ -186,7 +186,7 @@ What is the national airline of Spain?#national airline Spain#org.com#Spain#nati
 What city is the Liberty Bell currently located in?#Liberty Bell#loc.fac#Liberty Bell#located city#loc.admi#
 Who was Abraham in the Old Testament?#Abrahman Old Testament#pers.hum# # # #
 What player on a basketball team usually plays the post or pivot position?#basketball post pivot#pers.hum# # # #
-What is Richie's surname on "Happy Days"?#Richie Happy Days#pers.hum#Happy Days#Richie#pers.hum#
+What is Richie's surname on Happy Days?#Richie Happy Days#pers.hum#Happy Days#Richie#pers.hum#
 How did Cleopatra die?#Cleopatra#pers.hum# # # #
 What is the motto for the Boy Scouts?#Boy Scouts#org.edu# # # #
 How large in square miles is North Carolina?#Notrh Carolina#loc.admi#Notrth Carolina#square miles#amount.phy.area#
@@ -212,8 +212,8 @@ What American revolutionary general turned over West Point to the British?#West 
 How old was Babe Ruth when he died?#Babe Ruth#pers.hum#Babe Ruth#died#amount.phy.age#
 What is the state with the smallest population?#state smallest population#loc.admi# # # #
 How many Earth days does it take for Mars to orbit the sun?#Mars#unk#Mars#sun orbit Earth days#amount.phy.dur#
-What rock band sang "A Whole Lotta Love"?#A Whole Lotta Love#prod#A Whole Lotta Love#rock band sang#org.div#
-Name singers performing the role of Donna Elvira in performances of Mozart's "Don Giovanni".#Donna Elvira#pers.hum#Donna Elvira#singers performing role#pers.hum#
+What rock band sang A Whole Lotta Love?#A Whole Lotta Love#prod#A Whole Lotta Love#rock band sang#org.div#
+Name singers performing the role of Donna Elvira in performances of Mozart's Don Giovanni.#Donna Elvira#pers.hum#Donna Elvira#singers performing role#pers.hum#
 How far is the distance for a free throw?#free throw#unk#free throw#distance far#amount.phy.len#
 What is the fastest roller coaster?#roller coaster fastest#loc.fac#roller coaster#fastest#loc.fac#
 Who is Aga Khan?#Aga Khan#pers.hum# # # #
@@ -233,7 +233,7 @@ What is the world's largest coral reef?#larget coral reef#loc.geo#coral reef#wor
 What English city does the prime meridian pass through?#prime meridian#loc.admi#prime meridian#city pass through#loc.admi#
 What continent is the world's largest dessert on?#largest dessert#loc.admi# # # #
 Who is Andrea Bocceli?#Andrea Bocceli#pers.hum# # # #
-What sports stadium has been billed as "the eighth wonder of the world"?#the eighth wonder of the world#loc.fac#the eighth wonder of the world#sports stadium#unk#
+What sports stadium has been billed as the eighth wonder of the world?#the eighth wonder of the world#loc.fac#the eighth wonder of the world#sports stadium#unk#
 When was the first Olympics held?#first Olympics#unk#first Olympics#held #date#
 When was OJ Simpson arrested for murder?#OJ Simpson#pers.hum#OJ Simpson#arrested murder#date#
 What are the biggest snakes in the world?#biggest snakes#unk#snakes#biggest#unk#
@@ -251,9 +251,9 @@ What are baby frogs called?#baby frogs#unk# # # #
 What is Iqra?#Iqra#org.edu# # # #
 Who is Abu Sayaf?#Abu Sayaf#pers.hum# # # #
 What amendment did Roe vs. Wade affect?#Roe Wade#unk# # # #
-What museum in Philadelphia was used in "Rocky"?#Rocky museum#org.div#Rocky#museum Philadelphia#org.div#
+What museum in Philadelphia was used in Rocky?#Rocky museum#org.div#Rocky#museum Philadelphia#org.div#
 When was the city of New Orleans founded?#New Orleans#loc.admi#New Orleans#founded#date#
-What cities in the United States have newspapers called the "Daily Journal"?#Daily Journal#prod#Daily Journal#cities#loc.admi#
+What cities in the United States have newspapers called the Daily Journal?#Daily Journal#prod#Daily Journal#cities#loc.admi#
 How close is Mercury to the sun?#Mercury#unk#Mercury#sun#amount.phy.len#
 When was MTV started?#MTV#org.com#MTV#started#date#
 What president served 2 nonconsecutive terms?#president 2 terms#pers.hum# # # #
@@ -264,12 +264,12 @@ What document did Button Gwinnett sign on the upper left hand side?#Button Gwinn
 What dessert is made with poached peach halves, vanilla ice cream, and raspberry sauce?#dessert peach vanilla raspberry#unk# # # #
 What band did former Red Hot Chili Peppers guitarist Dave Navarro start out with?#Dave Navarro#org.div#Dave Navarro#band start out#org.div#
 How many children did Bob Marley have?#Bob Marley#pers.hum#Bob Marley#children#amount.phy.other#
-What is the motto of the "New York Times"?#New York Times#prod# # # #
+What is the motto of the New York Times?#New York Times#prod# # # #
 How did Chicago get its name?#Chicago#loc.admi# # # #
 Who is Albert Ghiorso?#Albert Ghiorso#pers.hum# # # #
 What court case overturned Plessy v. Furgeson?#Plessy Furgeson#unk#Plessy#court case Furgeson#unk#
 How many legs does a beetle have?#beetle#unk#beetle#legs#amount.phy.other#
-What Shakespeare character said, "...the law is an ass."?#Shakespeare character#pers.hum#Shakespeare#law ass character#pers.hum#
+What Shakespeare character said, ...the law is an ass.?#Shakespeare character#pers.hum#Shakespeare#law ass character#pers.hum#
 What country is Mt. Everest in?#Mt. Everest#loc.geo#Mt. Everest#country#loc.admi#
 What is a female moose called?#female moose#unk#moose#female#unk#
 What is tequila made from?#tequila#unk#tequila#made from#unk#
@@ -282,7 +282,7 @@ How did Brandon Lee die?#Brandon Lee#pers.hum# # # #
 How fast does light travel through space?#light#unk#light#travel through space#amount.phy.spd#
 How tall is the tallest pyramid?#tallest pyramid#loc.fac#pyramid#tallest#amount.phy.len#
 What city in Louisiana was Britney Spears born in?#Britney Spears#pers.hum#Britney Spears#city Lousiana born#loc.admi#
-What company owns the soft drink brand "Gatorade"?#Gatorade#prod#Gatarade#company owns#org.com#
+What company owns the soft drink brand Gatorade?#Gatorade#prod#Gatarade#company owns#org.com#
 How big does a pig get?#pig#unk#pig#big#amount.phy.wei#
 What is Corian made of?#Corian#prod#Corian#made of#unk#
 What peace treaty ended WWI?#WWI#unk#WWI#peace treaty#unk#
@@ -325,8 +325,8 @@ How cold is Lake George?#Lake George#loc.geo#Lake George#cold#amount.phy.temp#
 What college did Marcus Camby play for?#Marcus Camby#pers.hum#Marcus Camby#college play#org.edu#
 How many brothers and sisters does Fidel Castro have?#Fidel Castro#pers.hum#Fidel Castro#brothers sisters#amount.phy.other#
 When is Jennifer Lopez's birthday?#Jennifer Lopez#pers.hum#Jennifer Lopez#birthday#date#
-What does "CBS" (television network) stand for?#CBS#org.com# # # #
-What artist recorded the song "At Last" in the 40's or 50's?#At Last#pers.hum#At Last#recorded artist song#pers.hum#
+What does CBS (television network) stand for?#CBS#org.com# # # #
+What artist recorded the song At Last in the 40's or 50's?#At Last#pers.hum#At Last#recorded artist song#pers.hum#
 What is the inner peel of an orange called?#inner peel orange#unk# # # #
 When was John Lennon born?#John Lennon#pers.hum#John Lennon#born#date#
 What organization did Paul Konerko first play major league baseball with?#Paul Konerko#pers.hum#Paul Konerko#major baseball#org.com#
@@ -334,7 +334,7 @@ Who is Charles Lindberg?#Charles Lindberg#pers.hum# # # #
 What altitude is Orange City, Florida?#Orange City, Florida#loc.admi#Orange City, Florida#altitude#amount.phy.len#
 What country did Panama gain its independence from?#Panama#loc.admi#Panama#country independence#loc.admi#
 What flavor filling did the original Twinkies have?#Twinkies#prod#Twinkies#flavor#unk#
-How many home runs did Henry "Hank" Aaron hit in his major league career?#Henry Hank Aaron#pers.hum#Henry Hank Aaron#runs#amount.phy.other#
+How many home runs did Henry Hank Aaron hit in his major league career?#Henry Hank Aaron#pers.hum#Henry Hank Aaron#runs#amount.phy.other#
 Who is Ben Hur?#Ben Hur#pers.hum# # # #
 Who is the mayor of San Francisco?#San Francisco#loc.admi#San Francisco#mayor#pers.hum#
 What are names of dirigibles (rigid airships)?#dirigibles#unk# # # #
@@ -364,7 +364,7 @@ What country is home to Sabena Airlines?#Sabena Airlines#org.com#Sabena Airlines
 How fast does Randy Johnson throw?#Randy Johnson#pers.hum#Randy Johnson#throw#amount.phy.spd#
 What state had the most signers of the Declaration of Independence?#Declaration Independence#unk#Declaration Independence#most#loc.admi#
 what is the Hague?#Hague#loc.admi# # # #
-What country singer's first album was titled "Storms of Life"?#Storms of Life#pers.hum#Storms of Life#singer#pers.hum#
+What country singer's first album was titled Storms of Life?#Storms of Life#pers.hum#Storms of Life#singer#pers.hum#
 What is the body temperature of a dog?#dog#unk#dog#body temperature#amount.phy.temp#
 What is the nickname for the national New Zealand basketball team?#New Zealand basketball#org.div#New Zealand#basketball team#org.div#
 How high is the net on a regulation ping pong table?#ping pong#unk#ping pong#net#amount.phy.len#
@@ -378,9 +378,9 @@ What day did Pearl Harbor occur?#Pearl Harbor#unk#Pearl Harbor#day occur#date.re
 How often does the men's soccer World Cup take place?#soccer World Cup#unk#soccer World Cup#take place#amount.phy.dur#
 How big do iguanas get?#iguanas#unk#iguanas#big#amount.phy.wei#
 Who were the great opera tenors of the twentieth century?#great opera tenors#pers.hum#opera tenors#great twentieth#pers.hum#
-What is the "Playboy" logo?#Playboy#prod#Playboy#logo#unk#
+What is the Playboy logo?#Playboy#prod#Playboy#logo#unk#
 Who was Alexander Hamilton?#Alexander Hamilton#pers.hum# # # #
 What country did Iraq invade in 1990?#Iraq#loc.admi#Iraq#invade 1990#loc.admi#
-when was Dante's "Inferno" written?#Dante Inferno#pers.hum#Dante Inferno#written#date#
+when was Dante's Inferno written?#Dante Inferno#prod#Dante Inferno#written#date#
 Who is Angela Davis?#Angela Davis#pers.hum# # # #
 How high is Mt. Hood?#Mt. Hood#loc.geo#Mt. Hood#high#amount.phy.len#
