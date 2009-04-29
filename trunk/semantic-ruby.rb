@@ -32,7 +32,7 @@ def evaluate
 
   errors = 0
   i = 0
-  questions = File.new("test/eval_questions").readlines
+  questions = File.new("test/retenues").readlines
   questions.collect! { |q| q.strip! }
   questions.each do |q|
     i+=1
@@ -111,7 +111,7 @@ def evaluate
   puts "Categorizing : "
   puts " -- Precision : "
   precision.each_pair do |key, value| 
-    if value[1] > 0 and (["kw_e1_e2","kw_e3","en_e3"].include?(key) == false) and key != "prod" and key != "state"
+    if value[1] > 0 and (["kw_e1_e2","kw_e3","en_e3"].include?(key) == false) and !["prod","state","fonc"].include?(key)
       val = value[0].to_f/value[1].to_f
       fmeasure[key] = [val, 0]
       puts "\t#{key} \t: #{val} / #{value[1]} questions"
