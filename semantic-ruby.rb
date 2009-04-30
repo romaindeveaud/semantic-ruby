@@ -32,7 +32,7 @@ def evaluate
 
   errors = 0
   i = 0
-  questions = File.new("test/retenues").readlines
+  questions = File.new("test/eval_questions").readlines
   questions.collect! { |q| q.strip! }
   questions.each do |q|
     i+=1
