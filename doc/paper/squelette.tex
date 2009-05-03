@@ -149,7 +149,7 @@
 
 %%% description des ontologies et papiers de référence / WWW / dbpedia / Yago
 
-\section{Architecture du système NLGbAse.QR}\label{details}
+\section{Architecture du système NLGbAse.QR}
 
 
 \section{Algorithmes déployés}\label{details}
@@ -317,7 +317,7 @@ What record company is he with?
 
 \subsection{Mesures de l'extraction de mots-clés}
 
-\par Nous avons également mesuré la pertinence des mots-clés extraits par notre système. Comme précédemment nous avons tout d'abord effectué \og{}à la main\fg{} le travail d'extraction, puis nous avons comparé ceci avec les résultats du système afin d'obtenir un pourcentage de satisfaction calculé comme ceci : $$S(C) = \frac{\sum_{i = 1}^{N} P(Q_i)}{N}$$
+\par Nous avons également mesuré la pertinence des mots-clés extraits par notre système. Comme précédemment nous avons tout d'abord effectué \og{}à la main\fg{} le travail d'extraction, puis nous avons comparé ceci avec les résultats du système afin d'obtenir un pourcentage de satisfaction calculé selon la formule suivante : $$S(C) = \frac{\sum_{i = 1}^{N} P(Q_i)}{N}$$
 \par Ils sont présentés dans les tableaux ci-dessous.
 
 \begin{table}[htbp]
@@ -337,9 +337,12 @@ What record company is he with?
     \end{center}
 \end{table}
 
+\par La grande majorité des erreurs dans la détection de mots-clés est due à une formulation grammaticale approximative de la question, ce qui induit en erreur l'analyseur morpho-syntaxique qui ne va pas correctement étiqueter certains mots.
+
 %==============================================================
 \section{Conclusion}
 %==============================================================
+Nous avons présenté un système analysant et décomposant des requêtes formulées en langage naturel dans le but d'en extraire leur catégorie sémantique ainsi que les mots porteurs de sens et d'information, destiné à être couplé avec un système de recherche d'information que nous avons présenté.
 \bibliographystyle{majecstic}
 \bibliography{references}
 
