@@ -1,4 +1,4 @@
-This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2009.4.13)  15 APR 2009 13:57
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2009.4.17)  6 MAY 2009 17:37
 entering extended mode
  %&-line parsing enabled.
 **squelette.tex
@@ -53,6 +53,7 @@ Package babel Info: Making : an active character on input line 219.
 Package babel Info: Making ; an active character on input line 220.
 Package babel Info: Making ! an active character on input line 221.
 Package babel Info: Making ? an active character on input line 222.
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 299.
 \parindentFFN=\dimen104
 \std@mcc=\count88
 \dec@mcc=\count89
@@ -339,9 +340,6 @@ Package: vmargin 2004/07/15 V2.5 set document margins (VK)
 \PaperHeight=\dimen131
 ) (./squelette.aux
 
-LaTeX Warning: Label `details' multiply defined.
-
-
 LaTeX Warning: Label `tab:results' multiply defined.
 
 )
@@ -349,7 +347,11 @@ LaTeX Warning: Label `tab:results' multiply defined.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 66.
 LaTeX Font Info:    ... okay on input line 66.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 66.
+LaTeX Font Info:    Checking defaults for T1/lmr/m/n on input line 66.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 66.
+ (/usr/share/texmf/tex/latex/lm/t1lmr.fd
+File: t1lmr.fd 2007/01/14 v1.3 Font defs for Latin Modern
+)
 LaTeX Font Info:    ... okay on input line 66.
 LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 66.
 LaTeX Font Info:    ... okay on input line 66.
@@ -360,7 +362,8 @@ LaTeX Font Info:    ... okay on input line 66.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 66.
 LaTeX Font Info:    ... okay on input line 66.
 LaTeX Font Info:    Try loading font information for T1+ppl on input line 66.
- (/usr/share/texmf-texlive/tex/latex/psnfss/t1ppl.fd
+
+(/usr/share/texmf-texlive/tex/latex/psnfss/t1ppl.fd
 File: t1ppl.fd 2001/06/04 font definitions for T1/ppl.
 )
 LaTeX Info: Redefining \dots on input line 66.
@@ -456,20 +459,20 @@ Overfull \vbox (6.69997pt too high) has occurred while \output is active []
 
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
-]
-Underfull \vbox (badness 1997) has occurred while \output is active []
+] [2]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [2]
-[3] [4] [5] (./squelette.bbl) [6] (./squelette.aux)
+ [3]
+[4] [5] [6] (./squelette.bbl) [7] (./squelette.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 3786 strings out of 95063
- 45012 string characters out of 1182610
- 125132 words of memory out of 1500000
- 6869 multiletter control sequences out of 10000+50000
+ 3813 strings out of 95063
+ 45729 string characters out of 1182610
+ 125116 words of memory out of 1500000
+ 6893 multiletter control sequences out of 10000+50000
  32915 words of font info for 77 fonts, out of 1200000 for 2000
  28 hyphenation exceptions out of 8191
  32i,10n,24p,1048b,271s stack positions out of 5000i,500n,6000p,200000b,5000s
@@ -482,9 +485,9 @@ esky/ams/eufm10.pfb></usr/share/texmf-texlive/fonts/type1/bluesky/ams/eufm7.pfb
 b8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/palatino/uplr8a.pfb></usr/sha
 re/texmf-texlive/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texmf-texlive/
 fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on squelette.pdf (6 pages, 125775 bytes).
+Output written on squelette.pdf (7 pages, 135117 bytes).
 PDF statistics:
- 62 PDF objects out of 1000 (max. 8388607)
+ 67 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
