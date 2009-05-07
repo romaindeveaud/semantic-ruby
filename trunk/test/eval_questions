@@ -455,7 +455,7 @@ What 20th century American president died at Warm Springs, Georgia?#Warm Springs
 What instrument did Louis Armstrong play?#Louis Armstrong#pers.hum#Louis Armstrong#instrument play#unk#
 What city's biggest shopping district is called the Ginza District?#Ginza District#loc.admi#Ginza District#biggest city#loc.admi#
 Who was responsible for the killing of Duncan in "Macbeth"?#Duncan Macbeth#pers.hum#Duncan Macbeth#responsible killing#pers.hum#
-What country's soldiers hid in the Trojan horse?#Trojan horse#pers.anim#Trojan horse#country soldiers hid#loc.admi#
+What country's soldiers hid in the Trojan horse?#Trojan horse#loc.geo#Trojan horse#country soldiers hid#loc.geo#
 What is the gift for the 20th anniversary?#20th anniversary#unk#20th anniversary#gift#unk#
 What stadium was the first televised MLB game played in?#MLB game#unk#MLB game#televised#loc.fac#
 How high is Pikes peak?#Pikes peak#loc.geo#Pikes peak#high#amount.phy.len#
@@ -464,7 +464,7 @@ How hot does it get in Death Valley?#Death Valley#loc.geo#Death Valley#hot#amoun
 What body of water does the Colorado River empty into?#Colorado River#loc.geo#Colorado River#body water#unk#
 What is Schadenfreude?#Shadenfreude#unk# # # #
 How tall is the Washington Monument?#Washington Monument#loc.fac#Washington Monument#tall#amount.phy.len#
-What actress played Betsy in "Betsy's Weeding"?#Betsy's Weeding#prod.art#Betsy's Weeding#Betsy actress played#pers.hum#
+What actress played Betsy in "Betsy's Weeding"?#Betsy's Weeding#pers.hum#Betsy's Weeding#Betsy actress played#pers.hum#
 Who is Annie Oakley?#Annie Oakley#pers.hum# # # #
 When was the first potato chip made?#potato chip#unk#potato chip#first made#date#
 What type of bee drills holes in wood?#bee#unk#bee#drills holes wood#unk#
@@ -472,8 +472,8 @@ What is Destiny's Child?#Destiny's Child#org.div# # # #
 Who is Alger Hiss?#Alger Hiss#pers.hum# # # #
 What is the tallest statue in the world?#tallest statue#loc.fac# # # #
 What date did Thomas Jefferson die?#Thomas Jefferson#pers.hum#Thomas Jefferson#die#date#
-What color belt is first in karate?#karate#unk#karate#color first belt#unk#
-What country is the leading producer of rubber?#rubber#unk#rubber#country leading producer#loc.admi#
+What color belt is first in karate?#karate#org#karate#color first belt#unk#
+What country is the leading producer of rubber?#rubber#loc#rubber#country leading producer#loc.admi#
 How did Bob Marley die?#Bob Marley#pers.hum# # # #
 What is the scientific name for red ants?#red ants#unk# # # #
 What is the name of the official residence of the President of France?#President France residence#loc.fac#President of France#official residence#loc.fac#
@@ -483,7 +483,7 @@ How did Jerry Garcia Die?#Jerry Garcia#pers.hum# # # #
 What is the population of Canberra?#Canberra#loc.admi#Canberra#population#amount.phy.other#
 What is the Kama Sutra?#Kama Sutra#unk# # # #
 How did Harry Houdini die?#Harry Houdini#pers.hum# # # #
-What country celebrates Guy Fawkes Day?#Guy Fawkes Day#unk#Guy Fawkes Day#country celebrates#loc.admi#
+What country celebrates Guy Fawkes Day?#Guy Fawkes Day#pers.hum#Guy Fawkes Day#country celebrates#loc.admi#
 what Arthur Miller play recounts his marriage to Marilyn Monroe?#Arthur Miller#pers.hum# # # #
 What languages are spoken in India?#India#loc.admi#India#languages#unk#
 What ancient tribe of Mexico left behind huge stone heads standing 6-11 feet tall?#Mexico  tribe#org# # # #
