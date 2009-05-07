@@ -191,9 +191,6 @@ private
           word = @sent.words[@sent.words.index(word.capitalize)+1] if word.capitalize == "In"
           offset = @sent.words.index(word).nil? ? @sent.words.index(word.capitalize) : @sent.words.index(word)
           cat = get_cat(word,np, {:cat => 2}, offset)
-#          if (cat.nil?)
-#              cat = (@sent.words-["LEFT-WALL","RIGHT-WALL"]).join(" ").categorize_ccg
-#          end
         elsif @sent.linkages.first.links[0].label != "Xp" and @sent.linkages.first.links[0].label =~ /W[jqs]/
           cat = get_cat(@sent.words[1],np, {:cat => 2})
         elsif link.label =~ /W[di]|Q./ or link.lword != "LEFT-WALL"

@@ -224,51 +224,47 @@ en prenant la catégorie qui a le plus fort score, pour cela chaque catégorie se 
 
 \subsection{Corpus de référence et standard de mesure}
 
-\par Nous avons utilisé pour ces mesures des corpus de questions reliées à une réponse factuelles ou de type liste. Des corpus de références ont été mis au points dans le cadre de campagnes d'évaluation telles que Trec 8 %%% citer %%% 
-\par Le corpus \textit{Question Answering Collections} de Trec est composé de XXX questions factuelles et des réponses standard qui doivent être retournées\footnote{En téléchargement sur http:\/\/trec\.nist\.gov\/data\/qa\/t2004\_qadata.html}. Ces paires de questions et réponses sont organisées comme suit. Un fichier XML décrit les question factuelles: 
+\par Nous avons séparé les deux tâches que sont la RI et l'analyse sémantique de la phrase, c'est pourquoi l'évaluation de notre système porte sur la catégorisation et l'extraction de mots-clés. Nous avons utilisé pour ces mesures des corpus de questions déjà existants qui ont été mis au points dans le cadre de campagnes d'évaluation telles que Trec 12. %%i% citer %%% 
+\par Le corpus \textit{Question Answering Collections} de Trec est composé de 500 questions factuelles\footnote{En téléchargement sur http://trec.nist.gov/data/qa/2003\_qadata/03QA.tasks/test.set.t12.txt.html}, organisées dans un fichier XML comme suit : 
 
 \begin{verbatim}
-<target id="2" text="Fred Durst">
-<qa><q id="2.1" type="FACTOID">
-What is the name of Durst's group?
-</q></qa>
-<qa>
-<q id="2.2" type="FACTOID">
-What record company is he with?
-</q>
-</qa>
+<top>
+
+<num> Number: 1919
+
+<type> Type: factoid
+
+<desc> Description:
+How big is Mars?
+
+</top>
 [...]
 \end{verbatim}
 
-Des réponses \og{}standard\fg{} sont livrées sous forme de liste : 
-
-\begin{verbatim}
-2.5 1	vital	tattoo artist
-2.5 2	vital	operated skate park
-\end{verbatim}
-
-\par Ce corpus n'étant pas initiallement prévu pour vérifier l'expérience d'étiquetage de questions tel que prévu dans le cadre de notre algorithme, nous avons procédé à son enrichissement.
+\par Ce corpus n'étant pas initiallement prévu pour vérifier l'expérience d'étiquetage de questions tel que prévu dans le cadre de notre algorithme, nous avons procédé à son enrichissement \og{}à la main\fg{}.
 \par Cet enrichissement consiste a attribuer à chaque question la catégorie sémantique de la réponse attendue (nous n'avons retenu que les classes racines à savoir \emph{pers}, \emph{org}, \emph{loc}, \emph{date}, \emph{amount} et \emph{unk}), ainsi que les différents mots-clés qui peuvent permettre d'obtenir une réponse. Nous disposons ainsi d'un corpus de questions et de réponses de références complétées par des informations sémantiques compatibles avec notre système\footnote{Ce corpus complété est disponible sur www.nlgbase.org}. 
-\par Ainsi, dans l'exemple précité, nous complétons la description de la question par plusieurs étiquettes de classes, à savoir que l'entité source est une personne, et que la réponse cible est un nom d'organisation (celui du groupe musical), et d'éditeur de disque: 
+\par Néanmoins pour des raisons pratiques nous avons créé notre propre formalisme :
+\newpage
+\begin{verbatim}
+<question en toutes lettres>#
+<mots-clés attendus par les moteurs de RI>#<catégorie de l'entité source>#
+<nom de l'entité source>#<mots-clés probablement proches de la réponse>#
+<catégorie de l'entité réponse cherchée> 
+\end{verbatim}
+
+\par Ainsi, dans l'exemple précité, nous complétons la description de la question par plusieurs étiquettes de classes, à savoir que l'entité source est une localisation, et que la réponse cible est une quantité (\emph{amount}, la taille de la planète Mars) :
 
 \begin{verbatim}
-<target id="2" text="Fred Durst">
-<k>PERS</k>
-<qa><q id="2.1" type="FACTOID">
-What is the name of Durst's group?
-</q><kt>ORG</kt>
-</qa>
-<qa>
-<q id="2.2" type="FACTOID">
-What record company is he with?
-</q><kt>ORG</kt>
-</qa>
+How big is Mars?#Mars#loc#Mars#big#amount#
 [...]
 \end{verbatim}
 
-\par Le corpus est également composé de 108 questions prélevées aléatoirement sur le site AnswerBus\footnote{http://www.answerbus.com/}, qui est également un système de rechercher d'information par question-réponse. La particularité de ces questions est qu'elles ont été formulées par des utilisateurs, une majorité d'entre-elles n'est donc pas grammaticalement parfaite ; nous avons trouvé ce corpus intéressant pour tester notre système car cela nous permet de nous rapprocher de la réalité par rapport aux questions classiques de campagnes d'évaluation.
+%% plus d'actualité
+%%\par Le corpus est également composé de 108 questions prélevées aléatoirement sur le site AnswerBus\footnote{http://www.answerbus.com/}, qui est également un système de rechercher d'information par question-réponse. La particularité de ces questions est qu'elles ont été formulées par des utilisateurs, une majorité d'entre-elles n'est donc pas grammaticalement parfaite ; nous avons trouvé ce corpus intéressant pour tester notre système car cela nous permet de nous rapprocher de la réalité par rapport aux questions classiques de campagnes d'évaluation.
 
-\par Nous avons lancé notre système et mesuré pour chaque question la validité de son étiquetage sémantique et de l'identification des mots clés pertinents pour une extraction de réponse, puis la pertinence des réponses retournées par le moteur de recherche par rapport à la réponse de référence. Ces mesures sont réalisées par un calcul de score de précision et le rappel, complété par le F-Score\footnote{Mesure harmonique combinant la précision et le rappel}.
+\par Nous avons ainsi lancé notre système pour chacune des questions de ce corpus et mesuré les différences entre l'étiquetage \og{}à la main\fg{} et les sorties du système. Nous avons pu en déduire des mesures de précision et de rappel complétées par le F-Score\footnote{Mesure harmonique combinant la précision et le rappel} que nous vous présentons dans la sous-section \ref{evaluation}.
+
+%%validité de son étiquetage sémantique et de l'identification des mots clés pertinents pour une extraction de réponse, puis la pertinence des réponses retournées par le moteur de recherche par rapport à la réponse de référence. Ces mesures sont réalisées par un calcul de score de 
 
 %% retrait eric
 %Les sorties réelles de notre système ont donc été comparées avec notre corpus, et nous avons ainsi pu calculer les diverses mesures présentées ci-dessous.
@@ -282,11 +278,11 @@ What record company is he with?
 %% pas bon ça il faut être affirmatif et plus précis %%%
 %les standards d'Ester 2 n'étant pas encore complètement implémentés sur la version anglaise de NLGbAse. Nous avons récupéré un corpus de questions formulées par des utilisateurs et nous les avons étiquetées en faisant mentalement le même travail que notre système, afin de pouvoir comparer ses résultats aux notres. 
 
-\subsection{Mesures de la catégorisation sémantique}
+\subsection{Mesures de la catégorisation sémantique}\label{evaluation}
 
-\par Les résultats de l'attributions de catégories aux XXX phrases du corpus étiqueté sont présentés dans le tableau 1. 
+\par Les résultats de l'attributions de catégories aux 492 phrases du corpus étiqueté sont présentés dans le tableau 1. 
 %Nous avons calculé pour chacune d'elles la précision et le rappel, puis le F-Score\footnote{Mesure harmonique combinant la précision et le rappel} en découlant.
-\par Ces résultats mettent en perspective le fait que des règles simples couplées à une catégorisation par recherche dans une base de données sémantique peuvent être viables. Les résultats de la catégorie \emph{org} peuvent être expliqués par le fait que nous n'avons pas pu définir de règle spécifique à cette catégorie sans impacter les résultats des autres catégories, notamment \emph{pers} et \emph{loc}.
+\par Ces résultats mettent en perspective le fait que des règles simples couplées à une catégorisation par recherche dans une base de données sémantique peuvent être viables. Les résultats de la catégorie \emph{org} peuvent être expliqués par le fait qu'il n'existe pas de règle spécifique à cette catégorie, tous les essais que nous avons fait pour y remédier impactaient fortement les résultats des autres catégories, notamment \emph{pers} et \emph{loc}.
 
 \begin{table}[h]
     \begin{center}
@@ -336,12 +332,15 @@ What record company is he with?
     \end{center}
 \end{table}
 
-\par La grande majorité des erreurs dans la détection de mots-clés est due à une formulation grammaticale approximative de la question, ce qui induit en erreur l'analyseur morpho-syntaxique qui ne va pas correctement étiqueter certains mots.
+\par Ces derniers chiffres peuvent être expliqués par le fait qu'il est assez difficile de se mettre à la place d'un système de RI et d'imaginer quels paramètres seront les plus pertinents pour obtenir un bon résultat, les mots-clés que nous avons extrait \og{}à la main\fg{} pour établir notre corpus de test sont donc parfois éloignés de la formulation optimale.
 
 %==============================================================
 \section{Conclusion}
 %==============================================================
 Nous avons présenté un système analysant et décomposant des requêtes formulées en langage naturel dans le but d'en extraire leur catégorie sémantique ainsi que les mots porteurs de sens et d'information, destiné à être couplé avec un système de recherche d'information que nous avons présenté.
+%% conclusion a completer
+
+
 \bibliographystyle{majecstic}
 \bibliography{references}
 
