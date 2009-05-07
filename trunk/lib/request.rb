@@ -48,11 +48,17 @@ private
           np.push(l.rword.split(".").first.split("[").first, l.rword.split(".").first.split("[").first) if l.label =~ /MG.*/
         end
 
+        np.uniq!
+        if np.length > 2
+          t = np.shift
+          np.insert(1,t)
+          np.reverse!
+        end
+
         if np.empty?
           temp = @sent.words-["?",".","'s","LEFT-WALL","RIGHT-WALL","I"]
           temp.each { |w| np.push(w) if (w.capitalize == w or w.upcase == w)}
         end
-        np.uniq!
 
         if options[:from] != "e3"
           np.push(extract_e1_2({:label => "NP"}).split) if np.empty?
