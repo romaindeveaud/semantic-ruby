@@ -115,8 +115,18 @@ private
                 cat = "unk"
               end
             else 
-              if ["close","long","hot","late","fast","large","far","few","great","little","many","much","tall", "wide", "high", "big", "old"].include?(@sent.words[offset+1])
+              if ["large","few","great","little","many","much","tall", "wide", "high", "big"].include?(@sent.words[offset+1])
                   cat = "amount" 
+              elsif ["late","long"].include?(@sent.words[offset+1])
+                  cat = "time.hour"
+              elsif ["close","far"].include?(@sent.words[offset+1])
+                  cat = "amount.phy.len" 
+              elsif ["hot"].include?(@sent.words[offset+1])
+                  cat = "amount.phy.temp" 
+              elsif ["fast"].include?(@sent.words[offset+1])
+                  cat = "amount.phy.spd" 
+              elsif ["odl"].include?(@sent.words[offset+1])
+                  cat = "amount.phy.age" 
               elsif np.include?(object)
                 cat = np.join("+").categorize_np
                 cat = extract_e1_2({:label => "NP"}).split.join("+").categorize_np if cat == "unk"    
