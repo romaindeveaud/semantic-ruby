@@ -140,7 +140,7 @@
 %%% cette partie est intéressante pour l'état de l'art
 \par Des sociétés telles que Google\footnote{http://www.google.com}, Powerset\footnote{http://www.powerset.com} (propriété de Microsoft) ou Hakia\footnote{http://www.hakia.com} sont actuellement fortement investies dans le développement de solutions sémantiques à l'interrogation des moteurs de recherche et l'enrichissement communautaire en est un élément central, au moins pour les deux premiers protagonistes. Ils ont en effet recours à de nombreux sites dont les informations sont éditées par des internautes contributeurs, Wikipédia\footnote{http://www.wikipedia.org} étant le plus célèbre d'entre eux.
 
-\par C'est également notre cas, puisque le système que nous proposons s'interface avec NLGbAse\footnote{http://www.nlgbase.org}, une base de données classifiées provenant de Wikipédia qui peut être interrogée par le biais de trois moteurs de recherche différents. Le premier d'entre eux met en {\oe}uvre un algorithme calculant la \emph{similarité cosinus} entre l'ensemble des mots-clés entrés et les documents issus de Wikipédia ; le deuxième est semblable au premier en tous points, à l'exception que l'on peut affiner la recherche en précisant une catégorie, ainsi seuls les documents classifiés comme appartenant à la catégorie spécifiée seront relevés. Le troisième applique quant à lui un algorithme de compacité\footnote{Référence nécessaire} permettant de trouver une entité précise appartenant à une catégorie donnée, proche d'un ou plusieurs mots donnés, dans le document Wikipédia se rapportant à une entité nommée donnée, ce qui permet notamment de pouvoir proposer une réponse factuelle à une requête.
+\par C'est également notre cas, puisque le système que nous proposons s'interface avec NLGbAse\footnote{http://www.nlgbase.org}, une base de données classifiées provenant de Wikipédia qui peut être interrogée par le biais de trois moteurs de recherche différents. Le premier d'entre eux met en {\oe}uvre un algorithme calculant la \emph{similarité cosinus} entre l'ensemble des mots-clés entrés et les documents issus de Wikipédia ; le deuxième est semblable au premier en tous points, à l'exception que l'on peut affiner la recherche en précisant une catégorie, ainsi seuls les documents classifiés comme appartenant à la catégorie spécifiée seront relevés. Le troisième applique quant à lui un algorithme de compacité ~\cite{charton:paper} permettant de trouver une entité précise appartenant à une catégorie donnée, proche d'un ou plusieurs mots donnés, dans le document Wikipédia se rapportant à une entité nommée donnée, ce qui permet notamment de pouvoir proposer une réponse factuelle à une requête.
 
 \par Ces outils constituent le système de recherche d'information sur lequel nous appliquons les sorties de notre propre système ; ce dernier peut, à partir d'une phrase en langage naturel - de préférence une question, donner les différents mots-clés et catégories attendus par les moteurs de recherche de NLGbAse, et ainsi obtenir une liste de résultats - et éventuellement des réponses factuelles - pertinents.
 %Voulez-vous \og{}\emph{vraiment}\fg{} citer~\cite{bogdanoff:these,sonia:point} ?
@@ -185,6 +185,9 @@ Nous allons maintenant détailler les méthodes de catégorisation des noms propres
 %Nous avons essayé une autre approche. 
 en prenant la catégorie qui a le plus fort score, pour cela chaque catégorie se voit attribuée comme score la somme des scores des documents ayant cette catégorie. De ce fait la catégorie qui rassemble le plus de pertinence sera sélectionnée.
 \par Cependant nous sommes conscients qu'il arrive parfois que cette stratégie ne soit pas idéale, comme pour : \og{}What is the name of Batman's car?\fg{}. Il y a des chances que cette méthode donne \emph{pers} (Person) comme catégorie attendue alors que la solution idéale aurait probablement été \emph{prod} (Product). Elle n'est néanmoins pas totalement inappropriée car nous devrions trouver l'information désirée dans la fiche Wikipédia de Batman, néanmoins l'accès à la réponse est moins direct.
+\par Parfois cette méthode ne donne aucun résultat. Il y a plusieurs explications possibles à cela. La première est qu'il n'y a pas sur Wikipédia de fiche sur ce sujet, la seconde est que notre a mal extrait le nom propre et soumet donc quelque chose de faux à NLGbAse. La troisième raison est imputable à l'utilisateur. En effet si l'utilisateur commet une faute dans l'écriture du nom alors NLGbAse ne pourra pas nous donner la bonne réponse. Nous avons essayé de résoudre ce dernier point. La première solution serait d'avoir une base de tout les noms propres possibles et d'essayer de voir si un nom se rapproche de celui saisi par l'utilisateur mais cette solution serait très couteuse en espace de stockage. Nous avons alors pensé à utiliser Google pour essayer de corriger les fautes de ce genre. Lorsque le NLGbAse ne renvoi aucun résultat on effectue une requête avec le nom propre sur Google, ensuite nous regardons si Google suggère une autre orthographe par l'intermédiaire du "Did you mean :". Si Google suggère quelque chose alors on envoi cette suggestion à NLGbAse. Cependant cette méthode n'est pas infaillible est ne corrigera pas l'erreur si elle se retrouve beaucoup sur le net.
+\par Enfin si à ce stade le nom n'est toujours pas associé à une étiquette alors nous soumettons la phrase au module de CCG de reconnaissance d'entité nommée basé sur l'architecture SNOW~\cite{ratinov:paper}. En effet ce module à de très bonnes performances pour reconnaitre les personnes, organisations et produits.
+
 
 %=============================================================
 \subsubsection{Catégorisation par les noms communs utilisant WordNet}
@@ -224,7 +227,7 @@ en prenant la catégorie qui a le plus fort score, pour cela chaque catégorie se 
 
 \subsection{Corpus de référence et standard de mesure}
 
-\par Nous avons séparé les deux tâches que sont la RI et l'analyse sémantique de la phrase, c'est pourquoi l'évaluation de notre système porte sur la catégorisation et l'extraction de mots-clés. Nous avons utilisé pour ces mesures des corpus de questions déjà existants qui ont été mis au points dans le cadre de campagnes d'évaluation telles que Trec 12. %%i% citer %%% 
+\par Nous avons séparé les deux tâches que sont la RI et l'analyse sémantique de la phrase, c'est pourquoi l'évaluation de notre système porte sur la catégorisation et l'extraction de mots-clés. Nous avons utilisé pour ces mesures des corpus de questions déjà existants qui ont été mis au points dans le cadre de campagnes d'évaluation telles que Trec 12.  %%i% citer %%% 
 \par Le corpus \textit{Question Answering Collections} de Trec est composé de 500 questions factuelles\footnote{En téléchargement sur http://trec.nist.gov/data/qa/2003\_qadata/03QA.tasks/test.set.t12.txt.html}, organisées dans un fichier XML comme suit : 
 
 \begin{verbatim}
@@ -240,6 +243,10 @@ How big is Mars?
 </top>
 [...]
 \end{verbatim}
+
+Notre choix s'est porté sur cette année là car à partir de l'année suivante le format des fichiers a changé et est devenu à notre sens beaucoup trop spécifique à la tâche de question réponse.
+En effet les corpus les plus récents propose des séries de cinq questions en rapport avec une cible donnée. On voit bien là que l'approche est toute autre. En effet pour le moteur de ri classique avec lequel nous travaillons la meilleure manière d'obtenir un document comportant la réponse est de choisir la fiche correspondant à la cible. L'évaluation de notre application sur ces corpus n'aurait eu que très peu de sens. De plus nous trouvions qu'une évaluation de ce type est vraiment superficielle et ne reflète pas les résultats que le système fournirait à un utilisateur qui ne fournirait pas la cible de la question. Dans cette même optique de coller au plus près aux conditions réelles d'utilisation de l'outils nous avons décidé de ne pas tenir compte des informations données sur le type de questions (factoid, list , definition ...).
+Nous avons donc choisi le corpus le plus récent qui correspondait à l'évaluation que nous comptions faire.
 
 \par Ce corpus n'étant pas initiallement prévu pour vérifier l'expérience d'étiquetage de questions tel que prévu dans le cadre de notre algorithme, nous avons procédé à son enrichissement \og{}à la main\fg{}.
 \par Cet enrichissement consiste a attribuer à chaque question la catégorie sémantique de la réponse attendue (nous n'avons retenu que les classes racines à savoir \emph{pers}, \emph{org}, \emph{loc}, \emph{date}, \emph{amount} et \emph{unk}), ainsi que les différents mots-clés qui peuvent permettre d'obtenir une réponse. Nous disposons ainsi d'un corpus de questions et de réponses de références complétées par des informations sémantiques compatibles avec notre système\footnote{Ce corpus complété est disponible sur www.nlgbase.org}. 
@@ -334,6 +341,13 @@ How big is Mars?#Mars#loc#Mars#big#amount#
 
 \par Ces derniers chiffres peuvent être expliqués par le fait qu'il est assez difficile de se mettre à la place d'un système de RI et d'imaginer quels paramètres seront les plus pertinents pour obtenir un bon résultat, les mots-clés que nous avons extrait \og{}à la main\fg{} pour établir notre corpus de test sont donc parfois éloignés de la formulation optimale.
 
+\subsection{Commentaires et comparaisons}
+\par Ces résultats nous ont permis de comparer notre système avec certains des meilleurs systèmes actuels. Force est de constater que nous sommes nettement en dessous de leurs résultats comme par exemple le système de CCG ~\cite{learning:paper} qui obtient un score de 90 à 95\% de bonne classification. Cependant les méthodes utilisées par ces systèmes sont basé sur des méthodes d'apprentissage automatique. Avant même le début de notre application nous étions conscient que de tels systèmes permettaient d'obtenir des résultats meilleurs que ceux obtenu avec des méthodes et des règles faites manuellement. Cependant notre propos est plutôt de démontrer qu'il est possible d'obtenir des résultats interessants en utilisant un faible nombre de règles et de ressources ainsi que des algorithmes simples.
+\par
+De plus notre méthode est facilement adaptable à d'autres langues à condition que Wordnet la supporte (ou a moins de trouver des ressources identiques dans la langue voulue), d'avoir un parser dans cette langue et de traduire les quelques règles dans la langue cible. Nous obtenons alors dans ce cas des résultats à peine plus faible que le système multilingue de Thamar Solorio et al. ~\cite{solorio:paper} utilisant des heuristiques complexes et ayant recours aux svm.
+\par
+Enfin les résultats sont impactés par le fait que cette application dépends de plusieurs outils tel que NLGbAse qui est encore en développement et qui commet encore des erreurs que nous répétons, et tel que l'analyseur syntaxique linkgrammar qui bien qu'ayant l'avantage d'être libre n'est pas le plus performant existant et qui commet aussi des erreurs (par exemple sur l'objet de la question qu'il associe frequemment au pronom interrogatif).
+
 %==============================================================
 \section{Conclusion}
 %==============================================================
@@ -351,4 +365,3 @@ Nous avons présenté un système analysant et décomposant des requêtes formulées e
 
 \end{document}
 % fin
-
