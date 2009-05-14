@@ -1,8 +1,26 @@
 \begin{thebibliography}{1}
 
+\bibitem{charton:paper}
+Eric Charton.
+
+\bibitem{learning:paper}
+Xin Li et Dan Roth.
+\newblock Learning question classifiers.
+\newblock 2002.
+
+\bibitem{ratinov:paper}
+L.~Ratinov et D.~Roth.
+\newblock Design challenges and misconceptions in named entity recognition.
+\newblock 2009.
+
 \bibitem{linkgrammar:paper}
 Daniel Sleator et Davy Temperley.
 \newblock Parsing english with a link grammar.
 \newblock 1993.
+
+\bibitem{solorio:paper}
+Thamar Solorio et al.
+\newblock A language independent method for question classification.
+\newblock 2004.
 
 \end{thebibliography}
