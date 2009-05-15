@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-pdflatex consignes
-bibtex consignes
-pdflatex consignes
-pdflatex consignes
+pdflatex squelette2
+bibtex squelette2
+pdflatex squelette2
+pdflatex squelette2
