@@ -1,22 +1,24 @@
 \begin{thebibliography}{1}
 
+\bibitem{gillard:paper}
+Laurent~Gillard et~al.
+\newblock D'une compacit\'e positionnelle \`a une compacit\'e probabiliste pour un syst\`eme de questions/r\'eponses.
+\newblock 2007.
+
 \bibitem{linkgrammar:paper}
 Daniel Sleator et Davy Temperley.
 \newblock Parsing english with a link grammar.
 \newblock 1993.
 
-\bibitem{charton:paper}
-Eric Charton.
+\bibitem{ratinov:paper}
+L.~Ratinov et D.~Roth.
+\newblock Design challenges and misconceptions in named entity recognition.
+\newblock 2009.
 
 \bibitem{learning:paper}
 Xin Li et Dan Roth.
 \newblock Learning question classifiers.
 \newblock 2002.
-
-\bibitem{ratinov:paper}
-L.~Ratinov et D.~Roth.
-\newblock Design challenges and misconceptions in named entity recognition.
-\newblock 2009.
 
 \bibitem{solorio:paper}
 Thamar Solorio et al.
