@@ -23,16 +23,16 @@ loop do
     result = ""
     begin
       results = request.extract
-      result += "Keywords selected for engine 1 : "+results[:kw_e1]+"<br />"
+      result += "Keywords selected for engine 1 : "+results[:kw_e1]+"<br /><br />"
       result += "Keywords selected for engine 2 : "
-      result += "[#{results[:cat_e2]}] #{results[:kw_e2]}<br />"
+      result += "[#{results[:cat_e2]}] #{results[:kw_e2]}<br /><br />"
       result += "Keywords selected for engine 3 : "
-      result += "[#{results[:cat_e3]}] [Named entity : #{results[:en_e3]}] [Keywords : #{results[:kw_e3]}]<br />"
+      result += "[#{results[:cat_e3]}] [Named entity : #{results[:en_e3]}] [Keywords : #{results[:kw_e3]}]<br /><br /><br />"
       res1 = Net::HTTP.get(URI.parse("http://www.nlgbase.org/perl/rr_info_extractor_xml.pl?ename=#{results[:cat_e2]}&terms=#{results[:kw_e1].split.join("+")}&search=EN"))
       listener = XMLlistener.new
       parser = Parsers::StreamParser.new(res1, listener)
       parser.parse
-      res = "<br /><big><span style='font-weight: bold; margin-left : 50px;'>Semantic search, basic</span></big>#{listener.get_doc}"
+      res = "<pre><table style='text-align:left;margin-left:50px;margin-right:auto;font-size:1.3em;line-height:70%' border='0'><tr><td>#{result}</td></tr></table></pre><big><span style='font-weight: bold; margin-left : 50px;'>Semantic search, basic</span></big>#{listener.get_doc}"
       res2 = Net::HTTP.get(URI.parse("http://www.nlgbase.org/perl/rr_info_extractor_xml.pl?query=#{results[:kw_e1].split.join("+")}&search=EN"))
       listener = XMLlistener.new
       parser = Parsers::StreamParser.new(res2, listener)
