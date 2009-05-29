@@ -29,8 +29,8 @@ class Request
         results = Hash.new
         ext = extract_e1_2({:label => "NP"})
         ext = ext == "" ? extract_e1 : ext
-        results[:kw_e1]  = ext
-        results[:kw_e2]  = ext
+        results[:kw_e1]  = en_e3(ext)
+        results[:kw_e2]  = en_e3(ext)
         results[:kw_e3]  = extract_e3
         results[:cat_e2] = categorize_e2
         results[:cat_e3] = categorize_e3
@@ -115,17 +115,15 @@ private
                 cat = "unk"
               end
             else 
-              if ["large","few","great","little","many","much","tall", "wide", "high", "big"].include?(@sent.words[offset+1])
+              if ["large","few","great","little","many","much","tall", "wide", "high", "big","long"].include?(@sent.words[offset+1])
                   cat = "amount" 
-              elsif ["late","long"].include?(@sent.words[offset+1])
-                  cat = "time.hour"
               elsif ["close","far"].include?(@sent.words[offset+1])
                   cat = "amount.phy.len" 
               elsif ["hot"].include?(@sent.words[offset+1])
                   cat = "amount.phy.temp" 
               elsif ["fast"].include?(@sent.words[offset+1])
                   cat = "amount.phy.spd" 
-              elsif ["odl"].include?(@sent.words[offset+1])
+              elsif ["old"].include?(@sent.words[offset+1])
                   cat = "amount.phy.age" 
               elsif np.include?(object)
                 cat = np.join("+").categorize_np
@@ -262,7 +260,7 @@ private
 #        kw_array.each { |w| kw_str += "#{w.split(".").first} " }
 #        kw_str.strip!
 #        kw_str
-        kw_array.sort!        
+#        kw_array.sort!        
         kw_array.join(" ")        
     end
 
@@ -270,7 +268,7 @@ private
         kw_array = ctree_rec(@sent.constituent_tree.first, options[:label])
         kw_array -= $stoplist
 #        kw_array = extract_e1 if kw_array.empty?
-        kw_array.sort!
+#        kw_array.sort!
         kw_array.join(" ")
     end
 
