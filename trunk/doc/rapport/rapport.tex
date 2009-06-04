@@ -1,235 +1,147 @@
-%
-% Fichier exemple pour MajecSTIC 2009
-% -----------------------------------
-% Par le comité de pilotage MajecSTIC
-% majecstic-pilotage@irisa.fr
-% 
-% Vous pouvez éditer ce fichier pour composer votre article. Respectez la 
-% langue française, pour vous aider ce document comporte des consignes 
-% typographiques ainsi que des conseils pour la composition des figures et 
-% des algorithmes.
-%
-%
-%
-%% interventions
-%%  -eric 8 Avril 09 // qqes modifs de style pour le moment
-%%
-%%%%%% NE PAS MODIFIER
-%
-% gillemets a la francaise
-\def\leftnote#1{\leavevmode\vadjust{\setbox1=\vtop{\hsize 20mm
-  \parindent=0pt\small\baselineskip=9pt
-  \rightskip=4mm plus 4mm#1}
-  \hbox{\kern-2cm\smash{\box1}}}}
-% encore quelques petits symboles particuliers
-  \font\myl=manfnt
-  \def\panneau{{\myl\char"7F}}
-  \def\boxone{{\myl\char"1C}}
-  \def\boxtwo{{\myl\char"1D}}
-  \def\ortf{{\myl\char"1E}}
-  \def\fleurone{{\myl\char"26}}
-  \def\fleurtwo{{\myl\char"27}}
-  \def\diams{{\myl\char"23}}
-  \def\cible{{\myl\char"24}}
-  \def\carre{{\myl\char"25}}
-  \def\fleche{{\myl\char"79}}
-  \def\panneaubis{{\myl\char"7E}}
-\def\panneauinverse{{\myl\char"00}}
-
-% Conserver ces commandes (Debut)
-\documentclass[twoside,a4paper,10pt]{article}
+\documentclass[10pt,a4paper]{article}
+\usepackage[francais]{babel}
+\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[latin1]{inputenc}
-\usepackage[frenchb]{babel}
-\usepackage{majecstic2009,euler,palatino}
-\usepackage[french,ruled,vlined,linesnumbered]{algorithm2e}
-\dontprintsemicolon
-\Setnlskip{0.5em}
-\incmargin{1.2em}
-\usepackage{epsfig,shadow}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{url}
-\usepackage{cite}
-\usepackage{vmargin}
-\pagestyle{myheadings}
-\setpapersize{A4}
-% Conserver ces commandes (Fin)
+\usepackage{pdfpages}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{tabularx}
+\usepackage{amsfonts}
+\usepackage{graphicx}
 
-%===========================================================
-%                               Title
-%===========================================================
-\newcommand{\filet}{\noindent\rule[0mm]{\textwidth}{0.2mm}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\geometry{ hmargin=3cm, vmargin=3cm }
+\pagestyle{fancy}
 
-\toappear{1} % Conserver cette ligne pour la version finale
+\newcommand{\cd}[1]{\texttt{#1}}
+\newenvironment{Code}[0]
+{ \small \ttfamily \begin{minipage}{10cm} }
+{ \end{minipage} \normalfont \normalsize }
+
+\title{\Large\bf Interrogations de moteurs de recherche par des requÃªtes formulÃ©es en langage naturel \\ 
+  Rapport de projet}
+\author{Romain Deveaud \& Ludovic Bonnefoy}
 
 \begin{document}
-
 \parindent=0pt
 
-% À FAIRE modifier en ajoutant votre titre.
-% Le titre courant peut-être trop long, dans ce cas indiquez un titre 
-% plus court dans la commande shorttitle (sinon, indiquez le même)
-\title{\Large\bf Interrogations de moteurs de recherche par des requêtes formulées en langage naturel}
-
-% À FAIRE modifier en ajoutant dans le premier champ vos noms et dans votre
-% titre. Attention, il faut que ca tienne sur une largeur de page, donc il 
-% peut etre necessaire de donner un titre plus court, ou de ne mettre que les
-% noms de famille des auteurs
-% Exemples:
-% \markboth{Josiane Balasko, Muriel Robin \& Yves Montand}{Nos années palace.}
-% \markboth
-% {Dupont, Dupond, Haddock, Milou, Tintin \& Tournesol}
-% {De l'exploration des profondeurs à la conquète spatiale}
-\markboth
-{Ludovic Bonnefoy, Romain Deveaud \& Eric Charton}
-{Interrogations de moteurs de recherche par des requêtes formulées en langage naturel}
-
-% À FAIRE Indiquez vos noms ici. Nom1, Nom2 et Nom3. Utilisez $^i$ pour 
-% l'adresse i.
-\author{Ludovic Bonnefoy$^1$, Romain Deveaud$^1$ et Eric Charton$^2$}
-
-% À FAIRE Indiquez vos adresses ici. Attention, la première adresse commence
-% juste après le { de la commande.
-\address{1: Centre d'Enseignement et de Recherche en Informatique / Université d'Avignon et des Pays de Vaucluse \texttt{ludovic.bonnefoy}, \texttt{romain.deveaud} \texttt{\{@etd.univ-avignon.fr\}}\\
-2: LIA / Université d'Avignon et des Pays de Vaucluse, 339 chemin des Meinajaries, 84911 Avignon \texttt{eric.charton@univ-avignon.fr}
-}
-
 \maketitle
+\newpage
+\newpage
+\tableofcontents
+\newpage
 
-%===========================================================         %
-%R\'esum\'e
-%===========================================================  
-
-\Resume{La difficulté de la tâche d'interprétation de requêtes en langue naturelle réside dans la transformation d'une phrase grammaticale en une requête pertinente pour interroger un système de RI ou d'extraction d'information. Dans cet article, nous présentons un système d'extraction d'information associé à un analyseur de requêtes, dédié à l'analyse et à l'interprétation de questions factuelles formulées en langue naturelle issues de la campagne TREC. Notre système fournit des réponses en exploitant un système composé d'une ressource ontologique et sémantique issue d'un corpus encyclopédique, dont on aura extrait les réponses candidates à l'aide de méthodes statistiques.}
-%% Deja dans la fin de la section 1
-%Nous obtenons des performances du niveau de l'état de l'art.
-
-%Hors l'étape d à dessin de reformuler une interrogation qui soit efficace sur un système de RI. 
-%Malgré le fait que ce domaine commence à être couvert par quelques grands noms de l'informatique, les réalisations disponibles à ce jour ne peuvent être considérées que comme des prototypes compte tenu des résultats actuellement visibles. Ceci peut-être expliqué par la grande diversité du langage naturel et par les nombreux sens qui peuvent être donnés à un même mot ou une même expression. Les différents critères sémantiques naturellement présents dans les phrases permettent notamment de combiner la recherche d'information classique - extrayant des documents comparés à des termes, ou mots-clés - avec des \og{}entités\fg{} ou des \og{}concepts\fg{} pouvant être apparentés à des catégories sémantiques (par exemple : \og{}personne\fg{},\og{}organisation\fg{},\og{}date\fg{}...). Nous proposerons dans cet article un système de catégorisation et d'extraction de mots-clés à partir de phrases formulées en langage naturel.}
-% Une catégorisation plus fine peut également être réalisée, permettant ainsi d'obtenir une meilleure granularité des résultats ; une base de données catégorisée doit néanmoins être disponible pour pouvoir appliquer ce type de recherche d'information.}
-
-\Abstract{Nowadays, requesting a search engine with natural language requests is a significant issue in the information retrieval research field, and some of its biggest actors begin to take it seriously. Some prototypes are actually available, but the error rate, inferred by the huge diversity of natural language and the different semantics of words or expressions, is still too large. Sentences naturally contain semantic criteria such as "entities", "concepts" or "categories" which can be combined with standard information retrieval in order to filter the documents with these semantic categories (e.g. "person", "organisation", "date"...). In this article we propose a categorization and keywords extraction system for natural language sentences.}
-
-\MotsCles{Sémantique, catégorisation, langage naturel, recherche d'information.}
-\Keywords{Information retrieval, semantic, categorization, natural language.}
-%=========================================================
 \section{Introduction}
-%=========================================================
-%%
-%% De manière générale soyez plus directs, évitez les circonvolutions litéraires de type ``De nos Jours'' etc
-%%
+\par La difficultÃ© de la tÃ¢che d'interprÃ©tation de requÃªtes en langue naturelle rÃ©side dans la transformation d'une phrase grammaticale en une requÃªte pertinente pour interroger un systÃ¨me de RI ou d'extraction d'information. Dans cet article, nous prÃ©sentons un systÃ¨me d'extraction d'information associÃ© Ã  un analyseur de requÃªtes, dÃ©diÃ© Ã  l'analyse et Ã  l'interprÃ©tation de questions factuelles formulÃ©es en langue naturelle issues de la campagne TREC. Notre systÃ¨me fournit des rÃ©ponses en exploitant un systÃ¨me composÃ© d'une ressource ontologique et sÃ©mantique issue d'un corpus encyclopÃ©dique, dont on aura extrait les rÃ©ponses candidates Ã  l'aide de mÃ©thodes statistiques.
+\par L'interprÃ©tation de requÃªtes Ã©crites en langage naturel par un systÃ¨me de recherche d'information (RI) ou de dialogue est un enjeu important de l'ingÃ©nierie documentaire. Outre le fait que la requÃªte en language naturelle rend possible la formulation d'une requÃªte de recherche selon une forme bien plus prÃ©cise que la simple saisie de mots clÃ©s, elle permet, dans le cadre de la comprÃ©hension des languages parlÃ©s et des systÃ¨mes de dialogue, de dÃ©ployer des composants de comprÃ©hension (SLU) conviviaux pour les utilisateurs. 
 
-%\par De nos jours, les moteurs de recherche sont un outil pleinement utilisable par les personnes averties et habituées, malgré la volonté d'en améliorer l'accessibilité. En effet, le processus consistant à passer d'une interrogation à un enchainement de mots-clés pertinents retranscrivant correctement la pensée initiale n'est pas un exercice aisé, du moins pour les personnes qui ne sont pas familières avec l'informatique ou internet, parmi lesquelles nous pouvons par exemple compter les enfants ou certaines personnes âgées.
-%\par Il serait en effet idéal de pouvoir simplement formuler une question à un moteur de recherche et que celui-ci puisse donner la réponse ou du moins un ensemble de documents dans lesquels une ou des réponses se trouveraient. 
-\par L'interprétation de requêtes écrites en langage naturel par un système de recherche d'information (RI) ou de dialogue est un enjeu important de l'ingénierie documentaire. Outre le fait que la requête en language naturelle rend possible la formulation d'une requête de recherche selon une forme bien plus précise que la simple saisie de mots clés, elle permet, dans le cadre de la compréhension des languages parlés et des systèmes de dialogue, de déployer des composants de compréhension (SLU) conviviaux pour les utilisateurs. 
+\par Dans le cadre des systÃ¨mes de Question et RÃ©ponses (SQR), l'analyse d'une requÃªte en language naturelle doit permettre de transformer en processus d'extraction d'information, une question factuelle ou complexe. La difficultÃ© de la tÃ¢che d'interprÃ©tation de requÃªtes en langue naturelle rÃ©side dans la transformation d'une phrase grammaticale en une requÃªte pertinente pour interroger un systÃ¨me de RI ou d'extraction d'information. 
 
-\par Dans le cadre des systèmes de Question et Réponses (SQR), l'analyse d'une requête en language naturelle doit permettre de transformer en processus d'extraction d'information, une question factuelle ou complexe. La difficulté de la tâche d'interprétation de requêtes en langue naturelle réside dans la transformation d'une phrase grammaticale en une requête pertinente pour interroger un système de RI ou d'extraction d'information. 
-
-\par Dans cet article, nous présentons le système \textit{NLGbAse QR}. Ce système est un extracteur d'information contenues dans une ontologie, associé à un analyseur de requêtes formulées en langue naturelle. Ce système est testé à l'analyse et à l'interprétation de questions factuelles formulées en langue naturelle issues de la campagne TREC. 
+\par Dans cet article, nous prÃ©sentons le systÃ¨me \textit{NLGbAse QR}. Ce systÃ¨me est un extracteur d'information contenues dans une ontologie, associÃ© Ã  un analyseur de requÃªtes formulÃ©es en langue naturelle. Ce systÃ¨me est testÃ© Ã  l'analyse et Ã  l'interprÃ©tation de questions factuelles formulÃ©es en langue naturelle issues de la campagne TREC. 
 %% Deja dans l'intro %%
-%Notre système fournit des réponses en exploitant un système composé d'une ressource ontologique et sémantique issue d'un corpus encyclopédique, dont on aura extrait les réponses candidates à l'aide de méthodes statistiques. 
+%Notre systÃ¨me fournit des rÃ©ponses en exploitant un systÃ¨me composÃ© d'une ressource ontologique et sÃ©mantique issue d'un corpus encyclopÃ©dique, dont on aura extrait les rÃ©ponses candidates Ã  l'aide de mÃ©thodes statistiques. 
 
 \par La structure de cet article est la suivante: 
 
-\par Nous décrivons dans notre introduction les grands principes de la littérature sur l'analyse de requêtes en langue naturelle, et son déploiement dans le cadre de systèmes de Question Réponses (SQR). Puis nous présentons les principaux systèmes de QR existants, et les méthodes de transformation de requêtes sémantiques et d'interrogation qu'ils mettent en oeuvre. Nous expliquons également dans cette section la relation existant entre ontologies issues de corpus encyclopédiques, et le rôle que ces ontologies peuvent jouer dans des SQR. 
-\par Dans la section suivante, nous présentons l'architecture du SQR \textit{NLGbAse.QR}. Ce dernier est divisé en trois parties: analyse des requêtes en langue naturelle, transformation des requêtes en paramètres d'extraction, extracteur d'informations appliqué sur une ontologie. Puis nous détaillons dans la section \ref{details} ces trois modules et les algorithmes qu'ils sous-tendent. 
-\par Dans la section \ref{expériences}, nous présentons une évaluation de notre système avec le corpus de question de TREC. Nous concluons par une analyse critique des résultats obtenus, qui sont du niveau de l'état de l'art, et introduisons nos perspectives futures de recherche. 
+\par Nous dÃ©crivons dans notre introduction les grands principes de la littÃ©rature sur l'analyse de requÃªtes en langue naturelle, et son dÃ©ploiement dans le cadre de systÃ¨mes de Question RÃ©ponses (SQR). Puis nous prÃ©sentons les principaux systÃ¨mes de QR existants, et les mÃ©thodes de transformation de requÃªtes sÃ©mantiques et d'interrogation qu'ils mettent en oeuvre. Nous expliquons Ã©galement dans cette section la relation existant entre ontologies issues de corpus encyclopÃ©diques, et le rÃ´le que ces ontologies peuvent jouer dans des SQR. 
+\par Dans la section suivante, nous prÃ©sentons l'architecture du SQR \textit{NLGbAse.QR}. Ce dernier est divisÃ© en trois parties: analyse des requÃªtes en langue naturelle, transformation des requÃªtes en paramÃ¨tres d'extraction, extracteur d'informations appliquÃ© sur une ontologie. Puis nous dÃ©taillons dans la section \ref{details} ces trois modules et les algorithmes qu'ils sous-tendent. 
+\par Dans la section \ref{expÃ©riences}, nous prÃ©sentons une Ã©valuation de notre systÃ¨me avec le corpus de question de TREC. Nous concluons par une analyse critique des rÃ©sultats obtenus, qui sont du niveau de l'Ã©tat de l'art, et introduisons nos perspectives futures de recherche. 
 
-\section{Principe de l'analyse de requêtes en langue naturelle et des SQR}
-%%% cette partie est intéressante pour l'état de l'art
-\par Des sociétés telles que Google\footnote{http://www.google.com}, Powerset\footnote{http://www.powerset.com} (propriété de Microsoft) ou Hakia\footnote{http://www.hakia.com} sont actuellement fortement investies dans le développement de solutions sémantiques à l'interrogation des moteurs de recherche et l'enrichissement communautaire en est un élément central, au moins pour les deux premiers protagonistes. Ils ont en effet recours à de nombreux sites dont les informations sont éditées par des internautes contributeurs, Wikipédia\footnote{http://www.wikipedia.org} étant le plus célèbre d'entre eux.
+\section{Principe de l'analyse de requÃªtes en langue naturelle et des SQR}
+%%% cette partie est intÃ©ressante pour l'Ã©tat de l'art
+\par Des sociÃ©tÃ©s telles que Google\footnote{http://www.google.com}, Powerset\footnote{http://www.powerset.com} (propriÃ©tÃ© de Microsoft) ou Hakia\footnote{http://www.hakia.com} sont actuellement fortement investies dans le dÃ©veloppement de solutions sÃ©mantiques Ã  l'interrogation des moteurs de recherche et l'enrichissement communautaire en est un Ã©lÃ©ment central, au moins pour les deux premiers protagonistes. Ils ont en effet recours Ã  de nombreux sites dont les informations sont Ã©ditÃ©es par des internautes contributeurs, WikipÃ©dia\footnote{http://www.wikipedia.org} Ã©tant le plus cÃ©lÃ¨bre d'entre eux.
 
-\par C'est également notre cas, puisque le système que nous proposons s'interface avec NLGbAse\footnote{http://www.nlgbase.org}, une base de données classifiées provenant de Wikipédia qui peut être interrogée par le biais de trois moteurs de recherche différents. Le premier d'entre eux met en {\oe}uvre un algorithme calculant la \emph{similarité cosinus} entre l'ensemble des mots-clés entrés et les documents issus de Wikipédia ; le deuxième est semblable au premier en tous points, à l'exception que l'on peut affiner la recherche en précisant une catégorie, ainsi seuls les documents classifiés comme appartenant à la catégorie spécifiée seront relevés. Le troisième applique quant à lui un algorithme de compacité~\cite{gillard:paper} permettant de trouver une entité précise appartenant à une catégorie donnée, proche d'un ou plusieurs mots donnés, dans le document Wikipédia se rapportant à une entité nommée donnée, ce qui permet notamment de pouvoir proposer une réponse factuelle à une requête.
+\par C'est Ã©galement notre cas, puisque le systÃ¨me que nous proposons s'interface avec NLGbAse\footnote{http://www.nlgbase.org}, une base de donnÃ©es classifiÃ©es provenant de WikipÃ©dia qui peut Ãªtre interrogÃ©e par le biais de trois moteurs de recherche diffÃ©rents. Le premier d'entre eux met en {\oe}uvre un algorithme calculant la \emph{similaritÃ© cosinus} entre l'ensemble des mots-clÃ©s entrÃ©s et les documents issus de WikipÃ©dia ; le deuxiÃ¨me est semblable au premier en tous points, Ã  l'exception que l'on peut affiner la recherche en prÃ©cisant une catÃ©gorie, ainsi seuls les documents classifiÃ©s comme appartenant Ã  la catÃ©gorie spÃ©cifiÃ©e seront relevÃ©s. Le troisiÃ¨me applique quant Ã  lui un algorithme de compacitÃ©~\cite{gillard:paper} permettant de trouver une entitÃ© prÃ©cise appartenant Ã  une catÃ©gorie donnÃ©e, proche d'un ou plusieurs mots donnÃ©s, dans le document WikipÃ©dia se rapportant Ã  une entitÃ© nommÃ©e donnÃ©e, ce qui permet notamment de pouvoir proposer une rÃ©ponse factuelle Ã  une requÃªte.
 
-\par Ces outils constituent le système de recherche d'information sur lequel nous appliquons les sorties de notre propre système ; ce dernier peut, à partir d'une phrase en langage naturel - de préférence une question, donner les différents mots-clés et catégories attendus par les moteurs de recherche de NLGbAse, et ainsi obtenir une liste de résultats - et éventuellement des réponses factuelles - pertinents.
+\par Ces outils constituent le systÃ¨me de recherche d'information sur lequel nous appliquons les sorties de notre propre systÃ¨me ; ce dernier peut, Ã  partir d'une phrase en langage naturel - de prÃ©fÃ©rence une question, donner les diffÃ©rents mots-clÃ©s et catÃ©gories attendus par les moteurs de recherche de NLGbAse, et ainsi obtenir une liste de rÃ©sultats - et Ã©ventuellement des rÃ©ponses factuelles - pertinents.
 %Voulez-vous \og{}\emph{vraiment}\fg{} citer~\cite{bogdanoff:these,sonia:point} ?
 
-\section{Encyclopédies, ontologies et SQR}
+%%\section{EncyclopÃ©dies, ontologies et SQR}
 
-%%% description des ontologies et papiers de référence / WWW / dbpedia / Yago
+%%% description des ontologies et papiers de rÃ©fÃ©rence / WWW / dbpedia / Yago
 
-%% \section{Architecture du système NLGbAse.QR}
-%% Que faire dans cette section? A part expliquer pourquoi nous avons utilisé Link-Grammar et Wordnet et comment ils marchent, je ne vois pas.
+%% \section{Architecture du systÃ¨me NLGbAse.QR}
+%% Que faire dans cette section? A part expliquer pourquoi nous avons utilisÃ© Link-Grammar et Wordnet et comment ils marchent, je ne vois pas.
 
-\section{Algorithmes déployés}\label{details}
+\section{Algorithmes dÃ©ployÃ©s}\label{details}
 \subsection{Analyse morpho-syntaxique et couplage des mots}
-\par Pour travailler sur la sémantique, il est indispensable de posséder des outils permettant à la machine de décomposer et d'analyser la structure des phrases. C'est pourquoi nous avons utilisé un analyseur morpho-syntaxique réalisant des couplages de mots selon leur position grammaticale dans la phrase et les liant selon leurs interdépendances~\cite{linkgrammar:paper}.
+\par Pour travailler sur la sÃ©mantique, il est indispensable de possÃ©der des outils permettant Ã  la machine de dÃ©composer et d'analyser la structure des phrases. C'est pourquoi nous avons utilisÃ© un analyseur morpho-syntaxique rÃ©alisant des couplages de mots selon leur position grammaticale dans la phrase et les liant selon leurs interdÃ©pendances~\cite{linkgrammar:paper}.
 % A faire
-%Ici une explication du travail effectué par le parser et notre méthode pour trouver les noms propres, l'objet etc... dans une phrase.
+%Ici une explication du travail effectuÃ© par le parser et notre mÃ©thode pour trouver les noms propres, l'objet etc... dans une phrase.
 
 %=============================================================
-\subsection{Catégorisation des phrases}
+\subsection{CatÃ©gorisation des phrases}
 %=============================================================
-\par Par définition, la sémantique crée naturellement différentes classes de sens plus ou moins générales, au niveau du mot comme de la phrase. Nous adhérons à l'idée selon laquelle la sémantique globale d'une phrase est déterminée par un nombre réduit de mots appartenant à une catégorie grammaticale précise, et c'est selon ce point de vue que nous allons présenter la catégorisation de phrases en catégories sémantiques larges que nous avons implémentée.
+\par Par dÃ©finition, la sÃ©mantique crÃ©e naturellement diffÃ©rentes classes de sens plus ou moins gÃ©nÃ©rales, au niveau du mot comme de la phrase. Nous adhÃ©rons Ã  l'idÃ©e selon laquelle la sÃ©mantique globale d'une phrase est dÃ©terminÃ©e par un nombre rÃ©duit de mots appartenant Ã  une catÃ©gorie grammaticale prÃ©cise, et c'est selon ce point de vue que nous allons prÃ©senter la catÃ©gorisation de phrases en catÃ©gories sÃ©mantiques larges que nous avons implÃ©mentÃ©e.
 %=============================================================
-\subsubsection{Catégorisation à base de règles simples}
+\subsubsection{CatÃ©gorisation Ã  base de rÃ¨gles simples}
 %=============================================================
 
-\par Notre approche pour catégoriser les questions fonctionne avec un ensemble de règles. Cet ensemble est relativement restreint car nous avons pu remarquer qu'une dizaine de règles environ pouvaient couvrir une majorité des cas, et qu'ensuite chaque petit gain se traduisait par la production d'un grand nombre de nouvelles règles. Les règles que nous avons formulées se basent principalement sur les pronoms interrogatifs des questions. En voici la liste : 
+\par Notre approche pour catÃ©goriser les questions fonctionne avec un ensemble de rÃ¨gles. Cet ensemble est relativement restreint car nous avons pu remarquer qu'une dizaine de rÃ¨gles environ pouvaient couvrir une majoritÃ© des cas, et qu'ensuite chaque petit gain se traduisait par la production d'un grand nombre de nouvelles rÃ¨gles. Les rÃ¨gles que nous avons formulÃ©es se basent principalement sur les pronoms interrogatifs des questions. En voici la liste : 
 \begin{itemize}
 \item Who, Whom, Whose : \emph{pers} (Person).
-\item Where, Whence, Wither : si il s'agit de trouver une catégorie pour le deuxième moteur de NLGbAse, et si un nom propre ou un objet est trouvé, la catégorie sera celle du \emph{nom propre} ou de l'\emph{objet} grammatical de la phrase (par exemple : \og{}Where did Patrick Sébastien study?\fg{}, il y a peu de chance de trouver dans la fiche de ce lieu une mention de cette personnalité et il est à priori plus judicieux de proposer la fiche de \emph{Patrick Sébastien}, dans laquelle l'utilisateur sera à même de touver l'information). Dans le cas contraire (ou si nous voulons une catégorie pour le troisième moteur), la catégorie \emph{loc} (Location) est attribuée.
-\item How : nous appliquons la même procédure que précédemment, à l'exception près que si les premières conditions ne sont pas remplies, la catégorie \emph{unk} (Unknown) est attribuée. Pour ce pronom là nous avons ajouté quelques précisions lorsque nous cherchons une catégorie pour le troisème moteur : si le mot suivant directement \emph{how} fait partie de la liste suivante (far, few, great, little, many, much, tall, wide, high, big, old), la catégorie \emph{amount} est attribuée.
-\item What, Why, Which : le principe est toujours le même, avec \emph{unk} (Unknown) pour valeur par défaut. Nous avons également établi, comme précédemment, une liste de mots pouvant être acceptés comme suivant directement le pronom interrogatif (comme par exemple day : \og{}What day is the Independance Day?\fg{}) et qui vont impliquer automatiquement l'attribution d'une catégorie (\emph{date} dans l'exemple précédent).
+\item Where, Whence, Wither : si il s'agit de trouver une catÃ©gorie pour le deuxiÃ¨me moteur de NLGbAse, et si un nom propre ou un objet est trouvÃ©, la catÃ©gorie sera celle du \emph{nom propre} ou de l'\emph{objet} grammatical de la phrase (par exemple : \og{}Where did Patrick SÃ©bastien study?\fg{}, il y a peu de chance de trouver dans la fiche de ce lieu une mention de cette personnalitÃ© et il est Ã  priori plus judicieux de proposer la fiche de \emph{Patrick SÃ©bastien}, dans laquelle l'utilisateur sera Ã  mÃªme de touver l'information). Dans le cas contraire (ou si nous voulons une catÃ©gorie pour le troisiÃ¨me moteur), la catÃ©gorie \emph{loc} (Location) est attribuÃ©e.
+\item How : nous appliquons la mÃªme procÃ©dure que prÃ©cÃ©demment, Ã  l'exception prÃ¨s que si les premiÃ¨res conditions ne sont pas remplies, la catÃ©gorie \emph{unk} (Unknown) est attribuÃ©e. Pour ce pronom lÃ  nous avons ajoutÃ© quelques prÃ©cisions lorsque nous cherchons une catÃ©gorie pour le troisÃ¨me moteur : si le mot suivant directement \emph{how} fait partie de la liste suivante (far, few, great, little, many, much, tall, wide, high, big, old), la catÃ©gorie \emph{amount} est attribuÃ©e.
+\item What, Why, Which : le principe est toujours le mÃªme, avec \emph{unk} (Unknown) pour valeur par dÃ©faut. Nous avons Ã©galement Ã©tabli, comme prÃ©cÃ©demment, une liste de mots pouvant Ãªtre acceptÃ©s comme suivant directement le pronom interrogatif (comme par exemple day : \og{}What day is the Independance Day?\fg{}) et qui vont impliquer automatiquement l'attribution d'une catÃ©gorie (\emph{date} dans l'exemple prÃ©cÃ©dent).
 \end{itemize}
-Nous allons maintenant détailler les méthodes de catégorisation des noms propres et des noms communs que nous avons mises en place.
+Nous allons maintenant dÃ©tailler les mÃ©thodes de catÃ©gorisation des noms propres et des noms communs que nous avons mises en place.
 
 
 %=============================================================
-\subsubsection{Catégorisation par les noms propres utilisant NLGbAse}
+\subsubsection{CatÃ©gorisation par les noms propres utilisant NLGbAse}
 %=============================================================
-\par Comme nous l'avons vu, la majorité des règles ne nous permettent pas de trancher directement, nous devons donc compléter notre analyse par un autre moyen et cela passe notamment par la catégorisation des noms propres. Nous avons remarqué que dans la majorité des cas, si un nom propre est présent dans une question, il en est l'objet ou du moins l'objet est l'une de ses caractéristiques. Prennons par exemple ces deux questions \og{}What is the date of birth of Bruce Dickinson?\fg{}, \og{}Who is Batman's team-mate?\fg{} ; nous voyons bien que les informations désirées sont \emph{forcément} en relation avec nos noms propres.
-\par Nous avons donc prit le parti de prendre comme catégorie la catégorie du nom propre se trouvant dans la question - s'il y en a un. Pour cela nous adressons une requête à un script issu de NLGbAse, qui comme nous l'avons vu associe une catégorie à chaque entité de Wikipédia, qui récupère la catégorie de l'entité correspondant à ce nom propre. Si une entité porte exactement le même nom alors la catégorie sera celle de cette entité ; si ce n'est pas le cas mais que des entités ont un nom similaire, alors la catégorie sera celle de la plus pertinente d'entres elles. Enfin si ce n'est pas le cas nous effectuons une recherche par \emph{TF.Idf}
-%La solution la plus évidente aurait été de prendre pour catégorie celle du document ayant le meilleur score.
-%Nous avons essayé une autre approche. 
-en prenant la catégorie qui a le plus fort score, pour cela chaque catégorie se voit attribuée comme score la somme des scores des documents ayant cette catégorie. De ce fait la catégorie qui rassemble le plus de pertinence sera sélectionnée.
-\par Cependant nous sommes conscients qu'il arrive parfois que cette stratégie ne soit pas idéale, comme pour : \og{}What is the name of Batman's car?\fg{}. Il y a des chances que cette méthode donne \emph{pers} (Person) comme catégorie attendue alors que la solution idéale aurait probablement été \emph{prod} (Product). Elle n'est néanmoins pas totalement inappropriée car nous devrions trouver l'information désirée dans la fiche Wikipédia de Batman, néanmoins l'accès à la réponse est moins direct.
-\par Parfois cette méthode ne donne aucun résultat et il y a plusieurs explications possibles à cela. La première est qu'il est possible qu'il n'y ait pas de fiche relative à ce sujet sur Wikipédia, la seconde est que notre système extrait mal le nom propre et soumet donc quelque chose de faux à NLGbAse. La troisième raison est imputable à l'utilisateur. En effet si l'utilisateur commet une faute dans l'écriture du nom alors NLGbAse ne pourra pas nous donner la bonne réponse. 
-\par Pour y remédier nous effectuons une requête avec le nom propre sur Google, ensuite nous regardons si Google suggère une autre orthographe par l'intermédiaire du "Did you mean :". Cependant cette méthode n'est pas infaillible car il est possible que cette même faute d'orthographe soit souvent comise sur Internet.
-\par Enfin si à ce stade le nom n'est toujours pas associé à une étiquette alors nous soumettons la phrase au module de CCG de reconnaissance d'entité nommée~\cite{ratinov:paper} basé sur l'architecture SNOW. En effet ce module à de très bonnes performances pour reconnaitre les personnes, organisations et produits.
+\par Comme nous l'avons vu, la majoritÃ© des rÃ¨gles ne nous permettent pas de trancher directement, nous devons donc complÃ©ter notre analyse par un autre moyen et cela passe notamment par la catÃ©gorisation des noms propres. Nous avons remarquÃ© que dans la majoritÃ© des cas, si un nom propre est prÃ©sent dans une question, il en est l'objet ou du moins l'objet est l'une de ses caractÃ©ristiques. Prennons par exemple ces deux questions \og{}What is the date of birth of Bruce Dickinson?\fg{}, \og{}Who is Batman's team-mate?\fg{} ; nous voyons bien que les informations dÃ©sirÃ©es sont \emph{forcÃ©ment} en relation avec nos noms propres.
+\par Nous avons donc prit le parti de prendre comme catÃ©gorie la catÃ©gorie du nom propre se trouvant dans la question - s'il y en a un. Pour cela nous adressons une requÃªte Ã  un script issu de NLGbAse, qui comme nous l'avons vu associe une catÃ©gorie Ã  chaque entitÃ© de WikipÃ©dia, qui rÃ©cupÃ¨re la catÃ©gorie de l'entitÃ© correspondant Ã  ce nom propre. Si une entitÃ© porte exactement le mÃªme nom alors la catÃ©gorie sera celle de cette entitÃ© ; si ce n'est pas le cas mais que des entitÃ©s ont un nom similaire, alors la catÃ©gorie sera celle de la plus pertinente d'entres elles. Enfin si ce n'est pas le cas nous effectuons une recherche par \emph{TF.Idf}
+%La solution la plus Ã©vidente aurait Ã©tÃ© de prendre pour catÃ©gorie celle du document ayant le meilleur score.
+%Nous avons essayÃ© une autre approche. 
+en prenant la catÃ©gorie qui a le plus fort score, pour cela chaque catÃ©gorie se voit attribuÃ©e comme score la somme des scores des documents ayant cette catÃ©gorie. De ce fait la catÃ©gorie qui rassemble le plus de pertinence sera sÃ©lectionnÃ©e.
+\par Cependant nous sommes conscients qu'il arrive parfois que cette stratÃ©gie ne soit pas idÃ©ale, comme pour : \og{}What is the name of Batman's car?\fg{}. Il y a des chances que cette mÃ©thode donne \emph{pers} (Person) comme catÃ©gorie attendue alors que la solution idÃ©ale aurait probablement Ã©tÃ© \emph{prod} (Product). Elle n'est nÃ©anmoins pas totalement inappropriÃ©e car nous devrions trouver l'information dÃ©sirÃ©e dans la fiche WikipÃ©dia de Batman, nÃ©anmoins l'accÃ¨s Ã  la rÃ©ponse est moins direct.
+\par Parfois cette mÃ©thode ne donne aucun rÃ©sultat et il y a plusieurs explications possibles Ã  cela. La premiÃ¨re est qu'il est possible qu'il n'y ait pas de fiche relative Ã  ce sujet sur WikipÃ©dia, la seconde est que notre systÃ¨me extrait mal le nom propre et soumet donc quelque chose de faux Ã  NLGbAse. La troisiÃ¨me raison est imputable Ã  l'utilisateur. En effet si l'utilisateur commet une faute dans l'Ã©criture du nom alors NLGbAse ne pourra pas nous donner la bonne rÃ©ponse. 
+\par Pour y remÃ©dier nous effectuons une requÃªte avec le nom propre sur Google, ensuite nous regardons si Google suggÃ¨re une autre orthographe par l'intermÃ©diaire du "Did you mean :". Cependant cette mÃ©thode n'est pas infaillible car il est possible que cette mÃªme faute d'orthographe soit souvent comise sur Internet.
+\par Enfin si Ã  ce stade le nom n'est toujours pas associÃ© Ã  une Ã©tiquette alors nous soumettons la phrase au module de CCG de reconnaissance d'entitÃ© nommÃ©e~\cite{ratinov:paper} basÃ© sur l'architecture SNOW. En effet ce module Ã  de trÃ¨s bonnes performances pour reconnaitre les personnes, organisations et produits.
 
-
-%=============================================================
-\subsubsection{Catégorisation par les noms communs utilisant WordNet}
-%=============================================================
-
-\par Toutes les questions ne comportent évidemment pas de noms propres mais généralement des noms communs, c'est pourquoi nous avons du trouver un moyen de traiter ces questions par une approche assez simple. La décomposition morpho-syntaxique nous permet généralement de trouver l'objet de la question, qui possède généralement une forte valeur sémantique ; c'est donc celui-ci que nous allons étudier. En effet, pour la question \og{}What are the generals?\fg{}, l'objet de la question est \og{}generals\fg{} ; l'enjeu est d'arriver à associer \og{}generals\fg{} à l'étiquette \emph{fonc.mil} (fonction militaire).
-\par Pour arriver à cela nous utilisons WordNet\footnote{http://wordnet.princeton.edu} et ses hyperonymes ainsi que sa capacité à fournir une classe pour chaque mot : en effet WordNet associe déjà à la totalité des termes une étiquette, par exemple à \og{}general\fg{} WordNet associe \emph{noun.person}. L'étiquette que fournit WordNet est bien souvent satisfaisante, cependant son jeu d'étiquette ne correspond pas aux exigences d'Ester auquel notre projet doit se plier.
-\par La première étape fut d'associer \og{}à la main\fg{} des étiquettes à des mots qui prendront le dessus sur celles de WordNet ; pour reprendre notre exemple, nous ne voulons pas l'étiquette \emph{pers} (Person) pour \og{}general\fg{} mais bien \emph{fonc.mil}. Cependant faire ce travail sur tous les mots demanderait un investissement titanesque, et nous avons pu palier à ce problème en réfléchissant aux mots les plus généraux possibles pour chaque catégorie dont nous avions besoin. Ensuite nous vérifions que les hyponymes de ces mots sur WordNet correspondaient bien à la même catégorie, et si ce n'était pas le cas nous sélectionnions tous les hyponymes pour lesquels c'est le cas et répétions cette opération. Nous sommes donc arrivés à une liste de mots caractérisant parfaitement chaque catégorie - et étant compatibles avec WordNet.
-\par L'algorithme de catégorisation en lui-même consiste en une fonction récursive qui va vérifier si le nom commun ne fait pas partie des mots étiquetés. Si ce n'est pas le cas cette vérification est faite pour son hyperonyme, et ainsi de suite. La récursivité s'arrête si un mot associé à une étiquette est trouvé ou si on arrive sur l'hyperonyme de plus haut niveau. Dans le premier cas le mot de départ se voit associé cette étiquette et donc la catégorie recherchée aussi, dans le deuxième cas c'est l'étiquette associée par WordNet au mot de départ qui prévaut et qui est donc définie comme la catégorie recherchée.
-\par Cette méthode utilisée seule ne peut bien évidemment pas couvrir tous les cas, néanmoins c'est l'association des différentes - mais surtout complémentaires - méthodes de catégorisation qui permet d'obtenir des résultats satisfaisants.
-
-%Au final même si il est évident que nous ne couvrons pas tout les cas en seulement trois heures il est possible de couvrir un très grand nombre de cas puisque pour chaque mot étiqueté tout ses hyponymes reçoivent cette même étiquette.
 
 %=============================================================
-\subsection{Extraction des mots-clés}
+\subsubsection{CatÃ©gorisation par les noms communs utilisant WordNet}
 %=============================================================
-%Comme énoncé dans la section précédente nous utilisons un parser pour arriver à repérer les termes importants pour la catégorisation et il en est de même pour l'extraction des mots clés.
 
-\par Comme nous l'avons expliqué, les différents moteurs de recherche de NLGbAse n'attendent pas les mêmes entrées, nous allons donc détailler ici les deux types d'extraction de mots-clés - ou mots pertinents.
+\par Toutes les questions ne comportent Ã©videmment pas de noms propres mais gÃ©nÃ©ralement des noms communs, c'est pourquoi nous avons du trouver un moyen de traiter ces questions par une approche assez simple. La dÃ©composition morpho-syntaxique nous permet gÃ©nÃ©ralement de trouver l'objet de la question, qui possÃ¨de gÃ©nÃ©ralement une forte valeur sÃ©mantique ; c'est donc celui-ci que nous allons Ã©tudier. En effet, pour la question \og{}What are the generals?\fg{}, l'objet de la question est \og{}generals\fg{} ; l'enjeu est d'arriver Ã  associer \og{}generals\fg{} Ã  l'Ã©tiquette \emph{fonc.mil} (fonction militaire).
+\par Pour arriver Ã  cela nous utilisons WordNet\footnote{http://wordnet.princeton.edu} et ses hyperonymes ainsi que sa capacitÃ© Ã  fournir une classe pour chaque mot : en effet WordNet associe dÃ©jÃ  Ã  la totalitÃ© des termes une Ã©tiquette, par exemple Ã  \og{}general\fg{} WordNet associe \emph{noun.person}. L'Ã©tiquette que fournit WordNet est bien souvent satisfaisante, cependant son jeu d'Ã©tiquette ne correspond pas aux exigences d'Ester auquel notre projet doit se plier.
+\par La premiÃ¨re Ã©tape fut d'associer \og{}Ã  la main\fg{} des Ã©tiquettes Ã  des mots qui prendront le dessus sur celles de WordNet ; pour reprendre notre exemple, nous ne voulons pas l'Ã©tiquette \emph{pers} (Person) pour \og{}general\fg{} mais bien \emph{fonc.mil}. Cependant faire ce travail sur tous les mots demanderait un investissement titanesque, et nous avons pu palier Ã  ce problÃ¨me en rÃ©flÃ©chissant aux mots les plus gÃ©nÃ©raux possibles pour chaque catÃ©gorie dont nous avions besoin. Ensuite nous vÃ©rifions que les hyponymes de ces mots sur WordNet correspondaient bien Ã  la mÃªme catÃ©gorie, et si ce n'Ã©tait pas le cas nous sÃ©lectionnions tous les hyponymes pour lesquels c'est le cas et rÃ©pÃ©tions cette opÃ©ration. Nous sommes donc arrivÃ©s Ã  une liste de mots caractÃ©risant parfaitement chaque catÃ©gorie - et Ã©tant compatibles avec WordNet.
+\par L'algorithme de catÃ©gorisation en lui-mÃªme consiste en une fonction rÃ©cursive qui va vÃ©rifier si le nom commun ne fait pas partie des mots Ã©tiquetÃ©s. Si ce n'est pas le cas cette vÃ©rification est faite pour son hyperonyme, et ainsi de suite. La rÃ©cursivitÃ© s'arrÃªte si un mot associÃ© Ã  une Ã©tiquette est trouvÃ© ou si on arrive sur l'hyperonyme de plus haut niveau. Dans le premier cas le mot de dÃ©part se voit associÃ© cette Ã©tiquette et donc la catÃ©gorie recherchÃ©e aussi, dans le deuxiÃ¨me cas c'est l'Ã©tiquette associÃ©e par WordNet au mot de dÃ©part qui prÃ©vaut et qui est donc dÃ©finie comme la catÃ©gorie recherchÃ©e.
+\par Cette mÃ©thode utilisÃ©e seule ne peut bien Ã©videmment pas couvrir tous les cas, nÃ©anmoins c'est l'association des diffÃ©rentes - mais surtout complÃ©mentaires - mÃ©thodes de catÃ©gorisation qui permet d'obtenir des rÃ©sultats satisfaisants.
 
-\subsubsection{Extraction destinées aux moteurs de recherche d'information par similarité cosinus}
-\par Dans un premier temps, les mots-outils de la phrase sont automatiquement supprimés à l'aide d'un anti-dictionnaire. Nous utilisons ensuite l'analyse morpho-syntaxique de la phrase, et notamment l'arbre constitutif, pour récupérer les mots - qui ne sont pas des mots-outils - qui constituent groupes nominaux ; malgrès son aspect simple, voire simpliste, nous avons pu prouver empyriquement son efficacité.
+%Au final mÃªme si il est Ã©vident que nous ne couvrons pas tout les cas en seulement trois heures il est possible de couvrir un trÃ¨s grand nombre de cas puisque pour chaque mot Ã©tiquetÃ© tout ses hyponymes reÃ§oivent cette mÃªme Ã©tiquette.
 
-\subsubsection{Extraction destinées au moteur de recherche d'information par algorithme de compacité (question-réponse)}
-%Pour celui ci la démarche est assez proche mais le besoin de données est différent.
-\par Nous l'avons déjà précisé plus haut, ce troisième moteur accepte plusieurs entrées différentes, et notamment deux champs de mots-clés. Le premier champ est une entité nommée qui va déterminer dans quel document sera appliqué l'algorithme de compacité, tandis que le deuxième champ consiste en une liste de mots qui représentent l'information cherchée ; par exemple pour la question \og{}When was Albert Einstein born?\fg{}, le mot \og{}born\fg{} devrait être sélectionné car l'information recherchée - une date de naissance en l'occurence - se trouvera certainement très proche de ce mot.
-\par Dans un premier temps nous devons donc trouver l'entité nommée ; si un nom propre est présent dans la question, il sera directement utilisé comme entité nommée. Dans le cas contraire, nous éxécutons une requête sur NLGbAse avec l'objet de la question afin de récupérer le nom de l'entité nommée la plus pertinente. 
-\par Dans un second temps vient l'extraction des mots porteurs de sens ; il s'agit tout d'abord de supprimer tous les mots-outils, les noms propres et le verbe présents dans la phrase. Il s'agit ensuite de récupérer les synonymes des mots restant avec WordNet ; pour reprendre notre exemple précédent, nous ne savons pas si le mot \og{}born\fg{} sera effectivement employé dans le document dans lequel l'information sera cherchée, c'est pourquoi nous cherchons des dérivations afin de les rajouter à notre liste et ainsi améliorer nos chances de trouver l'information. Toujours pour notre exemple, cette recherche de synonymes pourrait nous mener au mot \og{}birth\fg{}, qui serait en effet intéressant à garder dans l'optique de la recherche d'une date de naissance.
+%=============================================================
+\subsection{Extraction des mots-clÃ©s}
+%=============================================================
+%Comme Ã©noncÃ© dans la section prÃ©cÃ©dente nous utilisons un parser pour arriver Ã  repÃ©rer les termes importants pour la catÃ©gorisation et il en est de mÃªme pour l'extraction des mots clÃ©s.
+
+\par Comme nous l'avons expliquÃ©, les diffÃ©rents moteurs de recherche de NLGbAse n'attendent pas les mÃªmes entrÃ©es, nous allons donc dÃ©tailler ici les deux types d'extraction de mots-clÃ©s - ou mots pertinents.
+
+\subsubsection{Extraction destinÃ©es aux moteurs de recherche d'information par similaritÃ© cosinus}
+\par Dans un premier temps, les mots-outils de la phrase sont automatiquement supprimÃ©s Ã  l'aide d'un anti-dictionnaire. Nous utilisons ensuite l'analyse morpho-syntaxique de la phrase, et notamment l'arbre constitutif, pour rÃ©cupÃ©rer les mots - qui ne sont pas des mots-outils - qui constituent groupes nominaux ; malgrÃ¨s son aspect simple, voire simpliste, nous avons pu prouver empyriquement son efficacitÃ©.
+
+\subsubsection{Extraction destinÃ©es au moteur de recherche d'information par algorithme de compacitÃ© (question-rÃ©ponse)}
+%Pour celui ci la dÃ©marche est assez proche mais le besoin de donnÃ©es est diffÃ©rent.
+\par Nous l'avons dÃ©jÃ  prÃ©cisÃ© plus haut, ce troisiÃ¨me moteur accepte plusieurs entrÃ©es diffÃ©rentes, et notamment deux champs de mots-clÃ©s. Le premier champ est une entitÃ© nommÃ©e qui va dÃ©terminer dans quel document sera appliquÃ© l'algorithme de compacitÃ©, tandis que le deuxiÃ¨me champ consiste en une liste de mots qui reprÃ©sentent l'information cherchÃ©e ; par exemple pour la question \og{}When was Albert Einstein born?\fg{}, le mot \og{}born\fg{} devrait Ãªtre sÃ©lectionnÃ© car l'information recherchÃ©e - une date de naissance en l'occurence - se trouvera certainement trÃ¨s proche de ce mot.
+\par Dans un premier temps nous devons donc trouver l'entitÃ© nommÃ©e ; si un nom propre est prÃ©sent dans la question, il sera directement utilisÃ© comme entitÃ© nommÃ©e. Dans le cas contraire, nous Ã©xÃ©cutons une requÃªte sur NLGbAse avec l'objet de la question afin de rÃ©cupÃ©rer le nom de l'entitÃ© nommÃ©e la plus pertinente. 
+\par Dans un second temps vient l'extraction des mots porteurs de sens ; il s'agit tout d'abord de supprimer tous les mots-outils, les noms propres et le verbe prÃ©sents dans la phrase. Il s'agit ensuite de rÃ©cupÃ©rer les synonymes des mots restant avec WordNet ; pour reprendre notre exemple prÃ©cÃ©dent, nous ne savons pas si le mot \og{}born\fg{} sera effectivement employÃ© dans le document dans lequel l'information sera cherchÃ©e, c'est pourquoi nous cherchons des dÃ©rivations afin de les rajouter Ã  notre liste et ainsi amÃ©liorer nos chances de trouver l'information. Toujours pour notre exemple, cette recherche de synonymes pourrait nous mener au mot \og{}birth\fg{}, qui serait en effet intÃ©ressant Ã  garder dans l'optique de la recherche d'une date de naissance.
 
 
 %==============================================================
-\section{Expériences et résultats}\label{expériences}
+\section{ExpÃ©riences et rÃ©sultats}\label{expÃ©riences}
 %==============================================================
 
 %%% modif eric
-\par La vocation de notre algorithme est de transformer une question en langue naturelle en une requête compatible avec un système de RI.  Pour mesurer les performances de notre système, nous évaluons dans un premier temps sa capacité à étiqueter une question en vue de l'extraction des informations requise pour construire une requête. Dans un second temps nous construisons une requête d'après les informations extraites et mesurons la pertinence des résultats retournés par l'un des trois moteurs de NLGbAse.
+\par La vocation de notre algorithme est de transformer une question en langue naturelle en une requÃªte compatible avec un systÃ¨me de RI.  Pour mesurer les performances de notre systÃ¨me, nous Ã©valuons dans un premier temps sa capacitÃ© Ã  Ã©tiqueter une question en vue de l'extraction des informations requise pour construire une requÃªte. Dans un second temps nous construisons une requÃªte d'aprÃ¨s les informations extraites et mesurons la pertinence des rÃ©sultats retournÃ©s par l'un des trois moteurs de NLGbAse.
 
-\subsection{Corpus de référence et standard de mesure}
+\subsection{Corpus de rÃ©fÃ©rence et standard de mesure}
 
-\par Nous avons séparé les deux tâches que sont la RI et l'analyse sémantique de la phrase, c'est pourquoi l'évaluation de notre système porte sur la catégorisation et l'extraction de mots-clés. Nous avons utilisé pour ces mesures des corpus de questions déjà existants qui ont été mis au points dans le cadre de campagnes d'évaluation telles que Trec 12. %%i% citer %%% 
-\par Le corpus \textit{Question Answering Collections} de Trec est composé de 500 questions factuelles\footnote{En téléchargement sur http://trec.nist.gov/data/qa/2003\_qadata/03QA.tasks/test.set.t12.txt.html}, organisées dans un fichier XML comme suit : 
+\par Nous avons sÃ©parÃ© les deux tÃ¢ches que sont la RI et l'analyse sÃ©mantique de la phrase, c'est pourquoi l'Ã©valuation de notre systÃ¨me porte sur la catÃ©gorisation et l'extraction de mots-clÃ©s. Nous avons utilisÃ© pour ces mesures des corpus de questions dÃ©jÃ  existants qui ont Ã©tÃ© mis au points dans le cadre de campagnes d'Ã©valuation telles que Trec 12. %%i% citer %%% 
+\par Le corpus \textit{Question Answering Collections} de Trec est composÃ© de 500 questions factuelles\footnote{En tÃ©lÃ©chargement sur http://trec.nist.gov/data/qa/2003\_qadata/03QA.tasks/test.set.t12.txt.html}, organisÃ©es dans un fichier XML comme suit : 
 
 \begin{verbatim}
 <top>
@@ -241,54 +153,54 @@ How big is Mars?
 [...]
 \end{verbatim}
 
-\par Notre choix s'est porté sur cette année là car ultérieurement le format des fichiers a changé et est devenu à notre sens beaucoup trop spécifique à la tâche de question réponse. En effet les corpus les plus récents proposent des séries de cinq questions en rapport avec une cible donnée. On voit bien là que l'approche est toute autre. En effet pour le moteur de RI classique avec lequel nous travaillons, la meilleure manière d'obtenir un document comportant la réponse est de choisir la fiche correspondant à la cible. L'évaluation de notre application sur ces corpus n'aurait donc eu que très peu de sens. De plus nous trouvions qu'une évaluation de ce type est vraiment superficielle et ne reflète pas les résultats que le système fournirait à un utilisateur qui ne préciserait pas la cible de la question. 
-\par Ce corpus n'étant pas initiallement prévu pour vérifier l'expérience d'étiquetage de questions tel que prévu dans le cadre de notre algorithme, nous avons procédé à son enrichissement \og{}à la main\fg{}.
-\par Cet enrichissement consiste a attribuer à chaque question la catégorie sémantique de la réponse attendue (nous n'avons retenu que les classes racines à savoir \emph{pers}, \emph{org}, \emph{loc}, \emph{date}, \emph{amount} et \emph{unk}), ainsi que les différents mots-clés qui peuvent permettre d'obtenir une réponse. Nous disposons ainsi d'un corpus de questions et de réponses de références complétées par des informations sémantiques compatibles avec notre système\footnote{Ce corpus complété est disponible sur www.nlgbase.org}. 
-\par Néanmoins pour des raisons pratiques nous avons créé notre propre formalisme :
+\par Notre choix s'est portÃ© sur cette annÃ©e lÃ  car ultÃ©rieurement le format des fichiers a changÃ© et est devenu Ã  notre sens beaucoup trop spÃ©cifique Ã  la tÃ¢che de question rÃ©ponse. En effet les corpus les plus rÃ©cents proposent des sÃ©ries de cinq questions en rapport avec une cible donnÃ©e. On voit bien lÃ  que l'approche est toute autre. En effet pour le moteur de RI classique avec lequel nous travaillons, la meilleure maniÃ¨re d'obtenir un document comportant la rÃ©ponse est de choisir la fiche correspondant Ã  la cible. L'Ã©valuation de notre application sur ces corpus n'aurait donc eu que trÃ¨s peu de sens. De plus nous trouvions qu'une Ã©valuation de ce type est vraiment superficielle et ne reflÃ¨te pas les rÃ©sultats que le systÃ¨me fournirait Ã  un utilisateur qui ne prÃ©ciserait pas la cible de la question. 
+\par Ce corpus n'Ã©tant pas initiallement prÃ©vu pour vÃ©rifier l'expÃ©rience d'Ã©tiquetage de questions tel que prÃ©vu dans le cadre de notre algorithme, nous avons procÃ©dÃ© Ã  son enrichissement \og{}Ã  la main\fg{}.
+\par Cet enrichissement consiste a attribuer Ã  chaque question la catÃ©gorie sÃ©mantique de la rÃ©ponse attendue (nous n'avons retenu que les classes racines Ã  savoir \emph{pers}, \emph{org}, \emph{loc}, \emph{date}, \emph{amount} et \emph{unk}), ainsi que les diffÃ©rents mots-clÃ©s qui peuvent permettre d'obtenir une rÃ©ponse. Nous disposons ainsi d'un corpus de questions et de rÃ©ponses de rÃ©fÃ©rences complÃ©tÃ©es par des informations sÃ©mantiques compatibles avec notre systÃ¨me\footnote{Ce corpus complÃ©tÃ© est disponible sur www.nlgbase.org}. 
+\par NÃ©anmoins pour des raisons pratiques nous avons crÃ©Ã© notre propre formalisme :
 \begin{verbatim}
 <question en toutes lettres>#
-<mots-clés attendus par les moteurs de RI>#<catégorie de l'entité source>#
-<nom de l'entité source>#<mots-clés probablement proches de la réponse>#
-<catégorie de l'entité réponse cherchée> 
+<mots-clÃ©s attendus par les moteurs de RI>#<catÃ©gorie de l'entitÃ© source>#
+<nom de l'entitÃ© source>#<mots-clÃ©s probablement proches de la rÃ©ponse>#
+<catÃ©gorie de l'entitÃ© rÃ©ponse cherchÃ©e> 
 \end{verbatim}
 
-\par Ainsi, dans l'exemple précité, nous complétons la description de la question par plusieurs étiquettes de classes, à savoir que l'entité source est une localisation, et que la réponse cible est une quantité (\emph{amount}, la taille de la planète Mars) :
+\par Ainsi, dans l'exemple prÃ©citÃ©, nous complÃ©tons la description de la question par plusieurs Ã©tiquettes de classes, Ã  savoir que l'entitÃ© source est une localisation, et que la rÃ©ponse cible est une quantitÃ© (\emph{amount}, la taille de la planÃ¨te Mars) :
 
 \begin{verbatim}
 How big is Mars?#Mars#loc#Mars#big#amount#
 [...]
 \end{verbatim}
 
-%% plus d'actualité
-%%\par Le corpus est également composé de 108 questions prélevées aléatoirement sur le site AnswerBus\footnote{http://www.answerbus.com/}, qui est également un système de rechercher d'information par question-réponse. La particularité de ces questions est qu'elles ont été formulées par des utilisateurs, une majorité d'entre-elles n'est donc pas grammaticalement parfaite ; nous avons trouvé ce corpus intéressant pour tester notre système car cela nous permet de nous rapprocher de la réalité par rapport aux questions classiques de campagnes d'évaluation.
+%% plus d'actualitÃ©
+%%\par Le corpus est Ã©galement composÃ© de 108 questions prÃ©levÃ©es alÃ©atoirement sur le site AnswerBus\footnote{http://www.answerbus.com/}, qui est Ã©galement un systÃ¨me de rechercher d'information par question-rÃ©ponse. La particularitÃ© de ces questions est qu'elles ont Ã©tÃ© formulÃ©es par des utilisateurs, une majoritÃ© d'entre-elles n'est donc pas grammaticalement parfaite ; nous avons trouvÃ© ce corpus intÃ©ressant pour tester notre systÃ¨me car cela nous permet de nous rapprocher de la rÃ©alitÃ© par rapport aux questions classiques de campagnes d'Ã©valuation.
 
-\par Nous avons ainsi lancé notre système pour chacune des questions de ce corpus et mesuré les différences entre l'étiquetage \og{}à la main\fg{} et les sorties du système. Nous avons pu en déduire des mesures de précision et de rappel complétées par le F-Score\footnote{Mesure harmonique combinant la précision et le rappel} que nous vous présentons dans la sous-section \ref{evaluation}.
+\par Nous avons ainsi lancÃ© notre systÃ¨me pour chacune des questions de ce corpus et mesurÃ© les diffÃ©rences entre l'Ã©tiquetage \og{}Ã  la main\fg{} et les sorties du systÃ¨me. Nous avons pu en dÃ©duire des mesures de prÃ©cision et de rappel complÃ©tÃ©es par le F-Score\footnote{Mesure harmonique combinant la prÃ©cision et le rappel} que nous vous prÃ©sentons dans la sous-section \ref{evaluation}.
 
-%%validité de son étiquetage sémantique et de l'identification des mots clés pertinents pour une extraction de réponse, puis la pertinence des réponses retournées par le moteur de recherche par rapport à la réponse de référence. Ces mesures sont réalisées par un calcul de score de 
+%%validitÃ© de son Ã©tiquetage sÃ©mantique et de l'identification des mots clÃ©s pertinents pour une extraction de rÃ©ponse, puis la pertinence des rÃ©ponses retournÃ©es par le moteur de recherche par rapport Ã  la rÃ©ponse de rÃ©fÃ©rence. Ces mesures sont rÃ©alisÃ©es par un calcul de score de 
 
 %% retrait eric
-%Les sorties réelles de notre système ont donc été comparées avec notre corpus, et nous avons ainsi pu calculer les diverses mesures présentées ci-dessous.
+%Les sorties rÃ©elles de notre systÃ¨me ont donc Ã©tÃ© comparÃ©es avec notre corpus, et nous avons ainsi pu calculer les diverses mesures prÃ©sentÃ©es ci-dessous.
 
-%\par Nous avons procédé à un certain nombre de tests et d'expériences afin d'évaluer les performances de la catégorisation comme de l'extraction des mots-clés. Nous n'avons retenu que les classes racines à savoir \emph{pers}, \emph{org}, \emph{loc}, \emph{date}, \emph{amount} et \emph{unk}. 
+%\par Nous avons procÃ©dÃ© Ã  un certain nombre de tests et d'expÃ©riences afin d'Ã©valuer les performances de la catÃ©gorisation comme de l'extraction des mots-clÃ©s. Nous n'avons retenu que les classes racines Ã  savoir \emph{pers}, \emph{org}, \emph{loc}, \emph{date}, \emph{amount} et \emph{unk}. 
 
-%\par Nous nous sommes appuyés sur un corpus de 
+%\par Nous nous sommes appuyÃ©s sur un corpus de 
 %% il faudra mettre le nombre de questions (107 pour le moment)
-%questions issues de TREC 8 que nous avons étiquettées \og{}à la main\fg{} comme si c'était des sorties de notre système. Pour chaque question, nous avons déterminé la catégorie sémantique de l'information attendue et les différents mots-clés nécessaires pour une recherche correcte de cette information - comme nous l'avons déjà expliqué dans cet article. Les sorties réelles de notre système ont donc été comparées avec notre corpus, et nous avons ainsi pu calculer les diverses mesures présentées ci-dessous.
+%questions issues de TREC 8 que nous avons Ã©tiquettÃ©es \og{}Ã  la main\fg{} comme si c'Ã©tait des sorties de notre systÃ¨me. Pour chaque question, nous avons dÃ©terminÃ© la catÃ©gorie sÃ©mantique de l'information attendue et les diffÃ©rents mots-clÃ©s nÃ©cessaires pour une recherche correcte de cette information - comme nous l'avons dÃ©jÃ  expliquÃ© dans cet article. Les sorties rÃ©elles de notre systÃ¨me ont donc Ã©tÃ© comparÃ©es avec notre corpus, et nous avons ainsi pu calculer les diverses mesures prÃ©sentÃ©es ci-dessous.
 
-%% pas bon ça il faut être affirmatif et plus précis %%%
-%les standards d'Ester 2 n'étant pas encore complètement implémentés sur la version anglaise de NLGbAse. Nous avons récupéré un corpus de questions formulées par des utilisateurs et nous les avons étiquetées en faisant mentalement le même travail que notre système, afin de pouvoir comparer ses résultats aux notres. 
+%% pas bon Ã§a il faut Ãªtre affirmatif et plus prÃ©cis %%%
+%les standards d'Ester 2 n'Ã©tant pas encore complÃ¨tement implÃ©mentÃ©s sur la version anglaise de NLGbAse. Nous avons rÃ©cupÃ©rÃ© un corpus de questions formulÃ©es par des utilisateurs et nous les avons Ã©tiquetÃ©es en faisant mentalement le mÃªme travail que notre systÃ¨me, afin de pouvoir comparer ses rÃ©sultats aux notres. 
 
-\subsection{Mesures de la catégorisation sémantique}\label{evaluation}
+\subsection{Mesures de la catÃ©gorisation sÃ©mantique}\label{evaluation}
 
-\par Les résultats de l'attributions de catégories aux 492 phrases du corpus étiqueté sont présentés dans le tableau 1. 
-%Nous avons calculé pour chacune d'elles la précision et le rappel, puis le F-Score\footnote{Mesure harmonique combinant la précision et le rappel} en découlant.
-\par Ces résultats mettent en perspective le fait que des règles simples couplées à une catégorisation par recherche dans une base de données sémantique peuvent être viables. Les résultats de la catégorie \emph{org} peuvent être expliqués par le fait qu'il n'existe pas de règle spécifique à cette catégorie, tous les essais que nous avons fait pour y remédier impactaient fortement les résultats des autres catégories, notamment \emph{pers} et \emph{loc}.
+\par Les rÃ©sultats de l'attributions de catÃ©gories aux 492 phrases du corpus Ã©tiquetÃ© sont prÃ©sentÃ©s dans le tableau 1. 
+%Nous avons calculÃ© pour chacune d'elles la prÃ©cision et le rappel, puis le F-Score\footnote{Mesure harmonique combinant la prÃ©cision et le rappel} en dÃ©coulant.
+\par Ces rÃ©sultats mettent en perspective le fait que des rÃ¨gles simples couplÃ©es Ã  une catÃ©gorisation par recherche dans une base de donnÃ©es sÃ©mantique peuvent Ãªtre viables. Les rÃ©sultats de la catÃ©gorie \emph{org} peuvent Ãªtre expliquÃ©s par le fait qu'il n'existe pas de rÃ¨gle spÃ©cifique Ã  cette catÃ©gorie, tous les essais que nous avons fait pour y remÃ©dier impactaient fortement les rÃ©sultats des autres catÃ©gories, notamment \emph{pers} et \emph{loc}.
 
 \begin{table}[h]
     \begin{center}
         \begin{tabular}{|p{2.5cm}|l|l|l|}
             \hline
-            Catégorie & (\={p}) & (\={r}) & (\={F}-s) \\
+            CatÃ©gorie & (\={p}) & (\={r}) & (\={F}-s) \\
             \hline
             Pers & 0.81 & 0.81 & \textbf{0.81} \\
             \hline
@@ -306,58 +218,63 @@ How big is Mars?#Mars#loc#Mars#big#amount#
             Total & 0.80 & 0.78 & \textbf{0.79} \\
             \hline
         \end{tabular}
-        \caption{\label{tab:results}Précision (\={p}), Rappel (\={r}), F-Score (\={F}-s) obtenus sur le corpus QA de TREC 12}
+        \caption{\label{tab:results}PrÃ©cision (\={p}), Rappel (\={r}), F-Score (\={F}-s) obtenus sur le corpus QA de TREC 12}
     \end{center}
 \end{table}
 
-\subsection{Mesures de l'extraction de mots-clés}
+\subsection{Mesures de l'extraction de mots-clÃ©s}
 
-\par Nous avons également mesuré la pertinence des mots-clés extraits par notre système. Comme précédemment nous avons tout d'abord effectué \og{}à la main\fg{} le travail d'extraction, puis nous avons comparé ceci avec les résultats du système afin d'obtenir un pourcentage de satisfaction calculé selon la formule suivante : $$S(C) = \frac{\sum_{i = 1}^{N} P(Q_i)}{N}$$
-\par Ils sont présentés dans les tableaux ci-dessous.
+\par Nous avons Ã©galement mesurÃ© la pertinence des mots-clÃ©s extraits par notre systÃ¨me. Comme prÃ©cÃ©demment nous avons tout d'abord effectuÃ© \og{}Ã  la main\fg{} le travail d'extraction, puis nous avons comparÃ© ceci avec les rÃ©sultats du systÃ¨me afin d'obtenir un pourcentage de satisfaction calculÃ© selon la formule suivante : $$S(C) = \frac{\sum_{i = 1}^{N} P(Q_i)}{N}$$
+\par Ils sont prÃ©sentÃ©s dans les tableaux ci-dessous.
 
 \begin{table}[htbp]
     \begin{center}
         \begin{tabular}{|p{12cm}|l|}
             \hline
-            Type de mots-clés & (S(C)) \\
+            Type de mots-clÃ©s & (S(C)) \\
             \hline
-            Mots-clés extraits pour une recherche par similarité cosinus & \textbf{54.03\%} \\
+            Mots-clÃ©s extraits pour une recherche par similaritÃ© cosinus & \textbf{54.03\%} \\
             \hline
-            Entités nommées extraites pour une recherche de type question-réponse (compacité) & \textbf{57.76\%} \\
+            EntitÃ©s nommÃ©es extraites pour une recherche de type question-rÃ©ponse (compacitÃ©) & \textbf{57.76\%} \\
             \hline
-            Mots-clés extraits pour une recherche de type question-réponse (compacité) & \textbf{73.28\%} \\
+            Mots-clÃ©s extraits pour une recherche de type question-rÃ©ponse (compacitÃ©) & \textbf{73.28\%} \\
             \hline
         \end{tabular}
         \caption{\label{tab:results}Satisfaction (S(C)) obtenue sur le corpus de test}
     \end{center}
 \end{table}
 
-\par Ces derniers chiffres peuvent être expliqués par le fait qu'il est assez difficile de se mettre à la place d'un système de RI et d'imaginer quels paramètres seront les plus pertinents pour obtenir un bon résultat, les mots-clés que nous avons extrait \og{}à la main\fg{} pour établir notre corpus de test sont donc parfois éloignés de la formulation optimale.
+\par Ces derniers chiffres peuvent Ãªtre expliquÃ©s par le fait qu'il est assez difficile de se mettre Ã  la place d'un systÃ¨me de RI et d'imaginer quels paramÃ¨tres seront les plus pertinents pour obtenir un bon rÃ©sultat, les mots-clÃ©s que nous avons extrait \og{}Ã  la main\fg{} pour Ã©tablir notre corpus de test sont donc parfois Ã©loignÃ©s de la formulation optimale.
 
 \subsection{Commentaires et comparaisons}
-\par Ces résultats nous ont permis de comparer notre système avec certains des meilleurs systèmes actuels
-%. Force est de constater que nous sommes nettement en dessous de leurs résultats 
- comme par exemple le système de CCG~\cite{learning:paper} qui obtient un score de 90\% à 95\% de bonne classification. Néanmoins celui-ci est basé sur l'architecture d'apprentissage automatique SNOW, contrairement à notre approche basée sur des règles simples et l'utilisation d'hyperonymes.
-%Cependant les méthodes utilisées par ces systèmes sont basé sur des méthodes d'apprentissage automatique. Avant même le début de notre application nous étions conscient que de tels systèmes permettaient d'obtenir des résultats meilleurs que ceux obtenu avec des méthodes et des règles faites manuellement. Cependant notre propos est plutôt de démontrer qu'il est possible d'obtenir des résultats interessants en utilisant un faible nombre de règles et de ressources ainsi que des algorithmes simples.
-De plus notre méthode est facilement adaptable à d'autres langues 
-%à condition que Wordnet la supporte (ou a moins de trouver des ressources identiques dans la langue voulue), d'avoir un parser dans cette langue et de traduire les quelques règles dans la langue cible. 
- et nous obtiendrions alors des résultats à peine plus faible que le système multilingue de Thamar Solorio et al.~\cite{solorio:paper} utilisant des heuristiques complexes et ayant recours aux SVM.
-%\par Enfin les résultats sont impactés par le fait que cette application dépends de plusieurs outils tel que NLGbAse qui est encore en développement et qui commet encore des erreurs que nous répétons, et tel que l'analyseur syntaxique linkgrammar qui bien qu'ayant l'avantage d'être libre n'est pas le plus performant existant et qui commet aussi des erreurs (par exemple sur l'objet de la question qu'il associe frequemment au pronom interrogatif).
+\par Ces rÃ©sultats nous ont permis de comparer notre systÃ¨me avec certains des meilleurs systÃ¨mes actuels
+%. Force est de constater que nous sommes nettement en dessous de leurs rÃ©sultats 
+ comme par exemple le systÃ¨me de CCG~\cite{learning:paper} qui obtient un score de 90\% Ã  95\% de bonne classification. NÃ©anmoins celui-ci est basÃ© sur l'architecture d'apprentissage automatique SNOW, contrairement Ã  notre approche basÃ©e sur des rÃ¨gles simples et l'utilisation d'hyperonymes.
+%Cependant les mÃ©thodes utilisÃ©es par ces systÃ¨mes sont basÃ© sur des mÃ©thodes d'apprentissage automatique. Avant mÃªme le dÃ©but de notre application nous Ã©tions conscient que de tels systÃ¨mes permettaient d'obtenir des rÃ©sultats meilleurs que ceux obtenu avec des mÃ©thodes et des rÃ¨gles faites manuellement. Cependant notre propos est plutÃ´t de dÃ©montrer qu'il est possible d'obtenir des rÃ©sultats interessants en utilisant un faible nombre de rÃ¨gles et de ressources ainsi que des algorithmes simples.
+De plus notre mÃ©thode est facilement adaptable Ã  d'autres langues 
+%Ã  condition que Wordnet la supporte (ou a moins de trouver des ressources identiques dans la langue voulue), d'avoir un parser dans cette langue et de traduire les quelques rÃ¨gles dans la langue cible. 
+ et nous obtiendrions alors des rÃ©sultats Ã  peine plus faible que le systÃ¨me multilingue de Thamar Solorio et al.~\cite{solorio:paper} utilisant des heuristiques complexes et ayant recours aux SVM.
+%\par Enfin les rÃ©sultats sont impactÃ©s par le fait que cette application dÃ©pends de plusieurs outils tel que NLGbAse qui est encore en dÃ©veloppement et qui commet encore des erreurs que nous rÃ©pÃ©tons, et tel que l'analyseur syntaxique linkgrammar qui bien qu'ayant l'avantage d'Ãªtre libre n'est pas le plus performant existant et qui commet aussi des erreurs (par exemple sur l'objet de la question qu'il associe frequemment au pronom interrogatif).
+
+\section{Choix techniques}
+\subsection{Ruby Ã§a roxx}
+\subsection{WordNet Ã§a pue}
+\subsection{LinkParser aussi}
+\subsection{GoogleCode : un outil combinant la gestion de projet et le versionning de sources (via SubVersion)}
+
+\section{Bilan global}
+\subsection{Recul sur les approches}
+\subsection{Autres orientations envisageables}
+
 %==============================================================
 \section{Conclusion}
 %==============================================================
-\par Nous avons présenté un système analysant et décomposant des requêtes formulées en langage naturel dans le but d'en extraire leur catégorie sémantique ainsi que les mots porteurs de sens et d'information, destiné à être couplé avec un système de recherche d'information que nous avons présenté. Les résultats obtenus sont encourageants et démontrent qu'un petit nombre de règles couplées à un outil d'analyse morpho-syntaxique et de reconnaissance des entités nommées peuvent constituer une approche viable dans la tâche de RI en langage naturel.% Néanmoins ces résultats sont à relativiser car nous n'avons travaillé que sur la langue anglaise qui, de part sa structure grammaticale, nous a permit de gérer un grand nombre de cas par un petit nombre de règles, ce qui ne serait pas le cas en français par exemple.
-\par Le système NLGbAse.QR\footnote{http://sit.vickev.fr/semantic-ruby/www/} peut être expérimenté en ligne et le corpus de test que nous avons utilisé est mis à disposition sur le site de NLGbAse.
+\par Nous avons prÃ©sentÃ© un systÃ¨me analysant et dÃ©composant des requÃªtes formulÃ©es en langage naturel dans le but d'en extraire leur catÃ©gorie sÃ©mantique ainsi que les mots porteurs de sens et d'information, destinÃ© Ã  Ãªtre couplÃ© avec un systÃ¨me de recherche d'information que nous avons prÃ©sentÃ©. Les rÃ©sultats obtenus sont encourageants et dÃ©montrent qu'un petit nombre de rÃ¨gles couplÃ©es Ã  un outil d'analyse morpho-syntaxique et de reconnaissance des entitÃ©s nommÃ©es peuvent constituer une approche viable dans la tÃ¢che de RI en langage naturel.% NÃ©anmoins ces rÃ©sultats sont Ã  relativiser car nous n'avons travaillÃ© que sur la langue anglaise qui, de part sa structure grammaticale, nous a permit de gÃ©rer un grand nombre de cas par un petit nombre de rÃ¨gles, ce qui ne serait pas le cas en franÃ§ais par exemple.
+\par Le systÃ¨me NLGbAse.QR\footnote{http://sit.vickev.fr/semantic-ruby/www/} peut Ãªtre expÃ©rimentÃ© en ligne et le corpus de test que nous avons utilisÃ© est mis Ã  disposition sur le site de NLGbAse.
 %% conclusion a completer
 
 
 \bibliographystyle{majecstic}
 \bibliography{references}
 
-% À FAIRE: remerciements (ou supprimez les deux lignes suivantes)
-%{\filet \small\\
-%{\em Vous pouvez placer ici des remerciements}\\ \filet } 
-
-
 \end{document}
-% fin
