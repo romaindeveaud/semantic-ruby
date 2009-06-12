@@ -1,5 +1,10 @@
 \begin{thebibliography}{1}
 
+\bibitem{salton:paper}
+Gerard Salton
+\newblock Automatic Information Organization and Retrieval.
+\newblock 1968.
+
 \bibitem{gillard:paper}
 Laurent~Gillard et~al.
 \newblock D'une compacit\'e positionnelle \`a une compacit\'e probabiliste pour un syst\`eme de questions/r\'eponses.
