@@ -1,0 +1,9 @@
+\beamer@endinputifotherversion {3.07pt}
+\beamer@sectionintoc {2}{Introduction}{3}{0}{1}
+\beamer@sectionintoc {3}{La recherche d'information, le langage naturel et NLGbAse}{4}{0}{2}
+\beamer@subsectionintoc {3}{1}{Moteurs de recherche int\IeC {\'e}grant la s\IeC {\'e}mantique}{4}{0}{2}
+\beamer@subsectionintoc {3}{2}{Pr\IeC {\'e}sentation de NLGbAse}{8}{0}{2}
+\beamer@sectionintoc {4}{Algorithmes d\IeC {\'e}ploy\IeC {\'e}s}{12}{0}{3}
+\beamer@subsectionintoc {4}{1}{Cat\IeC {\'e}gorisation d'une question}{12}{0}{3}
+\beamer@subsectionintoc {4}{2}{Extraction de mots-cl\IeC {\'e}s}{12}{0}{3}
+\beamer@sectionintoc {5}{Conclusion}{12}{0}{4}
