@@ -44,14 +44,80 @@
     \frametitle{Présentation de NLGbAse}
     \begin{itemize}
       \item<1-> Trois outils de recherche d'informations.
-      \item<2-> Un moteur "classique", prennant en entrée des mots-clés et appliquant un algorithme de compacité.
+      \item<2-> Un moteur "classique", prennant en entrée des mots-clés utilisant la similarité cosine.
       \item<3-> Un moteur "sémantique", reprennant le même algorithme que le précédent, mais permettant de sélectionner les résultats appartenant à une catégorie sémantique précise.
       \item<4-> Un moteur "extracteur d'informations", basé sur un algorithme de compacité, permettant d'obtenir une information précise éventuellement contenu dans un document.
     \end{itemize}
 }
 \section{Algorithmes déployés}
 \subsection{Catégorisation d'une question}
+\frame
+{
+    \frametitle{Les règles}
+    \begin{itemize}
+        \item Application de règles sur les pronoms interrogatifs.
+        \begin{itemize}
+            \item "Who","Whom","Whose" => pers
+            \item "How long","How much", "How many" => amount
+            \item "What","Why",... => ?
+        \end{itemize}
+    \end{itemize}
+}
+\frame 
+{
+    \frametitle{Catégorisation des noms propres}
+    \begin{itemize}
+        \item Si insuffisant : extraction du nom propre de la question.
+        \begin{itemize}
+            \item on le catégorise avec NLGbAse
+            \item si échec on vérifie l'orthographe sur google.com
+            \item si modification on interroge de nouveau NLGbAse
+            \item enfin si NLGbAse n'a rien retourné on interroge CCG
+        \end{itemize}
+    \end{itemize}
+}
+\frame 
+{
+    \frametitle{Catégorisation de l'objet de la question via Wordnet}
+    \begin{itemize}
+        \item Si la phrase ne contient pas de noms propres ou que l'étape précédente n'a rien donné : 
+        \item On récupère l'objet de la question et on va essayer de le catégoriser en ayant recours à Wordnet
+        \item Wordnet associe une catégorie à la majorité des mots, cependant elles ne correspondent pas à Ester
+        \item Nous utilisons donc une liste de correspondances : mot -> catégorie
+        \begin{itemize}
+            \item Mots de plus au niveau dans les arbres d'hyperonymes qui n'ont pour hyponymes que des mots de même classe.
+        \end{itemize}
+        \item L'algorithme est le suivant :
+    \end{itemize}
+}
+\frame
+{
+    \frametitle{Catégorisation de l'objet de la question via Wordnet(2)}
+    \begin{itemize}
+        \item Le mot est-il dans la liste?
+        \item Si oui Fin
+        \item Sinon on réessaye avec son hypéronyme.
+        \item Tant qu'un hypéronyme n'est pas dans la liste ou que l'on a pas atteint le concept de plus haut niveau on réitère.
+        \item Finalement si aucune classe n'est trouvée, on prend celle que Wordnet propose.
+        \item Si toutes les stratégies ont échoués on prend la classe unk.
+    \end{itemize}
+}
+
 \subsection{Extraction de mots-clés}
+
+\section{Améliorations envisageables}
+\frame
+{
+    \frametitle{Améliorations}
+    \begin{itemize}
+        \item Accepter plusieurs classes
+        \item Ajouter des options de ri classique
+        \begin{itemize}
+            \item Permettre d'élargir la requete (mots-clés et catégories)
+            \item Opérateurs logiques
+        \end{itemize}
+    \end{itemize}
+}
 \section{Conclusion}
 \frame
 {
