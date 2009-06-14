@@ -5,5 +5,6 @@
 \beamer@subsectionintoc {3}{2}{Pr\IeC {\'e}sentation de NLGbAse}{8}{0}{2}
 \beamer@sectionintoc {4}{Algorithmes d\IeC {\'e}ploy\IeC {\'e}s}{12}{0}{3}
 \beamer@subsectionintoc {4}{1}{Cat\IeC {\'e}gorisation d'une question}{12}{0}{3}
-\beamer@subsectionintoc {4}{2}{Extraction de mots-cl\IeC {\'e}s}{12}{0}{3}
-\beamer@sectionintoc {5}{Conclusion}{12}{0}{4}
+\beamer@subsectionintoc {4}{2}{Extraction de mots-cl\IeC {\'e}s}{16}{0}{3}
+\beamer@sectionintoc {5}{Am\IeC {\'e}liorations envisageables}{16}{0}{4}
+\beamer@sectionintoc {6}{Conclusion}{17}{0}{5}
