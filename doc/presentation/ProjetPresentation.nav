@@ -9,42 +9,64 @@
 \headcommand {\sectionentry {2}{Introduction}{3}{Introduction}{0}}
 \headcommand {\beamer@sectionpages {2}{2}}
 \headcommand {\beamer@subsectionpages {2}{2}}
-\headcommand {\slideentry {2}{0}{3}{3/3}{}{0}}
-\headcommand {\beamer@framepages {3}{3}}
-\headcommand {\sectionentry {3}{La recherche d'information, le langage naturel et NLGbAse}{4}{La recherche d'information, le langage naturel et NLGbAse}{0}}
-\headcommand {\beamer@sectionpages {3}{3}}
-\headcommand {\beamer@subsectionpages {3}{3}}
-\headcommand {\beamer@subsectionentry {0}{3}{1}{4}{Moteurs de recherche int\IeC {\'e}grant la s\IeC {\'e}mantique}}\headcommand {\beamer@subsectionpages {4}{3}}
-\headcommand {\slideentry {3}{1}{1}{4/7}{Moteurs de recherche int\IeC {\'e}grant la s\IeC {\'e}mantique}{0}}
-\headcommand {\beamer@framepages {4}{7}}
-\headcommand {\beamer@subsectionentry {0}{3}{2}{8}{Pr\IeC {\'e}sentation de NLGbAse}}\headcommand {\beamer@subsectionpages {4}{7}}
-\headcommand {\slideentry {3}{2}{1}{8/11}{Pr\IeC {\'e}sentation de NLGbAse}{0}}
-\headcommand {\beamer@framepages {8}{11}}
-\headcommand {\sectionentry {4}{Algorithmes d\IeC {\'e}ploy\IeC {\'e}s}{12}{Algorithmes d\IeC {\'e}ploy\IeC {\'e}s}{0}}
-\headcommand {\beamer@sectionpages {4}{11}}
-\headcommand {\beamer@subsectionpages {8}{11}}
-\headcommand {\beamer@subsectionentry {0}{4}{1}{12}{Cat\IeC {\'e}gorisation d'une question}}\headcommand {\beamer@subsectionpages {12}{11}}
-\headcommand {\slideentry {4}{1}{1}{12/12}{Cat\IeC {\'e}gorisation d'une question}{0}}
-\headcommand {\beamer@framepages {12}{12}}
-\headcommand {\slideentry {4}{1}{2}{13/13}{Cat\IeC {\'e}gorisation d'une question}{0}}
-\headcommand {\beamer@framepages {13}{13}}
-\headcommand {\slideentry {4}{1}{3}{14/14}{Cat\IeC {\'e}gorisation d'une question}{0}}
-\headcommand {\beamer@framepages {14}{14}}
-\headcommand {\slideentry {4}{1}{4}{15/15}{Cat\IeC {\'e}gorisation d'une question}{0}}
-\headcommand {\beamer@framepages {15}{15}}
-\headcommand {\beamer@subsectionentry {0}{4}{2}{16}{Extraction de mots-cl\IeC {\'e}s}}\headcommand {\beamer@subsectionpages {12}{15}}
-\headcommand {\sectionentry {5}{Am\IeC {\'e}liorations envisageables}{16}{Am\IeC {\'e}liorations envisageables}{0}}
-\headcommand {\beamer@sectionpages {12}{15}}
-\headcommand {\beamer@subsectionpages {16}{15}}
-\headcommand {\slideentry {5}{0}{1}{16/16}{}{0}}
-\headcommand {\beamer@framepages {16}{16}}
-\headcommand {\sectionentry {6}{Conclusion}{17}{Conclusion}{0}}
-\headcommand {\beamer@sectionpages {16}{16}}
-\headcommand {\beamer@subsectionpages {16}{16}}
-\headcommand {\slideentry {6}{0}{2}{17/17}{}{0}}
-\headcommand {\beamer@framepages {17}{17}}
-\headcommand {\beamer@partpages {1}{17}}
-\headcommand {\beamer@subsectionpages {17}{17}}
-\headcommand {\beamer@sectionpages {17}{17}}
-\headcommand {\beamer@documentpages {17}}
-\headcommand {\def \inserttotalframenumber {11}}
+\headcommand {\slideentry {2}{0}{3}{3/5}{}{0}}
+\headcommand {\beamer@framepages {3}{5}}
+\headcommand {\sectionentry {3}{La recherche d'information, le langage naturel et NLGbAse}{6}{La recherche d'information, le langage naturel et NLGbAse}{0}}
+\headcommand {\beamer@sectionpages {3}{5}}
+\headcommand {\beamer@subsectionpages {3}{5}}
+\headcommand {\beamer@subsectionentry {0}{3}{1}{6}{Moteurs de recherche int\IeC {\'e}grant la s\IeC {\'e}mantique}}\headcommand {\beamer@subsectionpages {6}{5}}
+\headcommand {\slideentry {3}{1}{1}{6/9}{Moteurs de recherche int\IeC {\'e}grant la s\IeC {\'e}mantique}{0}}
+\headcommand {\beamer@framepages {6}{9}}
+\headcommand {\beamer@subsectionentry {0}{3}{2}{10}{Pr\IeC {\'e}sentation de NLGbAse}}\headcommand {\beamer@subsectionpages {6}{9}}
+\headcommand {\slideentry {3}{2}{1}{10/13}{Pr\IeC {\'e}sentation de NLGbAse}{0}}
+\headcommand {\beamer@framepages {10}{13}}
+\headcommand {\sectionentry {4}{Algorithmes d\IeC {\'e}ploy\IeC {\'e}s}{14}{Algorithmes d\IeC {\'e}ploy\IeC {\'e}s}{0}}
+\headcommand {\beamer@sectionpages {6}{13}}
+\headcommand {\beamer@subsectionpages {10}{13}}
+\headcommand {\beamer@subsectionentry {0}{4}{1}{14}{Cat\IeC {\'e}gorisation d'une question}}\headcommand {\beamer@subsectionpages {14}{13}}
+\headcommand {\slideentry {4}{1}{1}{14/16}{Cat\IeC {\'e}gorisation d'une question}{0}}
+\headcommand {\beamer@framepages {14}{16}}
+\headcommand {\slideentry {4}{1}{2}{17/20}{Cat\IeC {\'e}gorisation d'une question}{0}}
+\headcommand {\beamer@framepages {17}{20}}
+\headcommand {\slideentry {4}{1}{3}{21/23}{Cat\IeC {\'e}gorisation d'une question}{0}}
+\headcommand {\beamer@framepages {21}{23}}
+\headcommand {\beamer@subsectionentry {0}{4}{2}{24}{Extraction de mots-cl\IeC {\'e}s}}\headcommand {\beamer@subsectionpages {14}{23}}
+\headcommand {\slideentry {4}{2}{1}{24/26}{Extraction de mots-cl\IeC {\'e}s}{0}}
+\headcommand {\beamer@framepages {24}{26}}
+\headcommand {\slideentry {4}{2}{2}{27/30}{Extraction de mots-cl\IeC {\'e}s}{0}}
+\headcommand {\beamer@framepages {27}{30}}
+\headcommand {\sectionentry {5}{Exp\IeC {\'e}riences et r\IeC {\'e}sultats}{31}{Exp\IeC {\'e}riences et r\IeC {\'e}sultats}{0}}
+\headcommand {\beamer@sectionpages {14}{30}}
+\headcommand {\beamer@subsectionpages {24}{30}}
+\headcommand {\beamer@subsectionentry {0}{5}{1}{31}{Mesures de la cat\IeC {\'e}gorisation s\IeC {\'e}mantique}}\headcommand {\beamer@subsectionpages {31}{30}}
+\headcommand {\slideentry {5}{1}{1}{31/35}{Mesures de la cat\IeC {\'e}gorisation s\IeC {\'e}mantique}{0}}
+\headcommand {\beamer@framepages {31}{35}}
+\headcommand {\slideentry {5}{1}{2}{36/36}{Mesures de la cat\IeC {\'e}gorisation s\IeC {\'e}mantique}{0}}
+\headcommand {\beamer@framepages {36}{36}}
+\headcommand {\beamer@subsectionentry {0}{5}{2}{37}{Mesure de l'extraction des mots-cl\IeC {\'e}s}}\headcommand {\beamer@subsectionpages {31}{36}}
+\headcommand {\slideentry {5}{2}{1}{37/38}{Mesure de l'extraction des mots-cl\IeC {\'e}s}{0}}
+\headcommand {\beamer@framepages {37}{38}}
+\headcommand {\slideentry {5}{2}{2}{39/39}{Mesure de l'extraction des mots-cl\IeC {\'e}s}{0}}
+\headcommand {\beamer@framepages {39}{39}}
+\headcommand {\sectionentry {6}{Recul sur le travail effectu\IeC {\'e}}{40}{Recul sur le travail effectu\IeC {\'e}}{0}}
+\headcommand {\beamer@sectionpages {31}{39}}
+\headcommand {\beamer@subsectionpages {37}{39}}
+\headcommand {\beamer@subsectionentry {0}{6}{1}{40}{Apports du projet}}\headcommand {\beamer@subsectionpages {40}{39}}
+\headcommand {\slideentry {6}{1}{1}{40/42}{Apports du projet}{0}}
+\headcommand {\beamer@framepages {40}{42}}
+\headcommand {\beamer@subsectionentry {0}{6}{2}{43}{Evolutions possibles}}\headcommand {\beamer@subsectionpages {40}{42}}
+\headcommand {\slideentry {6}{2}{1}{43/46}{Evolutions possibles}{0}}
+\headcommand {\beamer@framepages {43}{46}}
+\headcommand {\beamer@subsectionentry {0}{6}{3}{47}{??}}\headcommand {\beamer@subsectionpages {43}{46}}
+\headcommand {\slideentry {6}{3}{1}{47/50}{??}{0}}
+\headcommand {\beamer@framepages {47}{50}}
+\headcommand {\sectionentry {7}{Conclusion}{51}{Conclusion}{0}}
+\headcommand {\beamer@sectionpages {40}{50}}
+\headcommand {\beamer@subsectionpages {47}{50}}
+\headcommand {\slideentry {7}{0}{2}{51/53}{}{0}}
+\headcommand {\beamer@framepages {51}{53}}
+\headcommand {\beamer@partpages {1}{53}}
+\headcommand {\beamer@subsectionpages {51}{53}}
+\headcommand {\beamer@sectionpages {51}{53}}
+\headcommand {\beamer@documentpages {53}}
+\headcommand {\def \inserttotalframenumber {18}}

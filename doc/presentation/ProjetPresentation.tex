@@ -3,6 +3,7 @@
 \usecolortheme[RGB={107,142,35}]{structure}
 \usepackage{beamerthemesplit}
 \usepackage{graphicx}
+\usepackage[francais]{babel}
 \usepackage[utf8]{inputenc} 
 
 \title{Interrogations en langue naturelle}
@@ -23,7 +24,9 @@
 {
     \frametitle{Introduction}
     \begin{itemize}
-      \item<1-> Trululu
+      \item<1-> Les machines ne comprennent pas le langage naturel.
+      \item<2-> Développement d'un système permettant d'interroger une ressource ontologique et sémantique avec des vraies questions.
+      \item<3-> Combinaison avec un extracteur d'informations afin d'afficher des résultats.
     \end{itemize}
 }
 \section{La recherche d'information, le langage naturel et NLGbAse}
@@ -44,86 +47,177 @@
     \frametitle{Présentation de NLGbAse}
     \begin{itemize}
       \item<1-> Trois outils de recherche d'informations.
-      \item<2-> Un moteur "classique", prennant en entrée des mots-clés utilisant la similarité cosine.
-      \item<3-> Un moteur "sémantique", reprennant le même algorithme que le précédent, mais permettant de sélectionner les résultats appartenant à une catégorie sémantique précise.
-      \item<4-> Un moteur "extracteur d'informations", basé sur un algorithme de compacité, permettant d'obtenir une information précise éventuellement contenu dans un document.
+      \item<2-> Un moteur \og{}classique\fg{}, prennant en entrée des mots-clés utilisant la similarité cosinus.
+      \item<3-> Un moteur \og{}sémantique\fg{}, reprennant le même algorithme que le précédent, mais permettant de sélectionner les résultats appartenant à une catégorie sémantique précise.
+      \item<4-> Un moteur \og{}extracteur d'informations\fg{}, basé sur un algorithme de compacité, permettant d'obtenir une information précise éventuellement contenu dans un document.
     \end{itemize}
 }
 \section{Algorithmes déployés}
 \subsection{Catégorisation d'une question}
 \frame
 {
-    \frametitle{Les règles}
+    \frametitle{Utilisation de règles}
     \begin{itemize}
-        \item Application de règles sur les pronoms interrogatifs.
-        \begin{itemize}
-            \item "Who","Whom","Whose" => pers
-            \item "How long","How much", "How many" => amount
-            \item "What","Why",... => ?
-        \end{itemize}
+      \item<1-> Analyse morpho-syntaxique de la question pour la décomposer en concepts grammaticaux compréhensibles par la machine.
+      \item<2-> Règles appliquées sur les pronoms interrogatifs (Who, Whom, Whose, How, What, Which...).
+      \item<3-> Règles appliquées sur les mots suivant ces pronoms (How many, What day...).
     \end{itemize}
 }
 \frame 
 {
-    \frametitle{Catégorisation des noms propres}
+    \frametitle{Catégorisation par les noms propres}
     \begin{itemize}
-        \item Si insuffisant : extraction du nom propre de la question.
-        \begin{itemize}
-            \item on le catégorise avec NLGbAse
-            \item si échec on vérifie l'orthographe sur google.com
-            \item si modification on interroge de nouveau NLGbAse
-            \item enfin si NLGbAse n'a rien retourné on interroge CCG
-        \end{itemize}
+      \item<1-> Détection d'un nom propre contenu dans la question
+      \item<2-> Utilisation de NLGbAse pour récupérer la catégorie qui lui est associée (ex : Valentino Rossi $=>$ pers)
+      \item<3-> Vérification de l'orthographe de l'entité nommée à l'aide de Google
+      \item<4-> Utilisation du module Named Entity Recognition de CCG (Cognitive Computation Group, University of Illinois)
     \end{itemize}
 }
 \frame 
 {
-    \frametitle{Catégorisation de l'objet de la question via Wordnet}
+    \frametitle{Catégorisation utilisant Wordnet}
     \begin{itemize}
-        \item Si la phrase ne contient pas de noms propres ou que l'étape précédente n'a rien donné : 
-        \item On récupère l'objet de la question et on va essayer de le catégoriser en ayant recours à Wordnet
-        \item Wordnet associe une catégorie à la majorité des mots, cependant elles ne correspondent pas à Ester
-        \item Nous utilisons donc une liste de correspondances : mot -> catégorie
-        \begin{itemize}
-            \item Mots de plus au niveau dans les arbres d'hyperonymes qui n'ont pour hyponymes que des mots de même classe.
-        \end{itemize}
-        \item L'algorithme est le suivant :
-    \end{itemize}
-}
-\frame
-{
-    \frametitle{Catégorisation de l'objet de la question via Wordnet(2)}
-    \begin{itemize}
-        \item Le mot est-il dans la liste?
-        \item Si oui Fin
-        \item Sinon on réessaye avec son hypéronyme.
-        \item Tant qu'un hypéronyme n'est pas dans la liste ou que l'on a pas atteint le concept de plus haut niveau on réitère.
-        \item Finalement si aucune classe n'est trouvée, on prend celle que Wordnet propose.
-        \item Si toutes les stratégies ont échoués on prend la classe unk.
+      \item<1-> Wordnet : base de données lexicale, classifiant et mettant en relation le contenu sémantique et lexical de la langue anglaise.
+      \item<2-> Catégorisation de l'objet de la phrase (mot fortement porteur de sens).
+      \item<3-> Algorithme récursif parcourant les hyperonymes de l'objet jusqu'à trouver un mot appartenant à une liste associative (mot $=>$ catégorie).
     \end{itemize}
 }
 
 \subsection{Extraction de mots-clés}
-
-\section{Améliorations envisageables}
 \frame
 {
-    \frametitle{Améliorations}
+    \frametitle{Extraction destinée aux moteurs utilisant la \textit{similarité cosinus}}
     \begin{itemize}
-        \item Accepter plusieurs classes
-        \item Ajouter des options de ri classique
-        \begin{itemize}
-            \item Permettre d'élargir la requete (mots-clés et catégories)
-            \item Opérateurs logiques
-        \end{itemize}
+      \item<1-> Extraction automatique des entités nommées présentes dans la question.
+      \item<2-> Sinon l'analyse morpho-syntaxique nous permet de détecter les mots \og grammaticalement importants \fg (groupes nominaux...). 
+      \item<3-> Utilisation d'un anti-dictionnaire pour éliminer les mots non-porteurs de sens.
     \end{itemize}
 }
+\frame
+{
+    \frametitle{Extraction destinée au moteur utilisant la \textit{compacité}}
+    \begin{itemize}
+      \item<1-> Deux champs doivent être remplis : l'entité nommée en rapport avec la question et une liste de mots représentant l'information recherchée.
+      \item<2-> Si la question ne contient pas d'entité nommée, une requête est exécutée sur NLGbAse avec l'objet de la question pour récupérer l'entité nommée la plus pertinente.
+      \item<3-> Récupération des mots porteurs de sens près desquels l'information cherchée devrait être trouvée. 
+      \item<4-> Recherche de synonymes aux mots porteurs de sens afin d'élargir les possiblités. 
+    \end{itemize}
+}
+
+\section{Expériences et résultats}
+\subsection{Mesures de la catégorisation sémantique}
+\frame
+{
+    \frametitle{Mesures de la catégorisation sémantique}
+    \begin{itemize}
+      \item<1-> Nécessité de se comparer à l'état de l'art pour évaluer les performances du système.
+      \item<2-> Utilisation d'un corpus de traitement automatique de la langue naturelle : Question-Answer de TREC12 (500 questions formulées en langage naturel).
+      \item<3-> Création d'un nouveau formalisme d'étiquetage pour pouvoir comparer QA-TREC12 avec les sorties de notre système.
+      \item<4-> Etiquetage des questions \og à la main \fg.
+      \item<5-> \texttt{How big is Mars?\#Mars\#loc\#Mars\#big\#amount\#}
+    \end{itemize}
+}
+
+\frame
+{
+    \frametitle{Résultats de la catégorisation}
+    \begin{table}[h]
+        \begin{center}
+            \begin{tabular}{|p{2.5cm}|l|l|l|}
+                \hline
+                Catégorie & (\={p}) & (\={r}) & (\={F}-s) \\
+                \hline
+                Pers & 0.81 & 0.81 & \textbf{0.81} \\
+                \hline
+                Org & 0.64 & 0.61 & \textbf{0.63} \\
+                \hline
+                Loc & 0.76 & 0.77 & \textbf{0.76} \\
+                \hline
+                Date & 0.91 & 0.98 & \textbf{0.95} \\
+                \hline
+                Amount & 0.99 & 0.92 & \textbf{0.92} \\
+                \hline
+                Unk & 0.69 & 0.64 & \textbf{0.66} \\
+                \hline
+                \hline
+                Total & 0.80 & 0.78 & \textbf{0.79} \\
+                \hline
+            \end{tabular}
+            \caption{Précision (\={p}), Rappel (\={r}), F-Score (\={F}-s) obtenus sur le corpus QA de TREC 12}
+        \end{center}
+    \end{table}
+} 
+\subsection{Mesure de l'extraction des mots-clés}
+\frame
+{
+    \frametitle{Mesures de l'extraction des mots-clés}
+    \begin{itemize}
+      \item<1-> Difficultés pour extraire \og à la main \fg les mots-clés pertinents d'une question.
+      \item<2-> Résultats à relativiser.
+    \end{itemize}
+}
+\frame 
+{
+    \frametitle{Résultats de l'extraction des mots-clés}
+    \begin{table}[htbp]
+        \begin{center}
+            \begin{tabular}{|p{8cm}|l|}
+                \hline
+                Type de mots-clés & (S(C)) \\
+                \hline
+                Mots-clés extraits pour une recherche par similarité cosinus & \textbf{54.03\%} \\
+                \hline
+                Entités nommées extraites pour une recherche de type question-réponse (compacité) & \textbf{66.23\%} \\
+                \hline
+                Mots-clés extraits pour une recherche de type question-réponse (compacité) & \textbf{73.28\%} \\
+                \hline
+            \end{tabular}
+            \caption{Satisfaction (S(C)) obtenue sur le corpus de test}
+        \end{center}
+    \end{table}
+}
+\section{Recul sur le travail effectué}
+\subsection{Apports du projet}
+\frame
+{
+    \frametitle{Apports du projet}
+    \begin{itemize}
+      \item<1-> Acquisition de connaissances en TALN (analyse morpho-syntaxique, ontologies, extraction d'entités nommées, analyse sémantique, hyper et hyponimie\ldots).
+      \item<2-> Rédaction d'un article sur notre système pour la convention des jeunes chercheurs Majecstic.
+      \item<3-> Découverte de nombreux outils (Wordnet, LinkParser, Xip\ldots).
+    \end{itemize}
+}
+\subsection{Evolutions possibles}
+\frame
+{
+    \frametitle{Evolutions possibles}
+    \begin{itemize}
+      \item<1-> Evaluation de l'ensemble des catégories.
+      \item<2-> Certaines options de RI manquantes : relâchement des contraintes, opérateurs logiques.
+      \item<3-> Pouvoir sélectionner plusieurs catégories ayant différents poids.
+      \item<4-> Nouvelle approche basée sur de l'apprentissage automatique.
+    \end{itemize}
+}
+\subsection{??}
+\frame
+{
+    \frametitle{??}
+    \begin{itemize}
+        \item<1-> Produit fini facilement déployable : script d'installation, utilisation en ligne grâce à un CGI.
+        \item<2-> Résultats proches de ceux de l'état de l'art.
+        \item<3-> Facilement adaptable à différentes langues.
+        \item<4-> Un corpus annoté de 490 questions à disposition libre de la communauté scientifique.
+    \end{itemize}
+}
+
 \section{Conclusion}
 \frame
 {
     \frametitle{Conclusion}
     \begin{itemize}
-      \item<1-> Trululu
+      \item<1-> Système expérimental mais fonctionnel.
+      \item<2-> Apport d'une solution originale pour l'interrogation de moteurs de recherche en langage naturel.
+      \item<3-> Projet enrichissant qui nous a fait découvrir des perspectives de recherche intéressantes.
     \end{itemize}
 }
 \end{document}
