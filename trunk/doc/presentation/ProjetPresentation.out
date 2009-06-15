@@ -1,10 +1,16 @@
 \BOOKMARK [2][]{Outline0.1}{Sommaire}{}
 \BOOKMARK [2][]{Outline0.2}{Introduction}{}
 \BOOKMARK [2][]{Outline0.3}{La recherche d'information, le langage naturel et NLGbAse}{}
-\BOOKMARK [3][]{Outline0.3.1.4}{Moteurs de recherche int\351grant la s\351mantique}{Outline0.3}
-\BOOKMARK [3][]{Outline0.3.2.8}{Pr\351sentation de NLGbAse}{Outline0.3}
+\BOOKMARK [3][]{Outline0.3.1.6}{Moteurs de recherche int\351grant la s\351mantique}{Outline0.3}
+\BOOKMARK [3][]{Outline0.3.2.10}{Pr\351sentation de NLGbAse}{Outline0.3}
 \BOOKMARK [2][]{Outline0.4}{Algorithmes d\351ploy\351s}{}
-\BOOKMARK [3][]{Outline0.4.1.12}{Cat\351gorisation d'une question}{Outline0.4}
-\BOOKMARK [3][]{Outline0.4.2.16}{Extraction de mots-cl\351s}{Outline0.4}
-\BOOKMARK [2][]{Outline0.5}{Am\351liorations envisageables}{}
-\BOOKMARK [2][]{Outline0.6}{Conclusion}{}
+\BOOKMARK [3][]{Outline0.4.1.14}{Cat\351gorisation d'une question}{Outline0.4}
+\BOOKMARK [3][]{Outline0.4.2.24}{Extraction de mots-cl\351s}{Outline0.4}
+\BOOKMARK [2][]{Outline0.5}{Exp\351riences et r\351sultats}{}
+\BOOKMARK [3][]{Outline0.5.1.31}{Mesures de la cat\351gorisation s\351mantique}{Outline0.5}
+\BOOKMARK [3][]{Outline0.5.2.37}{Mesure de l'extraction des mots-cl\351s}{Outline0.5}
+\BOOKMARK [2][]{Outline0.6}{Recul sur le travail effectu\351}{}
+\BOOKMARK [3][]{Outline0.6.1.40}{Apports du projet}{Outline0.6}
+\BOOKMARK [3][]{Outline0.6.2.43}{Evolutions possibles}{Outline0.6}
+\BOOKMARK [3][]{Outline0.6.3.47}{??}{Outline0.6}
+\BOOKMARK [2][]{Outline0.7}{Conclusion}{}

@@ -1,10 +1,17 @@
 \beamer@endinputifotherversion {3.07pt}
+\select@language {french}
 \beamer@sectionintoc {2}{Introduction}{3}{0}{1}
-\beamer@sectionintoc {3}{La recherche d'information, le langage naturel et NLGbAse}{4}{0}{2}
-\beamer@subsectionintoc {3}{1}{Moteurs de recherche int\IeC {\'e}grant la s\IeC {\'e}mantique}{4}{0}{2}
-\beamer@subsectionintoc {3}{2}{Pr\IeC {\'e}sentation de NLGbAse}{8}{0}{2}
-\beamer@sectionintoc {4}{Algorithmes d\IeC {\'e}ploy\IeC {\'e}s}{12}{0}{3}
-\beamer@subsectionintoc {4}{1}{Cat\IeC {\'e}gorisation d'une question}{12}{0}{3}
-\beamer@subsectionintoc {4}{2}{Extraction de mots-cl\IeC {\'e}s}{16}{0}{3}
-\beamer@sectionintoc {5}{Am\IeC {\'e}liorations envisageables}{16}{0}{4}
-\beamer@sectionintoc {6}{Conclusion}{17}{0}{5}
+\beamer@sectionintoc {3}{La recherche d'information, le langage naturel et NLGbAse}{6}{0}{2}
+\beamer@subsectionintoc {3}{1}{Moteurs de recherche int\IeC {\'e}grant la s\IeC {\'e}mantique}{6}{0}{2}
+\beamer@subsectionintoc {3}{2}{Pr\IeC {\'e}sentation de NLGbAse}{10}{0}{2}
+\beamer@sectionintoc {4}{Algorithmes d\IeC {\'e}ploy\IeC {\'e}s}{14}{0}{3}
+\beamer@subsectionintoc {4}{1}{Cat\IeC {\'e}gorisation d'une question}{14}{0}{3}
+\beamer@subsectionintoc {4}{2}{Extraction de mots-cl\IeC {\'e}s}{24}{0}{3}
+\beamer@sectionintoc {5}{Exp\IeC {\'e}riences et r\IeC {\'e}sultats}{31}{0}{4}
+\beamer@subsectionintoc {5}{1}{Mesures de la cat\IeC {\'e}gorisation s\IeC {\'e}mantique}{31}{0}{4}
+\beamer@subsectionintoc {5}{2}{Mesure de l'extraction des mots-cl\IeC {\'e}s}{37}{0}{4}
+\beamer@sectionintoc {6}{Recul sur le travail effectu\IeC {\'e}}{40}{0}{5}
+\beamer@subsectionintoc {6}{1}{Apports du projet}{40}{0}{5}
+\beamer@subsectionintoc {6}{2}{Evolutions possibles}{43}{0}{5}
+\beamer@subsectionintoc {6}{3}{??}{47}{0}{5}
+\beamer@sectionintoc {7}{Conclusion}{51}{0}{6}
