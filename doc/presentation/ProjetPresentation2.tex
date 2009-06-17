@@ -17,6 +17,11 @@
 \frame{\titlepage}
 
 \section{Présentation de la problèmatique}
+\begin{frame}
+\begin{block}{\Large{Présentation de la problèmatique}}
+\tiny{Définition, bref état de l'art, objectifs du projet...}
+\end{block}
+\end{frame}
 \subsection{Définition}
 \frame
 {
@@ -106,6 +111,11 @@
 }
 
 \section{Méthodes déployées}
+\begin{frame}
+\begin{block}{\Large{Méthodes déployées}}
+\tiny{Analyse de la question, identification des classes, sélection des mots porteurs de sens}
+\end{block}
+\end{frame}
 \subsection{Pré-requis}
 \frame
 {
@@ -127,7 +137,7 @@
     \end{figure}
 }
 
-\subsection{Tâche 1 : Identifier la classe de la réponse attendue}
+\subsection{Tâche 1 : identifier la classe de la réponse attendue}
 \frame
 {
     \frametitle{A l'aide de règles}
@@ -161,14 +171,14 @@
     \end{itemize}
     \begin{figure}
         \includegraphics[scale=0.30]{wordnet}
-        \caption{Ex : What is Gaston Lagaffe's car? \texttt{=>} prod.vehicle}
+        \caption{Ex : What is Gaston Lagaffe's car? \texttt{=>} prod}
     \end{figure}
 }
 
-\subsection{Tâche 2 : Sélection des attracteurs pour le calcul de la compacité}
+\subsection{Tâche 2 : sélection d'attracteurs pour le calcul de la compacité}
 \frame
 {
-    \frametitle{Sélection des attracteurs pour le calcul de la compacité}
+    \frametitle{Sélection d'attracteurs pour le calcul de la compacité}
     \begin{itemize}
         \item<1-> L'objet de la question est exclu car il est utilisé comme entité source.
         \item<2-> Mots à valeur sémantique forte. \\
@@ -181,6 +191,11 @@
 }
 
 \section{Expériences et résultats}
+\begin{frame}
+\begin{block}{\Large{Expériences et résultats}}
+\tiny{Evaluation de notre système, formalisme de test utilisé, résultats obtenus}
+\end{block}
+\end{frame}
 \subsection{Evaluation de notre système}
 \frame
 {
@@ -190,6 +205,7 @@
     \item<2-> Mesures des performances.
     \item<3-> Comparaison avec les autres systèmes existants.
     \item<4-> Qu'est-ce qu'on évalue?
+    \item<5-> Capacité du système à transformer une requête formulée en langage naturel en données compatible avec des extracteurs d'informations.
     \item<5-> Attribution correcte de la classe de la réponse attendue.
     \item<6-> Bonne sélection des mots porteurs de sens.
   \end{itemize}
@@ -216,8 +232,12 @@ $</top>$
 {
   \frametitle{Corpus d'évaluation (2)}
   \begin{itemize}
-    \item<1-> Création d'un nouveau formalisme adapté à notre problème.
-    \item<2-> \texttt{How big is Mars?\#Mars\#loc\#Mars\#big\#amount\#}
+    \item<1-> Création d'un nouveau formalisme adapté à l'évaluation de notre système.
+    \item<2-> $How \: big \: is \: Mars?$\\
+    $cible \: : \: Mars$\\
+    $classe \: de \: la \: cible \: : \: loc$\\
+    $attracteurs \: : \: big;large$\\
+    $classe \: de \: la \: r\acute{e}ponse \: attendue \: : \: amount$
     \item<3-> Etiquetage des 500 questions \og{}à la main\fg{}. 
   \end{itemize}
 }
@@ -234,7 +254,7 @@ $</top>$
 \subsection{Résultats}
 \frame
 {
-    \frametitle{Résultats de l'attribution des classes}
+    \frametitle{Capacité d'attribution des classes de réponses attendues}
     \begin{table}[h]
         \begin{center}
             \begin{tabular}{|p{2.5cm}|l|l|l|}
@@ -263,7 +283,7 @@ $</top>$
 }
 \frame
 {
-    \frametitle{Résultats de la sélection des mots porteurs de sens}
+    \frametitle{Capacité de sélection des mots porteurs de sens}
     \begin{table}[htbp]
         \begin{center}
             \begin{tabular}{|p{8cm}|l|}
@@ -282,6 +302,11 @@ $</top>$
     \end{table}
 }
 \section{Conclusions et perspectives}
+\begin{frame}
+\begin{block}{\Large{Conclusions et perspectives}}
+\tiny{Travail effectué, autres réalisations, bilan du projet}
+\end{block}
+\end{frame}
 \subsection{Retour sur le travail effectué}
 \frame
 {
