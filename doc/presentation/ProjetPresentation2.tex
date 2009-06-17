@@ -63,10 +63,10 @@
 {
     \frametitle{Présentation de NLGbAse}
     \begin{itemize}
-        \item Une ressource ontologique basé sur un corpus documentaire Wikipédia.
-        \item Associe à chaque fiche Wikipédia une classe. \\
+        \item<1-> Une ressource ontologique basé sur un corpus documentaire Wikipédia.
+        \item<2-> Associe à chaque fiche Wikipédia une classe. \\
             Ex : Molière \texttt{=>} pers ; Avignon \texttt{=>} loc
-        \item Trois moteurs de recherche d'information permettant d'interroger l'ontologie.
+        \item<3-> Trois moteurs de recherche d'information permettant d'interroger l'ontologie.
     \end{itemize}
 }
 \frame
@@ -74,7 +74,7 @@
     \frametitle{Outils d'extraction d'informations proposés par NLGbAse}
     \begin{itemize}
         \item<1-> Moteur classique utilisant la similarité cosinus
-        \item<2-> Moteur utilisant la similarité cosinus et proposant de filtrer les résutats en fonction de la classe \\
+        \item<2-> Moteur utilisant la similarité cosinus et proposant de filtrer les résutats par une classe \\
                 Ex : Je cherche les entreprises faisant des recherches sur les moteurs en langage naturel \\
                 mots clés : recherches moteurs langage naturel ; filtre : org
    \end{itemize}
@@ -89,8 +89,8 @@
     \begin{itemize}
         \item<1-> Moteur utilisant un score de compacité. \\
                Ne retourne pas une liste de documents mais la réponse exacte. \\
-               Nécessite trois informations : l'entité cible, les mots près desquels peut se trouver la réponse et la classe de la réponse.\\
-               Ex : quand est né Victor Hugo? \\
+               Nécessite trois informations : l'entité cible, les mots près desquels peut se trouver la réponse (attracteurs) et la classe de la réponse.\\
+               Ex : Quand est né Victor Hugo? \\
                On va rechercher dans la fiche de l'entité cible Victor Hugo une date près du mot \og{}né\fg{}.
     \begin{figure}
         \includegraphics[scale=0.60]{compacite}
@@ -103,7 +103,7 @@
 {
     \frametitle{Formalisation du problème}
     \begin{itemize}
-        \item<1-> L'objectif de notre projet est d'obtenir à partir d'une requête formulée en langage naturel toutes les éléments nécessaire pour interroger l'ontologie proposée par NLGbAse.
+        \item<1-> L'objectif de notre projet est d'obtenir à partir d'une requête formulée en langage naturel toutes les éléments nécessaire pour interroger l'ontologie proposée par NLGbAse par l'intermédiaire des moteurs à notre disposition.
         \item<2-> Deux tâches principales :
         \item<3-> Identifier les mots porteurs de sens et les entités cibles.
         \item<4-> Déterminer la classe de la réponse attendue.
@@ -183,10 +183,9 @@
         \item<1-> L'objet de la question est exclu car il est utilisé comme entité source.
         \item<2-> Mots à valeur sémantique forte. \\
             Utilisation combinée des étiquettes de l'analyseur syntaxique et d'un anti-dictionnaire.
-        \item<3-> Besoins d'augmenter la couverture des attracteurs 
-        \item<4-> Les synonymes donnés par Wordnet.
-        \item<5-> Ex : Qui est la femme de Napoléon?\\
+        \item<3-> Problème : Qui est la femme de Napoléon?\\
             Interessant de choisir épouse comme attracteur.
+        \item<4-> Les synonymes donnés par Wordnet.
     \end{itemize}
 }
 
