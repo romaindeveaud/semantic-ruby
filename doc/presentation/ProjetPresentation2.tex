@@ -16,16 +16,13 @@
 
 \frame{\titlepage}
 
-\section[Sommaire]{}
-\frame{\tableofcontents}
-
 \section{Présentation de la problèmatique}
 \subsection{Définition}
 \frame
 {
   \frametitle{Définition}
   \begin{itemize}
-    \item<1-> Qu'est-ce que sont les interrogations en langage naturel?
+    \item<1-> Que signifie interrogation en langue naturelle?
     \item<2-> Permettre à un utilisateur de questionner un outil de recherche d'information avec des requêtes formulées en langue naturelle.
     \item<3-> Enjeu majeur : interpréter la question et comprendre le type de réponse attendu par l'utilisateur.
   \end{itemize}
@@ -64,15 +61,15 @@
         \item Une ressource ontologique basé sur un corpus documentaire Wikipédia.
         \item Associe à chaque fiche Wikipédia une classe. \\
             Ex : Molière \texttt{=>} pers ; Avignon \texttt{=>} loc
-        \item Trois moteurs de recherche d'information permettant d'interroger ces ressources.
+        \item Trois moteurs de recherche d'information permettant d'interroger l'ontologie.
     \end{itemize}
 }
 \frame
 {
     \frametitle{Outils d'extraction d'informations proposés par NLGbAse}
     \begin{itemize}
-        \item<1-> Moteur classique utilisant la similarité cosine
-        \item<2-> Moteur utilisant la similarité cosine et proposant de filtrer les résutats en fonction de la classe \\
+        \item<1-> Moteur classique utilisant la similarité cosinus
+        \item<2-> Moteur utilisant la similarité cosinus et proposant de filtrer les résutats en fonction de la classe \\
                 Ex : Je cherche les entreprises faisant des recherches sur les moteurs en langage naturel \\
                 mots clés : recherches moteurs langage naturel ; filtre : org
    \end{itemize}
@@ -101,33 +98,22 @@
 {
     \frametitle{Formalisation du problème}
     \begin{itemize}
-        \item<1-> Nécessité de créer un système transformant des questions en langage naturel en \og{}concepts\fg{} compréhensibles par les extracteurs d'information de NLGbAse.
-        \item<2-> Identifier les mots porteurs de sens et les entités cibles.
-        \item<3-> Déterminer la classe de la réponse attendue.
+        \item<1-> L'objectif de notre projet est d'obtenir à partir d'une requête formulée en langage naturel toutes les éléments nécessaire pour interroger l'ontologie proposée par NLGbAse.
+        \item<2-> Deux tâches principales :
+        \item<3-> Identifier les mots porteurs de sens et les entités cibles.
+        \item<4-> Déterminer la classe de la réponse attendue.
     \end{itemize}
 }
 
 \section{Méthodes déployées}
-\subsection{Identifier la classe de la réponse attendue}
+\subsection{Pré-requis}
 \frame
 {
-    \frametitle{A l'aide de règles}
+    \frametitle{Pré-requis}
     \begin{itemize}
-        \item<1-> Règles portant sur les pronoms interrogatifs.
-        \item<2-> Who \texttt{=>} pers
-        \item<3-> How much \texttt{=>} amount
-        \item<4-> What day \texttt{=>} date
-        \item<5-> ...
-    \end{itemize}
-}
-\frame
-{
-    \frametitle{Autres stratégies}
-    \begin{itemize}
-        \item<1-> Que faire quand les règles ne suffisent pas?
-        \item<2-> Trouver les mots porteurs de sens.
-        \item<3-> Comment? 
-        \item<4-> Utilisation d'un Analyseur Morpho-Syntaxique qui permet de mettre en évidence la structure d'un texte.
+        \item<1-> Obtenir la structure de la requête, identifier les éléments qui la compose.
+        \item<2-> Comment?
+        \item<3-> Utilisation d'un Analyseur Morpho-Syntaxique qui permet de mettre en évidence la structure d'un texte.
     \end{itemize}
 }
 \frame
@@ -140,31 +126,57 @@
         \includegraphics[scale=0.60]{linkgrammar}
     \end{figure}
 }
+
+\subsection{Tâche 1 : Identifier la classe de la réponse attendue}
 \frame
 {
-    \frametitle{Trouver la classe à partir de l'objet}
+    \frametitle{A l'aide de règles}
     \begin{itemize}
-        \item<1-> Si l'objet est une entité nommée alors on cherche à trouver la classe de cette entité nommée. \\
-            Ex : Who is G. Bush?
-        \item<2-> Interrogation de NLGbAse.
-        \item<3-> Si l'objet est un nom commun on utilise les hypéronymes (Wordnet) pour lui associer une classe. \\
-            Ex : Quelle est la voiture de X? \texttt{=>} prod.vehicle
+        \item<1-> Règles portant sur les pronoms interrogatifs.
+        \item<2-> Who \texttt{=>} pers
+        \item<3-> How much \texttt{=>} amount
+        \item<4-> What day \texttt{=>} date
+        \item<5-> ...
     \end{itemize}
 }
 
-\subsection{Sélection des mots porteurs de sens}
 \frame
 {
-    \frametitle{Sélection des mots porteurs de sens}
+    \frametitle{Trouver la classe à partir de l'objet de la question}
     \begin{itemize}
-        \item<1-> Ce ne sont pas l'objet de la question.
-        \item<2-> Valeur sémantique importante. \\
+        \item<1-> Si l'objet de la question est une entité nommée alors on cherche sa classe. \\
+        \item<2-> Pour cela on utilise l'ontologie NLGbAse.
+        \item<3-> Ex : What is a 2CV?
+        \item<4-> Si l'objet est un nom commun on utilise les hypéronymes donnés par WordNet.
+    \end{itemize}
+}
+
+\frame 
+{
+    \frametitle{WordNet}
+    \begin{itemize}
+        \item<1-> Wordnet est une base de donnée lexicale.
+        \item<2-> Classe tout les mots dans un arbre d'hypéronymes.
+        \item<3-> Nous avons associé des classes à un certains nombres de mots de haut niveau dans cet arbre.
+    \end{itemize}
+    \begin{figure}
+        \includegraphics[scale=0.30]{wordnet}
+        \caption{Ex : What is Gaston Lagaffe's car? \texttt{=>} prod.vehicle}
+    \end{figure}
+}
+
+\subsection{Tâche 2 : Sélection des attracteurs pour le calcul de la compacité}
+\frame
+{
+    \frametitle{Sélection des attracteurs pour le calcul de la compacité}
+    \begin{itemize}
+        \item<1-> L'objet de la question est exclu car il est utilisé comme entité source.
+        \item<2-> Mots à valeur sémantique forte. \\
             Utilisation combinée des étiquettes de l'analyseur syntaxique et d'un anti-dictionnaire.
-        \item<3-> Problème : le mot peut ne pas apparaître dans le document mais la réponse oui.\\
-               Ex : Qui était la femme de Napoléon?\\
-               Il se peut que "femme" ne soit pas dans la fiche de Napoléon.
-        \item<4-> Elargissement en utilisant les synonymes donnés par Wordnet.
-            Ex : dans le cas précédant on recherchera la réponse près de "femme" et "épouse"
+        \item<3-> Besoins d'augmenter la couverture des attracteurs 
+        \item<4-> Les synonymes donnés par Wordnet.
+        \item<5-> Ex : Qui est la femme de Napoléon?\\
+            Interessant de choisir épouse comme attracteur.
     \end{itemize}
 }
 
