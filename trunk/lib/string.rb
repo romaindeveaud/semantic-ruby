@@ -186,12 +186,13 @@ class String
         arr2 = Net::HTTP.get(URI.parse("http://www.google.com/search?hl=en&q=#{self}&btnG=Search")).split("Did you mean:")
         temp = ""
         if(!arr2[1].nil?)
-            arr2 = arr2[1].split("</a>")
-            arr2 = arr2[0].split("class=p>")
-            arr2 = arr2[1].split(/\<\/?[a-z0-9]\>+/)
+            arr2 = arr2.last.split("class=spell>").last
+            arr2 = arr2.split("</a>").first
+            arr2 = arr2.split(/\<\/?[a-z0-9]\>+/)
 
             temp = arr2.join(" ").split.join("+")
         end
+        puts temp
         temp
     end
 
