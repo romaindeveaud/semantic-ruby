@@ -288,13 +288,15 @@ private
     def en_e3(keywords)
       named_ent = ""
       
-      if get_np.empty?
+      np = get_np
+      if np.empty?
 # On exécute une requête avec l'objet de la question pour récupérer
 # le nom de la fiche associée, qui fera office d'entité nommée.
           named_ent = new_obj(keywords.split(" ")) 
       else
-# On exécute une requête pour récupérer le nom exact de l'EN.        
-          named_ent = get_np.join(" ")
+# On exécute une requête pour récupérer le nom exact de l'EN.      
+          check = np.join("+").check_np
+          named_ent = check == "" ? np.join(" ") : check.split("+").join(" ")
       end
 
       named_ent = "" if named_ent.nil?
