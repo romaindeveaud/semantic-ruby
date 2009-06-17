@@ -29,12 +29,14 @@ class Request
         results = Hash.new
         ext = extract_e1_2({:label => "NP"})
         ext = ext == "" ? extract_e1 : ext
-        results[:kw_e1]  = en_e3(ext)
-        results[:kw_e2]  = en_e3(ext)
+        en = en_e3(ext)
+        ext = en == "" ? ext : en
+        results[:kw_e1]  = ext
+        results[:kw_e2]  = ext
         results[:kw_e3]  = extract_e3
         results[:cat_e2] = categorize_e2
         results[:cat_e3] = categorize_e3
-        results[:en_e3]  = en_e3(ext)
+        results[:en_e3]  = en
         results
     end
 
