@@ -192,7 +192,6 @@ class String
 
             temp = arr2.join(" ").split.join("+")
         end
-        puts temp
         temp
     end
 
