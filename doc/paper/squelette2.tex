@@ -159,9 +159,22 @@
 %Ici une explication du travail effectué par le parser et notre méthode pour trouver les noms propres, l'objet etc... dans une phrase.
 
 %=============================================================
+%%\subsection{Catégorisation des phrases}
 \subsection{Catégorisation des phrases}
 %=============================================================
-\par Par définition, la sémantique crée naturellement différentes classes de sens plus ou moins générales, au niveau du mot comme de la phrase. Nous adhérons à l'idée selon laquelle la sémantique globale d'une phrase est déterminée par un nombre réduit de mots appartenant à une catégorie grammaticale précise, et c'est selon ce point de vue que nous allons présenter la catégorisation de phrases en catégories sémantiques larges que nous avons implémentée.
+%%Pouet
+\par Comme nous avons pu le voir catégoriser les phrases - c'est dire trouver la catégorie (ou étiquette) de la réponse attendue par l'utilisateur - est un élément central du problème.
+%%Pouet
+
+\par Par définition, la sémantique crée naturellement différentes classes de sens plus ou moins générales, au niveau du mot comme de la phrase. 
+Nous adhérons à l'idée selon laquelle la sémantique globale d'une phrase est déterminée par un nombre réduit de mots appartenant à une catégorie grammaticale précise, et c'est selon ce point de vue que nous allons présenter la catégorisation de phrases en catégories sémantiques larges que nous avons implémentée.
+%%Pouet
+%%Il faut virer le on adhère à l'idée.
+%%Pouet
+
+%%Pouet
+Le jeu de catégorie que nous utilisons est le même qui celui utilisé par NLGbAse à savoir celui défini lors de la campagne d'évaluation ESTER (lien ou référence? http://www.afcp-parole.org/ester/docs/Conventions_EN_ESTER2_v01.pdf)
+%%Pouet
 %=============================================================
 \subsubsection{Catégorisation à base de règles simples}
 %=============================================================
@@ -169,8 +182,8 @@
 \par Notre approche pour catégoriser les questions fonctionne avec un ensemble de règles. Cet ensemble est relativement restreint car nous avons pu remarquer qu'une dizaine de règles environ pouvaient couvrir une majorité des cas, et qu'ensuite chaque petit gain se traduisait par la production d'un grand nombre de nouvelles règles. Les règles que nous avons formulées se basent principalement sur les pronoms interrogatifs des questions. En voici la liste : 
 \begin{itemize}
 \item Who, Whom, Whose : \emph{pers} (Person).
-\item Where, Whence, Wither : si il s'agit de trouver une catégorie pour le deuxième moteur de NLGbAse, et si un nom propre ou un objet est trouvé, la catégorie sera celle du \emph{nom propre} ou de l'\emph{objet} grammatical de la phrase (par exemple : \og{}Where did Patrick Sébastien study?\fg{}, il y a peu de chance de trouver dans la fiche de ce lieu une mention de cette personnalité et il est à priori plus judicieux de proposer la fiche de \emph{Patrick Sébastien}, dans laquelle l'utilisateur sera à même de touver l'information). Dans le cas contraire (ou si nous voulons une catégorie pour le troisième moteur), la catégorie \emph{loc} (Location) est attribuée.
-\item How : nous appliquons la même procédure que précédemment, à l'exception près que si les premières conditions ne sont pas remplies, la catégorie \emph{unk} (Unknown) est attribuée. Pour ce pronom là nous avons ajouté quelques précisions lorsque nous cherchons une catégorie pour le troisème moteur : si le mot suivant directement \emph{how} fait partie de la liste suivante (far, few, great, little, many, much, tall, wide, high, big, old), la catégorie \emph{amount} est attribuée.
+\item Where, Whence, Wither : si il s'agit de trouver une catégorie pour le moteur de NLGbAse utilisant la similarité cosinus, et si un nom propre ou un objet est trouvé, la catégorie sera celle du \emph{nom propre} ou de l'\emph{objet} grammatical de la phrase (par exemple : \og{}Where did Patrick Sébastien study?\fg{}, il y a peu de chance de trouver dans la fiche de ce lieu une mention de cette personnalité et il est à priori plus judicieux de proposer la fiche de \emph{Patrick Sébastien}, dans laquelle l'utilisateur sera à même de touver l'information). Dans le cas contraire (ou si nous voulons une catégorie pour le moteur fonctionnant avec le principe de compacité), la catégorie \emph{loc} (Location) est attribuée.
+\item How : nous appliquons la même procédure que précédemment, à l'exception près que si les premières conditions ne sont pas remplies, la catégorie \emph{unk} (Unknown) est attribuée. Pour ce pronom là nous avons ajouté quelques précisions lorsque nous cherchons une catégorie pour le recherche avec la compacité: si le mot suivant directement \emph{how} fait partie de la liste suivante (far, few, great, little, many, much, tall, wide, high, big, old), la catégorie \emph{amount} est attribuée.
 \item What, Why, Which : le principe est toujours le même, avec \emph{unk} (Unknown) pour valeur par défaut. Nous avons également établi, comme précédemment, une liste de mots pouvant être acceptés comme suivant directement le pronom interrogatif (comme par exemple day : \og{}What day is the Independance Day?\fg{}) et qui vont impliquer automatiquement l'attribution d'une catégorie (\emph{date} dans l'exemple précédent).
 \end{itemize}
 Nous allons maintenant détailler les méthodes de catégorisation des noms propres et des noms communs que nous avons mises en place.
@@ -179,7 +192,7 @@ Nous allons maintenant détailler les méthodes de catégorisation des noms propres
 %=============================================================
 \subsubsection{Catégorisation par les noms propres utilisant NLGbAse}
 %=============================================================
-\par Comme nous l'avons vu, la majorité des règles ne nous permettent pas de trancher directement, nous devons donc compléter notre analyse par un autre moyen et cela passe notamment par la catégorisation des noms propres. Nous avons remarqué que dans la majorité des cas, si un nom propre est présent dans une question, il en est l'objet ou du moins l'objet est l'une de ses caractéristiques. Prennons par exemple ces deux questions \og{}What is the date of birth of Bruce Dickinson?\fg{}, \og{}Who is Batman's team-mate?\fg{} ; nous voyons bien que les informations désirées sont \emph{forcément} en relation avec nos noms propres.
+\par Comme nous l'avons vu, la majorité des règles ne nous permettent pas de trancher directement, nous devons donc compléter notre analyse par un autre moyen et cela passe notamment par la catégorisation des noms propres. Nous avons remarqué que dans la majorité des cas, si un nom propre est présent dans une question, il en est l'objet ou du moins l'objet est l'une de ses caractéristiques. Preeons par exemple ces deux questions \og{}What is the date of birth of Bruce Dickinson?\fg{}, \og{}Who is Batman's team-mate?\fg{} ; nous voyons bien que les informations désirées sont \emph{forcément} en relation avec nos noms propres.
 \par Nous avons donc prit le parti de prendre comme catégorie la catégorie du nom propre se trouvant dans la question - s'il y en a un. Pour cela nous adressons une requête à un script issu de NLGbAse, qui comme nous l'avons vu associe une catégorie à chaque entité de Wikipédia, qui récupère la catégorie de l'entité correspondant à ce nom propre. Si une entité porte exactement le même nom alors la catégorie sera celle de cette entité ; si ce n'est pas le cas mais que des entités ont un nom similaire, alors la catégorie sera celle de la plus pertinente d'entres elles. Enfin si ce n'est pas le cas nous effectuons une recherche par \emph{TF.Idf}
 %La solution la plus évidente aurait été de prendre pour catégorie celle du document ayant le meilleur score.
 %Nous avons essayé une autre approche. 
@@ -224,7 +237,7 @@ en prenant la catégorie qui a le plus fort score, pour cela chaque catégorie se 
 %==============================================================
 
 %%% modif eric
-\par La vocation de notre algorithme est de transformer une question en langue naturelle en une requête compatible avec un système de RI.  Pour mesurer les performances de notre système, nous évaluons dans un premier temps sa capacité à étiqueter une question en vue de l'extraction des informations requise pour construire une requête. Dans un second temps nous construisons une requête d'après les informations extraites et mesurons la pertinence des résultats retournés par l'un des trois moteurs de NLGbAse.
+\par La vocation de notre algorithme est de transformer une question en langue naturelle en une requête compatible avec un système de RI.  Pour mesurer les performances de notre système, nous évaluons dans un premier temps sa capacité à étiqueter une question en vue de l'extraction des informations requises pour construire une requête. Dans un second temps nous construisons une requête d'après les informations extraites et mesurons la pertinence des résultats retournés par l'un des trois moteurs de NLGbAse.
 
 \subsection{Corpus de référence et standard de mesure}
 
@@ -338,6 +351,9 @@ How big is Mars?#Mars#loc#Mars#big#amount#
 \par Ces résultats nous ont permis de comparer notre système avec certains des meilleurs systèmes actuels
 %. Force est de constater que nous sommes nettement en dessous de leurs résultats 
  comme par exemple le système de CCG~\cite{learning:paper} qui obtient un score de 90\% à 95\% de bonne classification. Néanmoins celui-ci est basé sur l'architecture d'apprentissage automatique SNOW, contrairement à notre approche basée sur des règles simples et l'utilisation d'hyperonymes.
+%%Pouet
+Maintenant si l'on se compare à d'autres système utilisant uniquement un jeu de règles pour définir la catégorie de la réponse attendue par l'utilisateur on voit que le système que nous présentons obtient en général de meilleurs résultats. Par exemple le système développé par AT\&T~\cite{att:paper} et évalué sur le jeu de question de TREC8 obtient sur un jeu de quatre catégories une précision de 60\%. De tels résultats permettent de mettre en évidence l'intérêt de coupler différentes méthodes et ressources dans cette tâche.
+%%Pouet
 %Cependant les méthodes utilisées par ces systèmes sont basé sur des méthodes d'apprentissage automatique. Avant même le début de notre application nous étions conscient que de tels systèmes permettaient d'obtenir des résultats meilleurs que ceux obtenu avec des méthodes et des règles faites manuellement. Cependant notre propos est plutôt de démontrer qu'il est possible d'obtenir des résultats interessants en utilisant un faible nombre de règles et de ressources ainsi que des algorithmes simples.
 De plus notre méthode est facilement adaptable à d'autres langues 
 %à condition que Wordnet la supporte (ou a moins de trouver des ressources identiques dans la langue voulue), d'avoir un parser dans cette langue et de traduire les quelques règles dans la langue cible. 
