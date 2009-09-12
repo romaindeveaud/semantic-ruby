@@ -122,9 +122,9 @@
 
 %\par De nos jours, les moteurs de recherche sont un outil pleinement utilisable par les personnes averties et habituées, malgré la volonté d'en améliorer l'accessibilité. En effet, le processus consistant à passer d'une interrogation à un enchainement de mots-clés pertinents retranscrivant correctement la pensée initiale n'est pas un exercice aisé, du moins pour les personnes qui ne sont pas familières avec l'informatique ou internet, parmi lesquelles nous pouvons par exemple compter les enfants ou certaines personnes âgées.
 %\par Il serait en effet idéal de pouvoir simplement formuler une question à un moteur de recherche et que celui-ci puisse donner la réponse ou du moins un ensemble de documents dans lesquels une ou des réponses se trouveraient. 
-\par L'interprétation de requêtes écrites en langage naturel par un système de recherche d'information (RI) ou de dialogue est un enjeu important de l'ingénierie documentaire. Outre le fait que la requête en language naturelle rend possible la formulation d'une requête de recherche selon une forme bien plus précise que la simple saisie de mots clés, elle permet, dans le cadre de la compréhension des languages parlés et des systèmes de dialogue, de déployer des composants de compréhension (SLU) conviviaux pour les utilisateurs. 
+\par L'interprétation de requêtes écrites en langage naturel par un système de recherche d'information (RI) ou de dialogue est un enjeu important de l'ingénierie documentaire. Outre le fait que la requête en langage naturelle rend possible la formulation d'une requête de recherche selon une forme bien plus précise que la simple saisie de mots clés, elle permet, dans le cadre de la compréhension des langages parlés et des systèmes de dialogue, de déployer des composants de compréhension (SLU) conviviaux pour les utilisateurs. 
 
-\par Dans le cadre des systèmes de Question et Réponses (SQR), l'analyse d'une requête en language naturelle doit permettre de transformer en processus d'extraction d'information, une question factuelle ou complexe. La difficulté de la tâche d'interprétation de requêtes en langue naturelle réside dans la transformation d'une phrase grammaticale en une requête pertinente pour interroger un système de RI ou d'extraction d'information. 
+\par Dans le cadre des systèmes de Question et Réponses (SQR), l'analyse d'une requête en langage naturelle doit permettre de transformer en processus d'extraction d'information, une question factuelle ou complexe. La difficulté de la tâche d'interprétation de requêtes en langue naturelle réside dans la transformation d'une phrase grammaticale en une requête pertinente pour interroger un système de RI ou d'extraction d'information. 
 
 \par Dans cet article, nous présentons le système \textit{NLGbAse QR}. Ce système est un extracteur d'information contenues dans une ontologie, associé à un analyseur de requêtes formulées en langue naturelle. Ce système est testé à l'analyse et à l'interprétation de questions factuelles formulées en langue naturelle issues de la campagne TREC. 
 %% Deja dans l'intro %%
@@ -193,7 +193,9 @@ Nous allons maintenant détailler les méthodes de catégorisation des noms propres
 \subsubsection{Catégorisation par les noms propres utilisant NLGbAse}
 %=============================================================
 \par Comme nous l'avons vu, la majorité des règles ne nous permettent pas de trancher directement, nous devons donc compléter notre analyse par un autre moyen et cela passe notamment par la catégorisation des noms propres. Nous avons remarqué que dans la majorité des cas, si un nom propre est présent dans une question, il en est l'objet ou du moins l'objet est l'une de ses caractéristiques. Preeons par exemple ces deux questions \og{}What is the date of birth of Bruce Dickinson?\fg{}, \og{}Who is Batman's team-mate?\fg{} ; nous voyons bien que les informations désirées sont \emph{forcément} en relation avec nos noms propres.
-\par Nous avons donc prit le parti de prendre comme catégorie la catégorie du nom propre se trouvant dans la question - s'il y en a un. Pour cela nous adressons une requête à un script issu de NLGbAse, qui comme nous l'avons vu associe une catégorie à chaque entité de Wikipédia, qui récupère la catégorie de l'entité correspondant à ce nom propre. Si une entité porte exactement le même nom alors la catégorie sera celle de cette entité ; si ce n'est pas le cas mais que des entités ont un nom similaire, alors la catégorie sera celle de la plus pertinente d'entres elles. Enfin si ce n'est pas le cas nous effectuons une recherche par \emph{TF.Idf}
+\par Nous avons donc pris le parti de prendre comme catégorie celle du nom propre se trouvant dans la question - s'il y en a un. Pour cela nous adressons une requête à un script issu de NLGbAse, qui comme nous l'avons vu associe une catégorie à chaque entité de Wikipédia, qui récupère la catégorie de l'entité correspondant à ce nom propre. Nous avons ici plusieurs cas de figure : 
+Soit une entité portant exactement le même nom est trouvée alors la catégorie sera celle de cette entité ; Une des forces de NLGbAse est le système de graphe utilisé pour définir les multiples écritures d'un même concept (acronyme, dans une autre langue) ~\cite{charton:paper}. Si nous ne trouvons pas une fiche avec un nom identique nous fesons alors appel à ce graphe. Par exemple si le nom propre extrait de la question est Mickeymauss nous pourrons par ce biais choisir comme catégorie celle de la fiche Mickey Mouse.
+Enfin si nous n'avons toujours pas obtennu une catégorie nous effectuons une recherche par \emph{TF.Idf} 
 %La solution la plus évidente aurait été de prendre pour catégorie celle du document ayant le meilleur score.
 %Nous avons essayé une autre approche. 
 en prenant la catégorie qui a le plus fort score, pour cela chaque catégorie se voit attribuée comme score la somme des scores des documents ayant cette catégorie. De ce fait la catégorie qui rassemble le plus de pertinence sera sélectionnée.
@@ -223,7 +225,7 @@ en prenant la catégorie qui a le plus fort score, pour cela chaque catégorie se 
 \par Comme nous l'avons expliqué, les différents moteurs de recherche de NLGbAse n'attendent pas les mêmes entrées, nous allons donc détailler ici les deux types d'extraction de mots-clés - ou mots pertinents.
 
 \subsubsection{Extraction destinées aux moteurs de recherche d'information par similarité cosinus}
-\par Dans un premier temps, les mots-outils de la phrase sont automatiquement supprimés à l'aide d'un anti-dictionnaire. Nous utilisons ensuite l'analyse morpho-syntaxique de la phrase, et notamment l'arbre constitutif, pour récupérer les mots - qui ne sont pas des mots-outils - qui constituent groupes nominaux ; malgrès son aspect simple, voire simpliste, nous avons pu prouver empyriquement son efficacité.
+\par Dans un premier temps, les mots-outils de la phrase sont automatiquement supprimés à l'aide d'un anti-dictionnaire. Nous utilisons ensuite l'analyse morpho-syntaxique de la phrase, et notamment l'arbre constitutif, pour récupérer les mots - qui ne sont pas des mots-outils - qui constituent les groupes nominaux ; malgrès son aspect simple, voire simpliste, nous avons pu prouver empyriquement son efficacité.
 
 \subsubsection{Extraction destinées au moteur de recherche d'information par algorithme de compacité (question-réponse)}
 %Pour celui ci la démarche est assez proche mais le besoin de données est différent.
@@ -275,7 +277,7 @@ How big is Mars?#Mars#loc#Mars#big#amount#
 %% plus d'actualité
 %%\par Le corpus est également composé de 108 questions prélevées aléatoirement sur le site AnswerBus\footnote{http://www.answerbus.com/}, qui est également un système de rechercher d'information par question-réponse. La particularité de ces questions est qu'elles ont été formulées par des utilisateurs, une majorité d'entre-elles n'est donc pas grammaticalement parfaite ; nous avons trouvé ce corpus intéressant pour tester notre système car cela nous permet de nous rapprocher de la réalité par rapport aux questions classiques de campagnes d'évaluation.
 
-\par Nous avons ainsi lancé notre système pour chacune des questions de ce corpus et mesuré les différences entre l'étiquetage \og{}à la main\fg{} et les sorties du système. Nous avons pu en déduire des mesures de précision et de rappel complétées par le F-Score\footnote{Mesure harmonique combinant la précision et le rappel} que nous vous présentons dans la sous-section \ref{evaluation}.
+\par Nous avons ainsi éxécuté notre système pour chacune des questions de ce corpus et mesuré les différences entre l'étiquetage \og{}à la main\fg{} et les sorties du système. Nous avons pu en déduire des mesures de précision et de rappel complétées par le F-Score\footnote{Mesure harmonique combinant la précision et le rappel} que nous vous présentons dans la sous-section \ref{evaluation}.
 
 %%validité de son étiquetage sémantique et de l'identification des mots clés pertinents pour une extraction de réponse, puis la pertinence des réponses retournées par le moteur de recherche par rapport à la réponse de référence. Ces mesures sont réalisées par un calcul de score de 
 
@@ -323,6 +325,8 @@ How big is Mars?#Mars#loc#Mars#big#amount#
     \end{center}
 \end{table}
 
+Comme nous pouvons le voir ici bien que nous obtenons ici des résultats interresants il reste un grand nombre de cas où la catégorie est mal choisie. C'est pourquoui nous avons choisi de ne pas utiliser les résultats de cette catégorisation pour filtrer les résultats fournit par les moteurs proposés par NLGbAse mais pour donner plus de poids à ceux qui y correspondent en combinant les résultats et les scores fournit par les deux moteurs utilisant la similarité cosinus (dont seulement l'un d'entre eux propose de filtrer les résultats avec une catégorie). 
+
 \subsection{Mesures de l'extraction de mots-clés}
 
 \par Nous avons également mesuré la pertinence des mots-clés extraits par notre système. Comme précédemment nous avons tout d'abord effectué \og{}à la main\fg{} le travail d'extraction, puis nous avons comparé ceci avec les résultats du système afin d'obtenir un pourcentage de satisfaction calculé selon la formule suivante : $$S(C) = \frac{\sum_{i = 1}^{N} P(Q_i)}{N}$$
@@ -359,6 +363,7 @@ De plus notre méthode est facilement adaptable à d'autres langues
 %à condition que Wordnet la supporte (ou a moins de trouver des ressources identiques dans la langue voulue), d'avoir un parser dans cette langue et de traduire les quelques règles dans la langue cible. 
  et nous obtiendrions alors des résultats à peine plus faible que le système multilingue de Thamar Solorio et al.~\cite{solorio:paper} utilisant des heuristiques complexes et ayant recours aux SVM.
 %\par Enfin les résultats sont impactés par le fait que cette application dépends de plusieurs outils tel que NLGbAse qui est encore en développement et qui commet encore des erreurs que nous répétons, et tel que l'analyseur syntaxique linkgrammar qui bien qu'ayant l'avantage d'être libre n'est pas le plus performant existant et qui commet aussi des erreurs (par exemple sur l'objet de la question qu'il associe frequemment au pronom interrogatif).
+
 %==============================================================
 \section{Conclusion}
 %==============================================================
